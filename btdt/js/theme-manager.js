@@ -224,8 +224,18 @@ class ThemeManager {
       return this;
     }
 
-    // When setting a single property, we remove the active preset
-    this._removeActivePreset();
+    // If a preset is active, "materialize" its values by loading individual
+    // modules for everything EXCEPT the category we are changing.
+    if (this.activeTheme._preset) {
+      const currentValues = { ...this.activeTheme };
+      this._removeActivePreset();
+      
+      Object.entries(currentValues).forEach(([cat, val]) => {
+        if (cat !== '_preset' && cat !== category && val) {
+          this._loadCSS(cat, val);
+        }
+      });
+    }
 
     this._loadCSS(category, value);
     this._saveToStorage();
