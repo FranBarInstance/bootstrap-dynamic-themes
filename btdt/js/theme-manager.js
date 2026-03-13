@@ -224,23 +224,36 @@ class ThemeManager {
       return this;
     }
 
-    // If a preset is active, "materialize" its values by loading individual
-    // modules for everything EXCEPT the category we are changing.
+    // If a preset is active, "materialize" its values
     if (this.activeTheme._preset) {
+      // Robustness: Attempt one last sync just in case the CSS loaded 
+      // but the event hasn't fired yet
+      this._syncFromComputedStyles();
+
       const currentValues = { ...this.activeTheme };
-      this._removeActivePreset();
-      
-      Object.entries(currentValues).forEach(([cat, val]) => {
-        if (cat !== '_preset' && cat !== category && val) {
-          this._loadCSS(cat, val);
-        }
-      });
+      const presetName = currentValues._preset;
+
+      // Check if we actually have data to materialize. 
+      // If everything is null, the preset is likely still loading.
+      const hasData = Object.keys(currentValues).some(cat => cat !== '_preset' && currentValues[cat] !== null);
+
+      if (hasData) {
+        this._removeActivePreset();
+        Object.entries(currentValues).forEach(([cat, val]) => {
+          if (cat !== '_preset' && cat !== category && val) {
+            this._loadCSS(cat, val);
+          }
+        });
+      } else {
+        console.warn(`Cannot materialize preset "${presetName}" yet - still loading metadata.`);
+        // We'll let the set proceed but keep the preset link for now to avoid total reset
+      }
     }
 
     this._loadCSS(category, value);
     this._saveToStorage();
     this._dispatchEvent(category, value);
-    return this; // Allows chaining
+    return this; 
   }
 
   _removeActivePreset() {
@@ -279,26 +292,32 @@ class ThemeManager {
       this.container.appendChild(link);
     }
     
-    // Set href and wait for it to be applied
-    link.href = this._withCacheBust(path);
     this.activeTheme._preset = presetName;
-
-    // 3. Sync metadata from Computed Styles (Works in file://)
+    
     return new Promise((resolve) => {
-      // Give the browser enough time to load the CSS and apply imports
-      setTimeout(() => {
-        this._syncFromComputedStyles();
-        this._saveToStorage();
-        
-        // Dispatch event so UI can update everything
-        this._dispatchEvent('preset', presetName);
+      const handleLoad = () => {
+        // Double check: give the browser a tiny moment to parse the root variables
+        setTimeout(() => {
+          this._syncFromComputedStyles();
+          this._saveToStorage();
+          this._dispatchEvent('preset', presetName);
+          if (this._modeLink) document.head.appendChild(this._modeLink);
+          resolve(this);
+        }, 50);
+      };
+
+      link.onload = handleLoad;
+      link.onerror = () => {
+        console.error(`Failed to load preset: ${presetName}`);
         resolve(this);
-      }, 300); 
-    }).then(() => {
-      if (this._modeLink) {
-        document.head.appendChild(this._modeLink);
-      }
-      return this;
+      };
+      
+      link.href = this._withCacheBust(path);
+
+      // Security fallback for very slow connections or cached files where onload might be tricky
+      setTimeout(() => {
+        if (!this.activeTheme.colors) handleLoad();
+      }, 1500);
     });
   }
 
