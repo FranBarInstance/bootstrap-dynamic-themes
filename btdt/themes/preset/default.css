@@ -1,0 +1,14 @@
+@import "../colors/corporate.css";
+@import "../fonts/inter.css";
+@import "../styles/borders-normal.css";
+
+:root {
+  --preset-colors: "corporate";
+  --preset-fonts: "inter";
+  --preset-borders: "normal";
+  --preset-rounding: "normal";
+  --preset-shadows: "normal";
+  --preset-spacing: "normal";
+  --preset-gradients: "off";
+  --preset-accent: "none";
+}

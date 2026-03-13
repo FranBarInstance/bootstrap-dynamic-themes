@@ -1,0 +1,5 @@
+# Example gitignore for BTDT integration
+# Copy these lines to your root .gitignore
+
+# Ignore the editor (keep only core engine and themes)
+btdt/editor/

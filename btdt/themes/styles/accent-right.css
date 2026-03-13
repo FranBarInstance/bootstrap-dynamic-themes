@@ -1,0 +1,51 @@
+/* themes/styles/accent-right.css
+ * Línea de acento del color primario en el LADO DERECHO
+ * de los elementos de contenedor principales.
+ * --------------------------------------------------------- */
+
+:root {
+  --accent-size: 4px;
+  --accent-color: var(--bs-accent, var(--bs-primary));
+}
+
+/* Cards */
+.card {
+  border-right: var(--accent-size) solid var(--accent-color) !important;
+}
+
+/* List group items */
+.list-group-item {
+  border-right: var(--accent-size) solid var(--accent-color) !important;
+}
+.list-group-item.active {
+  border-right-color: var(--accent-color) !important;
+}
+
+/* Accordion items */
+.accordion-item {
+  border-right: var(--accent-size) solid var(--accent-color) !important;
+}
+
+/* Alerts */
+.alert {
+  border-right: var(--accent-size) solid var(--accent-color) !important;
+  border-top-width:    var(--bs-alert-border-width, 1px);
+  border-left-width:   var(--bs-alert-border-width, 1px);
+  border-bottom-width: var(--bs-alert-border-width, 1px);
+}
+
+/* Alerts con su propio color de borde */
+.alert-success  { --accent-color: var(--bs-success); }
+.alert-danger   { --accent-color: var(--bs-danger);  }
+.alert-warning  { --accent-color: var(--bs-warning); }
+.alert-info     { --accent-color: var(--bs-info);    }
+
+/* Nav tabs — línea derecha activa */
+.nav-tabs .nav-link.active {
+  border-right: var(--accent-size) solid var(--accent-color) !important;
+}
+
+/* Navbar — borde derecho */
+.navbar {
+  border-right: var(--accent-size) solid var(--accent-color);
+}

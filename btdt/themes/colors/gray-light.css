@@ -1,0 +1,284 @@
+/* themes/colors/gray-light.css
+ * White background, navbar y acentos en gris claro (#f2f2f2).
+ * Like the other color themes, but the primary IS gray.
+ * -------------------------------------------------------------- */
+:root {
+  --bs-body-bg:    #ffffff;
+  --bs-body-color: #212121;
+
+  /* Lighter gray primary */
+  --bs-primary:     #f2f2f2;
+  --bs-primary-rgb: 242, 242, 242;
+
+  --bs-secondary:     #fafafa;
+  --bs-secondary-rgb: 250, 250, 250;
+
+  --bs-accent: #9e9e9e;
+
+  /* Pastel success/danger/warning/info */
+  --bs-success:     #7fcf85;
+  --bs-success-rgb: 127, 207, 133;
+
+  --bs-danger:     #f27f7f;
+  --bs-danger-rgb: 242, 127, 127;
+
+  --bs-warning:     #ffd36b;
+  --bs-warning-rgb: 255, 211, 107;
+
+  --bs-info:     #8fd3ff;
+  --bs-info-rgb: 143, 211, 255;
+
+  --bs-link-color:       #0056b3;
+  --bs-link-hover-color: #004494;
+
+  --bs-border-color: #f2f2f2;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn-primary {
+  --bs-btn-bg:               #f2f2f2;
+  --bs-btn-border-color:     #f2f2f2;
+  --bs-btn-color:            #212121;
+  --bs-btn-hover-bg:         #e6e6e6;
+  --bs-btn-hover-border-color: #e6e6e6;
+  --bs-btn-hover-color:      #212121;
+  --bs-btn-active-bg:        #d9d9d9;
+  --bs-btn-active-border-color: #d9d9d9;
+  --bs-btn-active-color:     #212121;
+}
+.btn-secondary {
+  --bs-btn-bg:           #fafafa;
+  --bs-btn-border-color: #fafafa;
+  --bs-btn-color:        #424242;
+  --bs-btn-hover-bg:     #f2f2f2;
+  --bs-btn-hover-border-color: #f2f2f2;
+  --bs-btn-hover-color:  #212121;
+}
+.btn-outline-primary {
+  --bs-btn-color:        #757575;
+  --bs-btn-border-color: #f2f2f2;
+  --bs-btn-hover-bg:     #f2f2f2;
+  --bs-btn-hover-color:  #212121;
+  --bs-btn-active-bg:    #f2f2f2;
+}
+.btn-outline-secondary {
+  --bs-btn-color:        #9e9e9e;
+  --bs-btn-border-color: #fafafa;
+  --bs-btn-hover-bg:     #fafafa;
+  --bs-btn-hover-color:  #424242;
+}
+
+/* ── Utilities ──────────────────────────────────────────────── */
+.bg-primary {
+  background-color: #f2f2f2 !important;
+  color: #212121 !important;
+}
+.bg-secondary {
+  background-color: #fafafa !important;
+  color: #424242 !important;
+}
+.text-primary   { color: #757575 !important; }
+.text-secondary { color: #9e9e9e !important; }
+
+.form-control:focus,
+.form-select:focus {
+  border-color: rgba(242, 242, 242, 0.9);
+  box-shadow: 0 0 0 0.25rem rgba(242, 242, 242, 0.55);
+}
+.form-check-input:checked {
+  background-color: #9e9e9e;
+  border-color:     #9e9e9e;
+}
+
+.page-link { color: #0056b3; }
+.page-item.active .page-link {
+  background-color: #f2f2f2;
+  border-color:     #f2f2f2;
+  color:            #212121;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #f2f2f2;
+  color: #212121;
+}
+/* Nav links outside navbar */
+:not(.navbar) > .nav-link,
+.nav-tabs .nav-link,
+.nav-pills .nav-link {
+  color: #0056b3;
+}
+
+/* ── Light gray navbar — dark text ────────────────────────── */
+.navbar-dark .navbar-nav .nav-link,
+.navbar[data-bs-theme="dark"] .navbar-nav .nav-link,
+.bg-primary .navbar-nav .nav-link {
+  color: inherit !important;
+}
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar[data-bs-theme="dark"] .navbar-nav .nav-link.active,
+.bg-primary .navbar-nav .nav-link.active {
+  color: inherit !important;
+}
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar[data-bs-theme="dark"] .navbar-nav .nav-link:hover,
+.bg-primary .navbar-nav .nav-link:hover {
+  color: inherit !important;
+}
+.navbar-dark .navbar-brand,
+.navbar[data-bs-theme="dark"] .navbar-brand,
+.bg-primary .navbar-brand {
+  color: inherit !important;
+}
+/* Search input and button in light gray navbar */
+.navbar-dark.bg-primary .form-control,
+.bg-primary .form-control {
+  border-color: rgba(0,0,0,0.2);
+  color: inherit;
+  background-color: rgba(255,255,255,0.5);
+}
+.navbar-dark.bg-primary .btn-outline-light,
+.bg-primary .btn-outline-light {
+  color: inherit;
+  border-color: rgba(0,0,0,0.25);
+}
+.navbar-dark.bg-primary .btn-outline-light:hover,
+.bg-primary .btn-outline-light:hover {
+  background-color: rgba(0,0,0,0.1);
+  color: inherit;
+}
+/* Dark toggler icon */
+.navbar-dark.bg-primary .navbar-toggler-icon,
+.bg-primary .navbar-toggler-icon {
+  filter: invert(0) brightness(0.2);
+}
+.navbar-dark.bg-primary .navbar-toggler,
+.bg-primary .navbar-toggler {
+  border-color: rgba(0,0,0,0.2);
+}
+
+.progress-bar { background-color: #9e9e9e; }
+.list-group-item.active {
+  background-color: #f2f2f2;
+  border-color: #f2f2f2;
+  color: #212121;
+}
+.card { --bs-card-border-color: #f2f2f2; }
+
+/* Bootstrap states (success/danger/warning/info) */
+.btn-success {
+  --bs-btn-bg: var(--bs-success);
+  --bs-btn-border-color: var(--bs-success);
+  --bs-btn-color: #212121;
+  --bs-btn-hover-color: #212121;
+  --bs-btn-active-color: #212121;
+  --bs-btn-hover-bg: rgba(var(--bs-success-rgb), 0.85);
+  --bs-btn-hover-border-color: rgba(var(--bs-success-rgb), 0.85);
+  --bs-btn-active-bg: rgba(var(--bs-success-rgb), 0.75);
+  --bs-btn-active-border-color: rgba(var(--bs-success-rgb), 0.75);
+}
+.btn-danger {
+  --bs-btn-bg: var(--bs-danger);
+  --bs-btn-border-color: var(--bs-danger);
+  --bs-btn-color: #212121;
+  --bs-btn-hover-color: #212121;
+  --bs-btn-active-color: #212121;
+  --bs-btn-hover-bg: rgba(var(--bs-danger-rgb), 0.85);
+  --bs-btn-hover-border-color: rgba(var(--bs-danger-rgb), 0.85);
+  --bs-btn-active-bg: rgba(var(--bs-danger-rgb), 0.75);
+  --bs-btn-active-border-color: rgba(var(--bs-danger-rgb), 0.75);
+}
+.btn-warning {
+  --bs-btn-bg: var(--bs-warning);
+  --bs-btn-border-color: var(--bs-warning);
+  --bs-btn-color: var(--bs-body-color);
+  --bs-btn-hover-bg: rgba(var(--bs-warning-rgb), 0.9);
+  --bs-btn-hover-border-color: rgba(var(--bs-warning-rgb), 0.9);
+  --bs-btn-active-bg: rgba(var(--bs-warning-rgb), 0.8);
+  --bs-btn-active-border-color: rgba(var(--bs-warning-rgb), 0.8);
+}
+.btn-info {
+  --bs-btn-bg: var(--bs-info);
+  --bs-btn-border-color: var(--bs-info);
+  --bs-btn-color: #212121;
+  --bs-btn-hover-color: #212121;
+  --bs-btn-active-color: #212121;
+  --bs-btn-hover-bg: rgba(var(--bs-info-rgb), 0.85);
+  --bs-btn-hover-border-color: rgba(var(--bs-info-rgb), 0.85);
+  --bs-btn-active-bg: rgba(var(--bs-info-rgb), 0.75);
+  --bs-btn-active-border-color: rgba(var(--bs-info-rgb), 0.75);
+}
+
+.bg-success {
+  background-color: var(--bs-success) !important;
+  color: #212121 !important;
+}
+.bg-danger {
+  background-color: var(--bs-danger) !important;
+  color: #212121 !important;
+}
+.bg-warning {
+  background-color: var(--bs-warning) !important;
+  color: var(--bs-body-color) !important;
+}
+.bg-info {
+  background-color: var(--bs-info) !important;
+  color: #212121 !important;
+}
+
+.text-success { color: var(--bs-success-text-emphasis, var(--bs-success)) !important; }
+.text-danger { color: var(--bs-danger-text-emphasis, var(--bs-danger)) !important; }
+.text-warning { color: var(--bs-warning-text-emphasis, var(--bs-warning)) !important; }
+.text-info { color: var(--bs-info-text-emphasis, var(--bs-info)) !important; }
+
+.text-bg-success {
+  background-color: var(--bs-success) !important;
+  color: #212121 !important;
+}
+.text-bg-danger {
+  background-color: var(--bs-danger) !important;
+  color: #212121 !important;
+}
+.text-bg-warning {
+  background-color: var(--bs-warning) !important;
+  color: var(--bs-body-color) !important;
+}
+.text-bg-info {
+  background-color: var(--bs-info) !important;
+  color: #212121 !important;
+}
+.text-bg-primary {
+  background-color: var(--bs-primary) !important;
+  color: #212121 !important;
+}
+.text-bg-secondary {
+  background-color: var(--bs-secondary) !important;
+  color: #424242 !important;
+}
+
+.badge.bg-primary,
+.badge.bg-secondary,
+.badge.bg-success,
+.badge.bg-danger,
+.badge.bg-warning,
+.badge.bg-info,
+.bg-primary.text-white,
+.bg-secondary.text-white,
+.bg-success.text-white,
+.bg-danger.text-white,
+.bg-warning.text-white,
+.bg-info.text-white {
+  color: #212121 !important;
+}
+
+/* Garantizar legibilidad de enlaces en contenedores con fondo (excluyendo navbar) */
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link),
+[class*="text-bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}
+
+/* Ensure links with light/white utility classes are visible in this gray theme */
+a.text-light, a.text-white, a.link-light {
+  color: #0056b3 !important;
+}
+

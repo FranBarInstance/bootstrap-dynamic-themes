@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap 5 Dynamic Themes</title>
+
+  <!-- 1) Base Bootstrap CSS (always first) -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../themes/preset/default.css?v=0.0.0" />
+
+  <style>
+    /* ===== Theme Control Panel ===== */
+    .theme-panel {
+      position: fixed;
+      right: -400px;
+      top: 0;
+      width: 358px;
+      height: 100vh;
+      background: #fff;
+      border-left: 1px solid #dee2e6;
+      z-index: 9999;
+      overflow-y: auto;
+      transition: right 0.3s ease;
+      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .theme-panel.open {
+      right: 0;
+    }
+
+    .theme-panel-toggle {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10000;
+      background: #212529;
+      color: #fff;
+      border: none;
+      padding: 13px 9px;
+      border-radius: 8px 0 0 8px;
+      cursor: pointer;
+      font-size: 1.25rem;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.15);
+      transition: right 0.3s ease;
+    }
+
+    .theme-panel.open~.theme-panel-toggle {
+      right: 380px;
+    }
+
+    /* ===== Panel should stay visually stable (ignore themes) ===== */
+    :root {
+      --panel-primary: #0d6efd;
+      --panel-primary-rgb: 13, 110, 253;
+      --panel-secondary: #6c757d;
+      --panel-secondary-rgb: 108, 117, 125;
+      --panel-border: #dee2e6;
+      --panel-text: #212529;
+      --panel-muted: #6c757d;
+      --panel-bg: #ffffff;
+      --panel-bg-soft: #f8f9fa;
+    }
+
+    .theme-panel {
+      color-scheme: light;
+      color: var(--panel-text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .theme-panel-toggle {
+      background: #212529;
+    }
+
+    .theme-panel .btn {
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.375rem;
+      box-shadow: none;
+      font-size: 1rem;
+      font-family: inherit;
+      border-width: 1px;
+      transition: none;
+    }
+
+    .theme-panel .btn:hover,
+    .theme-panel .btn:active {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .theme-panel .btn-sm {
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+    }
+
+    .theme-panel .btn-outline-primary {
+      --bs-btn-color: var(--panel-primary);
+      --bs-btn-border-color: var(--panel-primary);
+      --bs-btn-hover-bg: var(--panel-primary);
+      --bs-btn-hover-border-color: var(--panel-primary);
+      --bs-btn-hover-color: #fff;
+      --bs-btn-active-bg: #0b5ed7;
+      --bs-btn-active-border-color: #0a58ca;
+      --bs-btn-active-color: #fff;
+    }
+
+    .theme-panel .btn-outline-secondary {
+      --bs-btn-color: var(--panel-secondary);
+      --bs-btn-border-color: var(--panel-secondary);
+      --bs-btn-hover-bg: var(--panel-secondary);
+      --bs-btn-hover-border-color: var(--panel-secondary);
+      --bs-btn-hover-color: #fff;
+      --bs-btn-active-bg: #5c636a;
+      --bs-btn-active-border-color: #565e64;
+      --bs-btn-active-color: #fff;
+    }
+
+    .theme-panel h1,
+    .theme-panel h2,
+    .theme-panel h3,
+    .theme-panel h4,
+    .theme-panel h5,
+    .theme-panel h6,
+    .theme-panel .h1,
+    .theme-panel .h2,
+    .theme-panel .h3,
+    .theme-panel .h4,
+    .theme-panel .h5,
+    .theme-panel .h6 {
+      font-family: inherit;
+      letter-spacing: normal;
+    }
+
+    .theme-panel .bg-dark {
+      background-color: #212529 !important;
+    }
+
+    .theme-panel .text-light {
+      color: #f8f9fa !important;
+    }
+
+    .theme-panel .rounded {
+      border-radius: 0.375rem !important;
+    }
+
+    /* Color swatch */
+    .color-swatch {
+      width: 100%;
+      height: 50px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .color-swatch.active {
+      border-color: #333;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px #333;
+    }
+
+    .color-swatch:hover {
+      transform: scale(1.05);
+    }
+
+    .color-swatch .swatch-colors {
+      display: flex;
+      height: 100%;
+    }
+
+    .color-swatch .swatch-colors>div {
+      flex: 1;
+    }
+
+    .color-swatch .swatch-label {
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Preset cards */
+    .preset-card {
+      cursor: pointer;
+      border: 1px solid var(--panel-border);
+      transition: transform 0.15s ease, border-color 0.15s ease;
+      padding: 10px;
+      border-radius: 12px;
+      background: var(--panel-bg);
+      display: grid;
+      gap: 8px;
+    }
+
+    .preset-card:hover {
+      border-color: var(--panel-primary);
+      transform: translateY(-1px);
+    }
+
+    .preset-card.active {
+      border-color: var(--panel-primary);
+      box-shadow: 0 0 0 2px rgba(var(--panel-primary-rgb), 0.2);
+    }
+
+    .preset-swatch {
+      height: 28px;
+      border-radius: 8px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 0.8fr;
+      border: 1px solid var(--panel-border);
+    }
+
+    .preset-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--panel-text);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    /* Pill-style option selector */
+    .option-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      background: #f0f0f0;
+      border-radius: 8px;
+      padding: 3px;
+    }
+
+    .option-group .option-btn {
+      text-align: center;
+      padding: 6px 10px;
+      border: none;
+      background: transparent;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #555;
+      white-space: nowrap;
+    }
+
+    .option-group .option-btn.active {
+      background: #fff;
+      color: #333;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .option-group .option-btn:hover:not(.active) {
+      color: #333;
+    }
+
+    .panel-section {
+      padding: 16px 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .panel-section h6 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    /* Dark mode toggle */
+    .mode-toggle-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 0;
+    }
+
+    .mode-toggle-label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mode-toggle {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+
+    .mode-toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .mode-toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: #ccc;
+      border-radius: 26px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .mode-toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 3px;
+      bottom: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+
+    .mode-toggle input:checked+.mode-toggle-slider {
+      background: #424242;
+    }
+
+    .mode-toggle input:checked+.mode-toggle-slider::before {
+      transform: translateX(24px);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== NAVBAR HEADER ==================== -->
+  <nav class="navbar navbar-expand-lg bg-primary fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">
+        DynamicThemes
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Components
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#buttons">Buttons</a></li>
+              <li><a class="dropdown-item" href="#cards">Cards</a></li>
+              <li><a class="dropdown-item" href="#forms">Forms</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#tables">Tables</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Documentation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+        </ul>
+        <button class="btn ms-lg-3 d-flex align-items-center" id="navbarModeToggle" onclick="themeManager.toggleMode(); updatePanelState();" title="Toggle dark mode">
+          <span id="navbarModeIcon">☀️</span>
+          <span id="navbarModeText" class="ms-2 d-lg-none">Light mode</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Padding for fixed navbar -->
+  <div class="navbar navbar-expand-lg">&nbsp;</div>
+
+  <!-- ==================== HEADER ==================== -->
+  <div class="bg-primary py-5">
+    <div class="container py-5">
+      <h1 class="display-3 mb-0">
+        <span data-ng-bind="selected.palette.name" class="ng-binding">Bootstrap 5</span>
+      </h1>
+      <p class="lead mb-3"><span data-ng-bind="selected.palette.desc" class="ng-binding">The world's most popular CSS framework.</span></p>
+      <p class="small">Need a completely custom Bootstrap build? Use the <a class="toggles-ignore text-light" href="#"><u>Customizer</u></a>.</p>
+      <a class="btn btn-outline-light btn-lg toggles-ignore me-2" href="#">Get Started</a>
+      <a class="btn btn-outline-light btn-lg toggles-ignore me-2" href="#">Button 1</a>
+    </div>
+    <div class="py-1">&nbsp;</div>
+  </div>
+
+  <!-- ==================== CONTROL PANEL ==================== -->
+  <button class="theme-panel-toggle" onclick="togglePanel()">⚙️</button>
+
+  <div class="theme-panel" id="themePanel">
+    <div style="padding: 16px 20px; border-bottom: 2px solid #eee;">
+      <div class="d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold">🎨 Themes</h5>
+        <button class="btn btn-sm btn-outline-secondary" onclick="themeManager.reset(); updatePanelState();">Reset</button>
+      </div>
+    </div>
+
+    <!-- MODE -->
+    <div class="panel-section">
+      <h6>🌙 Mode</h6>
+      <div class="mode-toggle-wrap">
+        <span class="mode-toggle-label">
+          <span id="modeIcon">☀️</span>
+          <span id="modeLabel">Light mode</span>
+        </span>
+        <label class="mode-toggle" title="Toggle dark mode">
+          <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode(this.checked)">
+          <span class="mode-toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- PRESETS -->
+    <div class="panel-section">
+      <h6>⚡ Presets</h6>
+      <div class="row g-2" id="presetsContainer"></div>
+    </div>
+
+    <!-- COLORS -->
+    <div class="panel-section">
+      <h6>🎨 Color Palette</h6>
+      <div class="row g-2" id="colorsContainer"></div>
+    </div>
+
+    <!-- FONTS -->
+    <div class="panel-section">
+      <h6>🔤 Typography</h6>
+      <div class="option-group" id="fontsGroup"></div>
+    </div>
+
+    <!-- BORDERS -->
+    <div class="panel-section">
+      <h6>📐 Borders</h6>
+      <div class="option-group" id="bordersGroup"></div>
+    </div>
+
+    <!-- ROUNDING -->
+    <div class="panel-section">
+      <h6>⭕ Corners</h6>
+      <div class="option-group" id="roundingGroup"></div>
+    </div>
+
+    <!-- SHADOWS -->
+    <div class="panel-section">
+      <h6>💫 Shadows</h6>
+      <div class="option-group" id="shadowsGroup"></div>
+    </div>
+
+    <!-- SPACING -->
+    <div class="panel-section">
+      <h6>↔️ Spacing</h6>
+      <div class="option-group" id="spacingGroup"></div>
+    </div>
+
+    <!-- GRADIENTS -->
+    <div class="panel-section">
+      <h6>🌈 Gradients</h6>
+      <div class="option-group" id="gradientsGroup"></div>
+    </div>
+
+    <!-- ACCENT -->
+    <div class="panel-section">
+      <h6>✨ Accent Line</h6>
+      <div class="option-group" id="accentGroup"></div>
+    </div>
+
+    <!-- CURRENT CONFIG -->
+    <div class="panel-section">
+      <h6>📋 Current Configuration</h6>
+      <pre id="currentConfig" class="bg-dark text-light p-3 rounded" style="font-size:0.7rem; max-height:150px; overflow:auto;"></pre>
+      <button class="btn btn-sm btn-outline-primary w-100 mt-2" onclick="copyConfig()">📋 Copy CSS Preset</button>
+    </div>
+  </div>
+
+  <!-- ==================== DEMO CONTENT ==================== -->
+  <div class="container-fluid py-5 px-4 px-md-5" style="max-width: 1400px;">
+
+    <!-- Navbar demo -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded mb-4 px-2">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">MyApp</a>
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link active" href="#">Home</a>
+          <a class="nav-link" href="#">Products</a>
+          <a class="nav-link" href="#">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Buttons -->
+    <div class="mb-4" id="buttons">
+      <h5>Buttons</h5>
+      <div class="d-flex flex-wrap gap-2 mb-2">
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-success">Success</button>
+        <button class="btn btn-danger">Danger</button>
+        <button class="btn btn-warning">Warning</button>
+        <button class="btn btn-info">Info</button>
+      </div>
+      <div class="d-flex flex-wrap gap-2">
+        <button class="btn btn-outline-primary">Primary</button>
+        <button class="btn btn-outline-secondary">Secondary</button>
+        <button class="btn btn-outline-success">Success</button>
+        <button class="btn btn-outline-danger">Danger</button>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <!-- Card -->
+      <div class="col-md-6" id="cards">
+        <h5>Cards</h5>
+        <div class="card mb-4">
+          <div class="card-header bg-primary">
+            Primary Card
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Card Title</h5>
+            <p class="card-text">
+              Sample content to see how the theme applies
+              to the cards in the system.
+            </p>
+            <a href="#" class="btn btn-primary">Action</a>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-header bg-secondary">
+            Secondary Card
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Card Title</h5>
+            <p class="card-text">
+              Sample content to see how the theme applies
+              to the cards in the system.
+            </p>
+            <a href="#" class="btn btn-secondary">Action</a>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-header bg-success">
+            Success Card
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Card Title</h5>
+            <p class="card-text">
+              Sample content to see how the theme applies
+              to the cards in the system.
+            </p>
+            <a href="#" class="btn btn-success">Action</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alerts -->
+      <div class="col-md-6">
+        <h5>Alerts</h5>
+        <div class="alert alert-primary">Primary Alert</div>
+        <div class="alert alert-secondary">Secondary Alert</div>
+        <div class="alert alert-info">Info Alert</div>
+        <div class="alert alert-success">Success Alert</div>
+        <div class="alert alert-danger">Danger Alert</div>
+        <div class="alert alert-warning">Warning Alert</div>
+        <div class="alert alert-light">Light Alert</div>
+        <div class="alert alert-dark">Dark Alert</div>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <!-- List group + badges -->
+      <div class="col-md-12">
+        <h5>List and Badges</h5>
+        <ul class="list-group mb-3">
+          <li class="list-group-item active">Active Item</li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Messages
+            <span class="badge bg-primary rounded-pill">14</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Alerts
+            <span class="badge bg-danger rounded-pill">3</span>
+          </li>
+          <li class="list-group-item">Settings</li>
+        </ul>
+
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <span class="badge bg-primary">Primary</span>
+          <span class="badge bg-secondary">Secondary</span>
+          <span class="badge bg-success">Success</span>
+          <span class="badge bg-danger">Danger</span>
+          <span class="badge bg-warning">Warning</span>
+          <span class="badge bg-info">Info</span>
+        </div>
+
+        <h5>Progress</h5>
+        <div class="progress mb-2" style="height: 8px;">
+          <div class="progress-bar" style="width: 65%"></div>
+        </div>
+        <div class="progress" style="height: 8px;">
+          <div class="progress-bar bg-success" style="width: 40%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== FORMS ==================== -->
+    <div class="mb-4" id="forms">
+      <h5>Forms</h5>
+
+      <!-- Basic Form -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-control" placeholder="Your name">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" placeholder="your@email.com">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Select</label>
+          <select class="form-select">
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="formCheck1">
+            <label class="form-check-label" for="formCheck1">I accept the terms</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+
+      <!-- Floating Labels -->
+      <h6 class="text-muted mb-3">Floating Labels</h6>
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatName" placeholder="Name">
+            <label for="floatName">Full name</label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="email" class="form-control" id="floatEmail" placeholder="Email">
+            <label for="floatEmail">Email address</label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <select class="form-select" id="floatSelect">
+              <option selected>Select...</option>
+              <option>Option 1</option>
+              <option>Option 2</option>
+            </select>
+            <label for="floatSelect">Category</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Groups -->
+      <h6 class="text-muted mb-3">Input Groups</h6>
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <label class="form-label">With prefix</label>
+          <div class="input-group">
+            <span class="input-group-text">@</span>
+            <input type="text" class="form-control" placeholder="Username">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">With suffix</label>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Email">
+            <span class="input-group-text">@example.com</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Currency</label>
+          <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input type="number" class="form-control" placeholder="Amount">
+            <span class="input-group-text">.00</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">With checkbox</label>
+          <div class="input-group">
+            <div class="input-group-text">
+              <input class="form-check-input mt-0" type="checkbox" aria-label="Checkbox">
+            </div>
+            <input type="text" class="form-control" placeholder="With checkbox">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Button prefix</label>
+          <div class="input-group">
+            <button class="btn btn-outline-primary" type="button">Go</button>
+            <input type="text" class="form-control" placeholder="Search...">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Button suffix</label>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Subscribe">
+            <button class="btn btn-outline-success" type="button">Subscribe</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Range & Switches -->
+      <h6 class="text-muted mb-3">Range &amp; Switches</h6>
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <label class="form-label">Price range: <strong id="rangeVal2">50</strong>%</label>
+          <input type="range" class="form-range" min="0" max="100" value="50" id="priceRange2" oninput="document.getElementById('rangeVal2').textContent = this.value">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Switches</label>
+          <div class="d-flex gap-3 flex-wrap mt-1">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="sw1" checked>
+              <label class="form-check-label" for="sw1">Notifications</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="sw2">
+              <label class="form-check-label" for="sw2">Dark mode</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="sw3" checked>
+              <label class="form-check-label" for="sw3">Auto-save</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Validation -->
+      <h6 class="text-muted mb-3">Form Validation</h6>
+      <form class="row g-3 needs-validation" novalidate>
+        <div class="col-md-4">
+          <label class="form-label">First name</label>
+          <input type="text" class="form-control" value="John" required>
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Last name</label>
+          <input type="text" class="form-control" value="Doe" required>
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Username</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text">@</span>
+            <input type="text" class="form-control" value="johndoe" required>
+            <div class="invalid-feedback">Please choose a username.</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">City</label>
+          <input type="text" class="form-control" required>
+          <div class="invalid-feedback">Please provide a valid city.</div>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">State</label>
+          <select class="form-select" required>
+            <option selected disabled value="">Choose...</option>
+            <option>Option 1</option>
+            <option>Option 2</option>
+          </select>
+          <div class="invalid-feedback">Please select a state.</div>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Zip</label>
+          <input type="text" class="form-control" required>
+          <div class="invalid-feedback">Please provide a zip.</div>
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+            <label class="form-check-label" for="invalidCheck">
+              Agree to terms and conditions
+            </label>
+            <div class="invalid-feedback">You must agree before submitting.</div>
+          </div>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </div>
+      </form>
+      <script>
+        (function () {
+          'use strict';
+          var forms = document.querySelectorAll('.needs-validation');
+          Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        })();
+      </script>
+    </div>
+
+    <!-- Tabs -->
+    <div class="mb-4">
+      <h5>Navigation</h5>
+      <ul class="nav nav-pills mb-3">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Another Link</a>
+        </li>
+      </ul>
+
+      <nav>
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">«</a></li>
+          <li class="page-item active">
+            <a class="page-link" href="#">1</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">»</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Headings -->
+    <div class="mb-4">
+      <h5>Typography</h5>
+      <h1>Heading 1</h1>
+      <h2>Heading 2</h2>
+      <h3>Heading 3</h3>
+      <p>Normal paragraph with <a href="#">a link</a>,
+        <strong>bold text</strong>
+        and <em>italic text</em>.
+      </p>
+      <p class="text-primary">Primary Text</p>
+      <p class="text-secondary">Secondary Text</p>
+    </div>
+
+    <!-- Table -->
+    <div class="mb-4" id="tables">
+      <h5>Table</h5>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Anna Smith</td>
+            <td>anna@example.com</td>
+            <td><span class="badge bg-primary">Admin</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>John Doe</td>
+            <td>john@example.com</td>
+            <td><span class="badge bg-secondary">Editor</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Mary Rose</td>
+            <td>mary@example.com</td>
+            <td><span class="badge bg-success">User</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ==================== ACCORDION ==================== -->
+    <div class="mb-4">
+      <h5>Accordion</h5>
+      <div class="accordion" id="accordionDemo">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#acc1" aria-expanded="true">
+              What is Bootstrap 5?
+            </button>
+          </h2>
+          <div id="acc1" class="accordion-collapse collapse show" data-bs-parent="#accordionDemo">
+            <div class="accordion-body">
+              Bootstrap 5 is the most popular CSS framework in the world for building responsive, mobile-first websites.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acc2" aria-expanded="false">
+              Does it need jQuery?
+            </button>
+          </h2>
+          <div id="acc2" class="accordion-collapse collapse" data-bs-parent="#accordionDemo">
+            <div class="accordion-body">
+              No, Bootstrap 5 removed jQuery dependency. Now it uses pure JavaScript (Vanilla JS).
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acc3" aria-expanded="false">
+              Is it compatible with all browsers?
+            </button>
+          </h2>
+          <div id="acc3" class="accordion-collapse collapse" data-bs-parent="#accordionDemo">
+            <div class="accordion-body">
+              Yes, it is compatible with all modern browsers: Chrome, Firefox, Edge, Safari and Opera.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== BREADCRUMB + SPINNERS ==================== -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-6">
+        <h5>Breadcrumb</h5>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Components</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Breadcrumb</li>
+          </ol>
+        </nav>
+
+        <h5 class="mt-3">Spinners</h5>
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <div class="spinner-border text-success" role="status"></div>
+          <div class="spinner-border text-danger" role="status"></div>
+          <div class="spinner-grow text-primary" role="status"></div>
+          <div class="spinner-grow text-warning" role="status"></div>
+          <button class="btn btn-primary" type="button" disabled>
+            <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+            Loading...
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <h5>Placeholders <span class="badge bg-secondary" style="font-size:0.6rem;">Skeleton</span></h5>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title placeholder-glow">
+              <span class="placeholder col-6"></span>
+            </h5>
+            <p class="card-text placeholder-glow">
+              <span class="placeholder col-7"></span>
+              <span class="placeholder col-4"></span>
+              <span class="placeholder col-4"></span>
+              <span class="placeholder col-6"></span>
+              <span class="placeholder col-8"></span>
+            </p>
+            <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== OFFCANVAS + TOAST TRIGGERS ==================== -->
+    <div class="mb-4">
+      <h5>Offcanvas &amp; Toasts</h5>
+      <div class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDemo">
+          🗂️ Open Offcanvas
+        </button>
+        <button class="btn btn-success" onclick="showToast('toast-success')">✅ Success Toast</button>
+        <button class="btn btn-danger" onclick="showToast('toast-danger')">❌ Error Toast</button>
+        <button class="btn btn-warning" onclick="showToast('toast-warning')">⚠️ Warning Toast</button>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL ==================== -->
+    <div class="mb-4">
+      <h5>Modal</h5>
+      <div class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDemo">
+          Open Modal
+        </button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalLargeDemo">
+          Large Modal
+        </button>
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalSmallDemo">
+          Small Modal
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== DROPDOWN ==================== -->
+    <div class="mb-4">
+      <h5>Dropdown</h5>
+      <div class="d-flex flex-wrap gap-3 align-items-center">
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Primary Dropdown
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Separated link</a></li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Secondary Dropdown
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item active" href="#">Active Item</a></li>
+            <li><a class="dropdown-item disabled" href="#">Disabled Item</a></li>
+            <li><a class="dropdown-item" href="#">Regular Item</a></li>
+          </ul>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-danger">Split</button>
+          <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== COLLAPSE ==================== -->
+    <div class="mb-4">
+      <h5>Collapse</h5>
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Link with href
+        </a>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          Button with data-bs-target
+        </button>
+        <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="collapse1 collapse2">
+          Toggle both
+        </button>
+      </div>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <div class="collapse multi-collapse" id="collapse1">
+            <div class="card card-body">
+              First collapse panel - toggle with the button above to show both at once.
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="collapse multi-collapse" id="collapse2">
+            <div class="card card-body">
+              Second collapse panel - toggle with the button above to show both at once.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== BUTTON GROUP + CLOSE BUTTON ==================== -->
+    <div class="mb-4">
+      <h5>Button Groups &amp; Toolbar</h5>
+      <div class="btn-toolbar mb-3" role="toolbar">
+        <div class="btn-group me-2" role="group">
+          <button type="button" class="btn btn-outline-primary">
+            <strong>B</strong>
+          </button>
+          <button type="button" class="btn btn-outline-primary">
+            <em>I</em>
+          </button>
+          <button type="button" class="btn btn-outline-primary">
+            <u>U</u>
+          </button>
+        </div>
+        <div class="btn-group me-2" role="group">
+          <button type="button" class="btn btn-outline-secondary">◀</button>
+          <button type="button" class="btn btn-outline-secondary">▶</button>
+        </div>
+        <div class="btn-group" role="group">
+          <input type="radio" class="btn-check" name="align" id="alignL" autocomplete="off" checked>
+          <label class="btn btn-outline-secondary" for="alignL">≡ Left</label>
+          <input type="radio" class="btn-check" name="align" id="alignC" autocomplete="off">
+          <label class="btn btn-outline-secondary" for="alignC">≡ Center</label>
+          <input type="radio" class="btn-check" name="align" id="alignR" autocomplete="off">
+          <label class="btn btn-outline-secondary" for="alignR">≡ Right</label>
+        </div>
+      </div>
+
+      <h5>Popover &amp; Tooltip</h5>
+      <div class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="This is a Bootstrap 5 tooltip">
+          Hover for Tooltip ↑
+        </button>
+        <button type="button" class="btn btn-info text-white" data-bs-toggle="popover" data-bs-title="Popover Title" data-bs-content="Popover content with more details and additional information.">
+          Click for Popover
+        </button>
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip below">
+          Tooltip ↓
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== CARD GRID + RATIO ==================== -->
+    <div class="mb-4">
+      <h5>Image Ratio &amp; Card Deck</h5>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="ratio ratio-16x9 bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style="border-radius: var(--bs-card-border-radius) var(--bs-card-border-radius) 0 0; overflow:hidden;">
+              <div class="text-center text-primary fw-bold">16:9 Ratio Box</div>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title">Responsive Design</h6>
+              <p class="card-text small text-muted">Use ratio classes to maintain fixed aspect ratios.</p>
+            </div>
+            <div class="card-footer text-muted small">Updated 3 days ago</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 text-center">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center py-4">
+              <div class="display-4 mb-2">🚀</div>
+              <h6 class="card-title">Centered Card</h6>
+              <p class="card-text small text-muted">Perfectly aligned content.</p>
+              <a href="#" class="btn btn-outline-primary mt-auto">Explore</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==================== OFFCANVAS ==================== -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDemo" aria-labelledby="offcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasLabel">🗂️ Side Panel</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p>The <strong>Offcanvas</strong> is a sliding component that can appear from any side of the screen.</p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex align-items-center gap-2"><span>📊</span> Dashboard</li>
+        <li class="list-group-item d-flex align-items-center gap-2"><span>👥</span> Users</li>
+        <li class="list-group-item d-flex align-items-center gap-2"><span>📦</span> Products</li>
+        <li class="list-group-item d-flex align-items-center gap-2"><span>📈</span> Reports</li>
+        <li class="list-group-item d-flex align-items-center gap-2"><span>⚙️</span> Settings</li>
+      </ul>
+      <div class="mt-4">
+        <div class="alert alert-info">
+          <strong>Tip:</strong> It can also be opened from the right, top or bottom.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+  <!-- Default Modal -->
+  <div class="modal fade" id="modalDemo" tabindex="-1" aria-labelledby="modalDemoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalDemoLabel">Modal Title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>This is a standard Bootstrap 5 modal dialog.</p>
+          <p>Modals are used to display content in an overlay above the page.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Large Modal -->
+  <div class="modal fade" id="modalLargeDemo" tabindex="-1" aria-labelledby="modalLargeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLargeLabel">Large Modal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>This is a large modal for displaying more content.</p>
+          <p>Use <code>modal-lg</code> class for larger modals.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Small Modal -->
+  <div class="modal fade" id="modalSmallDemo" tabindex="-1" aria-labelledby="modalSmallLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalSmallLabel">Small Modal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>This is a small modal for quick interactions.</p>
+          <p>Use <code>modal-sm</code> class for smaller modals.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-info">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST CONTAINER ==================== -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 11000;">
+    <div id="toast-success" class="toast align-items-center text-bg-success border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body">✅ Operation completed successfully.</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+    <div id="toast-danger" class="toast align-items-center text-bg-danger border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body">❌ An error occurred. Please try again.</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+    <div id="toast-warning" class="toast align-items-center text-bg-warning border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body">⚠️ Attention: action requires confirmation.</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Theme Manager -->
+  <script src="../js/theme-manager.js"></script>
+
+  <script>
+    // Initialize ThemeManager for the editor (moves up from /editor/ folder)
+    window.themeManager = new ThemeManager({ basePath: '../' });
+
+    // ===== Color swatches definition =====
+    const colorSwatches = {
+      ocean: { primary: '#0077b6', secondary: '#48cae4', accent: '#06d6a0' },
+      sunset: { primary: '#e63946', secondary: '#f4845f', accent: '#f7b801' },
+      forest: { primary: '#2d6a4f', secondary: '#52b788', accent: '#dda15e' },
+      lavender: { primary: '#7b2d8e', secondary: '#b185db', accent: '#9b72cf' },
+      corporate: { primary: '#1e3a5f', secondary: '#4a6fa5', accent: '#3182ce' },
+      candy: { primary: '#e91e8c', secondary: '#7c4dff', accent: '#00b0ff' },
+      white: { primary: '#ffffff', secondary: '#f5f5f5', accent: '#bdbdbd' },
+      'gray-light': { primary: '#bdbdbd', secondary: '#d0d0d0', accent: '#9e9e9e' },
+      'black': { primary: '#212121', secondary: '#424242', accent: '#616161' },
+      'teal': { primary: '#008080', secondary: '#20c997', accent: '#17a2b8' },
+      'rose': { primary: '#e83e8c', secondary: '#f06595', accent: '#ff6b9d' },
+      'amber': { primary: '#ff8f00', secondary: '#ffb300', accent: '#ffc107' },
+      'mint': { primary: '#4db6ac', secondary: '#80cbc4', accent: '#b2dfdb' },
+      'peach': { primary: '#ffab91', secondary: '#ffccbc', accent: '#ffe0b2' },
+      'sky': { primary: '#81d4fa', secondary: '#b3e5fc', accent: '#e1f5fe' },
+      nord: { primary: '#2e3440', secondary: '#5e81ac', accent: '#88c0d0' },
+      desert: { primary: '#c26e2b', secondary: '#e0a458', accent: '#f2cc8f' },
+      plum: { primary: '#5b2a86', secondary: '#a06cd5', accent: '#2f9c95' },
+      midnight: { primary: '#0f172a', secondary: '#2563eb', accent: '#0ea5e9' },
+      volcano: { primary: '#b91c1c', secondary: '#ea580c', accent: '#fbbf24' },
+      olive: { primary: '#3f6212', secondary: '#84cc16', accent: '#0ea5a4' },
+      orchid: { primary: '#6d28d9', secondary: '#ec4899', accent: '#06b6d4' },
+      arctic: { primary: '#0369a1', secondary: '#22d3ee', accent: '#14b8a6' },
+      citrus: { primary: '#65a30d', secondary: '#f59e0b', accent: '#84cc16' },
+      coffee: { primary: '#6f4e37', secondary: '#c0895e', accent: '#8d6e63' },
+      gold: { primary: '#a16207', secondary: '#fbbf24', accent: '#b45309' },
+      slate: { primary: '#334155', secondary: '#64748b', accent: '#0ea5e9' },
+      ink: { primary: '#1f2937', secondary: '#7c3aed', accent: '#06b6d4' },
+      neon: { primary: '#00c2ff', secondary: '#b6ff00', accent: '#ff2d55' },
+      tropical: { primary: '#0ea5a4', secondary: '#f97316', accent: '#3b82f6' }
+    };
+
+    // ===== Human-readable labels for options =====
+    const labels = {
+      fonts: {
+        inter: 'Inter',
+        merriweather: 'Merriweather',
+        nunito: 'Nunito',
+        'jetbrains-mono': 'JetBrains Mono',
+        'playfair-display': 'Playfair Display',
+        'roboto-slab': 'Roboto Slab',
+        quicksand: 'Quicksand',
+        oswald: 'Oswald',
+        montserrat: 'Montserrat',
+        poppins: 'Poppins',
+        roboto: 'Roboto',
+        lora: 'Lora',
+        raleway: 'Raleway',
+        'fira-sans': 'Fira Sans',
+        'dm-sans': 'DM Sans',
+        'pt-serif': 'PT Serif',
+        neucha: 'Neucha',
+        'cabin-sketch': 'Cabin Sketch',
+        'alfa-slab-one': 'Alfa Slab One',
+        'bebas-neue': 'Bebas Neue'
+      },
+      borders: { normal: 'Normal', extra: 'Thick', none: 'None' },
+      rounding: { normal: 'Normal', extra: 'Extra', none: 'Sharp' },
+      shadows: { normal: 'Normal', extra: 'Extra', none: 'None' },
+      spacing: { normal: 'Normal', large: 'Large', small: 'Compact' },
+      gradients: { on: 'Yes', off: 'No' },
+      accent: { none: 'None', left: 'Left', right: 'Right', top: 'Top', bottom: 'Bottom' }
+    };
+
+    // ===== Preset metadata (panel-only UI) =====
+    const presetMeta = {
+      studio: { title: 'Studio', color: 'corporate' },
+      aurora: { title: 'Aurora', color: 'ocean' },
+      paper: { title: 'Paper', color: 'white' },
+      retro: { title: 'Retro', color: 'peach' },
+      noir: { title: 'Noir', color: 'ink' },
+      citrus: { title: 'Citrus', color: 'citrus' },
+      calm: { title: 'Calm', color: 'arctic' },
+      wild: { title: 'Wild', color: 'tropical' },
+      sunset: { title: 'Sunset', color: 'sunset' },
+      neon: { title: 'Neon', color: 'neon' },
+      candy: { title: 'Candy', color: 'candy' },
+      forest: { title: 'Forest', color: 'forest' }
+    };
+
+    // ===== Build the panel dynamically =====
+    function buildPanel() {
+      // Presets
+      const presetsHtml = themeManager.getPresets()
+        .filter(name => name !== 'default')
+        .map(name => {
+          const meta = presetMeta[name] || { title: name, color: null };
+          const swatch = colorSwatches[meta.color] || {
+            primary: '#ced4da',
+            secondary: '#e9ecef',
+            accent: '#adb5bd'
+          };
+          return `
+            <div class="col-6">
+              <div class="preset-card"
+                   data-preset="${name}"
+                   onclick="applyPreset('${name}')">
+                <div class="preset-swatch">
+                  <div style="background:${swatch.primary}"></div>
+                  <div style="background:${swatch.secondary}"></div>
+                  <div style="background:${swatch.accent}"></div>
+                </div>
+                <div class="preset-title text-center mt-1">${meta.title}</div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      document.getElementById('presetsContainer')
+        .innerHTML = presetsHtml;
+
+      // Colors
+      const colorsHtml = Object.entries(colorSwatches)
+        .map(([name, colors]) => `
+          <div class="col-4">
+            <div class="color-swatch"
+                 data-color="${name}"
+                 onclick="setTheme('colors','${name}')">
+              <div class="swatch-colors">
+                <div style="background:${colors.primary}"></div>
+                <div style="background:${colors.secondary}"></div>
+                <div style="background:${colors.accent}"></div>
+              </div>
+              <span class="swatch-label">${name}</span>
+            </div>
+          </div>
+        `).join('');
+      document.getElementById('colorsContainer')
+        .innerHTML = colorsHtml;
+
+      // Option groups
+      ['fonts', 'borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent']
+        .forEach(cat => {
+          const container =
+            document.getElementById(`${cat}Group`);
+          const opts = Object.entries(labels[cat])
+            .map(([value, label]) => `
+              <button class="option-btn"
+                      data-category="${cat}"
+                      data-value="${value}"
+                      onclick="setTheme('${cat}','${value}')">
+                ${label}
+              </button>
+            `).join('');
+          container.innerHTML = opts;
+        });
+    }
+
+    // ===== Actions =====
+    function toggleDarkMode(isDark) {
+      themeManager.setMode(isDark ? 'dark' : 'light');
+      updatePanelState();
+    }
+
+    function setTheme(category, value) {
+      themeManager.set(category, value);
+      updatePanelState();
+    }
+
+    async function applyPreset(name) {
+      await themeManager.applyPreset(name);
+      updatePanelState();
+    }
+
+    function togglePanel() {
+      document.getElementById('themePanel')
+        .classList.toggle('open');
+    }
+
+    function copyConfig() {
+      const css = themeManager.generatePresetCSS();
+      navigator.clipboard.writeText(css);
+      alert('CSS Preset copied to clipboard!');
+    }
+
+    // ===== Update panel visual state =====
+    function updatePanelState() {
+      const config = themeManager.getConfig();
+      const isDark = themeManager.getMode() === 'dark';
+
+      // Dark mode toggle
+      const toggle = document.getElementById('darkModeToggle');
+      if (toggle) toggle.checked = isDark;
+      const modeIcon = document.getElementById('modeIcon');
+      const modeLabel = document.getElementById('modeLabel');
+      if (modeIcon) modeIcon.textContent = isDark ? '🌙' : '☀️';
+      if (modeLabel) modeLabel.textContent = isDark ? 'Dark mode' : 'Light mode';
+
+      // Navbar toggle sync
+      const navIcon = document.getElementById('navbarModeIcon');
+      const navText = document.getElementById('navbarModeText');
+      if (navIcon) navIcon.textContent = isDark ? '🌙' : '☀️';
+      if (navText) navText.textContent = isDark ? 'Dark mode' : 'Light mode';
+
+      // Color swatches
+      document.querySelectorAll('.color-swatch')
+        .forEach(el => {
+          el.classList.toggle(
+            'active',
+            el.dataset.color === config.colors
+          );
+        });
+
+      // Option buttons
+      document.querySelectorAll('.option-btn')
+        .forEach(el => {
+          el.classList.toggle(
+            'active',
+            el.dataset.value === config[el.dataset.category]
+          );
+        });
+
+      // Preset cards
+      document.querySelectorAll('.preset-card')
+        .forEach(el => {
+          el.classList.toggle(
+            'active',
+            el.dataset.preset === config._preset
+          );
+        });
+
+      // Config display
+      const pre = document.getElementById('currentConfig');
+      if (pre) pre.textContent = themeManager.generatePresetCSS();
+    }
+
+    // ===== Toast helper =====
+    function showToast(id) {
+      const el = document.getElementById(id);
+      if (el) new bootstrap.Toast(el, { delay: 3000 }).show();
+    }
+
+    // ===== Init tooltips & popovers =====
+    document.addEventListener('DOMContentLoaded', () => {
+      // Tooltips
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        .forEach(el => new bootstrap.Tooltip(el));
+      // Popovers
+      document.querySelectorAll('[data-bs-toggle="popover"]')
+        .forEach(el => new bootstrap.Popover(el));
+      
+      // Update UI when theme changes (from preset analysis or direct set)
+      window.addEventListener('themechange', () => {
+        updatePanelState();
+      });
+
+      // Build panel if themeManager exists
+      if (typeof themeManager !== 'undefined') {
+        buildPanel();
+        updatePanelState();
+      }
+    });
+  </script>
+</body>
+
+</html>

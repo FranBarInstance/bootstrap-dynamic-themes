@@ -1,0 +1,249 @@
+/* themes/colors/mint.css
+ * White background, accents in menta verde pastel.
+ * -------------------------------------------------------------- */
+:root {
+  --bs-body-bg:    #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary:     #4db6ac;
+  --bs-primary-rgb: 77, 182, 172;
+
+  --bs-secondary:     #80cbc4;
+  --bs-secondary-rgb: 128, 203, 196;
+
+  /* Pastel success */
+  --bs-success:     #a5d6a7;
+  --bs-success-rgb: 165, 214, 167;
+  --bs-success-text-emphasis: #1b5e20;
+  --bs-success-bg-subtle: #e8f5e9;
+  --bs-success-border-subtle: #c8e6c9;
+
+  /* Pastel danger */
+  --bs-danger:     #ef9a9a;
+  --bs-danger-rgb: 239, 154, 154;
+  --bs-danger-text-emphasis: #b71c1c;
+  --bs-danger-bg-subtle: #ffebee;
+  --bs-danger-border-subtle: #ffcdd2;
+
+  /* Pastel warning */
+  --bs-warning:     #ffe082;
+  --bs-warning-rgb: 255, 224, 130;
+  --bs-warning-text-emphasis: #7a5b00;
+  --bs-warning-bg-subtle: #fff8e1;
+  --bs-warning-border-subtle: #ffecb3;
+
+  /* Pastel info */
+  --bs-info:     #81d4fa;
+  --bs-info-rgb: 129, 212, 250;
+  --bs-info-text-emphasis: #01579b;
+  --bs-info-bg-subtle: #e1f5fe;
+  --bs-info-border-subtle: #b3e5fc;
+
+  /* Links (darker for contrast on white background) */
+  --bs-link-color:       #007a72;
+  --bs-link-hover-color: #005f58;
+
+  --bs-border-color: #b2dfdb;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn-primary {
+  --bs-btn-bg:               #4db6ac;
+  --bs-btn-border-color:     #4db6ac;
+  --bs-btn-color:            #102a3a;
+  --bs-btn-hover-bg:         #26a69a;
+  --bs-btn-hover-border-color: #26a69a;
+  --bs-btn-hover-color:      #102a3a;
+  --bs-btn-active-bg:        #00897b;
+  --bs-btn-active-border-color: #00897b;
+  --bs-btn-active-color:     #ffffff;
+}
+.btn-secondary {
+  --bs-btn-bg:           #80cbc4;
+  --bs-btn-border-color: #80cbc4;
+  --bs-btn-color:        #102a3a;
+  --bs-btn-hover-bg:     #4db6ac;
+  --bs-btn-hover-border-color: #4db6ac;
+  --bs-btn-hover-color:  #102a3a;
+}
+
+/* Estados (success/danger/warning/info) en tono pastel */
+.btn-success {
+  --bs-btn-bg: var(--bs-success);
+  --bs-btn-border-color: var(--bs-success);
+  --bs-btn-color: #102a3a;
+  --bs-btn-hover-bg: #81c784;
+  --bs-btn-hover-border-color: #81c784;
+}
+.btn-danger {
+  --bs-btn-bg: var(--bs-danger);
+  --bs-btn-border-color: var(--bs-danger);
+  --bs-btn-color: #102a3a;
+  --bs-btn-hover-bg: #e57373;
+  --bs-btn-hover-border-color: #e57373;
+}
+.btn-warning {
+  --bs-btn-bg: var(--bs-warning);
+  --bs-btn-border-color: var(--bs-warning);
+  --bs-btn-color: #102a3a;
+  --bs-btn-hover-bg: #ffd54f;
+  --bs-btn-hover-border-color: #ffd54f;
+}
+.btn-info {
+  --bs-btn-bg: var(--bs-info);
+  --bs-btn-border-color: var(--bs-info);
+  --bs-btn-color: #102a3a;
+  --bs-btn-hover-bg: #4fc3f7;
+  --bs-btn-hover-border-color: #4fc3f7;
+}
+.btn-outline-primary {
+  --bs-btn-color:        #4db6ac;
+  --bs-btn-border-color: #4db6ac;
+  --bs-btn-hover-bg:     #4db6ac;
+  --bs-btn-hover-color:  #fff;
+  --bs-btn-active-bg:    #4db6ac;
+}
+.btn-outline-secondary {
+  --bs-btn-color:        #80cbc4;
+  --bs-btn-border-color: #80cbc4;
+  --bs-btn-hover-bg:     #80cbc4;
+  --bs-btn-hover-color:  #fff;
+}
+
+/* ── Utilities ──────────────────────────────────────────────── */
+.bg-primary {
+  background-color: #4db6ac !important;
+  color: #102a3a !important;
+}
+.bg-secondary {
+  background-color: #80cbc4 !important;
+  color: #102a3a !important;
+}
+.bg-success {
+  background-color: var(--bs-success) !important;
+  color: #102a3a !important;
+}
+.bg-danger {
+  background-color: var(--bs-danger) !important;
+  color: #102a3a !important;
+}
+.bg-warning {
+  background-color: var(--bs-warning) !important;
+  color: #102a3a !important;
+}
+.bg-info {
+  background-color: var(--bs-info) !important;
+  color: #102a3a !important;
+}
+.text-primary   { color: #007a72 !important; }
+.text-secondary { color: #005f58 !important; }
+.text-success { color: var(--bs-success-text-emphasis) !important; }
+.text-danger { color: var(--bs-danger-text-emphasis) !important; }
+.text-warning { color: var(--bs-warning-text-emphasis) !important; }
+.text-info { color: var(--bs-info-text-emphasis) !important; }
+
+.form-control:focus,
+.form-select:focus {
+  border-color: rgba(77, 182, 172, 0.6);
+  box-shadow: 0 0 0 0.25rem rgba(77, 182, 172, 0.3);
+}
+.form-check-input:checked {
+  background-color: #4db6ac;
+  border-color:     #4db6ac;
+}
+
+.page-link { color: #007a72; }
+.page-item.active .page-link {
+  background-color: #4db6ac;
+  border-color:     #4db6ac;
+  color:            #fff;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #4db6ac;
+  color: #fff;
+}
+:not(.navbar) > .nav-link,
+.nav-tabs .nav-link,
+.nav-pills .nav-link {
+  color: #007a72;
+}
+
+/* ── Navbar mint — texto claro para contraste ───────────────── */
+.navbar-dark .navbar-nav .nav-link,
+.navbar[data-bs-theme="dark"] .navbar-nav .nav-link,
+.bg-primary .navbar-nav .nav-link {
+  color: inherit !important;
+}
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar[data-bs-theme="dark"] .navbar-nav .nav-link.active,
+.bg-primary .navbar-nav .nav-link.active {
+  color: inherit !important;
+}
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar[data-bs-theme="dark"] .navbar-nav .nav-link:hover,
+.bg-primary .navbar-nav .nav-link:hover {
+  color: inherit !important;
+}
+.navbar-dark .navbar-brand,
+.navbar[data-bs-theme="dark"] .navbar-brand,
+.bg-primary .navbar-brand {
+  color: inherit !important;
+}
+.navbar-dark.bg-primary .form-control,
+.bg-primary .form-control {
+  border-color: rgba(0,0,0,0.2);
+  color: inherit;
+  background-color: rgba(255,255,255,0.5);
+}
+.navbar-dark.bg-primary .btn-outline-light,
+.bg-primary .btn-outline-light {
+  color: inherit;
+  border-color: rgba(0,0,0,0.25);
+}
+.navbar-dark.bg-primary .btn-outline-light:hover,
+.bg-primary .btn-outline-light:hover {
+  background-color: rgba(0,0,0,0.1);
+  color: inherit;
+}
+.navbar-dark.bg-primary .navbar-toggler-icon,
+.bg-primary .navbar-toggler-icon {
+  filter: invert(0) brightness(0.2);
+}
+.navbar-dark.bg-primary .navbar-toggler,
+.bg-primary .navbar-toggler {
+  border-color: rgba(0,0,0,0.2);
+}
+
+.progress-bar { background-color: #4db6ac; }
+.list-group-item.active {
+  background-color: #4db6ac;
+  border-color: #4db6ac;
+  color: #fff;
+}
+.card { --bs-card-border-color: #b2dfdb; }
+
+/* text-bg-* (Bootstrap) */
+.text-bg-success {
+  background-color: var(--bs-success) !important;
+  color: #102a3a !important;
+}
+.text-bg-danger {
+  background-color: var(--bs-danger) !important;
+  color: #102a3a !important;
+}
+.text-bg-warning {
+  background-color: var(--bs-warning) !important;
+  color: #102a3a !important;
+}
+.text-bg-info {
+  background-color: var(--bs-info) !important;
+  color: #102a3a !important;
+}
+
+/* Garantizar legibilidad de enlaces en contenedores con fondo (excluyendo navbar) */
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link),
+[class*="text-bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}
