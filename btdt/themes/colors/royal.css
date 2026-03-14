@@ -1,0 +1,29 @@
+/* themes/colors/royal.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #1e3a8a;
+  --bs-primary-rgb: 30,58,138;
+  --bs-secondary: #fbbf24;
+  --bs-secondary-rgb: 251,191,36;
+  
+  --bs-link-color: #1e3a8a;
+  --bs-link-hover-color: #1e3a8a;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #1e3a8a;
+  --bs-btn-hover-border-color: #1e3a8a;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #fff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #fff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

@@ -1,0 +1,29 @@
+/* themes/colors/sandstone.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #bc6c25;
+  --bs-primary-rgb: 188,108,37;
+  --bs-secondary: #dda15e;
+  --bs-secondary-rgb: 221,161,94;
+  
+  --bs-link-color: #bc6c25;
+  --bs-link-hover-color: #bc6c25;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #bc6c25;
+  --bs-btn-hover-border-color: #bc6c25;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #fff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #fff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

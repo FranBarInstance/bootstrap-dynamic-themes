@@ -1,0 +1,30 @@
+/* themes/colors/cyberpunk-light.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #f0abfc;
+  --bs-primary-rgb: 240,171,252;
+  --bs-secondary: #22d3ee;
+  --bs-secondary-rgb: 34,211,238;
+  
+  --bs-link-color: #f0abfc;
+  --bs-link-hover-color: #f0abfc;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-color: #1a1a1a;
+  --bs-btn-hover-bg: #f0abfc;
+  --bs-btn-hover-border-color: #f0abfc;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #1a1a1a !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #1a1a1a !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

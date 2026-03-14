@@ -1,0 +1,30 @@
+/* themes/colors/navy-gold.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #000080;
+  --bs-primary-rgb: 0,0,128;
+  --bs-secondary: #eab308;
+  --bs-secondary-rgb: 234,179,8;
+  
+  --bs-link-color: #000080;
+  --bs-link-hover-color: #000080;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-color: #ffffff;
+  --bs-btn-hover-bg: #000080;
+  --bs-btn-hover-border-color: #000080;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #ffffff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #ffffff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

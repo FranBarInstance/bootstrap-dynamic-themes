@@ -1,0 +1,30 @@
+/* themes/colors/steel-blue.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #4682b4;
+  --bs-primary-rgb: 70,130,180;
+  --bs-secondary: #a9c1d9;
+  --bs-secondary-rgb: 169,193,217;
+  
+  --bs-link-color: #4682b4;
+  --bs-link-hover-color: #4682b4;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-color: #ffffff;
+  --bs-btn-hover-bg: #4682b4;
+  --bs-btn-hover-border-color: #4682b4;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #ffffff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #1a1a1a !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

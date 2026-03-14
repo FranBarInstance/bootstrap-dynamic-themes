@@ -1,0 +1,29 @@
+/* themes/colors/clean-tech.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #2563eb;
+  --bs-primary-rgb: 37,99,235;
+  --bs-secondary: #60a5fa;
+  --bs-secondary-rgb: 96,165,250;
+  
+  --bs-link-color: #2563eb;
+  --bs-link-hover-color: #2563eb;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #2563eb;
+  --bs-btn-hover-border-color: #2563eb;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #fff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #fff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

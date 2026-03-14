@@ -1,0 +1,29 @@
+/* themes/colors/serene.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #6366f1;
+  --bs-primary-rgb: 99,102,241;
+  --bs-secondary: #a5b4fc;
+  --bs-secondary-rgb: 165,180,252;
+  
+  --bs-link-color: #6366f1;
+  --bs-link-hover-color: #6366f1;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #6366f1;
+  --bs-btn-hover-border-color: #6366f1;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #fff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #fff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

@@ -1,0 +1,30 @@
+/* themes/colors/indigo-night.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #4338ca;
+  --bs-primary-rgb: 67,56,202;
+  --bs-secondary: #6366f1;
+  --bs-secondary-rgb: 99,102,241;
+  
+  --bs-link-color: #4338ca;
+  --bs-link-hover-color: #4338ca;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-color: #ffffff;
+  --bs-btn-hover-bg: #4338ca;
+  --bs-btn-hover-border-color: #4338ca;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #ffffff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #ffffff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

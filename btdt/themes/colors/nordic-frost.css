@@ -1,0 +1,81 @@
+/* themes/colors/nordic-frost.css */
+:root {
+  /* Always white background for light themes as per SKILL guidelines */
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #2e3440;
+
+  /* Primary - Frost Blue */
+  --bs-primary: #5e81ac;
+  --bs-primary-rgb: 94, 129, 172;
+
+  /* Secondary - Polar Gray */
+  --bs-secondary: #88c0d0;
+  --bs-secondary-rgb: 136, 192, 208;
+
+  /* Success - Aurora Green */
+  --bs-success: #a3be8c;
+  --bs-success-rgb: 163, 190, 140;
+
+  /* Danger - Arctic Red */
+  --bs-danger: #bf616a;
+  --bs-danger-rgb: 191, 97, 106;
+
+  /* Warning - Sun Glow */
+  --bs-warning: #ebcb8b;
+  --bs-warning-rgb: 235, 203, 139;
+
+  /* Info - Deep Ice */
+  --bs-info: #81a1c1;
+  --bs-info-rgb: 129, 161, 193;
+
+  /* Links */
+  --bs-link-color: #5e81ac;
+  --bs-link-hover-color: #4c566a;
+}
+
+/* Buttons and components */
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #4c6a8a;
+  --bs-btn-hover-border-color: #4c6a8a;
+}
+
+.btn-secondary {
+  --bs-btn-bg: var(--bs-secondary);
+  --bs-btn-border-color: var(--bs-secondary);
+  --bs-btn-color: #2e3440;
+  --bs-btn-hover-bg: #74a9b8;
+  --bs-btn-hover-border-color: #74a9b8;
+}
+
+/* Backgrounds */
+.bg-primary {
+  background-color: var(--bs-primary) !important;
+  color: #fff !important;
+}
+.bg-secondary {
+  background-color: var(--bs-secondary) !important;
+  color: #2e3440 !important;
+}
+
+/* Form controls focus */
+.form-control:focus,
+.form-select:focus {
+  border-color: rgba(var(--bs-primary-rgb), 0.5);
+  box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Navbar: always white text on primary background */
+.navbar-dark .navbar-nav .nav-link,
+.navbar[data-bs-theme="dark"] .navbar-nav .nav-link,
+.bg-primary .navbar-nav .nav-link {
+  color: inherit !important;
+}
+
+/* Accessibility & Legibility Block */
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link),
+[class*="text-bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

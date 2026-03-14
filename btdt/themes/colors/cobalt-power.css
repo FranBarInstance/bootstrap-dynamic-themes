@@ -1,0 +1,30 @@
+/* themes/colors/cobalt-power.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #0047ab;
+  --bs-primary-rgb: 0,71,171;
+  --bs-secondary: #0056b3;
+  --bs-secondary-rgb: 0,86,179;
+  
+  --bs-link-color: #0047ab;
+  --bs-link-hover-color: #0047ab;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-color: #ffffff;
+  --bs-btn-hover-bg: #0047ab;
+  --bs-btn-hover-border-color: #0047ab;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #ffffff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #ffffff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

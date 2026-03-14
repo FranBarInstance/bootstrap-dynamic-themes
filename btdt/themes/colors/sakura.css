@@ -1,0 +1,30 @@
+/* themes/colors/sakura.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #ffb7c5;
+  --bs-primary-rgb: 255,183,197;
+  --bs-secondary: #ff91a4;
+  --bs-secondary-rgb: 255,145,164;
+  
+  --bs-link-color: #ffb7c5;
+  --bs-link-hover-color: #ffb7c5;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-color: #1a1a1a;
+  --bs-btn-hover-bg: #ffb7c5;
+  --bs-btn-hover-border-color: #ffb7c5;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #1a1a1a !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #1a1a1a !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

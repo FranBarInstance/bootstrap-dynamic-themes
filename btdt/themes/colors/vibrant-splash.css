@@ -1,0 +1,29 @@
+/* themes/colors/vibrant-splash.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #f43f5e;
+  --bs-primary-rgb: 244,63,94;
+  --bs-secondary: #fbbf24;
+  --bs-secondary-rgb: 251,191,36;
+  
+  --bs-link-color: #f43f5e;
+  --bs-link-hover-color: #f43f5e;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #f43f5e;
+  --bs-btn-hover-border-color: #f43f5e;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #fff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #fff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

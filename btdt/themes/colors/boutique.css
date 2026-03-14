@@ -1,0 +1,30 @@
+/* themes/colors/boutique.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #c084fc;
+  --bs-primary-rgb: 192,132,252;
+  --bs-secondary: #fb7185;
+  --bs-secondary-rgb: 251,113,133;
+  
+  --bs-link-color: #c084fc;
+  --bs-link-hover-color: #c084fc;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-color: #1a1a1a;
+  --bs-btn-hover-bg: #c084fc;
+  --bs-btn-hover-border-color: #c084fc;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #1a1a1a !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #1a1a1a !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

@@ -1,0 +1,30 @@
+/* themes/colors/pastel-cloud.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #bfdbfe;
+  --bs-primary-rgb: 191,219,254;
+  --bs-secondary: #dbeafe;
+  --bs-secondary-rgb: 219,234,254;
+  
+  --bs-link-color: #bfdbfe;
+  --bs-link-hover-color: #bfdbfe;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-color: #1a1a1a;
+  --bs-btn-hover-bg: #bfdbfe;
+  --bs-btn-hover-border-color: #bfdbfe;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #1a1a1a !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #1a1a1a !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

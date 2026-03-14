@@ -1,0 +1,29 @@
+/* themes/colors/vintage.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #c84b31;
+  --bs-primary-rgb: 200,75,49;
+  --bs-secondary: #346751;
+  --bs-secondary-rgb: 52,103,81;
+  
+  --bs-link-color: #c84b31;
+  --bs-link-hover-color: #c84b31;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #c84b31;
+  --bs-btn-hover-border-color: #c84b31;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #fff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #fff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

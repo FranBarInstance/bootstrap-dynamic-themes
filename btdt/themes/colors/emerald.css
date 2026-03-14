@@ -1,0 +1,29 @@
+/* themes/colors/emerald.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #065f46;
+  --bs-primary-rgb: 6,95,70;
+  --bs-secondary: #fbbf24;
+  --bs-secondary-rgb: 251,191,36;
+  
+  --bs-link-color: #065f46;
+  --bs-link-hover-color: #065f46;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #065f46;
+  --bs-btn-hover-border-color: #065f46;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #fff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #fff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

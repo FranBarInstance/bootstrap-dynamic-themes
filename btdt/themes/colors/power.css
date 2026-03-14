@@ -1,0 +1,29 @@
+/* themes/colors/power.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #991b1b;
+  --bs-primary-rgb: 153,27,27;
+  --bs-secondary: #111827;
+  --bs-secondary-rgb: 17,24,39;
+  
+  --bs-link-color: #991b1b;
+  --bs-link-hover-color: #991b1b;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #991b1b;
+  --bs-btn-hover-border-color: #991b1b;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #fff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #fff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

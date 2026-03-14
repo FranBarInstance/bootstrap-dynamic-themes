@@ -1,0 +1,29 @@
+/* themes/colors/deep-sea.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #006d77;
+  --bs-primary-rgb: 0,109,119;
+  --bs-secondary: #83c5be;
+  --bs-secondary-rgb: 131,197,190;
+  
+  --bs-link-color: #006d77;
+  --bs-link-hover-color: #006d77;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #006d77;
+  --bs-btn-hover-border-color: #006d77;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #fff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #fff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

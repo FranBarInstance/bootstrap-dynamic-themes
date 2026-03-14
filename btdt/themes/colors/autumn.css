@@ -1,0 +1,29 @@
+/* themes/colors/autumn.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #b3541e;
+  --bs-primary-rgb: 179,84,30;
+  --bs-secondary: #e9c46a;
+  --bs-secondary-rgb: 233,196,106;
+  
+  --bs-link-color: #b3541e;
+  --bs-link-hover-color: #b3541e;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #b3541e;
+  --bs-btn-hover-border-color: #b3541e;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #fff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #fff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}

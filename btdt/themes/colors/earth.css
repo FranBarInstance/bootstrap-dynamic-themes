@@ -1,0 +1,29 @@
+/* themes/colors/earth.css */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+
+  --bs-primary: #4b5320;
+  --bs-primary-rgb: 75,83,32;
+  --bs-secondary: #bcb88a;
+  --bs-secondary-rgb: 188,184,138;
+  
+  --bs-link-color: #4b5320;
+  --bs-link-hover-color: #4b5320;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #4b5320;
+  --bs-btn-hover-border-color: #4b5320;
+  filter: brightness(0.9);
+}
+
+.bg-primary { background-color: var(--bs-primary) !important; color: #fff !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; color: #fff !important; }
+
+[class*="bg-"]:not(.navbar) a:not(.btn):not(.nav-link) {
+  color: inherit !important;
+  text-decoration: underline;
+}
