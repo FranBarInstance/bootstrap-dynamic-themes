@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free themes for Bootstrap - BTDT</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" id="main-preset" href="themes/preset/nordic-elegance.css">
+</head>
+
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary py-2 shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center text-decoration-none" href="index.html">
+        <span class="me-2 fs-3">🎨</span> BTDT
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle color-inherit" href="#" id="themeDropdown" role="button" data-bs-toggle="dropdown">
+              Themes
+            </a>
+            <ul class="dropdown-menu shadow-lg border-0" id="presetList" style="max-height: 400px; overflow-y: auto;">
+              <!-- Populated via JS -->
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link color-inherit" href="https://github.com/FranBarInstance/bootstrap-dynamic-themes">Documentation</a>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center">
+          <a href="https://github.com/FranBarInstance/bootstrap-dynamic-themes" target="_blank" class="text-white text-decoration-none d-flex align-items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+          </a>
+          <a href="editor/index.html" class="btn btn-light ms-lg-3 fw-bold shadow-sm">Launch Editor</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="py-5 mt-5">
+    <div class="container py-5">
+      <div class="row align-items-center gy-5">
+        <div class="col-lg-6">
+          <span class="badge bg-primary bg-opacity-10 mb-3 px-3 py-2 rounded-pill fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 0.05em;">Production Ready</span>
+          <h1 class="display-3 fw-bold mb-4">Bootstrap themes, <span class="text-primary">redefined.</span></h1>
+          <p class="lead text-muted mb-5">
+            Create professional, modern, and accessible Bootstrap 5 themes in seconds. Zero SCSS, zero build steps, 100% dynamic.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="editor/index.html" class="btn btn-primary btn-lg px-4 fw-bold shadow-sm">Launch Designer</a>
+            <a href="https://github.com/FranBarInstance/bootstrap-dynamic-themes" class="btn btn-outline-dark btn-lg px-4 fw-bold">View Documentation</a>
+          </div>
+          <div class="mt-5 d-flex gap-4">
+            <div>
+              <p class="h1 fw-bold text-primary mb-0">30+</p>
+              <p class="text-muted small fw-bold text-uppercase">Palettes</p>
+            </div>
+            <div class="border-start ps-4">
+              <p class="h1 fw-bold text-primary mb-0">20+</p>
+              <p class="text-muted small fw-bold text-uppercase">Fonts</p>
+            </div>
+            <div class="border-start ps-4">
+              <p class="h1 fw-bold text-primary mb-0">Pure</p>
+              <p class="text-muted small fw-bold text-uppercase">CSS</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 ps-5">
+          <div class="rounded-4 overflow-hidden shadow-lg border border-white border-4">
+            <div class="card-body p-4">
+              <div class="d-flex gap-2 mb-3">
+                <span class="rounded-circle bg-danger d-inline-block p-1"></span>
+                <span class="rounded-circle bg-warning d-inline-block p-1"></span>
+                <span class="rounded-circle bg-success d-inline-block p-1"></span>
+              </div>
+              <div class="text-center py-5">
+                <div class="display-1 mb-3">🎨</div>
+                <h5 class="fw-bold">Bootstrap 5 Theming</h5>
+                <p class="small opacity-75 mb-3">Free themes for Bootstrap customizable</p>
+                <div class="d-flex justify-content-center gap-2">
+                  <span class="badge rounded-pill bg-primary px-3 py-2">Primary</span>
+                  <span class="badge rounded-pill bg-success px-3 py-2">Success</span>
+                  <span class="badge rounded-pill bg-danger px-3 py-2">Danger</span>
+                  <span class="badge rounded-pill bg-warning px-3 py-2">Warning</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section class="py-5 bg-white border-top border-bottom">
+    <div class="container py-5">
+      <div class="text-center mb-5 pb-3">
+        <h2 class="display-5 fw-bold">Why choose BTDT?</h2>
+        <p class="lead text-muted">The faster way to customize Bootstrap without the headache.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 p-4 border-0 shadow-sm rounded-4">
+            <div class="display-4 text-primary mb-3">⚡</div>
+            <h4 class="fw-bold">No SCSS Required</h4>
+            <p class="text-muted mb-0">Forget about Ruby, Node, or expensive build steps. BTDT uses modern CSS custom properties for instant styling.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 p-4 border-0 shadow-sm rounded-4">
+            <div class="display-4 text-primary mb-3">🌗</div>
+            <h4 class="fw-bold">Smart Dark Mode</h4>
+            <p class="text-muted mb-0">Built-in dark mode support with color inversion and specific overrides. Seamless transition with zero refresh.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 p-4 border-0 shadow-sm rounded-4">
+            <div class="display-4 text-primary mb-3">🎨</div>
+            <h4 class="fw-bold">Modular Presets</h4>
+            <p class="text-muted mb-0">Mix and match color palettes, typography, and structural styles. Export your unique creation in one click.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-5 bg-light">
+    <div class="container py-5">
+      <div class="row align-items-center gy-5">
+        <div class="col-lg-5">
+          <h2 class="display-5 fw-bold mb-5">Design to Production in minutes.</h2>
+          <div class="d-flex gap-4 mb-4">
+            <div class="display-6 text-primary fw-bold">01</div>
+            <div>
+              <h5 class="fw-bold mb-1">Visually Design</h5>
+              <p class="text-muted">Use the editor to tweak every detail: colors, rounding, shadows, and more.</p>
+            </div>
+          </div>
+          <div class="d-flex gap-4 mb-4">
+            <div class="display-6 text-primary fw-bold">02</div>
+            <div>
+              <h5 class="fw-bold mb-1">Export CSS</h5>
+              <p class="text-muted">Click the "Copy CSS Preset" button to get your optimized theme variables.</p>
+            </div>
+          </div>
+          <div class="d-flex gap-4">
+            <div class="display-6 text-primary fw-bold">03</div>
+            <div>
+              <h5 class="fw-bold mb-1">Drop & Run</h5>
+              <p class="text-muted">Save your CSS file and link it. No builds, no dependencies, just pure performance.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="p-4 bg-dark rounded-4 shadow-lg overflow-hidden">
+            <pre class="mb-0 text-info" style="font-size: 0.9rem;"><code><span class="text-secondary opacity-50">&lt;!-- Just add these lines --&gt;</span>
+<span class="text-white">&lt;link rel="stylesheet" href="btdt/css/bootstrap.min.css"&gt;</span>
+<span class="text-white">&lt;link rel="stylesheet" href="btdt/themes/preset/my-theme.css"&gt;</span>
+
+<span class="text-secondary opacity-50">&lt;!-- And you are ready! --&gt;</span>
+<span class="text-white">&lt;body&gt;</span>
+  <span class="text-muted">... your content ...</span>
+<span class="text-white">&lt;/body&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-5 bg-white text-center border-top">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="display-4 fw-bold mb-4">Ready to build something beautiful?</h2>
+          <p class="lead text-muted mb-5">Start designing your professional Bootstrap 5 theme today for free. No installation required.</p>
+          <a href="editor/index.html" class="btn btn-primary btn-lg px-5 fw-bold shadow">Get Started for Free</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-light border-top py-5">
+    <div class="container text-center">
+      <p class="fw-bold mb-1">BTDT Framework</p>
+      <p class="text-muted small mb-0">Built with ❤️ and Bootstrap 5. Pure CSS Power.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts: Bootstrap + Config + Switcher -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/config-presets.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const presetList = document.getElementById('presetList');
+      const mainLink = document.getElementById('main-preset');
+
+      // Populate Themes dropdown
+      if (window.BTDT_PRESETS) {
+        Object.entries(window.BTDT_PRESETS).forEach(([id, preset]) => {
+          if (id === 'default') return;
+          const li = document.createElement('li');
+          li.innerHTML = `<a class="dropdown-item text-decoration-none" href="javascript:void(0)" onclick="changeTheme('${id}')">${preset.title}</a>`;
+          presetList.appendChild(li);
+        });
+      }
+
+      window.changeTheme = (id) => {
+        mainLink.href = `themes/preset/${id}.css`;
+      };
+    });
+  </script>
+
+</body>
+</html>
