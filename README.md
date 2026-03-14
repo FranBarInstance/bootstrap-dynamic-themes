@@ -1,6 +1,6 @@
 # Bootstrap 5 Dynamic Themes (BTDT)
 
-A professional, real-time theme customizer and modular engine for Bootstrap 5.
+A professional, real-time theme customizer and modular engine for Bootstrap 5. An alternative to Bootswatch.
 
 **This is a production-ready theme system.** Use the included visual designer to create your look, and drop the self-contained module into your project.
 
@@ -14,6 +14,7 @@ This project is organized as a standalone module (`btdt/`) that can be easily dr
 │   ├── css/              # Bootstrap foundation
 │   ├── js/               # theme-manager.js engine
 │   └── themes/           # CSS modules (colors, fonts, etc.)
+├── .gitignore.example    # Suggested rules for production
 └── README.md
 ```
 
@@ -23,6 +24,16 @@ This project is organized as a standalone module (`btdt/`) that can be easily dr
 2.  **Design**: Use the panel to experiment with 30+ palettes, 20+ fonts, and multiple structural styles.
 3.  **Export**: Click **"Copy CSS Preset"** to get your `@import` code.
 4.  **Save & Link**: Save your design in `btdt/themes/preset/my-theme.css` and link it in your HTML.
+
+## ⚖️ BTDT vs. Bootswatch
+
+While **Bootswatch** is an industry standard for static themes, **BTDT** takes it to the next level by being a dynamic engine:
+
+- **100% Editable**: Don't just pick a theme; design it. Tweak every variable (colors, fonts, borders, rounding) in real-time.
+- **Dynamic Runtime**: Change the entire look and feel or toggle dark mode on-the-fly via the Javascript API without a page reload.
+- **Modular Design**: Mix and match components. Use the palette from one theme and the typography from another.
+- **Custom Presets**: Create and save your own theme combinations using the preset system, making your designs reusable and easy to share.
+- **AI-Ready**: Extend the library easily using an AI assistant (see below).
 
 ## How it Works
 
@@ -78,4 +89,4 @@ themeManager.applyPreset('aurora'); // Loads a different preset
 ```
 
 ---
-Built with and Bootstrap 5.
+Built with ❤️ and Bootstrap 5.
