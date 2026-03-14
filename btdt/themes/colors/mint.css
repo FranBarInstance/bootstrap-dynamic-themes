@@ -279,6 +279,3 @@
   background-color: var(--bs-info) !important;
   color: #102a3a !important;
 }
-
-/* Garantizar legibilidad de enlaces en contenedores con fondo (excluyendo navbar) */
-[class*="bg-"]
