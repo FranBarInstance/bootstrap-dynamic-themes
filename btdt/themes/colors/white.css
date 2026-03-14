@@ -1,7 +1,6 @@
 /* themes/colors/white.css
- * White background, white primary, white navbar — same idea as gray-*.
- * The accents (buttons, active states, etc.) use dark text on white.
  * -------------------------------------------------------------- */
+
 :root {
   --bs-body-bg:    #ffffff;
   --bs-body-color: #212121;
@@ -44,6 +43,10 @@
   --bs-btn-active-bg:        #e8e8e8;
   --bs-btn-active-border-color: #999999;
   --bs-btn-active-color:     #212121;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 .btn-secondary {
   --bs-btn-bg:           #f5f5f5;
@@ -52,6 +55,10 @@
   --bs-btn-hover-bg:     #eeeeee;
   --bs-btn-hover-border-color: #c8c8c8;
   --bs-btn-hover-color:  #212121;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 .btn-outline-primary {
   --bs-btn-color:        #424242;
@@ -59,12 +66,20 @@
   --bs-btn-hover-bg:     #f5f5f5;
   --bs-btn-hover-color:  #212121;
   --bs-btn-active-bg:    #eeeeee;
+
+  --bs-btn-disabled-color:        #6c757d;
+  --bs-btn-disabled-bg:           transparent;
+  --bs-btn-disabled-border-color: #6c757d;
 }
 .btn-outline-secondary {
   --bs-btn-color:        #757575;
   --bs-btn-border-color: #e0e0e0;
   --bs-btn-hover-bg:     #f5f5f5;
   --bs-btn-hover-color:  #424242;
+
+  --bs-btn-disabled-color:        #6c757d;
+  --bs-btn-disabled-bg:           transparent;
+  --bs-btn-disabled-border-color: #6c757d;
 }
 
 /* ── Utilities ──────────────────────────────────────────────── */
@@ -177,6 +192,10 @@
   --bs-btn-hover-border-color: rgba(var(--bs-success-rgb), 0.85);
   --bs-btn-active-bg: rgba(var(--bs-success-rgb), 0.75);
   --bs-btn-active-border-color: rgba(var(--bs-success-rgb), 0.75);
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 .btn-danger {
   --bs-btn-bg: var(--bs-danger);
@@ -188,6 +207,10 @@
   --bs-btn-hover-border-color: rgba(var(--bs-danger-rgb), 0.85);
   --bs-btn-active-bg: rgba(var(--bs-danger-rgb), 0.75);
   --bs-btn-active-border-color: rgba(var(--bs-danger-rgb), 0.75);
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 .btn-warning {
   --bs-btn-bg: var(--bs-warning);
@@ -197,6 +220,10 @@
   --bs-btn-hover-border-color: rgba(var(--bs-warning-rgb), 0.9);
   --bs-btn-active-bg: rgba(var(--bs-warning-rgb), 0.8);
   --bs-btn-active-border-color: rgba(var(--bs-warning-rgb), 0.8);
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 .btn-info {
   --bs-btn-bg: var(--bs-info);
@@ -208,6 +235,10 @@
   --bs-btn-hover-border-color: rgba(var(--bs-info-rgb), 0.85);
   --bs-btn-active-bg: rgba(var(--bs-info-rgb), 0.75);
   --bs-btn-active-border-color: rgba(var(--bs-info-rgb), 0.75);
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 .bg-success {
@@ -283,4 +314,3 @@
 a.text-light, a.text-white, a.link-light {
   color: #0056b3 !important;
 }
-

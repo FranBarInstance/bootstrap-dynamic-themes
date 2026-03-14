@@ -85,6 +85,9 @@
   --bs-btn-hover-border-color: #bdbdbd;
   --bs-btn-active-bg:        #e0e0e0;
   --bs-btn-active-border-color: #e0e0e0;
+  --bs-btn-disabled-bg:           #2a2a2a;
+  --bs-btn-disabled-border-color: #383838;
+  --bs-btn-disabled-color:        #555;
 }
 [data-mode="dark"] .btn-secondary {
   --bs-btn-bg:               #616161;
@@ -92,6 +95,9 @@
   --bs-btn-color:            #e0e0e0;
   --bs-btn-hover-bg:         #757575;
   --bs-btn-hover-border-color: #757575;
+  --bs-btn-disabled-bg:           #2a2a2a;
+  --bs-btn-disabled-border-color: #383838;
+  --bs-btn-disabled-color:        #555;
 }
 
 /* Outline buttons */
@@ -107,6 +113,9 @@
   --bs-btn-border-color:#757575;
   --bs-btn-hover-bg:    #757575;
   --bs-btn-hover-color: #121212;
+  --bs-btn-disabled-color:        #555;
+  --bs-btn-disabled-bg:           transparent;
+  --bs-btn-disabled-border-color: #383838;
 }
 [data-mode="dark"] .btn-outline-success {
   --bs-btn-color:       var(--bs-success);
@@ -126,21 +135,33 @@
   --bs-btn-bg: #558b2f; --bs-btn-border-color: #558b2f;
   --bs-btn-color: #e0e0e0;
   --bs-btn-hover-bg: #689f38; --bs-btn-hover-border-color: #689f38;
+  --bs-btn-disabled-bg:           #2a2a2a;
+  --bs-btn-disabled-border-color: #383838;
+  --bs-btn-disabled-color:        #555;
 }
 [data-mode="dark"] .btn-danger {
   --bs-btn-bg: #b71c1c; --bs-btn-border-color: #b71c1c;
   --bs-btn-color: #e0e0e0;
   --bs-btn-hover-bg: #c62828; --bs-btn-hover-border-color: #c62828;
+  --bs-btn-disabled-bg:           #2a2a2a;
+  --bs-btn-disabled-border-color: #383838;
+  --bs-btn-disabled-color:        #555;
 }
 [data-mode="dark"] .btn-warning {
   --bs-btn-bg: #f9a825; --bs-btn-border-color: #f9a825;
   --bs-btn-color: #121212;
   --bs-btn-hover-bg: #fbc02d; --bs-btn-hover-border-color: #fbc02d;
+  --bs-btn-disabled-bg:           #2a2a2a;
+  --bs-btn-disabled-border-color: #383838;
+  --bs-btn-disabled-color:        #555;
 }
 [data-mode="dark"] .btn-info {
   --bs-btn-bg: #00838f; --bs-btn-border-color: #00838f;
   --bs-btn-color: #e0e0e0;
   --bs-btn-hover-bg: #0097a7; --bs-btn-hover-border-color: #0097a7;
+  --bs-btn-disabled-bg:           #2a2a2a;
+  --bs-btn-disabled-border-color: #383838;
+  --bs-btn-disabled-color:        #555;
 }
 
 /* ── Cards ──────────────────────────────────────────────────── */

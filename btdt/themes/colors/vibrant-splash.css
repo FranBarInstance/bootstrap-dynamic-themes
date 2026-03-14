@@ -19,6 +19,10 @@
   --bs-btn-hover-bg: #f43f5e;
   --bs-btn-hover-border-color: #f43f5e;
   filter: brightness(0.9);
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 .bg-primary { background-color: var(--bs-primary) !important; color: #ffffff !important; }

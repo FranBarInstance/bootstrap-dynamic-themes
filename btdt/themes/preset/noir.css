@@ -1,16 +1,17 @@
 @import "../colors/ink.css";
-@import "../fonts/jetbrains-mono.css";
-@import "../styles/borders-extra.css";
+@import "../fonts/ubuntu.css";
+@import "../styles/borders-normal.css";
 @import "../styles/rounding-none.css";
 @import "../styles/shadows-none.css";
 @import "../styles/spacing-small.css";
 @import "../styles/gradients-off.css";
 @import "../styles/accent-left.css";
 
+/* Metadata for the editor */
 :root {
   --preset-colors: "ink";
-  --preset-fonts: "jetbrains-mono";
-  --preset-borders: "extra";
+  --preset-fonts: "ubuntu";
+  --preset-borders: "normal";
   --preset-rounding: "none";
   --preset-shadows: "none";
   --preset-spacing: "small";

@@ -1,4 +1,5 @@
 /* themes/colors/ocean.css */
+
 :root {
   /* Always white background */
   --bs-body-bg: #ffffff;
@@ -41,6 +42,10 @@
   --bs-btn-hover-border-color: #005f8a;
   --bs-btn-active-bg: #004a6e;
   --bs-btn-active-border-color: #004a6e;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 .btn-secondary {
@@ -49,6 +54,10 @@
   --bs-btn-color: #1a2332;
   --bs-btn-hover-bg: #3ab8d2;
   --bs-btn-hover-border-color: #3ab8d2;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 .btn-success {
@@ -56,6 +65,10 @@
   --bs-btn-border-color: var(--bs-success);
   --bs-btn-hover-bg: #05b889;
   --bs-btn-hover-border-color: #05b889;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 .btn-danger {
@@ -63,6 +76,10 @@
   --bs-btn-border-color: var(--bs-danger);
   --bs-btn-hover-bg: #d93a5e;
   --bs-btn-hover-border-color: #d93a5e;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 .btn-warning {
@@ -71,6 +88,10 @@
   --bs-btn-color: #1a2332;
   --bs-btn-hover-bg: #e6bb5a;
   --bs-btn-hover-border-color: #e6bb5a;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 .btn-info {
@@ -78,6 +99,10 @@
   --bs-btn-border-color: var(--bs-info);
   --bs-btn-hover-bg: #009ab8;
   --bs-btn-hover-border-color: #009ab8;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 /* Outline buttons */
@@ -86,6 +111,10 @@
   --bs-btn-border-color: var(--bs-primary);
   --bs-btn-hover-bg: var(--bs-primary);
   --bs-btn-active-bg: var(--bs-primary);
+
+  --bs-btn-disabled-color:        #6c757d;
+  --bs-btn-disabled-bg:           transparent;
+  --bs-btn-disabled-border-color: #6c757d;
 }
 
 .btn-outline-secondary {
@@ -93,6 +122,10 @@
   --bs-btn-border-color: var(--bs-secondary);
   --bs-btn-hover-bg: var(--bs-secondary);
   --bs-btn-active-bg: var(--bs-secondary);
+
+  --bs-btn-disabled-color:        #6c757d;
+  --bs-btn-disabled-bg:           transparent;
+  --bs-btn-disabled-border-color: #6c757d;
 }
 
 /* Backgrounds */

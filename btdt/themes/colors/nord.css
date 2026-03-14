@@ -40,6 +40,10 @@
   --bs-btn-hover-border-color: #232833;
   --bs-btn-active-bg: #1b1f27;
   --bs-btn-active-border-color: #1b1f27;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 .btn-secondary {
@@ -48,6 +52,10 @@
   --bs-btn-color: #ffffff;
   --bs-btn-hover-bg: #4c6f9a;
   --bs-btn-hover-border-color: #4c6f9a;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 .btn-success {
@@ -55,6 +63,10 @@
   --bs-btn-border-color: var(--bs-success);
   --bs-btn-hover-bg: #2f6a4c;
   --bs-btn-hover-border-color: #2f6a4c;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 .btn-danger {
@@ -62,6 +74,10 @@
   --bs-btn-border-color: var(--bs-danger);
   --bs-btn-hover-bg: #a9545c;
   --bs-btn-hover-border-color: #a9545c;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 .btn-warning {
@@ -70,6 +86,10 @@
   --bs-btn-color: #2e3440;
   --bs-btn-hover-bg: #be775f;
   --bs-btn-hover-border-color: #be775f;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 .btn-info {
@@ -78,6 +98,10 @@
   --bs-btn-color: #2e3440;
   --bs-btn-hover-bg: #78b2c4;
   --bs-btn-hover-border-color: #78b2c4;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 /* Outline buttons */
@@ -86,12 +110,20 @@
   --bs-btn-border-color: var(--bs-primary);
   --bs-btn-hover-bg: var(--bs-primary);
   --bs-btn-active-bg: var(--bs-primary);
+
+  --bs-btn-disabled-color:        #6c757d;
+  --bs-btn-disabled-bg:           transparent;
+  --bs-btn-disabled-border-color: #6c757d;
 }
 .btn-outline-secondary {
   --bs-btn-color: var(--bs-secondary);
   --bs-btn-border-color: var(--bs-secondary);
   --bs-btn-hover-bg: var(--bs-secondary);
   --bs-btn-active-bg: var(--bs-secondary);
+
+  --bs-btn-disabled-color:        #6c757d;
+  --bs-btn-disabled-bg:           transparent;
+  --bs-btn-disabled-border-color: #6c757d;
 }
 
 /* Backgrounds */

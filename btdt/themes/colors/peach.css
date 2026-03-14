@@ -1,6 +1,7 @@
 /* themes/colors/peach.css
  * White background, accents in durazno pastel.
  * -------------------------------------------------------------- */
+
 :root {
   --bs-body-bg:    #ffffff;
   --bs-body-color: #1a1a1a;
@@ -57,6 +58,10 @@
   --bs-btn-active-bg:        #ff7043;
   --bs-btn-active-border-color: #ff7043;
   --bs-btn-active-color:     #2a201a;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 .btn-secondary {
   --bs-btn-bg:           #ffccbc;
@@ -65,6 +70,10 @@
   --bs-btn-hover-bg:     #ffab91;
   --bs-btn-hover-border-color: #ffab91;
   --bs-btn-hover-color:  #2a201a;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 
 /* Estados (success/danger/warning/info) en tono pastel */
@@ -74,6 +83,10 @@
   --bs-btn-color: #2a201a;
   --bs-btn-hover-bg: #81c784;
   --bs-btn-hover-border-color: #81c784;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 .btn-danger {
   --bs-btn-bg: var(--bs-danger);
@@ -81,6 +94,10 @@
   --bs-btn-color: #2a201a;
   --bs-btn-hover-bg: #e57373;
   --bs-btn-hover-border-color: #e57373;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 .btn-warning {
   --bs-btn-bg: var(--bs-warning);
@@ -88,6 +105,10 @@
   --bs-btn-color: #2a201a;
   --bs-btn-hover-bg: #ffd54f;
   --bs-btn-hover-border-color: #ffd54f;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 .btn-info {
   --bs-btn-bg: var(--bs-info);
@@ -95,6 +116,10 @@
   --bs-btn-color: #2a201a;
   --bs-btn-hover-bg: #81d4fa;
   --bs-btn-hover-border-color: #81d4fa;
+
+  --bs-btn-disabled-bg:           #6c757d;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-btn-disabled-color:        #fff;
 }
 .btn-outline-primary {
   --bs-btn-color:        #c2410c;
@@ -102,12 +127,20 @@
   --bs-btn-hover-bg:     #ffab91;
   --bs-btn-hover-color:  #2a201a;
   --bs-btn-active-bg:    #ffab91;
+
+  --bs-btn-disabled-color:        #6c757d;
+  --bs-btn-disabled-bg:           transparent;
+  --bs-btn-disabled-border-color: #6c757d;
 }
 .btn-outline-secondary {
   --bs-btn-color:        #ffccbc;
   --bs-btn-border-color: #ffccbc;
   --bs-btn-hover-bg:     #ffccbc;
   --bs-btn-hover-color:  #fff;
+
+  --bs-btn-disabled-color:        #6c757d;
+  --bs-btn-disabled-bg:           transparent;
+  --bs-btn-disabled-border-color: #6c757d;
 }
 
 /* ── Utilities ──────────────────────────────────────────────── */

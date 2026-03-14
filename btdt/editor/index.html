@@ -519,11 +519,14 @@
 <body>
 
   <!-- ==================== NAVBAR ==================== -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-sm">
+  <nav class="navbar navbar-expand-lg bg-primary fixed-top shadow-sm">
     <div class="container">
       <a class="navbar-brand fw-bold d-flex align-items-center text-decoration-none" href="index.html">
         <span class="me-2">🎨</span> DynamicThemes
       </a>
+      <button class="" type="button" data-bs-toggle="offcanvas" data-bs-target="#theme-drawer" aria-controls="theme-drawer">
+        <span title="{:trans; Menu :}" class="navbar-toggler-icon"></span>
+      </button>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -565,20 +568,20 @@
         </ul>
         <ul class="navbar-nav ms-auto align-items-lg-center">
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center color-inherit px-3" href="javascript:void(0)" onclick="togglePanel()" title="Open Customizer">
+            <a class="nav-link d-flex align-items-center px-3" href="javascript:void(0)" onclick="togglePanel()" title="Open Customizer">
               <span class="me-2">🛠️</span>
               <span>Customize</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center color-inherit px-3" href="javascript:void(0)" id="navbarModeToggle"
+            <a class="nav-link d-flex align-items-center px-3" href="javascript:void(0)" id="navbarModeToggle"
               onclick="themeManager.toggleMode(); updatePanelState();" title="Toggle dark mode">
               <span id="navbarModeIcon">☀️</span>
               <span id="navbarModeText" class="ms-2 d-lg-none">Light mode</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center color-inherit px-3" href="https://github.com/FranBarInstance/bootstrap-dynamic-themes" target="_blank" title="View on GitHub">
+            <a class="nav-link d-flex align-items-center px-3" href="https://github.com/FranBarInstance/bootstrap-dynamic-themes" target="_blank" title="View on GitHub">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-github"
                 viewBox="0 0 16 16">
                 <path
@@ -906,7 +909,7 @@
             <button class="btn btn-primary btn-sm">Small</button>
             <button class="btn btn-primary">Default</button>
             <button class="btn btn-primary btn-lg">Large</button>
-            <button class="btn btn-secondary" disabled>Disabled</button>
+            <button class="btn btn-primary" disabled>Disabled</button>
             <a class="btn btn-success" href="#" role="button">Link Button</a>
           </div>
         </div>
@@ -943,8 +946,8 @@
         </div>
         <div class="col-md-4">
           <div class="card h-100 shadow-sm">
-            <div class="card-header bg-success text-white fw-semibold">
-              Success Card
+            <div class="card-header bg-light text-dark fw-semibold">
+              Light Card
             </div>
             <div class="card-body">
               <h5 class="card-title">Card Title</h5>
