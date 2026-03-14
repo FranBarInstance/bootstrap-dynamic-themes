@@ -1,6 +1,6 @@
 # Bootstrap 5 Dynamic Themes (BTDT)
 
-A professional, real-time theme customizer and modular engine for Bootstrap 5. An alternative to Bootswatch.
+A professional, real-time theme customizer and modular engine for Bootstrap 5. An alternative to **Bootswatch**.
 
 **This is a production-ready theme system.** Use the included visual designer to create your look, and drop the self-contained module into your project.
 
@@ -63,30 +63,43 @@ Copy the `btdt/` folder to your project root.
 > [!IMPORTANT]
 > **Production Safety**: Add `btdt/editor/` to your `.gitignore` to keep the customizer out of your public environment.
 
-### 2. Implementation in HTML
-Link the base Bootstrap CSS and your chosen preset in the `<head>`.
+### 2. Choose Implementation Method
+
+#### Option A: Native CSS (Maximum Performance)
+Best for static sites where speed is the only priority. Zero JS dependency for initial load.
 
 ```html
 <head>
-    <!-- 1. Foundation -->
     <link rel="stylesheet" href="btdt/css/bootstrap.min.css">
+    <link rel="stylesheet" href="btdt/themes/preset/studio.css">
+</head>
 
-    <!-- 2. Your Design -->
-    <link rel="stylesheet" href="btdt/themes/preset/my-theme.css">
+<body>
+    ...
+    <!-- API access -->
+    <script src="btdt/js/btdt.min.js"></script>
+</body>
+```
+
+#### Option B: All-in-One Loader (Saves a step)
+The simplest way. One single line in the `<head>` handles both CSS injection and API initialization.
+
+```html
+<head>
+    <link rel="stylesheet" href="btdt/css/bootstrap.min.css">
+    <script data-preset="studio" src="btdt/js/btdt.min.js"></script>
 </head>
 ```
 
-### 3. Programmatic Usage
-Initialize the manager specifying the `basePath` to unlock dynamic features (dark mode, live preset switching):
+### 3. API Usage
+
+Regardless of the option chosen (unless you skipped JS), you can use the global `btdt` object:
 
 ```javascript
-/* Initialize from project root */
-const themeManager = new ThemeManager({ basePath: 'btdt/' });
-
-/* Use the API */
-themeManager.toggleMode(); // Toggles between dark/light
-themeManager.applyPreset('aurora'); // Loads a different preset
+btdt.load('aurora'); // Switch preset dynamically
+btdt.toggleMode();   // Toggle Dark/Light mode
 ```
+
 
 ---
 Built with ❤️ and Bootstrap 5.
