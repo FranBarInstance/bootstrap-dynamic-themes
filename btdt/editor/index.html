@@ -227,6 +227,141 @@
       letter-spacing: 0;
     }
 
+    /* Custom Select Component */
+    .custom-select-container {
+      position: relative;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .custom-select-trigger {
+      width: 100%;
+      padding: 10px 15px;
+      background: var(--panel-bg-soft);
+      border: 1px solid var(--panel-border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--panel-text);
+      text-align: left;
+    }
+
+    .custom-select-trigger:hover {
+      border-color: var(--panel-primary);
+      background: #fff;
+    }
+
+    .custom-select-trigger:after {
+      content: '▾';
+      font-size: 1.2rem;
+      color: var(--panel-muted);
+      transition: transform 0.2s;
+      margin-left: 8px;
+    }
+
+    .custom-select-container.open .custom-select-trigger:after {
+      transform: rotate(180deg);
+    }
+
+    .custom-select-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    .custom-select-dropdown {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      z-index: 1001;
+      max-height: 350px;
+      overflow-y: auto;
+      display: none;
+      padding: 8px;
+    }
+
+    /* Custom Scrollbar */
+    .custom-select-dropdown::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .custom-select-dropdown::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .custom-select-dropdown::-webkit-scrollbar-thumb {
+      background: #ddd;
+      border-radius: 10px;
+    }
+
+    .custom-select-dropdown::-webkit-scrollbar-thumb:hover {
+      background: #ccc;
+    }
+
+    .custom-select-dropdown.show {
+      display: block;
+      animation: dropdownFadeIn 0.2s ease-out;
+    }
+
+    @keyframes dropdownFadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .custom-option {
+      padding: 10px 12px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-bottom: 2px;
+    }
+
+    .custom-option:hover {
+      background: var(--panel-bg-soft);
+    }
+
+    .custom-option.active {
+      background: rgba(var(--panel-primary-rgb), 0.1);
+      color: var(--panel-primary);
+      font-weight: 600;
+    }
+
+    .mini-swatch {
+      width: 48px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+
+    .mini-swatch > div {
+      flex: 1;
+    }
+
+    .option-label {
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     /* Pill-style option selector */
     .option-group {
       display: flex;
@@ -518,19 +653,46 @@
     <!-- PRESETS -->
     <div class="panel-section">
       <h6>⚡ Presets</h6>
-      <div class="row g-2" id="presetsContainer"></div>
+      <div class="custom-select-container" data-select-type="preset" id="presetSelectContainer">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('preset')">
+          <div class="custom-select-content" id="presetSelectContent">
+            <span>Select a theme...</span>
+          </div>
+        </div>
+        <div class="custom-select-dropdown" id="presetDropdown">
+          <!-- Populated by JS -->
+        </div>
+      </div>
     </div>
 
     <!-- COLORS -->
     <div class="panel-section">
       <h6>🎨 Color Palette</h6>
-      <div class="row g-2" id="colorsContainer"></div>
+      <div class="custom-select-container" data-select-type="colors" id="colorsSelectContainer">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('colors')">
+          <div class="custom-select-content" id="colorsSelectContent">
+            <span>Select colors...</span>
+          </div>
+        </div>
+        <div class="custom-select-dropdown" id="colorsDropdown">
+          <!-- Populated by JS -->
+        </div>
+      </div>
     </div>
 
     <!-- FONTS -->
     <div class="panel-section">
       <h6>🔤 Typography</h6>
-      <div class="option-group" id="fontsGroup"></div>
+      <div class="custom-select-container" data-select-type="fonts" id="fontsSelectContainer">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('fonts')">
+          <div class="custom-select-content" id="fontsSelectContent">
+            <span>Select fonts...</span>
+          </div>
+        </div>
+        <div class="custom-select-dropdown" id="fontsDropdown">
+          <!-- Populated by JS -->
+        </div>
+      </div>
     </div>
 
     <!-- BORDERS -->
@@ -1767,58 +1929,55 @@
 
     // ===== Build the panel dynamically =====
     function buildPanel() {
-      // Presets
+      // 1. Presets
       const presetsHtml = themeManager.getPresets()
         .filter(name => name !== 'default')
         .map(name => {
           const meta = presetMeta[name] || { title: name, color: null };
           const swatch = colorSwatches[meta.color] || {
-            primary: '#ced4da',
-            secondary: '#e9ecef',
-            accent: '#adb5bd'
+            primary: '#ced4da', secondary: '#e9ecef', accent: '#adb5bd'
           };
           return `
-            <div class="col-6">
-              <div class="preset-card"
-                   data-preset="${name}"
-                   onclick="applyPreset('${name}')">
-                <div class="preset-swatch">
-                  <div style="background:${swatch.primary}"></div>
-                  <div style="background:${swatch.secondary}"></div>
-                  <div style="background:${swatch.accent}"></div>
-                </div>
-                <div class="preset-title text-center mt-1">${meta.title}</div>
+            <div class="custom-option" data-value="${name}" onclick="applyPreset('${name}'); closeAllCustomDropdowns(); event.stopPropagation();">
+              <div class="mini-swatch">
+                <div style="background:${swatch.primary}"></div>
+                <div style="background:${swatch.secondary}"></div>
+                <div style="background:${swatch.accent}"></div>
               </div>
+              <span class="option-label">${meta.title}</span>
             </div>
           `;
         }).join('');
-      document.getElementById('presetsContainer')
-        .innerHTML = presetsHtml;
+      document.getElementById('presetDropdown').innerHTML = presetsHtml;
 
-      // Colors
+      // 2. Colors
       const colorsHtml = Object.entries(colorSwatches)
         .map(([name, colors]) => `
-          <div class="col-4">
-            <div class="color-swatch"
-                 data-color="${name}"
-                 onclick="setTheme('colors','${name}')">
-              <div class="swatch-colors">
-                <div style="background:${colors.primary}"></div>
-                <div style="background:${colors.secondary}"></div>
-                <div style="background:${colors.accent}"></div>
-              </div>
-              <span class="swatch-label">${name}</span>
+          <div class="custom-option" data-value="${name}" onclick="setTheme('colors','${name}'); closeAllCustomDropdowns(); event.stopPropagation();">
+            <div class="mini-swatch">
+              <div style="background:${colors.primary}"></div>
+              <div style="background:${colors.secondary}"></div>
+              <div style="background:${colors.accent}"></div>
             </div>
+            <span class="option-label text-capitalize">${name}</span>
           </div>
         `).join('');
-      document.getElementById('colorsContainer')
-        .innerHTML = colorsHtml;
+      document.getElementById('colorsDropdown').innerHTML = colorsHtml;
 
-      // Option groups
-      ['fonts', 'borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent']
+      // 3. Fonts
+      const fontsHtml = Object.entries(labels.fonts)
+        .map(([value, label]) => `
+          <div class="custom-option" data-value="${value}" onclick="setTheme('fonts','${value}'); closeAllCustomDropdowns(); event.stopPropagation();">
+            <span class="option-label" style="font-family: '${label}', sans-serif;">${label}</span>
+          </div>
+        `).join('');
+      document.getElementById('fontsDropdown').innerHTML = fontsHtml;
+
+      // 4. Other Option groups (Buttons)
+      ['borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent']
         .forEach(cat => {
-          const container =
-            document.getElementById(`${cat}Group`);
+          const container = document.getElementById(`${cat}Group`);
+          if (!container) return;
           const opts = Object.entries(labels[cat])
             .map(([value, label]) => `
               <button class="option-btn"
@@ -1847,6 +2006,33 @@
       await themeManager.applyPreset(name);
       updatePanelState();
     }
+
+    function toggleCustomDropdown(type) {
+      const allContainers = document.querySelectorAll('.custom-select-container');
+      const container = document.getElementById(`${type}SelectContainer`);
+      const dropdown = document.getElementById(`${type}Dropdown`);
+      
+      const isOpen = dropdown.classList.contains('show');
+      
+      closeAllCustomDropdowns();
+      
+      if (!isOpen) {
+        container.classList.add('open');
+        dropdown.classList.add('show');
+      }
+    }
+
+    function closeAllCustomDropdowns() {
+      document.querySelectorAll('.custom-select-container').forEach(el => el.classList.remove('open'));
+      document.querySelectorAll('.custom-select-dropdown').forEach(el => el.classList.remove('show'));
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.custom-select-container')) {
+        closeAllCustomDropdowns();
+      }
+    });
 
     function togglePanel() {
       document.getElementById('themePanel')
@@ -1878,32 +2064,56 @@
       if (navIcon) navIcon.textContent = isDark ? '🌙' : '☀️';
       if (navText) navText.textContent = isDark ? 'Dark mode' : 'Light mode';
 
-      // Color swatches
-      document.querySelectorAll('.color-swatch')
-        .forEach(el => {
-          el.classList.toggle(
-            'active',
-            el.dataset.color === config.colors
-          );
+      // Update custom select options state
+      ['preset', 'colors', 'fonts'].forEach(type => {
+        const dropdown = document.getElementById(`${type}Dropdown`);
+        const triggerContent = document.getElementById(`${type}SelectContent`);
+        const value = type === 'preset' ? config._preset : config[type];
+
+        // Active state in dropdown
+        dropdown.querySelectorAll('.custom-option').forEach(el => {
+          el.classList.toggle('active', el.dataset.value === value);
         });
 
-      // Option buttons
-      document.querySelectorAll('.option-btn')
-        .forEach(el => {
-          el.classList.toggle(
-            'active',
-            el.dataset.value === config[el.dataset.category]
-          );
-        });
+        // Update trigger content
+        if (value && value !== 'default') {
+          if (type === 'preset') {
+            const meta = presetMeta[value] || { title: value, color: null };
+            const swatch = colorSwatches[meta.color] || { primary: '#ced4da', secondary: '#e9ecef', accent: '#adb5bd' };
+            triggerContent.innerHTML = `
+              <div class="mini-swatch">
+                <div style="background:${swatch.primary}"></div>
+                <div style="background:${swatch.secondary}"></div>
+                <div style="background:${swatch.accent}"></div>
+              </div>
+              <span class="option-label">${meta.title}</span>
+            `;
+          } else if (type === 'colors') {
+            const colors = colorSwatches[value];
+            triggerContent.innerHTML = `
+              <div class="mini-swatch">
+                <div style="background:${colors.primary}"></div>
+                <div style="background:${colors.secondary}"></div>
+                <div style="background:${colors.accent}"></div>
+              </div>
+              <span class="option-label text-capitalize">${value}</span>
+            `;
+          } else if (type === 'fonts') {
+            const label = labels.fonts[value] || value;
+            triggerContent.innerHTML = `<span class="option-label" style="font-family: '${label}', sans-serif;">${label}</span>`;
+          }
+        } else {
+          const defaultLabels = { preset: 'Select a theme...', colors: 'Select colors...', fonts: 'Select fonts...' };
+          triggerContent.innerHTML = `<span>${defaultLabels[type]}</span>`;
+        }
+      });
 
-      // Preset cards
-      document.querySelectorAll('.preset-card')
-        .forEach(el => {
-          el.classList.toggle(
-            'active',
-            el.dataset.preset === config._preset
-          );
-        });
+      // Update pill option buttons state (Borders, Corners, etc.)
+      document.querySelectorAll('.option-btn').forEach(el => {
+        const cat = el.dataset.category;
+        const val = el.dataset.value;
+        el.classList.toggle('active', config[cat] === val);
+      });
 
       // Config display
       const pre = document.getElementById('currentConfig');
