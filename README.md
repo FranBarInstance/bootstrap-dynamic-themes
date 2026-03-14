@@ -23,7 +23,7 @@ This project is organized as a standalone module (`btdt/`) that can be easily dr
 ## Workflow: Design to Production
 
 1.  **Open the Editor**: Launch `btdt/editor/index.html` in your browser (or use the [Live Demo](https://franbarinstance.github.io/bootstrap-dynamic-themes/btdt/editor/)).
-2.  **Design**: Use the panel to experiment with 50+ palettes, 50+ fonts, and multiple structural styles.
+2.  **Design**: Use the panel to experiment with 50+ palettes, 50+ fonts, 30+ presets and multiple structural styles.
 3.  **Export**: Click **"Copy CSS Preset"** to get your `@import` code.
 4.  **Save & Link**: Save your design in `btdt/themes/preset/my-theme.css` and link it in your HTML.
 
