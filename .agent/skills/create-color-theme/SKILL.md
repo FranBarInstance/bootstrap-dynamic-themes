@@ -32,6 +32,11 @@ Set the contrast-related variables in the template so that:
 ### 1.2 Component Overrides
 Do not add or modify component override selectors. All required overrides must already exist in the template.
 
+### 1.3 Custom Accent Color
+- Set `--accent-color` (and its RGB version) to the **Accent** color defined for the theme.
+- This color is used by "Accent" styles (e.g., `btdt/themes/styles/accent-bottom.css`) to add decorative lines to cards, alerts, and navbars.
+- If the theme doesn't have a distinct accent color, use a variation of the Primary or Secondary color.
+
 ### 2. Button Overrides
 Only adjust the template variables used by button styles. Do not edit selector blocks.
 

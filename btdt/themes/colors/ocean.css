@@ -45,6 +45,9 @@
   --bs-light: #F4F6F9;
   --bs-dark: #161C2D;
 
+  /* Custom accent color for btdt/themes/styles/accent-*.css */
+  --accent-color: #06d6a0;
+
   /* ─── Semantic RGB ─── */
   --bs-primary-rgb: 0, 119, 182;
   --bs-secondary-rgb: 72, 202, 228;
@@ -54,12 +57,13 @@
   --bs-danger-rgb: 192, 57, 43;
   --bs-light-rgb: 244, 246, 249;
   --bs-dark-rgb: 22, 28, 45;
+  --accent-color-rgb: 6, 214, 160;
 
   /* ─── Contrast (text on top of each bg) ─── */
   --bs-primary-contrast: #fff;
   --bs-secondary-contrast: #000;
   --bs-success-contrast: #fff;
-  --bs-info-contrast: #000;
+  --bs-info-contrast: #fff;
   --bs-warning-contrast: #161C2D;
   --bs-danger-contrast: #fff;
   --bs-light-contrast: #161C2D;

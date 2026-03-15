@@ -5,30 +5,29 @@
 
 :root {
   --accent-size: 4px;
-  --accent-color: var(--bs-accent, var(--bs-primary));
 }
 
 /* Cards */
 .card {
-  border-left: var(--accent-size) solid var(--accent-color) !important;
+  border-left: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* List group items */
 .list-group-item {
-  border-left: var(--accent-size) solid var(--accent-color) !important;
+  border-left: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 .list-group-item.active {
-  border-left-color: var(--accent-color) !important;
+  border-left-color: var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* Accordion items */
 .accordion-item {
-  border-left: var(--accent-size) solid var(--accent-color) !important;
+  border-left: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* Alerts */
 .alert {
-  border-left: var(--accent-size) solid var(--accent-color) !important;
+  border-left: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
   border-top-width:    var(--bs-alert-border-width, 1px);
   border-right-width:  var(--bs-alert-border-width, 1px);
   border-bottom-width: var(--bs-alert-border-width, 1px);
@@ -42,10 +41,10 @@
 
 /* Nav tabs — línea izquierda activa */
 .nav-tabs .nav-link.active {
-  border-left: var(--accent-size) solid var(--accent-color) !important;
+  border-left: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* Navbar — borde izquierdo (en sidebar / menú vertical) */
 .navbar {
-  border-left: var(--accent-size) solid var(--accent-color);
+  border-left: var(--accent-size) solid var(--accent-color, var(--bs-primary));
 }

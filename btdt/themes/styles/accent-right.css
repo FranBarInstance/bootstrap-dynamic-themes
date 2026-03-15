@@ -5,30 +5,29 @@
 
 :root {
   --accent-size: 4px;
-  --accent-color: var(--bs-accent, var(--bs-primary));
 }
 
 /* Cards */
 .card {
-  border-right: var(--accent-size) solid var(--accent-color) !important;
+  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* List group items */
 .list-group-item {
-  border-right: var(--accent-size) solid var(--accent-color) !important;
+  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 .list-group-item.active {
-  border-right-color: var(--accent-color) !important;
+  border-right-color: var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* Accordion items */
 .accordion-item {
-  border-right: var(--accent-size) solid var(--accent-color) !important;
+  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* Alerts */
 .alert {
-  border-right: var(--accent-size) solid var(--accent-color) !important;
+  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
   border-top-width:    var(--bs-alert-border-width, 1px);
   border-left-width:   var(--bs-alert-border-width, 1px);
   border-bottom-width: var(--bs-alert-border-width, 1px);
@@ -42,10 +41,10 @@
 
 /* Nav tabs — línea derecha activa */
 .nav-tabs .nav-link.active {
-  border-right: var(--accent-size) solid var(--accent-color) !important;
+  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* Navbar — borde derecho */
 .navbar {
-  border-right: var(--accent-size) solid var(--accent-color);
+  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary));
 }

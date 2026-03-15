@@ -5,27 +5,26 @@
 
 :root {
   --accent-size: 4px;
-  --accent-color: var(--bs-accent, var(--bs-primary));
 }
 
 /* Cards */
 .card {
-  border-bottom: var(--accent-size) solid var(--accent-color) !important;
+  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* List group items (solo el último) */
 .list-group-item:last-child {
-  border-bottom: var(--accent-size) solid var(--accent-color) !important;
+  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* Accordion items — último */
 .accordion-item:last-of-type {
-  border-bottom: var(--accent-size) solid var(--accent-color) !important;
+  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* Alerts */
 .alert {
-  border-bottom: var(--accent-size) solid var(--accent-color) !important;
+  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
   border-left-width:   var(--bs-alert-border-width, 1px);
   border-right-width:  var(--bs-alert-border-width, 1px);
   border-top-width:    var(--bs-alert-border-width, 1px);
@@ -39,15 +38,15 @@
 
 /* Nav tabs — línea inferior en activo (subrayado) */
 .nav-tabs .nav-link.active {
-  border-bottom: var(--accent-size) solid var(--accent-color) !important;
+  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* Nav pills — underline activo */
 .nav-pills .nav-link.active {
-  border-bottom: var(--accent-size) solid var(--accent-color) !important;
+  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* Navbar — borde inferior (el más típico en diseño de nav) */
 .navbar {
-  border-bottom: var(--accent-size) solid var(--accent-color);
+  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary));
 }

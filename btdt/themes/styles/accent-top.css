@@ -5,30 +5,29 @@
 
 :root {
   --accent-size: 4px;
-  --accent-color: var(--bs-accent, var(--bs-primary));
 }
 
 /* Cards */
 .card {
-  border-top: var(--accent-size) solid var(--accent-color) !important;
+  border-top: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* List group items (solo el primero) */
 .list-group-item:first-child {
-  border-top: var(--accent-size) solid var(--accent-color) !important;
+  border-top: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* Accordion items */
 .accordion-item:first-of-type {
-  border-top: var(--accent-size) solid var(--accent-color) !important;
+  border-top: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 .accordion-item + .accordion-item {
-  border-top: var(--accent-size) solid var(--accent-color) !important;
+  border-top: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* Alerts */
 .alert {
-  border-top: var(--accent-size) solid var(--accent-color) !important;
+  border-top: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
   border-left-width:   var(--bs-alert-border-width, 1px);
   border-right-width:  var(--bs-alert-border-width, 1px);
   border-bottom-width: var(--bs-alert-border-width, 1px);
@@ -42,10 +41,10 @@
 
 /* Nav tabs — línea superior activa */
 .nav-tabs .nav-link.active {
-  border-top: var(--accent-size) solid var(--accent-color) !important;
+  border-top: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
 }
 
 /* Navbar — borde superior */
 .navbar {
-  border-top: var(--accent-size) solid var(--accent-color);
+  border-top: var(--accent-size) solid var(--accent-color, var(--bs-primary));
 }

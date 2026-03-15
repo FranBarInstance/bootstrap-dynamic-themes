@@ -45,6 +45,9 @@
   --bs-light: #F4F6F9;
   --bs-dark: #161C2D;
 
+  /* Custom accent color for btdt/themes/styles/accent-*.css */
+  --accent-color: #b2dfdb;
+
   /* ─── Semantic RGB ─── */
   --bs-primary-rgb: 77, 182, 172;
   --bs-secondary-rgb: 128, 203, 196;
@@ -54,9 +57,10 @@
   --bs-danger-rgb: 192, 57, 43;
   --bs-light-rgb: 244, 246, 249;
   --bs-dark-rgb: 22, 28, 45;
+  --accent-color-rgb: 178, 223, 219;
 
   /* ─── Contrast (text on top of each bg) ─── */
-  --bs-primary-contrast: #000;
+  --bs-primary-contrast: #fff;
   --bs-secondary-contrast: #000;
   --bs-success-contrast: #fff;
   --bs-info-contrast: #000;
@@ -68,7 +72,7 @@
   --bs-white-contrast: #161C2D;
 
   /* ─── Contrast RGB ─── */
-  --bs-primary-contrast-rgb: 0, 0, 0;
+  --bs-primary-contrast-rgb: 255, 255, 255;
   --bs-secondary-contrast-rgb: 255, 255, 255;
   --bs-success-contrast-rgb: 255, 255, 255;
   --bs-info-contrast-rgb: 22, 28, 45;
@@ -226,7 +230,7 @@
     Light navbar (dark icon):  none
     Custom tinted icon:        invert(1) sepia(1) hue-rotate(180deg) brightness(1.5)
   */
-  --bs-navbar-toggler-icon-filter: none;
+  --bs-navbar-toggler-icon-filter: invert(1) brightness(2);
 
   /* ─── SVGs with embedded colors (can't use var() inside data URIs) ─── */
   --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230B1725'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
