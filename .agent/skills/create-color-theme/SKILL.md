@@ -15,7 +15,7 @@ The starting point is always the template: `btdt/themes/colors/_template_.css`.
 Before starting, you MUST open `btdt/themes/colors/_template_.css` and base the new theme on it.
 You MAY also read existing themes for inspiration (recommended: `btdt/themes/colors/corporate.css` and `btdt/themes/colors/white.css`), but the template is the source of truth for structure.
 
-For advanced color theory and aesthetic guidelines, consult: [colors-guide.md](../../../docs/colors-guide.md).
+For advanced color theory and aesthetic guidelines, consult: `btdt/docs/color-system.md`.
 
 ### 1. Template-First Workflow (CRITICAL)
 - Copy `btdt/themes/colors/_template_.css` to `btdt/themes/colors/[theme-name].css`.
@@ -27,7 +27,7 @@ For advanced color theory and aesthetic guidelines, consult: [colors-guide.md](.
 Set the contrast-related variables in the template so that:
 - If the `--bs-primary` or `--bs-secondary` color is light (e.g., pastels, lime, yellow), text on those backgrounds uses a dark color (e.g., `#1a1a1a`).
 - Conversely, for dark primary colors, text uses white.
-- **Navbar Toggler**: Ensure `--bs-navbar-toggler-icon-filter` matches the text color of the primary background. 
+- **Navbar Toggler**: Ensure `--bs-navbar-toggler-icon-filter` matches the text color of the primary background.
   - Use `invert(1) brightness(2)` for white text on dark backgrounds.
   - Use `none` for dark text on light backgrounds.
 

@@ -1,10 +1,10 @@
-# Aesthetic and Color Combination Guides for Bootstrap Palettes
+# BTDT Color System & Aesthetic Design Guide
 
-Here are some comprehensive notes for IA agent to generate Bootstrap color palettes:
+This document defines the professional standards for generating and maintaining color palettes within the Bootstrap Dynamic Themes engine.
 
 ---
 
-## 📋 Notes for generating Bootstrap color palettes
+## 📋 Core Architecture & Rules
 
 ### 1. Fundamental principles of color harmony
 
