@@ -119,33 +119,32 @@ btdt.toggleMode();   // Toggle Dark/Light mode
 
 ## Dynamic Contrast & Theming
 
-A common challenge in Bootstrap 5+ is handling accessibility and contrast dynamically.
+A common challenge in Bootstrap 5+ is handling accessibility and contrast dynamically without bloating the HTML with `data-bs-theme` attributes.
 
 ### The Standard (Static) Approach
-In standard Bootstrap, developers must explicitly define the contrast mode for each container. If you have a dark background, you add `data-bs-theme="dark"` to make the child elements (text, links, buttons) visible.
+In standard Bootstrap (and static themes like Bootswatch), developers must explicitly define the contrast mode for each container. If you have a dark background, you add `data-bs-theme="dark"` (or old-school `navbar-dark`) to make the child elements (text, links, buttons) visible.
 
 ```html
 <!-- You must know IN ADVANCE that bg-primary is dark -->
-<footer class="bg-primary" data-bs-theme="dark">
+<header class="bg-primary" data-bs-theme="dark">
     <a class="nav-link" href="#">Static Link</a>
-</footer>
+</header>
 ```
-**The limitation**: This approach is hardcoded. If you change your theme to a light version at runtime, the `data-bs-theme="dark"` attribute will remain, making the text unreadable (white text on a light background).
+**The limitation**: This approach is hardcoded into your HTML. If you change your theme to a light version at runtime, the `data-bs-theme="dark"` attribute will remain, making the text unreadable (white text on a light background).
 
 ### The BTDT (Dynamic) Approach
-BTDT uses a specialized approach to ensure your UI remains readable regardless of the active theme without modifying the HTML:
-
-1.  **Agnostic HTML**: We use the native `.text-reset` class, which tells the element to inherit the color from its parent instead of using the default Bootstrap link color.
-2.  **Smart Theme Logic**: Each BTDT CSS theme module automatically calculates the optimal contrast color based on the primary color's current brightness.
+BTDT handles contrast at the **CSS variable level**. Each theme module calculates its own contrast colors (`--bs-primary-contrast`, etc.), and the engine applies them automatically to components inside background utilities.
 
 ```html
-<!-- Agnostic structure: works for both dark and light primary colors -->
-<footer class="bg-primary">
-    <a class="nav-link text-reset" href="#">Dynamic Link</a>
-</footer>
+<!-- Clean, Agnostic HTML -->
+<header class="bg-primary">
+    <a class="nav-link" href="#">Automatic Dynamic Link</a>
+</header>
 ```
 
-This ensures that when you switch from a dark professional theme to a light pastel style, your menus and links **automatically adapt** their colors instantly.
+- **Zero HTML Changes**: Switch from a dark professional theme to a light pastel style, and your menus, cards, and links **automatically adapt** their colors instantly.
+- **Smart Icons**: The navbar toggler and other SVG icons automatically flip their filters to remain visible.
+- **Harmonized Accents**: Themes include a synchronized `--accent-color` (automatically derived from your primary color) for decorative elements, ensuring a premium, integrated look across all 50+ palettes.
 
 ---
 Built with ❤️ and Bootstrap 5.
