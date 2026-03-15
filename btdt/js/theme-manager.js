@@ -156,9 +156,11 @@ class ThemeManager {
 
     if (mode === 'dark') {
       document.documentElement.setAttribute('data-mode', 'dark');
+      document.documentElement.setAttribute('data-bs-theme', 'dark');
       this._modeLink.disabled = false;
     } else {
       document.documentElement.removeAttribute('data-mode');
+      document.documentElement.setAttribute('data-bs-theme', 'light');
       this._modeLink.disabled = true;
     }
     // Ensure mode CSS stays last in the cascade.
