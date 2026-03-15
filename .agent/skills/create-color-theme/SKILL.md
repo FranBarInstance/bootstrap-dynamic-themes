@@ -34,6 +34,9 @@ Set the contrast-related variables in the template so that:
 ### 1.2 Component Overrides
 Do not add or modify component override selectors. All required overrides must already exist in the template.
 
+### 1.2.1 Very Light Themes (Note)
+In very light themes, some elements may need theme-specific tweaks (for example, the checkbox checkmark in `btdt/themes/colors/white.css`). Only add such rules when they are strictly necessary, and never modify `btdt/css/color-theme-rules.css`.
+
 ### 1.3 Custom Accent Color
 - **Default**: Set `--accent-color` (and its RGB version) to be the SAME as `--bs-primary`.
 - **Refinement (Optional)**: If a subtle variation is desired to make the accent stand out:
