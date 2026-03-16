@@ -28,8 +28,8 @@
   border: none;
 }
 
-.form-check-input {
-  border: none !important;
+.form-check {
+  border-width: 1px;
 }
 
 .alert {
