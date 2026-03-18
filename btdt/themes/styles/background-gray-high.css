@@ -1,0 +1,16 @@
+/* themes/styles/background-gray-high.css */
+
+html:not([data-bs-theme="dark"]):not([data-mode="dark"]) {
+  --bs-body-bg: color-mix(in srgb, var(--bs-gray-600) 15%, white);
+  --bs-secondary-bg: color-mix(in srgb, var(--bs-gray-600) 20%, white);
+  --bs-tertiary-bg: color-mix(in srgb, var(--bs-gray-600) 24%, white);
+  --bs-border-color: color-mix(in srgb, var(--bs-gray-600) 22%, #dee2e6);
+}
+
+html[data-bs-theme="dark"],
+html[data-mode="dark"] {
+  --bs-body-bg: color-mix(in srgb, var(--bs-gray-500) 22%, #121212);
+  --bs-secondary-bg: color-mix(in srgb, var(--bs-gray-500) 26%, #121212);
+  --bs-tertiary-bg: color-mix(in srgb, var(--bs-gray-500) 30%, #121212);
+  --bs-border-color: color-mix(in srgb, var(--bs-gray-500) 34%, #343a40);
+}

@@ -1,0 +1,17 @@
+/* themes/styles/background-primary-high.css */
+
+html:not([data-bs-theme="dark"]):not([data-mode="dark"]) {
+  --bs-body-bg: color-mix(in srgb, var(--bs-primary) 18%, white);
+  --bs-secondary-bg: color-mix(in srgb, var(--bs-primary) 22%, white);
+  --bs-tertiary-bg: color-mix(in srgb, var(--bs-primary) 26%, white);
+  --bs-border-color: color-mix(in srgb, var(--bs-primary) 24%, #dee2e6);
+}
+
+html[data-bs-theme="dark"],
+html[data-mode="dark"] {
+  --bs-body-bg: color-mix(in srgb, var(--bs-primary) 22%, #121212);
+  --bs-secondary-bg: color-mix(in srgb, var(--bs-primary) 26%, #121212);
+  --bs-tertiary-bg: color-mix(in srgb, var(--bs-primary) 30%, #121212);
+  --bs-border-color: color-mix(in srgb, var(--bs-primary) 34%, #343a40);
+}
+

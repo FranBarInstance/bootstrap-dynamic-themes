@@ -23,6 +23,12 @@ class ThemeManager {
       fonts: Object.keys(fonts).length ? Object.keys(fonts) : [
         'inter', 'merriweather', 'nunito', 'jetbrains-mono'
       ],
+      background: Object.keys(ui.background || {}).length ? Object.keys(ui.background) : [
+        'none',
+        'primary-low', 'primary-medium', 'primary-high',
+        'secondary-low', 'secondary-medium', 'secondary-high',
+        'gray-low', 'gray-medium', 'gray-high'
+      ],
       borders: Object.keys(ui.borders || {}).length ? Object.keys(ui.borders) : ['normal', 'extra', 'none'],
       rounding: Object.keys(ui.rounding || {}).length ? Object.keys(ui.rounding) : ['normal', 'extra', 'none'],
       shadows: Object.keys(ui.shadows || {}).length ? Object.keys(ui.shadows) : ['normal', 'extra', 'none'],
@@ -39,7 +45,7 @@ class ThemeManager {
 
     // Current active theme
     this.activeTheme = {
-      colors: null, fonts: null, borders: null, rounding: null,
+      colors: null, fonts: null, background: null, borders: null, rounding: null,
       shadows: null, spacing: null, gradients: null, accent: null
     };
 
@@ -99,6 +105,7 @@ class ThemeManager {
     const pathMap = {
       colors:   `themes/colors/${value}.css`,
       fonts:    `themes/fonts/${value}.css`,
+      background:`themes/styles/background-${value}.css`,
       borders:  `themes/styles/borders-${value}.css`,
       rounding: `themes/styles/rounding-${value}.css`,
       shadows:  `themes/styles/shadows-${value}.css`,

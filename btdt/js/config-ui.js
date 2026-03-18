@@ -1,5 +1,17 @@
 // btdt/js/config-ui.js
 window.BTDT_UI = {
+  background: {
+    none: 'None',
+    'primary-low': 'Primary · Low',
+    'primary-medium': 'Primary · Medium',
+    'primary-high': 'Primary · High',
+    'secondary-low': 'Secondary · Low',
+    'secondary-medium': 'Secondary · Medium',
+    'secondary-high': 'Secondary · High',
+    'gray-low': 'Gray · Low',
+    'gray-medium': 'Gray · Medium',
+    'gray-high': 'Gray · High'
+  },
   borders: { normal: 'Normal', extra: 'Thick', none: 'None' },
   rounding: { normal: 'Normal', extra: 'Extra', none: 'Sharp' },
   shadows: { normal: 'Normal', extra: 'Extra', none: 'None' },

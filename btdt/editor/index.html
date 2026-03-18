@@ -648,7 +648,7 @@
     </div>
     <div class="row g-4">
       <div class="col-6 col-lg-3">
-        <div class="card text-center border-0 shadow-sm h-100">
+        <div class="card text-center border-0 shadow-sm bg-white h-100">
           <div class="card-body py-4">
             <div class="fs-1 mb-2">🎨</div>
             <h6 class="fw-bold">Colors</h6>
@@ -657,7 +657,7 @@
         </div>
       </div>
       <div class="col-6 col-lg-3">
-        <div class="card text-center border-0 shadow-sm h-100">
+        <div class="card text-center border-0 shadow-sm bg-white h-100">
           <div class="card-body py-4">
             <div class="fs-1 mb-2">🔤</div>
             <h6 class="fw-bold">Typography</h6>
@@ -666,7 +666,7 @@
         </div>
       </div>
       <div class="col-6 col-lg-3">
-        <div class="card text-center border-0 shadow-sm h-100">
+        <div class="card text-center border-0 shadow-sm bg-white h-100">
           <div class="card-body py-4">
             <div class="fs-1 mb-2">🌗</div>
             <h6 class="fw-bold">Dark Mode</h6>
@@ -675,7 +675,7 @@
         </div>
       </div>
       <div class="col-6 col-lg-3">
-        <div class="card text-center border-0 shadow-sm h-100">
+        <div class="card text-center border-0 shadow-sm bg-white h-100">
           <div class="card-body py-4">
             <div class="fs-1 mb-2">⚡</div>
             <h6 class="fw-bold">Presets</h6>
@@ -757,6 +757,19 @@
         <div class="custom-select-dropdown" id="fontsDropdown">
           <!-- Populated by JS -->
         </div>
+      </div>
+    </div>
+
+    <!-- BACKGROUND -->
+    <div class="panel-section">
+      <h6>🪄 Background Tint</h6>
+      <div class="custom-select-container" data-select-type="background" id="backgroundSelectContainer">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('background')">
+          <div class="custom-select-content" id="backgroundSelectContent">
+            <span>Select background...</span>
+          </div>
+        </div>
+        <div class="custom-select-dropdown" id="backgroundDropdown"></div>
       </div>
     </div>
 
@@ -2012,8 +2025,8 @@
         `).join('');
       document.getElementById('fontsDropdown').innerHTML = fontsHtml;
 
-      // 4. Other categories (Borders, Rounding, etc.)
-      ['borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent']
+      // 4. Other categories (Background, Borders, Rounding, etc.)
+      ['background', 'borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent']
         .forEach(cat => {
           const dropdown = document.getElementById(`${cat}Dropdown`);
           if (!dropdown) return;
@@ -2106,7 +2119,7 @@
       if (navText) navText.textContent = isDark ? 'Dark mode' : 'Light mode';
 
       // Update custom select options state
-      ['preset', 'colors', 'fonts', 'borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent']
+      ['preset', 'colors', 'fonts', 'background', 'borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent']
         .forEach(type => {
           const dropdown = document.getElementById(`${type}Dropdown`);
           const triggerContent = document.getElementById(`${type}SelectContent`);
@@ -2155,6 +2168,7 @@
               preset: 'Select a theme...',
               colors: 'Select colors...',
               fonts: 'Select fonts...',
+              background: 'Select background...',
               borders: 'Select border...',
               rounding: 'Select rounding...',
               shadows: 'Select shadows...',
