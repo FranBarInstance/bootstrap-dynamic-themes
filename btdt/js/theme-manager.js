@@ -309,28 +309,42 @@ class ThemeManager {
     this.activeTheme._preset = presetName;
     
     return new Promise((resolve) => {
-      const handleLoad = () => {
+      let settled = false;
+
+      const finalizeSuccess = () => {
+        if (settled) return;
+        settled = true;
         // Double check: give the browser a tiny moment to parse the root variables
         setTimeout(() => {
           this._syncFromComputedStyles();
           this._saveToStorage();
           this._dispatchEvent('preset', presetName);
           if (this._modeLink) document.head.appendChild(this._modeLink);
+          link.onload = null;
+          link.onerror = null;
           resolve(this);
         }, 50);
       };
 
-      link.onload = handleLoad;
-      link.onerror = () => {
+      const finalizeError = () => {
+        if (settled) return;
+        settled = true;
         console.error(`Failed to load preset: ${presetName}`);
+        this.activeTheme._preset = null;
+        this._saveToStorage();
+        link.onload = null;
+        link.onerror = null;
         resolve(this);
       };
+
+      link.onload = finalizeSuccess;
+      link.onerror = finalizeError;
       
       link.href = this._withCacheBust(path);
 
       // Security fallback for very slow connections or cached files where onload might be tricky
       setTimeout(() => {
-        if (!this.activeTheme.colors) handleLoad();
+        if (!settled && !this.activeTheme.colors) finalizeSuccess();
       }, 1500);
     });
   }
@@ -405,6 +419,7 @@ class ThemeManager {
       let path = "";
       if (cat === 'colors') path = `../colors/${val}.css`;
       else if (cat === 'fonts') path = `../fonts/${val}.css`;
+      else if (cat === 'accentSize' || cat === 'accentColor') path = `../styles/accent-${val}.css`;
       else path = `../styles/${cat}-${val}.css`;
       
       css += `@import "${path}";\n`;

@@ -49,12 +49,16 @@
             if (this._manager) return Promise.resolve(this._manager);
             if (this._loading) return this._loading;
 
-            this._loading = new Promise((resolve) => {
+            this._loading = new Promise((resolve, reject) => {
                 const s = document.createElement('script');
                 s.src = `${basePath}js/theme-manager.js`;
                 s.onload = () => {
                     this._manager = new ThemeManager({ basePath });
                     resolve(this._manager);
+                };
+                s.onerror = () => {
+                    this._loading = null;
+                    reject(new Error(`Failed to load ThemeManager from ${s.src}`));
                 };
                 document.head.appendChild(s);
             });

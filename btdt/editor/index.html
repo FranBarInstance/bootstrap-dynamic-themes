@@ -2016,7 +2016,7 @@
             primary: '#ced4da', secondary: '#e9ecef', accent: '#adb5bd'
           };
           return `
-            <div class="custom-option" data-value="${name}" onclick="applyPreset('${name}'); closeAllCustomDropdowns(); event.stopPropagation();">
+            <div class="custom-option" data-value="${name}" onclick="applyPreset('${name}', event); closeAllCustomDropdowns();">
               <div class="mini-swatch">
                 <div style="background:${swatch.primary}"></div>
                 <div style="background:${swatch.secondary}"></div>
@@ -2031,7 +2031,7 @@
       // 2. Colors
       const colorsHtml = Object.entries(colorSwatches)
         .map(([name, colors]) => `
-          <div class="custom-option" data-value="${name}" onclick="setTheme('colors','${name}'); closeAllCustomDropdowns(); event.stopPropagation();">
+          <div class="custom-option" data-value="${name}" onclick="setTheme('colors','${name}', event); closeAllCustomDropdowns();">
             <div class="mini-swatch">
               <div style="background:${colors.primary}"></div>
               <div style="background:${colors.secondary}"></div>
@@ -2045,7 +2045,7 @@
       // 3. Fonts
       const fontsHtml = Object.entries(labels.fonts)
         .map(([value, label]) => `
-          <div class="custom-option" data-value="${value}" onclick="setTheme('fonts','${value}'); closeAllCustomDropdowns(); event.stopPropagation();">
+          <div class="custom-option" data-value="${value}" onclick="setTheme('fonts','${value}', event); closeAllCustomDropdowns();">
             <span class="option-label" style="font-family: '${label}', sans-serif;">${label}</span>
           </div>
         `).join('');
@@ -2058,7 +2058,7 @@
           if (!dropdown) return;
           const opts = Object.entries(labels[cat])
             .map(([value, label]) => `
-              <div class="custom-option" data-value="${value}" onclick="setTheme('${cat}','${value}'); closeAllCustomDropdowns(); event.stopPropagation();">
+              <div class="custom-option" data-value="${value}" onclick="setTheme('${cat}','${value}', event); closeAllCustomDropdowns();">
                 <span class="option-label">${label}</span>
               </div>
             `).join('');
@@ -2072,12 +2072,14 @@
       updatePanelState();
     }
 
-    function setTheme(category, value) {
+    function setTheme(category, value, e) {
+      if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
       themeManager.set(category, value);
       updatePanelState();
     }
 
-    async function applyPreset(name) {
+    async function applyPreset(name, e) {
+      if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
       await themeManager.applyPreset(name);
       updatePanelState();
     }
@@ -2172,7 +2174,7 @@
                 <span class="option-label">${meta.title}</span>
               `;
             } else if (type === 'colors') {
-              const colors = colorSwatches[value];
+              const colors = colorSwatches[value] || { primary: '#ced4da', secondary: '#e9ecef', accent: '#adb5bd' };
               triggerContent.innerHTML = `
                 <div class="mini-swatch">
                   <div style="background:${colors.primary}"></div>
