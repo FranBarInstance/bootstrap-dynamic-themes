@@ -14,9 +14,20 @@ Font modules are stored in: `btdt/themes/fonts/[font-name].css`
 Use `@import` to load the font from Google Fonts. Always include multiple weights (e.g., 400, 700) to support headings and body text.
 
 ### 2. CSS Variable Mapping
-Map the font family to the following variables:
-- `--bs-body-font-family`: The primary font for the entire application.
-- `--bs-heading-font-family` (optional): Use if you want headings to have a different personality than the body.
+At minimum, define:
+- `--bs-body-font-family`
+- `--bs-body-font-weight`
+- `--bs-body-line-height`
+
+Then style the main typographic selectors actually used in this codebase:
+- headings (`h1`-`h6`, `.h1`-`.h6`)
+- display headings (`.display-1`-`.display-6`)
+- `.btn`
+
+Optional but recommended when appropriate:
+- `.navbar-brand`
+- `.form-label`
+- `code, pre, kbd`
 
 ### 3. Fallbacks
 Always include standard system fallbacks (e.g., `sans-serif`, `serif`, `monospace`) to ensure a graceful degradation.
@@ -33,6 +44,14 @@ After creating the CSS file, you MUST add the new font metadata to `btdt/js/conf
 
 :root {
   --bs-body-font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --bs-body-font-weight: 400;
+  --bs-body-line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
 }
 ```
 
