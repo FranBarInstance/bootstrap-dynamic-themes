@@ -49,6 +49,11 @@
   border-radius: 1rem;
 }
 
+.navbar {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
 .modal-content {
   border-radius: 1.5rem;
 }
