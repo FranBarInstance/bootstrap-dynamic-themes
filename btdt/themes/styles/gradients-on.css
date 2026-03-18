@@ -51,44 +51,44 @@
 
 /* Backgrounds with gradient */
 .bg-primary {
-  background: linear-gradient(
+  background-image: linear-gradient(
     135deg,
-    var(--bs-primary, #0d6efd),
-    color-mix(in srgb, var(--bs-primary, #0d6efd), black 20%)
+    rgba(255,255,255,0.16),
+    rgba(0,0,0,0.14)
   ) !important;
 }
 
 .bg-secondary {
-  background: linear-gradient(
+  background-image: linear-gradient(
     135deg,
-    var(--bs-secondary, #6c757d),
-    color-mix(in srgb, var(--bs-secondary, #6c757d), black 20%)
+    rgba(255,255,255,0.16),
+    rgba(0,0,0,0.14)
   ) !important;
 }
 
 .bg-success {
-  background: linear-gradient(
+  background-image: linear-gradient(
     135deg,
-    var(--bs-success, #198754),
-    color-mix(in srgb, var(--bs-success, #198754), black 20%)
+    rgba(255,255,255,0.16),
+    rgba(0,0,0,0.14)
   ) !important;
 }
 
 .bg-danger {
-  background: linear-gradient(
+  background-image: linear-gradient(
     135deg,
-    var(--bs-danger, #dc3545),
-    color-mix(in srgb, var(--bs-danger, #dc3545), black 20%)
+    rgba(255,255,255,0.16),
+    rgba(0,0,0,0.14)
   ) !important;
 }
 
 /* Gradient navbar */
 .navbar.bg-primary,
 .navbar.bg-dark {
-  background: linear-gradient(
+  background-image: linear-gradient(
     135deg,
-    var(--bs-primary, #0d6efd),
-    color-mix(in srgb, var(--bs-primary, #0d6efd), black 25%)
+    rgba(255,255,255,0.12),
+    rgba(0,0,0,0.18)
   ) !important;
 }
 
@@ -112,28 +112,28 @@
 
 /* Card headers */
 .card-header.bg-primary {
-  background: linear-gradient(
+  background-image: linear-gradient(
     135deg,
-    var(--bs-primary, #0d6efd),
-    color-mix(in srgb, var(--bs-primary, #0d6efd), black 15%)
+    rgba(255,255,255,0.16),
+    rgba(0,0,0,0.12)
   ) !important;
 }
 
 /* Badges */
 .badge.bg-primary {
-  background: linear-gradient(
+  background-image: linear-gradient(
     135deg,
-    var(--bs-primary, #0d6efd),
-    color-mix(in srgb, var(--bs-primary, #0d6efd), black 20%)
+    rgba(255,255,255,0.16),
+    rgba(0,0,0,0.14)
   ) !important;
 }
 
 /* Active list items */
 .list-group-item.active {
-  background: linear-gradient(
+  background-image: linear-gradient(
     135deg,
-    var(--bs-primary, #0d6efd),
-    color-mix(in srgb, var(--bs-primary, #0d6efd), black 20%)
+    rgba(255,255,255,0.16),
+    rgba(0,0,0,0.14)
   );
 }
 
