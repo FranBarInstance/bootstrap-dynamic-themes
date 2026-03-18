@@ -1,3 +1,12 @@
 /* themes/styles/rounding-normal.css */
-/* Bootstrap defaults. Kept intentionally empty so explicit rounding
-   utilities continue using the framework's native tokens. */
+/* Bootstrap defaults + explicit navbar rounding so "Corners: Normal"
+   is visible in the demo without requiring HTML utility classes. */
+.navbar {
+  border-radius: var(--bs-border-radius);
+  overflow: hidden;
+}
+
+.card {
+  border-radius: var(--bs-border-radius);
+  overflow: hidden;
+}
