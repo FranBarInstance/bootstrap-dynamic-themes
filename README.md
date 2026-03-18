@@ -85,7 +85,7 @@ Best for static sites where speed is the only priority. Zero JS dependency for i
 ```html
 <head>
     <link rel="stylesheet" href="btdt/css/bootstrap.min.css">
-    <link rel="stylesheet" href="btdt/themes/preset/studio.css">
+    <link id="theme-preset" rel="stylesheet" href="btdt/themes/preset/studio.css">
 </head>
 
 <body>
@@ -108,6 +108,16 @@ The simplest way. One single line in the `<head>` handles both CSS injection and
 > [!NOTE]
 > Using the JS loader (**Option B**) may cause a slight flash of unstyled content (FOUC) during page load as the CSS is injected via JavaScript. For a perfectly smooth experience, use **Option A**.
 
+### About `theme-preset`
+
+When using the JS loader, BTDT manages the active preset through a standard stylesheet tag:
+
+```html
+<link id="theme-preset" rel="stylesheet" href="btdt/themes/preset/studio.css">
+```
+
+This `id` is the fixed hook used by `btdt.js` to detect, reuse, or replace the current preset stylesheet. If it already exists, `btdt.load('aurora')` updates that same `<link>` instead of creating duplicates. If it does not exist, `btdt.js` creates it automatically.
+
 ### 3. API Usage
 
 Regardless of the option chosen (unless you skipped JS), you can use the global `btdt` object:
@@ -116,6 +126,45 @@ Regardless of the option chosen (unless you skipped JS), you can use the global 
 btdt.load('aurora'); // Switch preset dynamically
 btdt.toggleMode();   // Toggle Dark/Light mode
 ```
+
+Available methods:
+
+- `btdt.load(name)`
+Loads a preset stylesheet dynamically. You can pass a preset name such as `studio` or `aurora`, or a direct CSS path.
+
+```javascript
+btdt.load('studio');
+btdt.load('aurora');
+btdt.load('/assets/themes/custom-theme.css');
+```
+
+- `btdt.setMode(mode)`
+Sets the active mode explicitly. Accepted values are `light` and `dark`.
+
+```javascript
+btdt.setMode('dark');
+btdt.setMode('light');
+```
+
+- `btdt.toggleMode()`
+Switches between `light` and `dark`.
+
+```javascript
+btdt.toggleMode();
+```
+
+- `btdt.getMode()`
+Returns the current mode as a string: `light` or `dark`.
+
+```javascript
+const mode = btdt.getMode();
+```
+
+Notes:
+
+- `btdt.js` is a production loader. It only handles preset loading and dark/light mode.
+- It does not depend on the editor or on `theme-manager.js`.
+- It does not need to know which presets exist in advance. It simply updates the active preset stylesheet.
 
 ## Dynamic Contrast & Theming
 
