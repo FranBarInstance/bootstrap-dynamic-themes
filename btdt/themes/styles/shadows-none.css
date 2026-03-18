@@ -1,10 +1,4 @@
 /* themes/styles/shadows-none.css */
-:root {
-  --bs-box-shadow: none;
-  --bs-box-shadow-sm: none;
-  --bs-box-shadow-lg: none;
-}
-
 .card,
 .btn,
 .dropdown-menu,
@@ -13,24 +7,18 @@
 .alert,
 .navbar,
 .badge {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 .btn:hover,
 .btn:focus,
 .btn:active,
 .card:hover {
-  box-shadow: none !important;
-  transform: none !important;
+  box-shadow: none;
+  transform: none;
 }
 
 .form-control:focus,
 .form-select:focus {
-  box-shadow: none !important;
-}
-
-.shadow,
-.shadow-sm,
-.shadow-lg {
-  box-shadow: none !important;
+  box-shadow: none;
 }

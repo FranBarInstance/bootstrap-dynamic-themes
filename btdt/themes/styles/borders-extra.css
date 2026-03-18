@@ -1,9 +1,4 @@
 /* themes/styles/borders-extra.css */
-:root {
-  --bs-border-width: 2px;
-  --bs-border-color: #adb5bd;
-}
-
 .card {
   border-width: 2px;
 }

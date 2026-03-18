@@ -1,9 +1,4 @@
 /* themes/styles/borders-none.css */
-:root {
-  --bs-border-width: 0px;
-  --bs-border-color: transparent;
-}
-
 .card {
   border: none;
 }

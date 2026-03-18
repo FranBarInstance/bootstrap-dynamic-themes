@@ -9,25 +9,25 @@
 
 /* Cards */
 .card {
-  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
+  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary));
 }
 
 /* List group items */
 .list-group-item {
-  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
+  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary));
 }
 .list-group-item.active {
-  border-right-color: var(--accent-color, var(--bs-primary)) !important;
+  border-right-color: var(--accent-color, var(--bs-primary));
 }
 
 /* Accordion items */
 .accordion-item {
-  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
+  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary));
 }
 
 /* Alerts */
 .alert {
-  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
+  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary));
   border-top-width:    var(--bs-alert-border-width, 1px);
   border-left-width:   var(--bs-alert-border-width, 1px);
   border-bottom-width: var(--bs-alert-border-width, 1px);
@@ -41,7 +41,7 @@
 
 /* Nav tabs — línea derecha activa */
 .nav-tabs .nav-link.active {
-  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
+  border-right: var(--accent-size) solid var(--accent-color, var(--bs-primary));
 }
 
 /* Navbar — borde derecho */

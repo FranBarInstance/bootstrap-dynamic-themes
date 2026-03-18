@@ -1,13 +1,4 @@
 /* themes/styles/rounding-extra.css */
-:root {
-  --bs-border-radius: 1rem;
-  --bs-border-radius-sm: 0.75rem;
-  --bs-border-radius-lg: 1.5rem;
-  --bs-border-radius-xl: 2rem;
-  --bs-border-radius-xxl: 3rem;
-  --bs-border-radius-pill: 50rem;
-}
-
 .card {
   border-radius: 1.25rem;
   overflow: hidden;
@@ -96,8 +87,4 @@
 .pagination .page-link:last-child {
   border-top-right-radius: 0.75rem;
   border-bottom-right-radius: 0.75rem;
-}
-
-img.rounded {
-  border-radius: 1rem !important;
 }

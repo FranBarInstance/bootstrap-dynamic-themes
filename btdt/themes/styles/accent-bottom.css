@@ -9,22 +9,22 @@
 
 /* Cards */
 .card {
-  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
+  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary));
 }
 
 /* List group items (solo el último) */
 .list-group-item:last-child {
-  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
+  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary));
 }
 
 /* Accordion items — último */
 .accordion-item:last-of-type {
-  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
+  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary));
 }
 
 /* Alerts */
 .alert {
-  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
+  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary));
   border-left-width:   var(--bs-alert-border-width, 1px);
   border-right-width:  var(--bs-alert-border-width, 1px);
   border-top-width:    var(--bs-alert-border-width, 1px);
@@ -38,12 +38,12 @@
 
 /* Nav tabs — línea inferior en activo (subrayado) */
 .nav-tabs .nav-link.active {
-  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
+  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary));
 }
 
 /* Nav pills — underline activo */
 .nav-pills .nav-link.active {
-  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary)) !important;
+  border-bottom: var(--accent-size) solid var(--accent-color, var(--bs-primary));
 }
 
 /* Navbar — borde inferior (el más típico en diseño de nav) */

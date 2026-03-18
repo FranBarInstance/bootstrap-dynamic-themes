@@ -67,6 +67,23 @@ class ThemeManager {
     return `${path}${sep}v=${this._cacheBust}`;
   }
 
+  _getCascadeOrder() {
+    return ['colors', 'fonts', 'background', 'borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent'];
+  }
+
+  _reorderThemeLinks() {
+    this._getCascadeOrder().forEach((category) => {
+      const link = document.getElementById(`theme-${category}`);
+      if (link) {
+        this.container.appendChild(link);
+      }
+    });
+
+    if (this._modeLink) {
+      document.head.appendChild(this._modeLink);
+    }
+  }
+
   // Creates a container for theme CSS
   _initContainer() {
     // Use <head> directly so <link rel="stylesheet"> is always applied.
@@ -141,11 +158,8 @@ class ThemeManager {
     link.setAttribute('data-theme-value', value);
 
     this.container.appendChild(link);
-    // Keep mode CSS last so it can override any theme CSS.
-    if (this._modeLink) {
-      document.head.appendChild(this._modeLink);
-    }
     this.activeTheme[category] = value;
+    this._reorderThemeLinks();
   }
 
   // ===== MODE API =====

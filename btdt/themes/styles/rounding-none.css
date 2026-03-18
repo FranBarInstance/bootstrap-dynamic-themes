@@ -1,12 +1,4 @@
 /* themes/styles/rounding-none.css */
-:root {
-  --bs-border-radius: 0;
-  --bs-border-radius-sm: 0;
-  --bs-border-radius-lg: 0;
-  --bs-border-radius-xl: 0;
-  --bs-border-radius-xxl: 0;
-}
-
 .card,
 .btn,
 .form-control,
@@ -22,10 +14,8 @@
 .input-group-text,
 .list-group,
 .list-group-item:first-child,
-.list-group-item:last-child,
-img.rounded,
-.rounded {
-  border-radius: 0 !important;
+.list-group-item:last-child {
+  border-radius: 0;
 }
 
 .card .card-img-top,
