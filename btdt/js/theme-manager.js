@@ -29,7 +29,7 @@ class ThemeManager {
         'secondary-low', 'secondary-medium', 'secondary-high',
         'gray-low', 'gray-medium', 'gray-high'
       ],
-      borders: Object.keys(ui.borders || {}).length ? Object.keys(ui.borders) : ['normal', 'extra', 'none'],
+      borders: Object.keys(ui.borders || {}).length ? Object.keys(ui.borders) : ['normal', 'minimal', 'extra', 'none'],
       rounding: Object.keys(ui.rounding || {}).length ? Object.keys(ui.rounding) : ['normal', 'extra', 'none'],
       shadows: Object.keys(ui.shadows || {}).length ? Object.keys(ui.shadows) : ['normal', 'extra', 'none'],
       spacing: Object.keys(ui.spacing || {}).length ? Object.keys(ui.spacing) : ['normal', 'large', 'small'],

@@ -12,7 +12,7 @@ window.BTDT_UI = {
     'gray-medium': 'Gray · Medium',
     'gray-high': 'Gray · High'
   },
-  borders: { normal: 'Normal', extra: 'Thick', none: 'None' },
+  borders: { normal: 'Normal', minimal: 'Minimal', extra: 'Thick', none: 'None' },
   rounding: { normal: 'Normal', extra: 'Extra', none: 'Sharp' },
   shadows: { normal: 'Normal', extra: 'Extra', none: 'None' },
   spacing: { normal: 'Normal', large: 'Large', small: 'Compact' },

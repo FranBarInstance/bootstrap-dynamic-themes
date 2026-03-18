@@ -1,0 +1,68 @@
+/* themes/styles/borders-minimal.css */
+.card,
+.form-control,
+.form-select,
+.alert,
+.list-group-item,
+.modal-content,
+.dropdown-menu,
+.input-group-text,
+.pagination .page-link,
+.toast {
+  border-width: 1px;
+  border-color: color-mix(in srgb, var(--bs-border-color, #dee2e6), transparent 45%);
+}
+
+.btn {
+  border-width: 1px;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-success,
+.btn-danger,
+.btn-warning,
+.btn-info,
+.btn-dark,
+.btn-light {
+  border-color: color-mix(in srgb, currentColor, transparent 75%);
+}
+
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-success,
+.btn-outline-danger,
+.btn-outline-warning,
+.btn-outline-info,
+.btn-outline-dark,
+.btn-outline-light {
+  border-width: 1px;
+}
+
+.table th,
+.table td {
+  border-bottom-width: 1px;
+  border-bottom-color: color-mix(in srgb, var(--bs-border-color, #dee2e6), transparent 45%);
+}
+
+.nav-tabs .nav-link {
+  border-width: 1px;
+  border-color: color-mix(in srgb, var(--bs-border-color, #dee2e6), transparent 45%);
+}
+
+.nav-tabs .nav-link.active {
+  border-bottom-color: transparent;
+}
+
+.badge {
+  border: 1px solid color-mix(in srgb, currentColor, transparent 82%);
+}
+
+hr {
+  border-top-width: 1px;
+  border-top-color: color-mix(in srgb, var(--bs-border-color, #dee2e6), transparent 45%);
+}
+
+.form-check-input {
+  border-color: color-mix(in srgb, var(--bs-border-color, #dee2e6), transparent 30%);
+}
