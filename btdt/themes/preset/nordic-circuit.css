@@ -1,19 +1,26 @@
 @import "../colors/nord.css";
 @import "../fonts/jetbrains-mono.css";
+@import "../styles/background-gray-low.css";
 @import "../styles/borders-none.css";
 @import "../styles/rounding-none.css";
 @import "../styles/shadows-normal.css";
-@import "../styles/spacing-small.css";
+@import "../styles/spacing-large.css";
 @import "../styles/gradients-off.css";
 @import "../styles/accent-left.css";
+@import "../styles/accent-1.css";
+@import "../styles/accent-gray.css";
 
+/* Metadata for the editor */
 :root {
   --preset-colors: "nord";
   --preset-fonts: "jetbrains-mono";
+  --preset-background: "gray-low";
   --preset-borders: "none";
   --preset-rounding: "none";
   --preset-shadows: "normal";
-  --preset-spacing: "small";
+  --preset-spacing: "large";
   --preset-gradients: "off";
   --preset-accent: "left";
+  --preset-accentSize: "1";
+  --preset-accentColor: "gray";
 }

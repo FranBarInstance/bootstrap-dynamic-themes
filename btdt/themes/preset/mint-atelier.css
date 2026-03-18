@@ -1,19 +1,26 @@
 @import "../colors/mint.css";
 @import "../fonts/comfortaa.css";
+@import "../styles/background-none.css";
 @import "../styles/borders-normal.css";
 @import "../styles/rounding-extra.css";
 @import "../styles/shadows-normal.css";
 @import "../styles/spacing-large.css";
 @import "../styles/gradients-on.css";
-@import "../styles/accent-top.css";
+@import "../styles/accent-bottom.css";
+@import "../styles/accent-3.css";
+@import "../styles/accent-secondary.css";
 
+/* Metadata for the editor */
 :root {
   --preset-colors: "mint";
   --preset-fonts: "comfortaa";
+  --preset-background: "none";
   --preset-borders: "normal";
   --preset-rounding: "extra";
   --preset-shadows: "normal";
   --preset-spacing: "large";
   --preset-gradients: "on";
-  --preset-accent: "top";
+  --preset-accent: "bottom";
+  --preset-accentSize: "3";
+  --preset-accentColor: "secondary";
 }

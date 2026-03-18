@@ -1,2 +1,1 @@
-/* themes/styles/rounding-normal.css */
-.navbar{border-radius:var(--bs-border-radius);overflow:hidden}
+.navbar{border-radius:var(--bs-border-radius)}.card{border-radius:var(--bs-border-radius);overflow:hidden}

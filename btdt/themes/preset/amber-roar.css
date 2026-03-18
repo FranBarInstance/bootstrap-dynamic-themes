@@ -1,19 +1,26 @@
 @import "../colors/amber.css";
 @import "../fonts/oswald.css";
-@import "../styles/borders-extra.css";
+@import "../styles/background-none.css";
+@import "../styles/borders-minimal.css";
 @import "../styles/rounding-normal.css";
 @import "../styles/shadows-extra.css";
 @import "../styles/spacing-normal.css";
 @import "../styles/gradients-on.css";
 @import "../styles/accent-bottom.css";
+@import "../styles/accent-2.css";
+@import "../styles/accent-primary.css";
 
+/* Metadata for the editor */
 :root {
   --preset-colors: "amber";
   --preset-fonts: "oswald";
-  --preset-borders: "extra";
+  --preset-background: "none";
+  --preset-borders: "minimal";
   --preset-rounding: "normal";
   --preset-shadows: "extra";
   --preset-spacing: "normal";
   --preset-gradients: "on";
   --preset-accent: "bottom";
+  --preset-accentSize: "2";
+  --preset-accentColor: "primary";
 }
