@@ -2,28 +2,33 @@
  * BTDT production loader.
  * Only handles preset CSS loading and light/dark mode.
  *
- * Attributes:
- *   data-base-path       Override base URL for theme assets
- *   data-auto-init       Set to "false" to disable automatic initialization
- *   data-preset          Preset CSS name or path to load on init (ignored if <link id="theme-preset"> already exists in HTML)
- *   data-mode            Force "dark" or "light" mode, ignoring all detection
- *   data-minified        Set to "true" to load .min.css variants by default
- *   data-dark-var        JS global variable name to read dark mode preference from
- *   data-dark-cookie     Cookie name to read dark mode preference from
- *   data-dark-system     Set to "true" to follow OS prefers-color-scheme
- *   data-fouc            FOUC strategy: "none" | "hide" (default) | "fade"
- *   data-preset-cookie   Cookie name to persist preset choice across page loads
+ * Directory structure (relative to btdt/):
+ *   btdt/js/               → this script (btdt.min.js)
+ *   btdt/themes/preset/    → preset CSS files
+ *   btdt/themes/modes/     → dark.min.css
  *
- * Recommended HTML — no disabled="" on the dark link:
- *   <link id="theme-preset"      rel="stylesheet" href="/themes/preset/mi-preset.css">
- *   <link id="theme-preset-dark" rel="stylesheet" href="/themes/modes/dark.min.css">
+ * Bootstrap must always be loaded statically in the HTML:
+ *   <link id="theme-preset-bootstrap" rel="stylesheet" href="/btdt/css/bootstrap.min.css">
+ *   <link id="theme-preset"           rel="stylesheet" href="/btdt/themes/preset/name.min.css">
+ *   <link id="theme-preset-dark"      rel="stylesheet" href="/btdt/themes/modes/dark.min.css">
  *   <style>html:not([data-btdt-ready]) body { visibility: hidden !important; }</style>
- *   <script src="btdt-loader.js" data-fouc="none" data-dark-system="true"></script>
+ *   <script src="btdt.min.js" data-fouc="none" ...></script>
+ *
+ * Attributes:
+ *   data-base-path       Override base URL (default: parent dir of this script)
+ *   data-auto-init       Set to "false" to disable automatic initialization
+ *   data-preset          Preset name to load (ignored if <link id="theme-preset"> already in HTML)
+ *   data-mode            Force "dark" or "light", ignoring all detection
+ *   data-minified        Set to "true" to load .min.css variants by default
+ *   data-dark-var        JS global variable name for dark mode preference
+ *   data-dark-cookie     Cookie name for dark mode preference
+ *   data-dark-system     Set to "true" to follow OS prefers-color-scheme
+ *   data-fouc            "none" | "hide" (default) | "fade"
+ *   data-preset-cookie   Cookie name to persist preset choice
  *
  * API (window.btdt):
- *   .load(name, options?)         Internal: load preset href onto the link element
  *   .setPreset(name, options?)    Switch preset dynamically with transition
- *   .setMode(mode)                Set "dark" or "light" mode
+ *   .setMode(mode)                Set "dark" or "light"
  *   .toggleMode()                 Toggle between dark and light
  *   .getMode()                    Returns current mode string
  *   .getPreset()                  Returns current preset name
@@ -32,37 +37,58 @@
 (function () {
     if (window.btdt && window.btdt._initialized) return;
 
-    const script = document.currentScript;
-    if (!script) return;
+    // ─── Locate the script element ────────────────────────────────────────────
+    // document.currentScript can be null in some environments (nonce, async).
+    // Fallback: find the last script tag whose src contains 'btdt'.
+
+    var script = document.currentScript;
+    if (!script) {
+        var scripts = document.querySelectorAll('script[src]');
+        for (var i = scripts.length - 1; i >= 0; i--) {
+            if (scripts[i].src.indexOf('btdt') !== -1) {
+                script = scripts[i];
+                break;
+            }
+        }
+    }
 
     // ─── Config ──────────────────────────────────────────────────────────────
 
-    const detectedBase    = script.src.split('/').slice(0, -2).join('/') + '/';
-    const basePath        = (script.getAttribute('data-base-path') || detectedBase).replace(/\/?$/, '/');
-    const autoInit        = script.getAttribute('data-auto-init') !== 'false';
-    const initialPreset   = script.getAttribute('data-preset') || null;
-    const initialMode     = script.getAttribute('data-mode') || null;
-    const defaultMinified = script.getAttribute('data-minified') === 'true';
-    const darkVarName     = script.getAttribute('data-dark-var') || null;
-    const darkCookieName  = script.getAttribute('data-dark-cookie') || null;
-    const useSystemDark   = script.getAttribute('data-dark-system') === 'true';
-    const foucStrategy    = script.getAttribute('data-fouc') || 'hide';
-    const presetCookie    = script.getAttribute('data-preset-cookie') || null;
+    function attr(name, def) {
+        if (!script) return def;
+        var val = script.getAttribute(name);
+        return val !== null ? val : def;
+    }
+
+    var src          = script ? script.src : '';
+    var detectedBase = src.split('/').slice(0, -2).join('/') + '/';
+    var basePath     = attr('data-base-path', detectedBase).replace(/\/?$/, '/');
+    var autoInit     = attr('data-auto-init', 'true') !== 'false';
+    var initialPreset = attr('data-preset', null);
+    var initialMode  = attr('data-mode', null);
+    var defaultMin   = attr('data-minified', 'false') === 'true';
+    var darkVarName  = attr('data-dark-var', null);
+    var darkCookieN  = attr('data-dark-cookie', null);
+    var useSystemDark = attr('data-dark-system', 'false') === 'true';
+    var foucStrategy = attr('data-fouc', 'hide');
+    var presetCookie = attr('data-preset-cookie', null);
+
+    var DARK_SRC = basePath + 'themes/modes/dark.min.css';
 
     // ─── FOUC prevention ─────────────────────────────────────────────────────
 
-    const FOUC_TIMEOUT = 500;
-    let _foucTimer    = null;
-    let _foucResolved = false;
+    var FOUC_TIMEOUT  = 500;
+    var _foucTimer    = null;
+    var _foucResolved = false;
 
     function injectFoucStyle() {
         if (foucStrategy === 'none') return;
-        const style = document.createElement('style');
+        var style = document.createElement('style');
         style.id = 'btdt-fouc';
         style.textContent = foucStrategy === 'fade'
             ? 'html:not([data-btdt-ready]) body { opacity: 0; }'
             : 'html:not([data-btdt-ready]) body { visibility: hidden !important; }';
-        const first = document.head.firstChild;
+        var first = document.head.firstChild;
         first ? document.head.insertBefore(style, first) : document.head.appendChild(style);
     }
 
@@ -72,7 +98,7 @@
         if (_foucTimer) { clearTimeout(_foucTimer); _foucTimer = null; }
 
         if (foucStrategy === 'fade') {
-            const style = document.getElementById('btdt-fouc');
+            var style = document.getElementById('btdt-fouc');
             if (style) style.textContent = 'body { opacity: 0; transition: opacity 0.15s ease; }';
             requestAnimationFrame(function () {
                 requestAnimationFrame(function () {
@@ -94,45 +120,45 @@
 
     // ─── Dark mode detection ──────────────────────────────────────────────────
 
-    const DARK_VALUES  = new Set(['1', 'true', 'yes', 'dark', 'on']);
-    const LIGHT_VALUES = new Set(['0', 'false', 'no', 'light', 'off']);
+    var DARK_VALUES  = new Set(['1', 'true', 'yes', 'dark', 'on']);
+    var LIGHT_VALUES = new Set(['0', 'false', 'no', 'light', 'off']);
 
     function classifyValue(value) {
         if (value == null) return null;
-        const n = String(value).trim().toLowerCase();
+        var n = String(value).trim().toLowerCase();
         if (DARK_VALUES.has(n))  return 'dark';
         if (LIGHT_VALUES.has(n)) return 'light';
         return null;
     }
 
     function getCookie(name) {
-        const match = document.cookie.match(
+        var match = document.cookie.match(
             new RegExp('(?:^|; )' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)')
         );
         return match ? decodeURIComponent(match[1]) : null;
     }
 
     function setCookie(name, value, days) {
-        const expires = new Date(Date.now() + days * 864e5).toUTCString();
+        var expires = new Date(Date.now() + days * 864e5).toUTCString();
         document.cookie = name + '=' + encodeURIComponent(value) +
             '; expires=' + expires + '; path=/; SameSite=Lax';
     }
 
     function resolveTargetMode() {
         if (initialMode === 'dark' || initialMode === 'light') return initialMode;
-        if (darkVarName)    { const r = classifyValue(window[darkVarName]);       if (r) return r; }
-        if (darkCookieName) { const r = classifyValue(getCookie(darkCookieName)); if (r) return r; }
+        if (darkVarName) { var r = classifyValue(window[darkVarName]);   if (r) return r; }
+        if (darkCookieN) { var r = classifyValue(getCookie(darkCookieN)); if (r) return r; }
         if (useSystemDark && window.matchMedia) {
             return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
         return 'light';
     }
 
-    const targetMode = resolveTargetMode();
+    var targetMode = resolveTargetMode();
 
     // ─── Apply to <html> immediately (before first paint) ────────────────────
 
-    const html = document.documentElement;
+    var html = document.documentElement;
     html.setAttribute('data-bs-theme', targetMode);
     if (targetMode === 'dark') {
         html.setAttribute('data-mode', 'dark');
@@ -140,92 +166,136 @@
         html.removeAttribute('data-mode');
     }
 
+    // ─── Dark mode link — created immediately ────────────────────────────────
+    // Must exist and have correct disabled state before any other CSS loads.
+    // We do this inline here (before helper functions are defined) so the
+    // browser never renders without knowing whether dark mode is active.
+    (function () {
+        var dm = document.getElementById('theme-preset-dark');
+        if (!dm) {
+            dm = document.createElement('link');
+            dm.id  = 'theme-preset-dark';
+            dm.rel = 'stylesheet';
+            dm.href = basePath + 'themes/modes/dark.min.css';
+            document.head.appendChild(dm);
+        }
+        dm.disabled = targetMode !== 'dark';
+    }());
+
     // ─── CSS helpers ──────────────────────────────────────────────────────────
 
-    const CACHE_TOKEN = Date.now();
+    var CACHE_TOKEN = Date.now();
 
     function withCacheBust(path) {
-        const sep = path.includes('?') ? '&' : '?';
+        var sep = path.indexOf('?') !== -1 ? '&' : '?';
         return path + sep + 'v=' + CACHE_TOKEN;
+    }
+
+    function cleanHref(href) {
+        return href ? href.split('?')[0] : '';
     }
 
     function resolvePresetHref(name, options) {
         if (!name) return null;
-        if (name.endsWith('.css') || name.includes('/')) return name;
-        const min = (options && options.minified != null) ? options.minified : defaultMinified;
+        if (name.indexOf('.css') !== -1 || name.indexOf('/') !== -1) return name;
+        var min = (options && options.minified != null) ? options.minified : defaultMin;
         return basePath + 'themes/preset/' + name + (min ? '.min' : '') + '.css';
     }
 
-    function findPresetLink() {
-        const byId = document.getElementById('theme-preset');
-        if (byId) return byId;
-        const links = document.head.querySelectorAll('link[rel="stylesheet"]');
-        for (let i = 0; i < links.length; i++) {
-            if (links[i].href.includes('themes/preset/')) return links[i];
+    function findLinkByFilename(filename) {
+        var links = document.head.querySelectorAll('link[rel="stylesheet"]');
+        for (var i = 0; i < links.length; i++) {
+            if (links[i].href.indexOf(filename) !== -1) return links[i];
         }
         return null;
     }
 
-    function ensurePresetLink() {
-        let link = findPresetLink();
-        if (link) { link.id = 'theme-preset'; return link; }
-        link = document.createElement('link');
-        link.id  = 'theme-preset';
+    function createLink(id) {
+        var link = document.createElement('link');
+        link.id  = id;
         link.rel = 'stylesheet';
         document.head.appendChild(link);
         return link;
     }
 
-    // Extract the base path of a link href, without cache-bust query string
-    function cleanHref(href) {
-        return href ? href.split('?')[0] : '';
+    // ─── Preset link ──────────────────────────────────────────────────────────
+
+    function findPresetLink() {
+        return document.getElementById('theme-preset') ||
+               findLinkByFilename('themes/preset/') ||
+               null;
     }
 
-    let _modeLinkCache = null;
+    function ensurePresetLink() {
+        var existing = findPresetLink();
+        if (existing) { existing.id = 'theme-preset'; return existing; }
+        return createLink('theme-preset');
+    }
+
+    // ─── Dark mode link ───────────────────────────────────────────────────────
+    // Always last in the <head> so its overrides win over the preset.
+
+    var _modeLinkCache = null;
 
     function ensureModeLink() {
         if (_modeLinkCache) return _modeLinkCache;
-        let link = document.getElementById('theme-preset-dark');
+        var link = document.getElementById('theme-preset-dark');
         if (!link) {
-            link = document.createElement('link');
-            link.id  = 'theme-preset-dark';
-            link.rel = 'stylesheet';
-            link.href = withCacheBust(basePath + 'themes/modes/dark.min.css');
-            document.head.appendChild(link);
+            link = createLink('theme-preset-dark');
+            link.href = withCacheBust(DARK_SRC);
         }
         link.disabled = targetMode !== 'dark';
         _modeLinkCache = link;
         return link;
     }
 
+    // ─── Parallel load helper ─────────────────────────────────────────────────
+
+    function waitForLinks(entries, callback) {
+        var pending = 0;
+
+        entries.forEach(function (entry) {
+            if (!entry.alreadyLoaded && !(entry.link && entry.link.sheet)) pending++;
+        });
+
+        if (pending === 0) { callback(); return; }
+
+        function onOne() {
+            pending--;
+            if (pending === 0) callback();
+        }
+
+        entries.forEach(function (entry) {
+            if (entry.alreadyLoaded || (entry.link && entry.link.sheet)) return;
+            entry.link.addEventListener('load',  onOne, { once: true });
+            entry.link.addEventListener('error', onOne, { once: true });
+        });
+    }
+
     // ─── Dynamic preset switching ─────────────────────────────────────────────
 
-    let _currentPreset = null;
+    var _currentPreset = null;
 
     function switchPreset(name, options) {
-        const href = resolvePresetHref(name, options);
+        var href = resolvePresetHref(name, options);
         if (!href) return;
 
-        const activeLink = ensurePresetLink();
-        const resolved   = withCacheBust(href);
+        var activeLink = ensurePresetLink();
+        var resolved   = withCacheBust(href);
 
-        // Already showing this preset — nothing to do
         if (cleanHref(activeLink.href) === cleanHref(resolved)) return;
 
         if (presetCookie) setCookie(presetCookie, name, 365);
 
-        let pending = document.getElementById('theme-preset-pending');
+        var pending = document.getElementById('theme-preset-pending');
         if (!pending) {
-            pending = document.createElement('link');
-            pending.id  = 'theme-preset-pending';
-            pending.rel = 'stylesheet';
+            pending = createLink('theme-preset-pending');
             pending.disabled = true;
-            document.head.appendChild(pending);
         }
 
-        const SWITCH_TIMEOUT = 500;
-        let switched    = false;
-        let switchTimer = null;
+        var SWITCH_TIMEOUT = 500;
+        var switched    = false;
+        var switchTimer = null;
 
         function doSwap() {
             if (switched) return;
@@ -243,17 +313,14 @@
             });
 
             _currentPreset = name;
-
             html.dispatchEvent(new CustomEvent('btdt:presetchange', {
                 bubbles: true,
                 detail: { preset: name }
             }));
-
             revealBodyAfterSwitch();
         }
 
         switchTimer = setTimeout(doSwap, SWITCH_TIMEOUT);
-
         hideBodyForSwitch(function () {
             pending.href = resolved;
             pending.addEventListener('load',  doSwap, { once: true });
@@ -261,7 +328,7 @@
         });
     }
 
-    let _switchStyle = null;
+    var _switchStyle = null;
 
     function hideBodyForSwitch(callback) {
         if (!_switchStyle) {
@@ -270,25 +337,21 @@
             document.head.appendChild(_switchStyle);
         }
         _switchStyle.textContent = 'body { visibility: hidden !important; transition: none !important; }';
-        requestAnimationFrame(function () {
-            requestAnimationFrame(callback);
-        });
+        requestAnimationFrame(function () { requestAnimationFrame(callback); });
     }
 
     function revealBodyAfterSwitch() {
         if (!_switchStyle) return;
         requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-                _switchStyle.textContent = '';
-            });
+            requestAnimationFrame(function () { _switchStyle.textContent = ''; });
         });
     }
 
     // ─── applyMode ────────────────────────────────────────────────────────────
 
     function applyMode(mode) {
-        const normalized = mode === 'dark' ? 'dark' : 'light';
-        const modeLink   = ensureModeLink();
+        var normalized = mode === 'dark' ? 'dark' : 'light';
+        var modeLink   = ensureModeLink();
 
         html.setAttribute('data-bs-theme', normalized);
         if (normalized === 'dark') {
@@ -309,46 +372,12 @@
 
     // ─── Public API ───────────────────────────────────────────────────────────
 
-    const _readyCallbacks = [];
-    let _isReady = false;
+    var _readyCallbacks = [];
+    var _isReady = false;
 
     window.btdt = {
         _initialized: true,
         _mode: targetMode,
-
-        load: function (name, options) {
-            const href = resolvePresetHref(name, options);
-            if (!href) return this;
-
-            const link     = ensurePresetLink();
-            const resolved = withCacheBust(href);
-
-            // If the link already has this href (ignoring cache-bust), leave it alone.
-            // This is the key fix: a static <link> in the HTML already has the correct
-            // href — overwriting it would force a new network request and cause a flash.
-            if (cleanHref(link.href) === cleanHref(resolved)) {
-                // Already loaded or loading — just wire up the reveal listener
-                if (link.sheet) {
-                    revealPage();
-                } else if (!link._btdtListening) {
-                    link._btdtListening = true;
-                    link.addEventListener('load',  revealPage);
-                    link.addEventListener('error', revealPage);
-                    armFoucTimeout();
-                }
-                return this;
-            }
-
-            // href differs — this is a dynamic load (no static link in HTML)
-            link.href = resolved;
-            if (!link._btdtListening) {
-                link._btdtListening = true;
-                link.addEventListener('load',  revealPage);
-                link.addEventListener('error', revealPage);
-            }
-
-            return this;
-        },
 
         setPreset: function (name, options) {
             switchPreset(name, options);
@@ -382,39 +411,37 @@
     // ─── Auto-init ────────────────────────────────────────────────────────────
 
     if (autoInit) {
-        ensureModeLink();
+        var entries    = [];
+        var nameToLoad = initialPreset || (presetCookie ? getCookie(presetCookie) : null);
+        _currentPreset = nameToLoad;
 
-        const existingLink = findPresetLink();
+        // 1. Preset
+        var existingPreset = findPresetLink();
+        if (existingPreset) {
+            // Static in HTML — adopt, never touch href
+            existingPreset.id = 'theme-preset';
+            entries.push({ link: existingPreset, alreadyLoaded: !!existingPreset.sheet });
+        } else if (nameToLoad) {
+            // Dynamic — create and load
+            var presetHref = resolvePresetHref(nameToLoad);
+            var plink      = ensurePresetLink();
+            if (presetHref) plink.href = withCacheBust(presetHref);
+            entries.push({ link: plink, alreadyLoaded: !!plink.sheet });
+        }
 
-        if (existingLink) {
-            // ── Case 1: static <link> already in HTML ──────────────────────────
-            // Adopt it as-is. Do NOT touch its href regardless of data-preset.
-            // The server already wrote the correct href — overwriting it would
-            // cause a new network request and the flash we're trying to avoid.
-            existingLink.id = 'theme-preset';
-            _currentPreset  = initialPreset; // track the name for getPreset()
+        // 2. Dark mode — always last so its overrides win
+        // appendChild moves the node if already in DOM, placing it after the preset
+        var modeLink = ensureModeLink();
+        document.head.appendChild(modeLink);
 
-            if (existingLink.sheet) {
-                revealPage();
-            } else {
-                existingLink.addEventListener('load',  revealPage);
-                existingLink.addEventListener('error', revealPage);
-                armFoucTimeout();
-            }
-
-        } else if (initialPreset || (presetCookie && getCookie(presetCookie))) {
-            // ── Case 2: no static link — load dynamically ─────────────────────
-            const nameToLoad = initialPreset || getCookie(presetCookie);
-            _currentPreset   = nameToLoad;
-            window.btdt.load(nameToLoad);
+        if (entries.length > 0) {
+            waitForLinks(entries, revealPage);
             armFoucTimeout();
-
         } else {
-            // ── Case 3: no preset at all ──────────────────────────────────────
             revealPage();
         }
 
-        if (useSystemDark && !initialMode && !darkVarName && !darkCookieName && window.matchMedia) {
+        if (useSystemDark && !initialMode && !darkVarName && !darkCookieN && window.matchMedia) {
             window.matchMedia('(prefers-color-scheme: dark)')
                 .addEventListener('change', function (e) {
                     window.btdt.setMode(e.matches ? 'dark' : 'light');
@@ -422,8 +449,8 @@
         }
 
         _isReady = true;
-        for (let i = 0; i < _readyCallbacks.length; i++) {
-            try { _readyCallbacks[i](); } catch (_) { /* don't break init */ }
+        for (var i = 0; i < _readyCallbacks.length; i++) {
+            try { _readyCallbacks[i](); } catch (e) { /* don't break init */ }
         }
     } else {
         revealPage();
