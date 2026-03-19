@@ -73,6 +73,7 @@ python minify.py preset ../../themes/preset
 - Only processes `.css`
 - Resolves recursive `@import "..."` statements
 - Embeds imported CSS into one final stylesheet
+- Moves any remaining `@import` rules to the top of the final stylesheet before minifying
 - Minifies the bundled result into a `.min.css` file next to the source preset
 
 ### Notes

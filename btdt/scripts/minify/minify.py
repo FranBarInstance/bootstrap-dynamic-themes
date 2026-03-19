@@ -157,6 +157,27 @@ def resolve_css_imports(path: Path, stack=None) -> str:
     return IMPORT_RE.sub(replace_import, source)
 
 
+def hoist_imports_to_top(css: str) -> str:
+    """Move any remaining @import rules to the beginning of the stylesheet.
+
+    After preset bundling, external/media-qualified @import rules can remain in
+    arbitrary positions. Keeping them at the top avoids invalid CSS ordering
+    and keeps downstream minification predictable.
+    """
+    imports: list[str] = []
+
+    def collect_import(match):
+        imports.append(match.group(0).strip())
+        return ""
+
+    body = IMPORT_RE.sub(collect_import, css).strip()
+    if not imports:
+        return body
+    if not body:
+        return "\n".join(imports) + "\n"
+    return "\n".join(imports) + "\n\n" + body
+
+
 def minify_preset_file(path: Path) -> None:
     """Bundle a BTDT preset CSS file by inlining imports, then write its .min.css output."""
     if path.suffix != ".css":
@@ -166,6 +187,7 @@ def minify_preset_file(path: Path) -> None:
     try:
         cssmin = get_cssmin()
         bundled = resolve_css_imports(path)
+        bundled = hoist_imports_to_top(bundled)
         output = path.with_suffix(".min.css")
         write_minified(output, cssmin(bundled))
         print(f"[PRESET] {path}")

@@ -12,8 +12,8 @@ Presets are stored in: `btdt/themes/preset/[preset-name].css`
 
 ### 1. Modular Imports
 Include `@import` statements in this exact order:
-- `colors`
 - `fonts`
+- `colors`
 - `background`
 - `borders`
 - `rounding`
@@ -23,6 +23,8 @@ Include `@import` statements in this exact order:
 - `accent`
 - `accentSize`
 - `accentColor`
+
+All `@import` rules MUST stay at the top of the file (first lines), before any other CSS rule or comment block. This order is required for compatibility with the preset bundling/minification workflow.
 
 Use exactly one module from each category. Presets in this project are now considered complete only when all 11 categories are explicit.
 
@@ -37,8 +39,8 @@ After creating the CSS file, you MUST add the new preset metadata to `btdt/js/co
 ## Example Reference
 ```css
 /* btdt/themes/preset/studio.css */
-@import "../colors/corporate.css";
 @import "../fonts/ubuntu.css";
+@import "../colors/corporate.css";
 @import "../styles/background-none.css";
 @import "../styles/borders-normal.css";
 @import "../styles/rounding-normal.css";
