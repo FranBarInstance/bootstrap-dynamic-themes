@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+"""BTDT CSS/JS minification and preset bundling utility."""
 import argparse
 import re
 import sys
@@ -72,7 +72,7 @@ def write_minified(output_path: Path, content: str) -> None:
 def get_cssmin():
     """Import and return the CSS minifier on demand."""
     try:
-        from rcssmin import cssmin
+        from rcssmin import cssmin  # pylint: disable=import-outside-toplevel
     except ModuleNotFoundError as exc:
         raise ModuleNotFoundError(
             "Falta 'rcssmin'. Instala las dependencias con: pip install -r requirements.txt"
@@ -83,7 +83,7 @@ def get_cssmin():
 def get_jsmin():
     """Import and return the JS minifier on demand."""
     try:
-        from rjsmin import jsmin
+        from rjsmin import jsmin  # pylint: disable=import-outside-toplevel
     except ModuleNotFoundError as exc:
         raise ModuleNotFoundError(
             "Falta 'rjsmin'. Instala las dependencias con: pip install -r requirements.txt"
@@ -142,7 +142,8 @@ def resolve_css_imports(path: Path, stack=None) -> str:
 
         relative = relative.strip().strip('"').strip("'")
 
-        # BTDT preset bundling is local-only: keep external imports and media-specific imports untouched.
+        # BTDT preset bundling is local-only: keep external imports
+        # and media-specific imports untouched.
         tail = (match.group("tail") or "").strip()
         if re.match(r"^(url\()?https?://", relative, re.IGNORECASE):
             return match.group(0)
@@ -198,7 +199,10 @@ def minify_preset_file(path: Path) -> None:
 def parse_args():
     """Parse CLI arguments for normal or preset minification."""
     parser = argparse.ArgumentParser(
-        description="Minifica archivos CSS/JS o compila presets CSS embebiendo sus @import."
+        description=(
+            "Minifica archivos CSS/JS o compila "
+            "presets CSS embebiendo sus @import."
+        )
     )
     parser.add_argument(
         "mode",
