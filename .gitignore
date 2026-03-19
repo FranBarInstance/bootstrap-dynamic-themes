@@ -1,4 +1,12 @@
 **/.env*
 **/.venv*
 **/venv*
+.directory
 .vscode
+/tmp/*
+.python-version
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.Python
+.venv/
