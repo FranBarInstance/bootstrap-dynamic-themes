@@ -1,9 +1,59 @@
 /**
  * BTDT production loader — CSP compliant.
  * No inline styles, no eval, no nonce required.
+ *
+ * @file        btdt-loader.js
+ * @description Production loader for BTDT. Handles color mode (light/dark) detection and application,
+ *              and loads the active preset's stylesheet. Content Security Policy (CSP) compliant:
+ *              no inline styles, eval, or nonce required.
+ *
+ * @usage
+ *   <script src="path/to/btdt-loader.js"
+ *           data-preset="default"
+ *           data-mode="dark"
+ *           data-minified="true"
+ *           data-auto-init="true"
+ *           data-dark-var="MY_DARK_VAR"
+ *           data-dark-cookie="dark_mode"
+ *           data-dark-system="true">
+ *   </script>
+ *
+ * @attributes
+ *   data-base-path    {string}   Base path for assets. Automatically detected from the script URL by default.
+ *   data-preset       {string}   Name of the CSS preset to load (e.g. "default", "corporate").
+ *                                Can be a short name or a complete path/URL to a .css file.
+ *   data-mode         {string}   Initial color mode: "light" | "dark".
+ *                                Takes priority over all other sources.
+ *   data-minified     {boolean}  If "true", loads .min.css files. Default: false.
+ *   data-auto-init    {boolean}  If "false", disables automatic initialization. Default: true.
+ *   data-dark-var     {string}   Name of a window global variable whose value indicates if dark mode is active.
+ *                                Recognized values: "1","true","yes","dark","on" for dark;
+ *                                "0","false","no","light","off" for light.
+ *   data-dark-cookie  {string}   Name of the cookie that stores dark mode preference.
+ *                                Same recognized values as data-dark-var.
+ *   data-dark-system  {boolean}  If "true", uses the operating system's prefers-color-scheme as mode preference.
+ *
+ * @priority    Color mode source resolution order:
+ *              1. data-mode (explicit attribute)
+ *              2. data-dark-var (window global variable)
+ *              3. data-dark-cookie (browser cookie)
+ *              4. data-dark-system (operating system preference)
+ *              5. "light" (default value)
+ *
+ * @api         Exposes window.btdt with the following methods:
+ *   btdt.load(name, options)  Loads a CSS preset by name or options.
+ *   btdt.setMode(mode)        Sets the color mode ("light" | "dark").
+ *   btdt.toggleMode()         Toggles between light and dark mode.
+ *   btdt.getMode()            Returns the active color mode.
+ *
+ * @events
+ *   btdt:modechange  Fired on <html> when color mode changes.
+ *                    detail: { mode: "light" | "dark" }
  */
 (function() {
     if (window.btdt && window.btdt._initialized) return;
+
+    const VERSION = '1.0.0';
 
     const script = document.currentScript;
     if (!script) return;
@@ -49,7 +99,6 @@
     const targetMode = resolveTargetMode();
     const html       = document.documentElement;
 
-    // Apply mode to <html> immediately — attribute manipulation is CSP-safe
     html.setAttribute('data-bs-theme', targetMode);
     if (targetMode === 'dark') {
         html.setAttribute('data-mode', 'dark');
@@ -57,17 +106,11 @@
         html.removeAttribute('data-mode');
     }
 
-    const CACHE_TOKEN = Date.now();
-
-    function withCacheBust(path) {
-        const sep = path.includes('?') ? '&' : '?';
-        return `${path}${sep}v=${CACHE_TOKEN}`;
-    }
-
     function findLinkByFilename(filename) {
         const links = document.head.querySelectorAll('link[rel="stylesheet"]');
         for (let i = 0; i < links.length; i++) {
-            if (links[i].href.includes(filename)) return links[i];
+            const url = new URL(links[i].href);
+            if (url.pathname.includes(filename)) return links[i];
         }
         return null;
     }
@@ -95,21 +138,17 @@
         return link;
     }
 
-    let _modeLinkCache = null;
-
     function ensureModeLink() {
-        if (_modeLinkCache) return _modeLinkCache;
         let link = document.getElementById('theme-preset-dark');
         if (!link) {
             link = document.createElement('link');
-            link.id  = 'theme-preset-dark';
-            link.rel = 'stylesheet';
-            link.href = withCacheBust(`${basePath}themes/modes/dark.min.css`);
+            link.id   = 'theme-preset-dark';
+            link.rel  = 'stylesheet';
+            link.href = `${basePath}themes/modes/dark.min.css?v=${VERSION}`;
             document.head.appendChild(link);
         }
-        // link.disabled is a DOM property, not an inline style — CSP safe
-        link.disabled = targetMode !== 'dark';
-        _modeLinkCache = link;
+
+        link.media = targetMode === 'dark' ? 'all' : 'not all';
         return link;
     }
 
@@ -120,10 +159,10 @@
         html.setAttribute('data-bs-theme', normalized);
         if (normalized === 'dark') {
             html.setAttribute('data-mode', 'dark');
-            modeLink.disabled = false;
+            modeLink.media = 'all';
         } else {
             html.removeAttribute('data-mode');
-            modeLink.disabled = true;
+            modeLink.media = 'not all';
         }
 
         html.dispatchEvent(new CustomEvent('btdt:modechange', {
@@ -139,11 +178,10 @@
         _mode: targetMode,
 
         load: function(name, options) {
-            const href     = resolvePresetHref(name, options);
+            const href = resolvePresetHref(name, options);
             if (!href) return this;
-            const link     = ensurePresetLink();
-            const resolved = withCacheBust(href);
-            if (link.href !== resolved) link.href = resolved;
+            const link = ensurePresetLink();
+            if (link.href !== href) link.href = href;
             return this;
         },
 
@@ -170,9 +208,7 @@
             window.btdt.load(initialPreset);
         }
 
-        // Dark link always after preset so its overrides win in cascade
-        const modeLink = ensureModeLink();
-        document.head.appendChild(modeLink);
+        ensureModeLink();
 
         if (useSystemDark && !initialMode && !darkVarName && !darkCookieName && window.matchMedia) {
             window.matchMedia('(prefers-color-scheme: dark)')
