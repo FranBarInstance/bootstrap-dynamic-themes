@@ -354,7 +354,6 @@ class ThemeManager {
    * Example: --preset-colors: "ocean";
    */
   _syncFromComputedStyles() {
-    console.log("Syncing config from computed styles...");
     const styles = getComputedStyle(document.documentElement);
     
     Object.keys(this.activeTheme).forEach(cat => {
@@ -365,7 +364,6 @@ class ThemeManager {
       
       if (value && value !== 'initial' && value !== '') {
         this.activeTheme[cat] = value;
-        console.log(`-> Recovered ${cat}: ${value}`);
       }
     });
   }
