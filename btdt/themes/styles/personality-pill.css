@@ -1,0 +1,99 @@
+/* themes/styles/personality-pill.css
+ * Pill / Rounded finish layer.
+ * Sharp top-left corner on blocks, perfect pill on inline elements.
+ * The straight corner anchors blocks while small elements flow as clean pills.
+*/
+
+:root {
+  --personality-pill-line: 1.5px;
+  --personality-pill-radius-full: 9999px;
+  --personality-pill-radius-block: 0 3rem 3rem 3rem;
+  --personality-pill-radius-medium: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.card,
+.btn,
+.form-control,
+.form-select,
+.alert,
+.badge,
+.dropdown-menu,
+.navbar,
+.modal-content,
+.toast,
+.accordion-item,
+.list-group-item,
+.input-group-text,
+.pagination .page-link,
+.nav-pills .nav-link,
+.nav-tabs .nav-link,
+.accordion-button {
+  /* border-style: solid; */
+  border-width: max(var(--bs-border-width, 1px), var(--personality-pill-line));
+}
+
+/* ─── Full pill: single-line components ──────────────────────────────────── */
+
+.btn,
+.badge,
+.pagination .page-link,
+.input-group-text,
+.nav-pills .nav-link,
+.nav-tabs .nav-link,
+.form-control,
+.form-select,
+.navbar {
+  border-radius: var(--personality-pill-radius-full) !important;
+}
+
+/* ─── Block: cards, modals, alerts ───────────────────────────────────────── */
+
+.card,
+.modal-content,
+.toast,
+.alert,
+.dropdown-menu {
+  border-radius: var(--personality-pill-radius-block) !important;
+}
+
+/* card-header: sharp top-left, rounded top-right, straight bottom */
+.card-header {
+  border-radius: 0 3rem 0 0 !important;
+}
+
+/* card-footer: straight top, rounded bottom-right, sharp bottom-left */
+.card-footer {
+  border-radius: 0 0 3rem 3rem !important;
+}
+
+/* modal-header: same logic as card-header */
+.modal-header {
+  border-radius: 0 3rem 0 0 !important;
+}
+
+/* modal-footer: rounded bottom corners to match modal-content */
+.modal-footer {
+  border-radius: 0 0 3rem 3rem !important;
+}
+
+/* ─── Medium radius: list and accordion ──────────────────────────────────── */
+
+.accordion-item {
+  border-radius: var(--personality-pill-radius-medium) !important;
+}
+
+.accordion-button {
+  border-radius: 0 1.5rem 0 0 !important;
+}
+
+.list-group {
+  border-radius: var(--personality-pill-radius-medium) !important;
+}
+
+.list-group-item:first-child {
+  border-radius: 0 1.5rem 0 0 !important;
+}
+
+.list-group-item:last-child {
+  border-radius: 0 0 1.5rem 1.5rem !important;
+}
