@@ -40,9 +40,9 @@ This project is organized as a standalone module (`btdt/`) that can be easily dr
 
 ### Editor Bundled Export
 
-The visual editor also includes a browser-side helper at [`btdt/js/minify.js`](/home/enrique/trabajos/proyectos/bootstrap-dynamic-themes/btdt/js/minify.js) for generating a **single bundled and minified preset CSS** from the current configuration.
+The visual editor also includes a browser-side helper at [`btdt/js/minify.js`](btdt/js/minify.js) for generating a **single bundled and minified preset CSS** from the current configuration.
 
-It is designed to mirror the preset flow from [`btdt/scripts/minify/minify.py`](/home/enrique/trabajos/proyectos/bootstrap-dynamic-themes/btdt/scripts/minify/minify.py):
+It is designed to mirror the preset flow from [`btdt/scripts/minify/minify.py`](btdt/scripts/minify/minify.py):
 
 - Resolves local `@import` rules recursively
 - Leaves external or media-qualified `@import` rules untouched

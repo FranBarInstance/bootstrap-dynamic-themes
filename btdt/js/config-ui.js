@@ -1,23 +1,12 @@
 // btdt/js/config-ui.js
 window.BTDT_UI = {
-  background: {
-    none: 'None',
-    'primary-low': 'Primary · Low',
-    'primary-medium': 'Primary · Medium',
-    'primary-high': 'Primary · High',
-    'secondary-low': 'Secondary · Low',
-    'secondary-medium': 'Secondary · Medium',
-    'secondary-high': 'Secondary · High',
-    'gray-low': 'Gray · Low',
-    'gray-medium': 'Gray · Medium',
-    'gray-high': 'Gray · High'
-  },
-  borders: { normal: 'Normal', minimal: 'Minimal', extra: 'Thick', none: 'None' },
-  rounding: { normal: 'Normal', extra: 'Extra', none: 'Sharp' },
-  shadows: { normal: 'Normal', extra: 'Extra', none: 'None' },
-  spacing: { normal: 'Normal', large: 'Large', small: 'Compact' },
-  gradients: { on: 'Yes', off: 'No' },
-  accent: { none: 'None', left: 'Left', right: 'Right', top: 'Top', bottom: 'Bottom' },
-  accentSize: { 1: '1 px', 2: '2 px', 3: '3 px', 4: '4 px', 5: '5 px' },
-  accentColor: { primary: 'Primary', secondary: 'Secondary', gray: 'Gray' }
+  background: { 'gray-high': 'Gray · High', 'gray-low': 'Gray · Low', 'gray-medium': 'Gray · Medium', none: 'None', 'primary-high': 'Primary · High', 'primary-low': 'Primary · Low', 'primary-medium': 'Primary · Medium', 'secondary-high': 'Secondary · High', 'secondary-low': 'Secondary · Low', 'secondary-medium': 'Secondary · Medium' },
+  borders: { extra: 'Thick', minimal: 'Minimal', none: 'None', normal: 'Normal' },
+  rounding: { extra: 'Extra', none: 'Sharp', normal: 'Normal' },
+  shadows: { extra: 'Extra', none: 'None', normal: 'Normal' },
+  spacing: { large: 'Large', normal: 'Normal', small: 'Compact' },
+  gradients: { off: 'No', on: 'Yes' },
+  accent: { bottom: 'Bottom', left: 'Left', none: 'None', right: 'Right', top: 'Top' },
+  accentSize: { '1': '1 px', '2': '2 px', '3': '3 px', '4': '4 px', '5': '5 px' },
+  accentColor: { gray: 'Gray', primary: 'Primary', secondary: 'Secondary' },
 };
