@@ -70,6 +70,20 @@ The application uses a **Modular CSS Injection** strategy managed by the `ThemeM
 2.  **Base Path Awareness**: The `ThemeManager` supports a `basePath` configuration, allowing it to find its theme modules regardless of where your HTML file is located.
 3.  **Zero-CORS Metadata**: Presets include invisible CSS variables that the engine reads via computed styles, enabling full editor sync even in local environments (`file://`).
 
+### Theme Personalities
+
+BTDT can also apply **theme personalities**: final finish layers that add a distinctive character to a theme without fundamentally changing its identity.
+
+In practice, a personality is not a new palette or a new typography system. It is a surface treatment applied on top of the current theme, usually through contour, shadow, texture, glow, filter, or other finish effects.
+
+Current examples include:
+
+- `none`: no additional finish layer
+- `sketch`: irregular contours and rough-draft energy
+- `asymmetric`: a more off-balance contour treatment that gives components a distinctive silhouette
+
+The idea is simple: the theme defines what the interface is, and the personality defines how that same interface feels at the final visual layer.
+
 ## Pure CSS - No Compilation
 
 Unlike many Bootstrap customization workflows that require complex SCSS/SASS setups, BTDT is built on **Pure CSS** using modern CSS custom properties (variables).
