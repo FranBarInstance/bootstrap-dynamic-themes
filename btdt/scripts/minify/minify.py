@@ -66,6 +66,8 @@ def iter_targets(target: Path, mode: str):
 
 def write_minified(output_path: Path, content: str) -> None:
     """Write minified content next to its source file using UTF-8."""
+    if output_path.suffix == ".css" and content == "":
+        content = "/* empty */\n"
     output_path.write_text(content, encoding="utf-8")
 
 
