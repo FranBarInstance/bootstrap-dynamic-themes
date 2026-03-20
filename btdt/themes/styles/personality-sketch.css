@@ -1,0 +1,83 @@
+/* themes/styles/personality-sketch.css
+ * Sketchy finish layer.
+ * The effect comes mainly from irregular contours, not from polishing.
+ */
+
+:root {
+  --personality-sketch-line: 1.5px;
+  --personality-sketch-radius-a: 155px 25px 125px 25px / 25px 125px 25px 155px;
+  --personality-sketch-radius-b: 25px 135px 35px 145px / 145px 35px 135px 25px;
+  --personality-sketch-radius-c: 125px 35px 155px 20px / 20px 155px 35px 125px;
+  --personality-sketch-radius-d: 35px 145px 25px 135px / 135px 25px 145px 35px;
+  --personality-sketch-radius-e: 15px 135px 20px 145px / 145px 15px 135px 18px;
+}
+
+.card,
+.btn,
+.form-control,
+.form-select,
+.alert,
+.badge,
+.dropdown-menu,
+.navbar,
+.modal-content,
+.toast,
+.accordion-item,
+.list-group-item,
+.input-group-text,
+.pagination .page-link,
+.nav-pills .nav-link,
+.nav-tabs .nav-link,
+.accordion-button {
+  border-style: solid;
+  border-width: max(var(--bs-border-width, 1px), var(--personality-sketch-line));
+}
+
+.card {
+  border-radius: var(--personality-sketch-radius-e) !important;
+}
+
+.dropdown-menu,
+.modal-content,
+.toast,
+.accordion-item,
+.alert,
+.list-group-item {
+  border-radius: var(--personality-sketch-radius-e) !important;
+}
+
+.btn,
+.badge,
+.pagination .page-link,
+.input-group-text {
+  border-radius: var(--personality-sketch-radius-b) !important;
+}
+
+.btn:nth-of-type(even),
+.badge:nth-of-type(even),
+.pagination .page-link:nth-of-type(even) {
+  border-radius: var(--personality-sketch-radius-c) !important;
+}
+
+.form-control,
+.form-select,
+.accordion-button,
+.navbar,
+.nav-pills .nav-link,
+.nav-tabs .nav-link {
+  border-radius: var(--personality-sketch-radius-d) !important;
+}
+
+.nav-pills .nav-link:nth-of-type(even),
+.nav-tabs .nav-link:nth-of-type(even) {
+  border-radius: var(--personality-sketch-radius-c) !important;
+}
+
+.card-header,
+.modal-header,
+.card-footer,
+.modal-footer,
+.list-group-item:first-child,
+.list-group-item:last-child {
+  border-radius: inherit;
+}

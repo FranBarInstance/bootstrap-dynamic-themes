@@ -878,6 +878,19 @@
       </div>
     </div>
 
+    <!-- PERSONALITY -->
+    <div class="panel-section">
+      <h6>✏️ Personality</h6>
+      <div class="custom-select-container" data-select-type="personality" id="personalitySelectContainer">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('personality')">
+          <div class="custom-select-content" id="personalitySelectContent">
+            <span>Select personality...</span>
+          </div>
+        </div>
+        <div class="custom-select-dropdown" id="personalityDropdown"></div>
+      </div>
+    </div>
+
     <!-- CURRENT CONFIG -->
     <div class="panel-section">
       <h6>📋 Current Configuration</h6>
@@ -2083,7 +2096,7 @@
       document.getElementById('fontsDropdown').innerHTML = fontsHtml;
 
       // 4. Other categories (Background, Borders, Rounding, etc.)
-      ['background', 'borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent', 'accentSize', 'accentColor']
+      ['background', 'borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent', 'accentSize', 'accentColor', 'personality']
         .forEach(cat => {
           const dropdown = document.getElementById(`${cat}Dropdown`);
           if (!dropdown) return;
@@ -2211,7 +2224,7 @@
       if (navText) navText.textContent = isDark ? 'Dark mode' : 'Light mode';
 
       // Update custom select options state
-      ['preset', 'colors', 'fonts', 'background', 'borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent', 'accentSize', 'accentColor']
+      ['preset', 'colors', 'fonts', 'background', 'borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent', 'accentSize', 'accentColor', 'personality']
         .forEach(type => {
           const dropdown = document.getElementById(`${type}Dropdown`);
           const triggerContent = document.getElementById(`${type}SelectContent`);
@@ -2268,7 +2281,8 @@
               gradients: 'Gradients?',
               accent: 'Select accent...',
               accentSize: 'Select accent size...',
-              accentColor: 'Select accent color...'
+              accentColor: 'Select accent color...',
+              personality: 'Select personality...'
             };
             triggerContent.innerHTML = `<span>${defaultLabels[type]}</span>`;
           }

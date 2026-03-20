@@ -1,0 +1,5 @@
+/* themes/styles/personality-none.css
+ * Neutral personality layer.
+ * Intentionally empty: removing any previous personality is handled by
+ * unloading the previous stylesheet for this category.
+ */

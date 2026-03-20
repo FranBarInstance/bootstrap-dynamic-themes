@@ -36,7 +36,8 @@ class ThemeManager {
       gradients: Object.keys(ui.gradients || {}).length ? Object.keys(ui.gradients) : ['on', 'off'],
       accent: Object.keys(ui.accent || {}).length ? Object.keys(ui.accent) : ['none', 'left', 'right', 'top', 'bottom'],
       accentSize: Object.keys(ui.accentSize || {}).length ? Object.keys(ui.accentSize) : ['1', '2', '3', '4', '5'],
-      accentColor: Object.keys(ui.accentColor || {}).length ? Object.keys(ui.accentColor) : ['primary', 'secondary', 'gray']
+      accentColor: Object.keys(ui.accentColor || {}).length ? Object.keys(ui.accentColor) : ['primary', 'secondary', 'gray'],
+      personality: Object.keys(ui.personality || {}).length ? Object.keys(ui.personality) : ['none', 'sketch']
     };
 
     // Available modes
@@ -48,7 +49,8 @@ class ThemeManager {
     // Current active theme
     this.activeTheme = {
       colors: null, fonts: null, background: null, borders: null, rounding: null,
-      shadows: null, spacing: null, gradients: null, accent: null, accentSize: null, accentColor: null
+      shadows: null, spacing: null, gradients: null, accent: null, accentSize: null, accentColor: null,
+      personality: null
     };
 
     // Predefined presets
@@ -70,7 +72,7 @@ class ThemeManager {
   }
 
   _getCascadeOrder() {
-    return ['colors', 'fonts', 'background', 'borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent', 'accentSize', 'accentColor'];
+    return ['colors', 'fonts', 'background', 'borders', 'rounding', 'shadows', 'spacing', 'gradients', 'accent', 'accentSize', 'accentColor', 'personality'];
   }
 
   _reorderThemeLinks() {
@@ -132,7 +134,8 @@ class ThemeManager {
       gradients:`themes/styles/gradients-${value}.css`,
       accent:   `themes/styles/accent-${value}.css`,
       accentSize:`themes/styles/accent-${value}.css`,
-      accentColor:`themes/styles/accent-${value}.css`
+      accentColor:`themes/styles/accent-${value}.css`,
+      personality:`themes/styles/personality-${value}.css`
     };
 
     return pathMap[category] ? this._resolvePath(pathMap[category]) : null;
@@ -426,6 +429,7 @@ class ThemeManager {
       'accent',
       'accentSize',
       'accentColor',
+      'personality',
     ];
 
     exportOrder.forEach((cat) => {

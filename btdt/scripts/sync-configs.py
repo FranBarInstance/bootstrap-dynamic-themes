@@ -47,6 +47,7 @@ STYLE_ORDER = [
     "accent",
     "accentSize",
     "accentColor",
+    "personality",
 ]
 
 PRESET_IMPORT_ORDER = [
@@ -368,6 +369,7 @@ def detect_style_categories(warnings: WarningCollector) -> dict[str, list[str]]:
             "shadows",
             "spacing",
             "gradients",
+            "personality",
         ]:
             marker = f"{prefix}-"
             if name.startswith(marker):

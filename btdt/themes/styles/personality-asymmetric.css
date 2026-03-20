@@ -1,0 +1,104 @@
+/* themes/styles/personality-asymmetric.css
+ * Asymmetric finish layer.
+ * Controlled geometric asymmetry with one hero corner and the rest mostly straight.
+ */
+
+:root {
+  --personality-asymmetric-line: 1.25px;
+  --personality-asymmetric-radius-strong: 1rem 1rem 1rem 2.35rem;
+  --personality-asymmetric-radius-strong-alt: 2.35rem 1rem 1rem 1rem;
+  --personality-asymmetric-radius-soft: 0.65rem 0.65rem 0.65rem 1.4rem;
+  --personality-asymmetric-radius-tight: 0.35rem 0.35rem 0.35rem 0.95rem;
+}
+
+.card,
+.btn,
+.form-control,
+.form-select,
+.alert,
+.badge,
+.dropdown-menu,
+.navbar,
+.modal-content,
+.toast,
+.accordion-item,
+.list-group-item,
+.input-group-text,
+.pagination .page-link,
+.nav-pills .nav-link,
+.nav-tabs .nav-link,
+.accordion-button {
+  border-style: solid;
+  border-width: max(var(--bs-border-width, 1px), var(--personality-asymmetric-line));
+}
+
+.btn,
+.badge,
+.pagination .page-link,
+.input-group-text,
+.nav-pills .nav-link,
+.nav-tabs .nav-link {
+  border-radius: var(--personality-asymmetric-radius-strong) !important;
+}
+
+.btn:nth-of-type(even),
+.badge:nth-of-type(even),
+.pagination .page-link:nth-of-type(even),
+.nav-pills .nav-link:nth-of-type(even),
+.nav-tabs .nav-link:nth-of-type(even) {
+  border-radius: var(--personality-asymmetric-radius-strong-alt) !important;
+}
+
+.card,
+.dropdown-menu,
+.modal-content,
+.toast,
+.accordion-item,
+.alert,
+.list-group-item,
+.navbar {
+  border-radius: var(--personality-asymmetric-radius-soft) !important;
+}
+
+.form-control,
+.form-select,
+.accordion-button {
+  border-radius: var(--personality-asymmetric-radius-tight) !important;
+}
+
+.input-group-text,
+.btn-group > .btn,
+.btn-group-vertical > .btn {
+  border-radius: var(--personality-asymmetric-radius-tight) !important;
+}
+
+.btn-group > .btn:last-child,
+.btn-group-vertical > .btn:last-child,
+.input-group > :last-child:not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+  border-radius: var(--personality-asymmetric-radius-strong-alt) !important;
+}
+
+.card-header,
+.modal-header,
+.card-footer,
+.modal-footer,
+.list-group-item:first-child,
+.list-group-item:last-child {
+  border-radius: inherit;
+}
+
+.card > .card-header:first-child,
+.modal-content > .modal-header {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.card > .card-footer:last-child,
+.modal-content > .modal-footer {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
