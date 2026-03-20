@@ -150,12 +150,14 @@ def parse_color_config(path: Path) -> dict[str, dict[str, str]]:
     """Parse config-colors.js into a Python dictionary."""
     content = read_text(path)
     pattern = re.compile(
-        r"'(?P<key>[^']+)'\s*:\s*\{\s*primary:\s*'(?P<primary>[^']+)',\s*"
+        r"(?:'(?P<qkey>[^']+)'|(?P<key>[A-Za-z_][\w-]*))\s*:\s*\{\s*"
+        r"primary:\s*'(?P<primary>[^']+)',\s*"
         r"secondary:\s*'(?P<secondary>[^']+)',\s*accent:\s*'(?P<accent>[^']+)'\s*\}"
     )
     result: dict[str, dict[str, str]] = {}
     for match in pattern.finditer(content):
-        result[match.group("key")] = {
+        key = match.group("qkey") or match.group("key")
+        result[key] = {
             "primary": match.group("primary"),
             "secondary": match.group("secondary"),
             "accent": match.group("accent"),
@@ -167,13 +169,14 @@ def parse_preset_config(path: Path) -> dict[str, dict[str, str | None]]:
     """Parse config-presets.js into a Python dictionary."""
     content = read_text(path)
     pattern = re.compile(
-        r"'(?P<key>[^']+)'\s*:\s*\{\s*title:\s*'(?P<title>[^']*)',\s*"
+        r"(?:'(?P<qkey>[^']+)'|(?P<key>[A-Za-z_][\w-]*))\s*:\s*\{\s*title:\s*'(?P<title>[^']*)',\s*"
         r"color:\s*(?P<color>null|'[^']*')\s*\}"
     )
     result: dict[str, dict[str, str | None]] = {}
     for match in pattern.finditer(content):
         color = match.group("color")
-        result[match.group("key")] = {
+        key = match.group("qkey") or match.group("key")
+        result[key] = {
             "title": match.group("title"),
             "color": None if color == "null" else color.strip("'"),
         }
@@ -246,14 +249,14 @@ def serialize_js_key(key: str) -> str:
 
 
 def write_config(path: Path, global_name: str, payload: dict) -> None:
-    """Write a JS config file and its minified sibling."""
+    """Write a source JS config file.
+
+    Minified siblings are intentionally left untouched. They belong to the
+    minification pipeline, not to catalog synchronization.
+    """
     header = f"// {path.relative_to(ROOT).as_posix()}\n"
     body = serialize_js_value(payload, indent=0, top_level=True)
     path.write_text(f"{header}window.{global_name} = {body};\n", encoding="utf-8")
-
-    min_path = path.with_suffix(".min.js")
-    min_body = serialize_js_value(payload, indent=0, top_level=False)
-    min_path.write_text(f"window.{global_name}={min_body};", encoding="utf-8")
 
 
 def parse_css_vars(path: Path) -> dict[str, str]:

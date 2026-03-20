@@ -100,6 +100,8 @@ File:
 - `btdt/js/config-presets.js`
 - `btdt/js/config-ui.js`
 
+It does **not** rewrite the corresponding `.min.js` files. Those remain under the minification workflow.
+
 It also emits warnings when it finds mismatches or modules that do not follow the conventions documented in `.agent/skills/`.
 
 Examples:
@@ -121,3 +123,4 @@ python3 btdt/scripts/sync-configs.py --check
 
 - This script uses only Python's standard library
 - `--check` validates and reports warnings without writing any file
+- Only the source `config-*.js` files are regenerated
