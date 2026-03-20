@@ -28,7 +28,7 @@
 .nav-pills .nav-link,
 .nav-tabs .nav-link,
 .accordion-button {
-  border-style: solid;
+  /* border-style: solid; */
   border-width: max(var(--bs-border-width, 1px), var(--personality-asymmetric-line));
 }
 
