@@ -7,7 +7,6 @@
 .alert,
 .nav-tabs,
 .navbar {
-  --accent-width: 0px;
   border-left-width:   var(--bs-border-width, 1px);
   border-right-width:  var(--bs-border-width, 1px);
   border-top-width:    var(--bs-border-width, 1px);
