@@ -395,6 +395,15 @@
   --bs-pagination-active-border-color: var(--bs-primary);
 }
 
+/* Force contrast on active page link */
+.page-item.active > .page-link,
+.page-item.active > .page-link:hover,
+.page-item.active > .page-link:focus {
+  color: var(--bs-primary-contrast) !important;
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
 
 /* ─────────────────────────────────────────────
    8. DROPDOWN
@@ -473,6 +482,32 @@
   --bs-list-group-active-color: var(--bs-primary-contrast);
   --bs-list-group-active-bg: var(--bs-primary);
   --bs-list-group-active-border-color: var(--bs-primary);
+  --bs-list-group-action-hover-color: var(--bs-primary);
+  --bs-list-group-action-hover-bg: var(--bs-tertiary-bg);
+  --bs-list-group-action-active-color: var(--bs-primary-contrast);
+  --bs-list-group-action-active-bg: var(--bs-primary);
+}
+
+/* Force contrast on active items — any element type */
+.list-group-item.active,
+a.list-group-item.active,
+button.list-group-item.active {
+  color: var(--bs-primary-contrast) !important;
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
+/* Keep contrast on hover / focus for action items */
+.list-group-item-action.active:hover,
+.list-group-item-action.active:focus {
+  color: var(--bs-primary-contrast) !important;
+  background-color: var(--bs-primary-hover-bg, var(--bs-primary)) !important;
+  border-color: var(--bs-primary-hover-border, var(--bs-primary)) !important;
+}
+
+/* Links nested inside an active item */
+.list-group-item.active a:not(.btn):not(.dropdown-item) {
+  color: var(--bs-primary-contrast) !important;
 }
 
 
@@ -679,28 +714,32 @@
 /* ─────────────────────────────────────────────
    26. LINKS INSIDE BACKGROUNDS
    ───────────────────────────────────────────── */
-.bg-primary a:not(.btn):not(.dropdown-item):not(.dropdown-header)    { color: rgba(var(--bs-primary-contrast-rgb), 0.85) !important; }
-.bg-secondary a:not(.btn):not(.dropdown-item):not(.dropdown-header)  { color: rgba(var(--bs-secondary-contrast-rgb), 0.85) !important; }
-.bg-success a:not(.btn):not(.dropdown-item):not(.dropdown-header)    { color: rgba(var(--bs-success-contrast-rgb), 0.85) !important; }
-.bg-info a:not(.btn):not(.dropdown-item):not(.dropdown-header)       { color: rgba(var(--bs-info-contrast-rgb), 0.85) !important; }
-.bg-warning a:not(.btn):not(.dropdown-item):not(.dropdown-header)    { color: rgba(var(--bs-warning-contrast-rgb), 0.85) !important; }
-.bg-danger a:not(.btn):not(.dropdown-item):not(.dropdown-header)     { color: rgba(var(--bs-danger-contrast-rgb), 0.85) !important; }
-.bg-dark a:not(.btn):not(.dropdown-item):not(.dropdown-header)       { color: rgba(var(--bs-dark-contrast-rgb), 0.85) !important; }
-.bg-light a:not(.btn):not(.dropdown-item):not(.dropdown-header)      { color: rgba(var(--bs-light-contrast-rgb), 0.85) !important; }
-.bg-black a:not(.btn):not(.dropdown-item):not(.dropdown-header)      { color: rgba(var(--bs-black-contrast-rgb), 0.85) !important; }
-.bg-white a:not(.btn):not(.dropdown-item):not(.dropdown-header)      { color: rgba(var(--bs-white-contrast-rgb), 0.85) !important; }
+.bg-primary a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link)    { color: rgba(var(--bs-primary-contrast-rgb), 0.85) !important; }
+.bg-secondary a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link)  { color: rgba(var(--bs-secondary-contrast-rgb), 0.85) !important; }
+.bg-success a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link)    { color: rgba(var(--bs-success-contrast-rgb), 0.85) !important; }
+.bg-info a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link)       { color: rgba(var(--bs-info-contrast-rgb), 0.85) !important; }
+.bg-warning a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link)    { color: rgba(var(--bs-warning-contrast-rgb), 0.85) !important; }
+.bg-danger a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link)     { color: rgba(var(--bs-danger-contrast-rgb), 0.85) !important; }
+.bg-dark a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link)       { color: rgba(var(--bs-dark-contrast-rgb), 0.85) !important; }
+.bg-light a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link)      { color: rgba(var(--bs-light-contrast-rgb), 0.85) !important; }
+.bg-black a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link)      { color: rgba(var(--bs-black-contrast-rgb), 0.85) !important; }
+.bg-white a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link)      { color: rgba(var(--bs-white-contrast-rgb), 0.85) !important; }
 
-.bg-primary a:not(.btn):not(.dropdown-item):not(.dropdown-header):hover    { color: var(--bs-primary-contrast) !important; }
-.bg-secondary a:not(.btn):not(.dropdown-item):not(.dropdown-header):hover  { color: var(--bs-secondary-contrast) !important; }
-.bg-success a:not(.btn):not(.dropdown-item):not(.dropdown-header):hover    { color: var(--bs-success-contrast) !important; }
-.bg-info a:not(.btn):not(.dropdown-item):not(.dropdown-header):hover       { color: var(--bs-info-contrast) !important; }
-.bg-warning a:not(.btn):not(.dropdown-item):not(.dropdown-header):hover    { color: var(--bs-warning-contrast) !important; }
-.bg-danger a:not(.btn):not(.dropdown-item):not(.dropdown-header):hover     { color: var(--bs-danger-contrast) !important; }
-.bg-dark a:not(.btn):not(.dropdown-item):not(.dropdown-header):hover       { color: var(--bs-dark-contrast) !important; }
-.bg-light a:not(.btn):not(.dropdown-item):not(.dropdown-header):hover      { color: var(--bs-light-contrast) !important; }
-.bg-black a:not(.btn):not(.dropdown-item):not(.dropdown-header):hover      { color: var(--bs-black-contrast) !important; }
-.bg-white a:not(.btn):not(.dropdown-item):not(.dropdown-header):hover      { color: var(--bs-white-contrast) !important; }
+.bg-primary a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover    { color: var(--bs-primary-contrast) !important; }
+.bg-secondary a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover  { color: var(--bs-secondary-contrast) !important; }
+.bg-success a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover    { color: var(--bs-success-contrast) !important; }
+.bg-info a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover       { color: var(--bs-info-contrast) !important; }
+.bg-warning a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover    { color: var(--bs-warning-contrast) !important; }
+.bg-danger a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover     { color: var(--bs-danger-contrast) !important; }
+.bg-dark a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover       { color: var(--bs-dark-contrast) !important; }
+.bg-light a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover      { color: var(--bs-light-contrast) !important; }
+.bg-black a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover      { color: var(--bs-black-contrast) !important; }
+.bg-white a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover      { color: var(--bs-white-contrast) !important; }
 
+
+/* ─────────────────────────────────────────────
+   27. NAVBAR TOGGLER ICON
+   ───────────────────────────────────────────── */
 .navbar-toggler-icon {
   filter: var(--bs-navbar-toggler-icon-filter, none);
 }
