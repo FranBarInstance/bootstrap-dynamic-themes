@@ -202,6 +202,10 @@
   color: var(--bs-body-color);
 }
 
+[data-mode="dark"] .nav-tabs {
+  --bs-nav-tabs-link-active-color: var(--bs-body-color);
+}
+
 /* Ensure outline dark is visible on dark surfaces */
 [data-mode="dark"] .btn-outline-dark {
   --bs-btn-color: var(--bs-body-color);

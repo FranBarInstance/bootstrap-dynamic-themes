@@ -253,6 +253,11 @@
   border-color: var(--bs-dark);
 }
 
+/* ─── Nav Tabs ─── */
+.nav-tabs {
+  --bs-nav-tabs-link-active-color: var(--bs-dark);
+}
+
 /* ─── Outline buttons ─── */
 .btn-outline-primary { --bs-btn-color: var(--bs-dark); --bs-btn-border-color: var(--bs-dark); --bs-btn-hover-color: var(--bs-white); --bs-btn-hover-bg: var(--bs-dark); --bs-btn-hover-border-color: var(--bs-dark); --bs-btn-active-color: var(--bs-white); --bs-btn-active-bg: var(--bs-dark); --bs-btn-active-border-color: var(--bs-dark); --bs-btn-disabled-color: var(--bs-dark); --bs-btn-disabled-border-color: var(--bs-dark); }
 .btn-outline-secondary { --bs-btn-color: var(--bs-gray-600); --bs-btn-border-color: var(--bs-gray-600); --bs-btn-hover-bg: var(--bs-gray-600); --bs-btn-hover-border-color: var(--bs-gray-600); --bs-btn-active-bg: var(--bs-gray-600); --bs-btn-active-border-color: var(--bs-gray-600); --bs-btn-disabled-color: var(--bs-gray-600); --bs-btn-disabled-border-color: var(--bs-gray-600); }
