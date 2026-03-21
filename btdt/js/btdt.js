@@ -1,3 +1,4 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /**
  * BTDT production loader — CSP compliant.
  * No inline styles, no eval, no nonce required.

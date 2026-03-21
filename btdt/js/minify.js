@@ -1,3 +1,4 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 (function () {
   function createImportRegex() {
     return /@import\s+(?:url\(\s*(?:(\"[^\"]+\")|(\'[^\']+\')|([^)\s]+))\s*\)|(\"[^\"]+\")|(\'[^\']+\'))(\s+[^;]+)?\s*;/g;

@@ -1,3 +1,4 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 // js/theme-manager.js
 
 class ThemeManager {
