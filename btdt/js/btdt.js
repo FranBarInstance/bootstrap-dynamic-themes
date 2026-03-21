@@ -12,13 +12,15 @@
  * @usage
  *   <script src="path/to/btdt-loader.js"
  *           data-preset="preset-name"
- *           data-minified="true"
  *           data-auto-init="true"
  *           data-dark-value="dark"
  *           data-dark-cookie="dark_mode"
  *           data-cookie-expire="30"
  *           data-dark-system="true">
  *   </script>
+ *
+ *   Named preset loads use .min.css files by default.
+ *   Set data-minified="false" only when you explicitly want source preset files.
  *
  * @attributes
  *   data-base-path    {string}   Base path for assets. Automatically detected from the script URL by default.
