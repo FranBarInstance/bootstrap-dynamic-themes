@@ -46,7 +46,6 @@ For a minimal production deployment, the runtime only needs:
 
 - `btdt/README.md`
 - `btdt/css/bootstrap.min.css`
-- `btdt/js/bootstrap.bundle.min.js`
 - `btdt/js/btdt.min.js`
 - `btdt/themes/modes/dark.min.css`
 - `btdt/themes/preset/*.min.css`
