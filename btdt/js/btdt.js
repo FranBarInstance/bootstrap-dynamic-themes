@@ -24,7 +24,8 @@
  *   data-base-path    {string}   Base path for assets. Automatically detected from the script URL by default.
  *   data-preset       {string}   Name of the CSS preset to load (e.g. "default", "corporate").
  *                                Can be a short name or a complete path/URL to a .css file.
- *   data-minified     {boolean}  If "true", loads .min.css files. Default: false.
+ *   data-minified     {boolean}  If not set, named preset loads use .min.css files by default.
+ *                                Set to "false" to target non-minified preset files instead.
  *   data-auto-init    {boolean}  If "false", disables automatic initialization. Default: true.
  *   data-dark-value   {string}   A literal value indicating the initial dark mode state.
  *                                Dark values:  "1" | "true" | "yes" | "dark" | "on"
@@ -76,7 +77,7 @@
     const basePath        = (script.getAttribute('data-base-path') || detectedBase).replace(/\/?$/, '/');
     const autoInit        = script.getAttribute('data-auto-init') !== 'false';
     const initialPreset   = script.getAttribute('data-preset') || null;
-    const defaultMinified = script.getAttribute('data-minified') === 'true';
+    const defaultMinified = script.getAttribute('data-minified') !== 'false';
     const darkValue       = script.getAttribute('data-dark-value') || null;
     const darkCookieName  = script.getAttribute('data-dark-cookie') || null;
     const cookieExpire    = parseInt(script.getAttribute('data-cookie-expire') || '0', 10);
@@ -313,7 +314,8 @@
          *
          * @param  {string} name     Preset name (e.g. "corporate") or a full path/URL ending in ".css".
          * @param  {Object} options  Optional overrides.
-         * @param  {boolean} [options.minified]  Load the .min.css variant. Defaults to data-minified.
+         * @param  {boolean} [options.minified]  Load the .min.css variant. Defaults to true unless
+         *                                       data-minified="false" is set on the loader script.
          * @return {this}            Chainable.
          */
         load: function(name, options) {

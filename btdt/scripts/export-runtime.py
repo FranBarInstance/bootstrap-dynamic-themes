@@ -14,7 +14,6 @@ BTDT_DIR = ROOT / "btdt"
 
 STATIC_FILES = [
     Path("css/bootstrap.min.css"),
-    Path("css/color-theme-rules.min.css"),
     Path("js/bootstrap.bundle.min.js"),
     Path("js/btdt.min.js"),
     Path("themes/modes/dark.min.css"),
