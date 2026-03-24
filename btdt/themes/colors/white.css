@@ -264,3 +264,8 @@
 .btn-outline-secondary { --bs-btn-color: var(--bs-gray-600); --bs-btn-border-color: var(--bs-gray-600); --bs-btn-hover-bg: var(--bs-gray-600); --bs-btn-hover-border-color: var(--bs-gray-600); --bs-btn-active-bg: var(--bs-gray-600); --bs-btn-active-border-color: var(--bs-gray-600); --bs-btn-disabled-color: var(--bs-gray-600); --bs-btn-disabled-border-color: var(--bs-gray-600); }
 .btn-outline-info      { --bs-btn-color: var(--bs-gray-600); --bs-btn-border-color: var(--bs-gray-600); --bs-btn-hover-bg: var(--bs-gray-600); --bs-btn-hover-border-color: var(--bs-gray-600); --bs-btn-active-bg: var(--bs-gray-600); --bs-btn-active-border-color: var(--bs-gray-600); --bs-btn-disabled-color: var(--bs-gray-600); --bs-btn-disabled-border-color: var(--bs-gray-600); }
 .btn-outline-light     { --bs-btn-color: var(--bs-gray-400); --bs-btn-border-color: var(--bs-gray-400); --bs-btn-hover-bg: var(--bs-gray-400); --bs-btn-hover-border-color: var(--bs-gray-400); --bs-btn-active-bg: var(--bs-gray-400); --bs-btn-active-border-color: var(--bs-gray-400); --bs-btn-disabled-color: var(--bs-gray-400); --bs-btn-disabled-border-color: var(--bs-gray-400); }
+
+/* ─── Fix list hover contrast ─── */
+.list-group {
+  --bs-list-group-action-hover-color: var(--bs-body-color);
+}
