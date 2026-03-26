@@ -19,7 +19,6 @@
 .alert,
 .badge,
 .dropdown-menu,
-.navbar,
 .modal-content,
 .toast,
 .accordion-item,
@@ -42,8 +41,7 @@
 .nav-pills .nav-link,
 .nav-tabs .nav-link,
 .form-control,
-.form-select,
-.navbar {
+.form-select {
   border-radius: var(--personality-pill-radius-full) !important;
 }
 
