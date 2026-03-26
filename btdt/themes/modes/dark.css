@@ -268,3 +268,17 @@
   --bs-btn-disabled-color: var(--bs-body-color);
   --bs-btn-disabled-border-color: var(--bs-body-color);
 }
+
+/* Ensure list-group-item hover state has contrast */
+[data-mode="dark"] .list-group-item-action:hover,
+[data-mode="dark"] .list-group-item-action:focus {
+  background-color: var(--bs-secondary-bg);
+  color: var(--bs-emphasis-color);
+}
+
+[data-mode="dark"] button.list-group-item:hover,
+[data-mode="dark"] a.list-group-item:hover {
+  background-color: var(--bs-secondary-bg);
+  color: var(--bs-emphasis-color);
+}
+
