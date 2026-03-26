@@ -6,7 +6,7 @@
    ================================================================ */
 
 /* ─────────────────────────────────────────────
-   2. SOLID BUTTONS
+   SOLID BUTTONS
    ───────────────────────────────────────────── */
 .btn-primary {
   --bs-btn-color: var(--bs-primary-contrast);
@@ -146,7 +146,7 @@
 
 
 /* ─────────────────────────────────────────────
-   3. OUTLINE BUTTONS
+   OUTLINE BUTTONS
    ───────────────────────────────────────────── */
 .btn-outline-primary {
   --bs-btn-color: var(--bs-primary);
@@ -262,7 +262,7 @@
 
 
 /* ─────────────────────────────────────────────
-   4. LINK BUTTON
+   LINK BUTTON
    ───────────────────────────────────────────── */
 .btn-link {
   --bs-btn-color: var(--bs-link-color);
@@ -272,7 +272,7 @@
 
 
 /* ─────────────────────────────────────────────
-   5. LINK UTILITIES (.link-*)
+   LINK UTILITIES (.link-*)
    ───────────────────────────────────────────── */
 .link-primary:hover,
 .link-primary:focus {
@@ -332,7 +332,7 @@
 
 
 /* ─────────────────────────────────────────────
-   6. FORMS
+   FORMS
    ───────────────────────────────────────────── */
 .form-control:focus,
 .form-select:focus {
@@ -382,7 +382,7 @@
 
 
 /* ─────────────────────────────────────────────
-   7. PAGINATION
+   PAGINATION
    ───────────────────────────────────────────── */
 .pagination {
   --bs-pagination-color: var(--bs-link-color);
@@ -406,7 +406,7 @@
 
 
 /* ─────────────────────────────────────────────
-   8. DROPDOWN
+   DROPDOWN
    ───────────────────────────────────────────── */
 .dropdown-menu {
   --bs-dropdown-color: var(--bs-body-color);
@@ -425,7 +425,7 @@
 
 
 /* ─────────────────────────────────────────────
-   9. NAV PILLS
+   NAV PILLS
    ───────────────────────────────────────────── */
 .nav-pills {
   --bs-nav-pills-link-active-color: var(--bs-primary-contrast);
@@ -434,7 +434,7 @@
 
 
 /* ─────────────────────────────────────────────
-   10. NAV TABS
+   NAV TABS
    ───────────────────────────────────────────── */
 .nav-tabs {
   --bs-nav-tabs-link-active-color: var(--bs-primary);
@@ -443,7 +443,7 @@
 
 
 /* ─────────────────────────────────────────────
-   11. NAVBAR
+   NAVBAR
    ───────────────────────────────────────────── */
 .navbar-dark,
 [data-bs-theme="dark"] .navbar {
@@ -457,7 +457,7 @@
 
 
 /* ─────────────────────────────────────────────
-   12. ACCORDION
+   ACCORDION
    ───────────────────────────────────────────── */
 .accordion {
   --bs-accordion-active-color: var(--bs-primary-text-emphasis);
@@ -468,7 +468,7 @@
 
 
 /* ─────────────────────────────────────────────
-   13. PROGRESS BAR
+   PROGRESS BAR
    ───────────────────────────────────────────── */
 .progress {
   --bs-progress-bar-bg: var(--bs-primary);
@@ -476,7 +476,19 @@
 
 
 /* ─────────────────────────────────────────────
-   14. LIST GROUP
+   CARDS
+   ───────────────────────────────────────────── */
+.card > .card-body:first-child {
+  border-top-left-radius: inherit !important;
+  border-top-right-radius: inherit !important;
+}
+.card > .card-body:last-child {
+  border-bottom-left-radius: inherit !important;
+  border-bottom-right-radius: inherit !important;
+}
+
+/* ─────────────────────────────────────────────
+   LIST GROUP
    ───────────────────────────────────────────── */
 .list-group {
   --bs-list-group-active-color: var(--bs-primary-contrast);
@@ -512,7 +524,7 @@ button.list-group-item.active {
 
 
 /* ─────────────────────────────────────────────
-   15. MODAL
+   MODAL
    ───────────────────────────────────────────── */
 .modal {
   --bs-modal-header-border-color: var(--bs-border-color);
@@ -521,7 +533,7 @@ button.list-group-item.active {
 
 
 /* ─────────────────────────────────────────────
-   16. TOAST
+   TOAST
    ───────────────────────────────────────────── */
 .toast {
   --bs-toast-border-color: var(--bs-border-color-translucent);
@@ -530,7 +542,7 @@ button.list-group-item.active {
 
 
 /* ─────────────────────────────────────────────
-   17. TOOLTIP
+   TOOLTIP
    ───────────────────────────────────────────── */
 .tooltip {
   --bs-tooltip-bg: var(--bs-dark);
@@ -539,7 +551,7 @@ button.list-group-item.active {
 
 
 /* ─────────────────────────────────────────────
-   18. POPOVER
+   POPOVER
    ───────────────────────────────────────────── */
 .popover {
   --bs-popover-border-color: var(--bs-border-color-translucent);
@@ -549,7 +561,7 @@ button.list-group-item.active {
 
 
 /* ─────────────────────────────────────────────
-   19. OFFCANVAS
+   OFFCANVAS
    ───────────────────────────────────────────── */
 .offcanvas,
 .offcanvas-lg,
@@ -562,7 +574,7 @@ button.list-group-item.active {
 
 
 /* ─────────────────────────────────────────────
-   20. SPINNER
+   SPINNER
    ───────────────────────────────────────────── */
 .spinner-border.text-primary,
 .spinner-grow.text-primary {
@@ -571,7 +583,7 @@ button.list-group-item.active {
 
 
 /* ─────────────────────────────────────────────
-   21. BREADCRUMB
+   BREADCRUMB
    ───────────────────────────────────────────── */
 .breadcrumb {
   --bs-breadcrumb-divider-color: var(--bs-secondary-color);
@@ -580,7 +592,7 @@ button.list-group-item.active {
 
 
 /* ─────────────────────────────────────────────
-   22. CAROUSEL
+   CAROUSEL
    ───────────────────────────────────────────── */
 .carousel-indicators [data-bs-target] {
   background-color: var(--bs-white);
@@ -592,7 +604,7 @@ button.list-group-item.active {
 
 
 /* ─────────────────────────────────────────────
-   23. CLOSE BUTTON
+   CLOSE BUTTON
    ───────────────────────────────────────────── */
 .btn-close:focus {
   box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
@@ -600,7 +612,7 @@ button.list-group-item.active {
 
 
 /* ─────────────────────────────────────────────
-   24. PLACEHOLDERS
+   PLACEHOLDERS
    ───────────────────────────────────────────── */
 .placeholder {
   background-color: currentcolor;
@@ -608,7 +620,7 @@ button.list-group-item.active {
 
 
 /* ─────────────────────────────────────────────
-   25. BACKGROUND UTILITIES WITH CONTRAST
+   BACKGROUND UTILITIES WITH CONTRAST
    ───────────────────────────────────────────── */
 
 /* ─── Solid ─── */
@@ -712,7 +724,7 @@ button.list-group-item.active {
 }
 
 /* ─────────────────────────────────────────────
-   26. LINKS INSIDE BACKGROUNDS
+   LINKS INSIDE BACKGROUNDS
    ───────────────────────────────────────────── */
 .bg-primary a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link)    { color: rgba(var(--bs-primary-contrast-rgb), 0.85) !important; }
 .bg-secondary a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link)  { color: rgba(var(--bs-secondary-contrast-rgb), 0.85) !important; }
@@ -738,7 +750,7 @@ button.list-group-item.active {
 
 
 /* ─────────────────────────────────────────────
-   27. NAVBAR TOGGLER ICON
+   NAVBAR TOGGLER ICON
    ───────────────────────────────────────────── */
 .navbar-toggler-icon {
   filter: var(--bs-navbar-toggler-icon-filter, none);
