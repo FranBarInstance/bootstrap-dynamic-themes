@@ -15,7 +15,7 @@ window.BTDT_PRESETS = {
   'cyber-neon': { title: 'Cyber Neon', color: 'cyber-lime' },
   'deep-sea-echo': { title: 'Deep Sea Echo', color: 'deep-sea' },
   'deep-space': { title: 'Deep Space', color: 'indigo-night' },
-  default: { title: 'Default', color: 'corporate' },
+  default: { title: 'Default', color: 'clean-tech' },
   'desert-bloom': { title: 'Desert Bloom', color: 'desert' },
   'desert-mirage': { title: 'Desert Mirage', color: 'sandstone' },
   'earth-explorer': { title: 'Earth Explorer', color: 'earth' },

@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
-@import "../fonts/ubuntu.css";
-@import "../colors/corporate.css";
+@import "../fonts/open-sans.css";
+@import "../colors/clean-tech.css";
 @import "../styles/background-none.css";
 @import "../styles/borders-normal.css";
 @import "../styles/rounding-normal.css";
@@ -13,8 +13,8 @@
 
 /* Metadata for the editor */
 :root {
-  --preset-colors: "corporate";
-  --preset-fonts: "ubuntu";
+  --preset-colors: "clean-tech";
+  --preset-fonts: "open-sans";
   --preset-background: "none";
   --preset-borders: "normal";
   --preset-rounding: "normal";
@@ -25,3 +25,4 @@
   --preset-accentSize: "1";
   --preset-accentColor: "primary";
 }
+
