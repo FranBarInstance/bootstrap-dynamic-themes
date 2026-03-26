@@ -22,7 +22,7 @@ class ThemeManager {
         'white', 'gray-light', 'black', 'teal', 'rose', 'amber', 'mint', 'peach', 'sky'
       ],
       fonts: Object.keys(fonts).length ? Object.keys(fonts) : [
-        'inter', 'merriweather', 'nunito', 'jetbrains-mono'
+        'default', 'inter', 'merriweather', 'nunito', 'jetbrains-mono'
       ],
       background: Object.keys(ui.background || {}).length ? Object.keys(ui.background) : [
         'none',
@@ -30,11 +30,11 @@ class ThemeManager {
         'secondary-low', 'secondary-medium', 'secondary-high',
         'gray-low', 'gray-medium', 'gray-high'
       ],
-      borders: Object.keys(ui.borders || {}).length ? Object.keys(ui.borders) : ['normal', 'minimal', 'extra', 'none'],
-      rounding: Object.keys(ui.rounding || {}).length ? Object.keys(ui.rounding) : ['normal', 'extra', 'none'],
-      shadows: Object.keys(ui.shadows || {}).length ? Object.keys(ui.shadows) : ['normal', 'extra', 'none'],
-      spacing: Object.keys(ui.spacing || {}).length ? Object.keys(ui.spacing) : ['normal', 'large', 'small'],
-      gradients: Object.keys(ui.gradients || {}).length ? Object.keys(ui.gradients) : ['on', 'off'],
+      borders: Object.keys(ui.borders || {}).length ? Object.keys(ui.borders) : ['default', 'normal', 'minimal', 'extra', 'none'],
+      rounding: Object.keys(ui.rounding || {}).length ? Object.keys(ui.rounding) : ['default', 'normal', 'extra', 'none'],
+      shadows: Object.keys(ui.shadows || {}).length ? Object.keys(ui.shadows) : ['default', 'normal', 'extra', 'none'],
+      spacing: Object.keys(ui.spacing || {}).length ? Object.keys(ui.spacing) : ['default', 'normal', 'large', 'small'],
+      gradients: Object.keys(ui.gradients || {}).length ? Object.keys(ui.gradients) : ['default', 'on', 'off'],
       accent: Object.keys(ui.accent || {}).length ? Object.keys(ui.accent) : ['none', 'left', 'right', 'top', 'bottom'],
       accentSize: Object.keys(ui.accentSize || {}).length ? Object.keys(ui.accentSize) : ['1', '2', '3', '4', '5'],
       accentColor: Object.keys(ui.accentColor || {}).length ? Object.keys(ui.accentColor) : ['primary', 'secondary', 'gray'],

@@ -214,7 +214,9 @@
           el.classList.toggle('active', el.dataset.value === value);
         });
 
-        if (value && value !== 'default') {
+        const shouldShowSelectedValue = Boolean(value) && (value !== 'default' || type !== 'preset');
+
+        if (shouldShowSelectedValue) {
           if (type === 'preset') {
             const meta = presetMeta[value] || { title: value, color: null };
             const swatch = colorSwatches[meta.color] || { primary: '#ced4da', secondary: '#e9ecef', accent: '#adb5bd' };
