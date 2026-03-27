@@ -1,0 +1,25 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+@import "../fonts/architects-daughter.css";
+@import "../colors/white.css";
+@import "../styles/background-none.css";
+@import "../styles/borders-default.css";
+@import "../styles/rounding-default.css";
+@import "../styles/shadows-default.css";
+@import "../styles/spacing-default.css";
+@import "../styles/gradients-default.css";
+@import "../styles/accent-none.css";
+@import "../styles/personality-sketch.css";
+
+/* Metadata for the editor */
+:root {
+  --preset-colors: "white";
+  --preset-fonts: "architects-daughter";
+  --preset-background: "none";
+  --preset-borders: "default";
+  --preset-rounding: "default";
+  --preset-shadows: "default";
+  --preset-spacing: "default";
+  --preset-gradients: "default";
+  --preset-accent: "none";
+  --preset-personality: "sketch";
+}

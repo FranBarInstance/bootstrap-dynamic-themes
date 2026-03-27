@@ -44,6 +44,7 @@ window.BTDT_PRESETS = {
   'royal-heritage': { title: 'Royal Heritage', color: 'royal' },
   'sakura-garden': { title: 'Sakura Garden', color: 'sakura' },
   'serene-zen': { title: 'Serene Zen', color: 'serene' },
+  sketch: { title: 'Sketch', color: 'white' },
   'sky-forge': { title: 'Sky Forge', color: 'sky' },
   'slate-studio': { title: 'Slate Studio', color: 'slate' },
   'steel-horizon': { title: 'Steel Horizon', color: 'steel-blue' },
