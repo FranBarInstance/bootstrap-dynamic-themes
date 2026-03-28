@@ -782,6 +782,8 @@ button.list-group-item.active {
 .navbar.bg-info,
 .navbar.bg-warning,
 .navbar.bg-danger,
+.navbar.bg-body-secondary,
+.navbar.bg-body-tertiary,
 .navbar.bg-light,
 .navbar.bg-dark,
 .navbar.bg-black,
