@@ -153,14 +153,20 @@ Example with the JS loader:
 ```html
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/franbarinstance/bootstrap-dynamic-themes@1.1.0/btdt/css/bootstrap.min.css">
-    <script
-        data-base-path="https://cdn.jsdelivr.net/gh/franbarinstance/bootstrap-dynamic-themes@1.1.0/btdt/"
-        data-preset="studio"
-        src="https://cdn.jsdelivr.net/gh/franbarinstance/bootstrap-dynamic-themes@1.1.0/btdt/js/btdt.min.js"></script>
+    <script data-preset="studio" src="https://cdn.jsdelivr.net/gh/franbarinstance/bootstrap-dynamic-themes@1.1.0/btdt/js/btdt.min.js"></script>
 </head>
 ```
 
-When using CDN mode with the JS loader, set `data-base-path` to the remote `btdt/` directory so `btdt.load(...)` and dark mode asset resolution keep working correctly.
+In this CDN setup, `btdt.min.js` detects the base path automatically from its own `src`, so `btdt.load(...)` and dark mode asset resolution keep working without extra configuration.
+
+If you need to override the asset location manually, you can still set `data-base-path` explicitly:
+
+```html
+<script
+    data-base-path="https://cdn.jsdelivr.net/gh/franbarinstance/bootstrap-dynamic-themes@1.1.0/btdt/"
+    data-preset="studio"
+    src="https://cdn.jsdelivr.net/gh/franbarinstance/bootstrap-dynamic-themes@1.1.0/btdt/js/btdt.min.js"></script>
+```
 
 #### Option A: Native CSS (Maximum Performance)
 Best for static sites where speed is the only priority. Zero JS dependency for initial load.
