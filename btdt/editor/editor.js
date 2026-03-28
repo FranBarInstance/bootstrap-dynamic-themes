@@ -132,6 +132,29 @@
     document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
   }
 
+  function getStoredValue(key) {
+    try {
+      const value = localStorage.getItem(key);
+      if (value !== null) return value;
+    } catch (e) { /* silent */ }
+
+    const cookieValue = getCookie(key);
+    if (cookieValue) {
+      try {
+        localStorage.setItem(key, cookieValue);
+      } catch (e) { /* silent */ }
+    }
+    return cookieValue;
+  }
+
+  function setStoredValue(key, value) {
+    try {
+      localStorage.setItem(key, value);
+      return;
+    } catch (e) { /* silent */ }
+    setCookie(key, value);
+  }
+
   function syncNavbarHeight() {
     const navbar = document.getElementById('main-navbar');
     document.documentElement.style.setProperty('--theme-navbar-h', `${navbar?.offsetHeight || 56}px`);
@@ -325,7 +348,7 @@
     }
 
     function isPinned() {
-      return !isMobile() && getCookie(PIN_KEY) === '1';
+      return !isMobile() && getStoredValue(PIN_KEY) === '1';
     }
 
     function syncPinToggle() {
@@ -378,7 +401,7 @@
       toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
       tabsToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
       overlay.classList.toggle('show', isMobile() && expanded);
-      setCookie(STORAGE_KEY, isMobile() ? 'theme-drawer-state-hidden' : state);
+      setStoredValue(STORAGE_KEY, isMobile() ? 'theme-drawer-state-hidden' : state);
 
       if (!hasHydrated) {
         hasHydrated = true;
@@ -407,7 +430,7 @@
       syncPinToggle();
       ensureActiveTab();
       const state = useStoredState
-        ? recoverState(getCookie(STORAGE_KEY) || 'theme-drawer-state-hidden')
+        ? recoverState(getStoredValue(STORAGE_KEY) || 'theme-drawer-state-hidden')
         : getCurrentState();
       applyState(state);
     }
@@ -441,7 +464,7 @@
     if (pinToggle) {
       pinToggle.addEventListener('change', () => {
         enableLayoutTransitions();
-        setCookie(PIN_KEY, pinToggle.checked ? '1' : '0');
+        setStoredValue(PIN_KEY, pinToggle.checked ? '1' : '0');
         syncPinToggle();
         applyState(pinToggle.checked ? 'theme-drawer-state-full' : 'theme-drawer-state-icons');
       });
@@ -468,7 +491,7 @@
     window.addEventListener('load', () => scheduleRefresh(true));
     window.addEventListener('pageshow', () => scheduleRefresh(true));
     window.addEventListener('pagehide', () => {
-      if (isMobile()) setCookie(STORAGE_KEY, 'theme-drawer-state-hidden');
+      if (isMobile()) setStoredValue(STORAGE_KEY, 'theme-drawer-state-hidden');
     });
 
     if (typeof ResizeObserver !== 'undefined') {
