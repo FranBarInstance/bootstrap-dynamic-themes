@@ -4,6 +4,7 @@ This directory contains maintenance and build utilities for the `btdt/` module.
 
 Available scripts:
 
+- `download-google-fonts.py`
 - `export-runtime.py`
 - `minify/`
 - `minify-all`
@@ -45,6 +46,73 @@ python3 btdt/scripts/export-runtime.py /tmp/runtime-export --dry-run
 - The destination argument is the parent directory; the script creates `DESTINATION/btdt/`
 - If `DESTINATION/btdt/` already exists, the script does nothing unless `--force` is passed
 - With `--force`, existing files in the destination are overwritten only for the exported subset
+
+## `download-google-fonts.py`
+
+Utility to download Google Fonts for local hosting with licenses.
+
+File:
+
+- [`download-google-fonts.py`](download-google-fonts.py)
+
+### Purpose
+
+`download-google-fonts.py` downloads individual Google Fonts with all their weights and variants for local hosting. It:
+
+- Fetches font metadata from Google Fonts API
+- Downloads all variants (supports variable font ranges like 100..900)
+- Saves WOFF2 or TrueType files to `btdt/fonts/[font-slug]/`
+- Downloads the original OFL license from Google Fonts GitHub repository
+- Generates local CSS with @font-face rules
+
+This is typically used when:
+- Adding a new font to BTDT for offline/air-gapped environments
+- Preparing fonts for production with local file hosting
+- Reducing external CDN dependencies
+
+### Usage
+
+```bash
+python3 btdt/scripts/download-google-fonts.py "Font Name"
+```
+
+Example:
+
+```bash
+python3 btdt/scripts/download-google-fonts.py "Inter"
+python3 btdt/scripts/download-google-fonts.py "Roboto Slab"
+python3 btdt/scripts/download-google-fonts.py "Playfair Display"
+```
+
+### What it does
+
+1. Fetches CSS from Google Fonts API using variable weight range (100..900)
+2. Parses @font-face rules for each weight and style
+3. Downloads font files (WOFF2 or TrueType) from Google Fonts servers
+4. Saves to `btdt/fonts/[slug]/` directory
+5. Downloads OFL license from `github.com/google/fonts` repository
+6. Generates `[slug].css` with local @font-face rules pointing to downloaded files
+
+### Output structure
+
+```
+btdt/fonts/
+└── inter/
+    ├── inter-100-normal.woff2
+    ├── inter-400-normal.woff2
+    ├── inter-700-normal.woff2
+    ├── inter.css
+    └── LICENSE.txt
+```
+
+### Notes
+
+- This script uses only Python's standard library
+- The font name is case-sensitive (use the exact name from Google Fonts)
+- Supports both WOFF2 and TrueType formats (detected automatically from CSS)
+- Variable font ranges (e.g., 100..900) are expanded to individual weights
+- License is downloaded from the official Google Fonts GitHub repository
+- If license download fails, a reference file with links is created instead
 
 ## `minify/`
 
