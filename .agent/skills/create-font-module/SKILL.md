@@ -9,34 +9,67 @@ Use this skill when the user asks to:
 This skill allows the AI to add new typography options to the BTDT ecosystem using Google Fonts.
 
 ## Project Context
-The system uses modular CSS files to load fonts dynamically. Each module imports the font and maps it to Bootstrap's CSS variables.
+The system uses modular CSS files to load fonts dynamically. Fonts are hosted locally in `btdt/fonts/` and imported via CSS in `btdt/themes/fonts/`.
 
 ## Directory Structure
-Font modules are stored in: `btdt/themes/fonts/[font-name].css`
+- `btdt/fonts/[font-slug]/` - Downloaded font files (WOFF2/TTF) and CSS
+  - `[font-slug].css` - @font-face rules
+  - `LICENSE.txt` - OFL license
+  - Font files (e.g., `inter-400-normal.woff2`)
+- `btdt/themes/fonts/[font-slug].css` - Theme typography rules that import local font
 
-## Implementation Guidelines
+## Implementation Steps
 
-### 1. Font Import
-Use `@import` to load the font from Google Fonts. Always include multiple weights (e.g., 400, 700) to support headings and body text.
+### 1. Download Font Files
+Use the provided script to download the font from Google Fonts:
 
-### 2. CSS Variable Mapping
-At minimum, define:
-- `--bs-body-font-family`
-- `--bs-body-font-weight`
-- `--bs-body-line-height`
+```bash
+python3 btdt/scripts/download-google-fonts.py "Font Name"
+```
 
-Then style the main typographic selectors actually used in this codebase:
-- headings (`h1`-`h6`, `.h1`-`.h6`)
-- display headings (`.display-1`-`.display-6`)
-- `.btn`
+This downloads:
+- All font variants (supports variable ranges like 100..900)
+- Original OFL license from Google Fonts GitHub
+- Generates local CSS with @font-face rules
 
-Optional but recommended when appropriate:
-- `.navbar-brand`
-- `.form-label`
-- `code, pre, kbd`
+### 2. Create Theme CSS (if not exists)
+If `btdt/themes/fonts/[slug].css` doesn't exist, create it:
 
-### 3. Fallbacks
-Always include standard system fallbacks (e.g., `sans-serif`, `serif`, `monospace`) to ensure a graceful degradation.
+```css
+/* btdt/themes/fonts/inter.css */
+@import url('../../fonts/inter/inter.css');
+
+:root {
+  --bs-body-font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --bs-body-font-weight: 400;
+  --bs-body-line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+}
+
+.display-1, .display-2, .display-3,
+.display-4, .display-5, .display-6 {
+  font-weight: 300;
+}
+
+.btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+```
+
+### 3. Alternative: Use add-fonts.py
+For a one-step process, use:
+
+```bash
+python3 btdt/scripts/add-fonts.py "Font Name"
+```
+
+This downloads the font AND creates the theme CSS if missing.
 
 ### 4. Catalog Sync (CRITICAL)
 After creating or removing a font module, do NOT edit `btdt/js/config-fonts.js` manually.
@@ -44,9 +77,9 @@ After creating or removing a font module, do NOT edit `btdt/js/config-fonts.js` 
 Instead, run:
 - `btdt/scripts/sync-configs.py`
 
-This regenerates `btdt/js/config-fonts.js` from the filesystem and keeps the editor catalog aligned with the real modules.
+This regenerates `btdt/js/config-fonts.js` from the filesystem.
 
-If the task also requires minified assets to be updated, run after that:
+If minified assets need updating, run after that:
 - `btdt/scripts/minify-all.py`
 
 Order matters:
@@ -54,9 +87,10 @@ Order matters:
 2. `btdt/scripts/minify-all.py`
 
 ## Example Reference
+
 ```css
 /* btdt/themes/fonts/inter.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('../../fonts/inter/inter.css');
 
 :root {
   --bs-body-font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -74,4 +108,9 @@ h1, h2, h3, h4, h5, h6,
 ## Selection Criteria
 - **Professionalism**: Pick fonts that look premium and are highly legible.
 - **Variety**: Offer a mix of High-quality Sans-serifs (Modern), Serifs (Classic), and Mono fonts (Technical).
-- **Performance**: Only import necessary weights to keep load times fast.
+- **Performance**: Variable fonts with range (100..900) provide flexibility with fewer files.
+
+## Notes
+- Font name is case-sensitive (use exact name from Google Fonts)
+- Both WOFF2 and TrueType formats are supported
+- Licenses are downloaded automatically from the official Google Fonts GitHub repository

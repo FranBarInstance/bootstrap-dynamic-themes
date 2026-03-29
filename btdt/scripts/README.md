@@ -4,12 +4,14 @@ This directory contains maintenance and build utilities for the `btdt/` module.
 
 Available scripts:
 
+- `add-fonts.py`
 - `download-google-fonts.py`
 - `export-runtime.py`
 - `minify/`
 - `minify-all`
 - `minify-all.py`
 - `sync-configs.py`
+- `sync-fonts.py`
 
 ## `export-runtime.py`
 
@@ -113,6 +115,108 @@ btdt/fonts/
 - Variable font ranges (e.g., 100..900) are expanded to individual weights
 - License is downloaded from the official Google Fonts GitHub repository
 - If license download fails, a reference file with links is created instead
+
+## `sync-fonts.py`
+
+Utility to synchronize fonts from themes with local font files.
+
+File:
+
+- [`sync-fonts.py`](sync-fonts.py)
+
+### Purpose
+
+`sync-fonts.py` scans `btdt/themes/fonts/` for font CSS files, checks if corresponding font files exist in `btdt/fonts/`, and downloads missing fonts using `download-google-fonts.py`.
+
+This is typically used when:
+- Setting up a new development environment
+- Synchronizing after adding new fonts to themes
+- Updating font files after theme changes
+
+### Usage
+
+```bash
+python3 btdt/scripts/sync-fonts.py
+python3 btdt/scripts/sync-fonts.py --dry-run
+```
+
+### What it does
+
+1. Scans `btdt/themes/fonts/*.css` for font imports
+2. Supports both old format (Google Fonts CDN) and new format (local files)
+3. Checks if each font exists in `btdt/fonts/[slug]/`
+4. Downloads missing fonts automatically
+5. Reports which fonts are already present vs missing
+
+### Notes
+
+- This script uses only Python's standard library
+- Uses `--dry-run` to preview what would be downloaded without actually downloading
+- Automatically imports and uses `download-google-fonts.py` for downloads
+- Handles both WOFF2 and TrueType font formats
+
+## `add-fonts.py`
+
+Utility to add a new font to BTDT system in one step.
+
+File:
+
+- [`add-fonts.py`](add-fonts.py)
+
+### Purpose
+
+`add-fonts.py` combines downloading font files and creating theme CSS into a single command. It:
+
+- Downloads font files if not already present
+- Creates theme CSS file if not already present
+- Reports status of each step
+
+This is the recommended way to add new fonts to BTDT.
+
+### Usage
+
+```bash
+python3 btdt/scripts/add-fonts.py "Font Name"
+```
+
+Example:
+
+```bash
+python3 btdt/scripts/add-fonts.py "Inter"
+python3 btdt/scripts/add-fonts.py "Playfair Display"
+```
+
+### What it does
+
+1. Checks if font files exist in `btdt/fonts/[slug]/`
+2. If missing, downloads using `download-google-fonts.py`
+3. Checks if theme CSS exists in `btdt/themes/fonts/[slug].css`
+4. If missing, creates CSS that imports local font with Bootstrap variable mappings
+5. Shows next steps (sync-configs.py and minify-all.py)
+
+### Output
+
+```
+Adding font: Inter (inter)
+
+✓ Font files already exist: btdt/fonts/inter
+
+✓ Theme CSS already exists: btdt/themes/fonts/inter.css
+
+==================================================
+Font added successfully!
+
+Next steps:
+1. Run: python3 btdt/scripts/sync-configs.py
+2. Run: python3 btdt/scripts/minify-all.py
+```
+
+### Notes
+
+- This script uses only Python's standard library
+- Safe to run multiple times - won't overwrite existing files
+- Font name is case-sensitive (use exact name from Google Fonts)
+- Automatically imports and uses `download-google-fonts.py`
 
 ## `minify/`
 
