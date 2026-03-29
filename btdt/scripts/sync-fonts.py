@@ -17,39 +17,50 @@ def slugify(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
 
 
-def extract_font_name_from_css(css_path: Path) -> str | None:
-    """Extract font name from CSS @import URL.
+def extract_fonts_from_css(css_path: Path) -> set[str]:
+    """Extract all font names used in a CSS file.
 
-    Supports both formats:
-    - Old: @import url('https://fonts.googleapis.com/css2?family=Inter...')
-    - New: @import url('../../fonts/inter/inter.css')
+    Includes fonts from:
+    - @import url (local or Google Fonts)
+    - font-family declarations in CSS rules
+
+    Returns set of font names (e.g., 'PT Sans', 'Inter')
     """
     content = css_path.read_text(encoding="utf-8")
+    fonts = set()
 
-    # Try new format first: local font CSS
-    # Match @import url('../../fonts/slug/slug.css') or similar
+    # Try local format first: @import url('../../fonts/slug/slug.css')
     local_match = re.search(
         r"@import\s+url\(['\"]?[^'\"]*/fonts/([^/'\"]+)/[^'\"]+\.css['\"]?\)",
         content
     )
     if local_match:
         slug = local_match.group(1)
-        # Convert slug back to name (replace hyphens with spaces, title case)
-        return slug.replace("-", " ").title()
+        fonts.add(slug.replace("-", " ").title())
 
-    # Try old format: Google Fonts URL
-    # Match @import url with Google Fonts - capture only the family name
-    # Family name is between family= and : or & or end of value
+    # Try old Google Fonts format
     google_match = re.search(
         r"@import\s+url\(['\"]?https://fonts\.googleapis\.com/css2\?family=([^:&'\"]+)",
         content
     )
     if google_match:
-        # URL decode
-        name = google_match.group(1).replace("+", " ")
-        return name.strip()
+        name = google_match.group(1).replace("+", " ").strip()
+        fonts.add(name)
 
-    return None
+    # Extract all font-family declarations
+    # Match font-family: 'Font Name', ... or font-family: "Font Name", ...
+    for match in re.finditer(r"font-family:\s*['\"]?([^;'\"]+)['\"]?", content):
+        font_list = match.group(1)
+        # Split by comma and extract first font (the primary one)
+        primary_font = font_list.split(',')[0].strip().strip("'\"")
+        # Skip generic font families
+        if primary_font.lower() not in {'sans-serif', 'serif', 'monospace', 'cursive', 'fantasy', 'system-ui', 'inherit', 'initial', 'unset'}:
+            # Skip system fonts
+            system_fonts = {'-apple-system', 'blinkmacsystemfont', 'segoe ui', 'roboto', 'helvetica neue', 'arial', 'noto sans', 'apple color emoji', 'segoe ui emoji', 'segoe ui symbol', 'noto color emoji'}
+            if primary_font.lower() not in system_fonts:
+                fonts.add(primary_font)
+
+    return fonts
 
 
 def get_required_fonts(themes_fonts_dir: Path) -> dict[str, str]:
@@ -67,8 +78,8 @@ def get_required_fonts(themes_fonts_dir: Path) -> dict[str, str]:
         if css_file.name == "default.css":
             continue
 
-        font_name = extract_font_name_from_css(css_file)
-        if font_name:
+        font_names = extract_fonts_from_css(css_file)
+        for font_name in font_names:
             slug = slugify(font_name)
             fonts[slug] = font_name
 
