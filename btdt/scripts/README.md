@@ -31,15 +31,23 @@ File:
 - `btdt/js/btdt.min.js`
 - `btdt/themes/modes/dark.min.css`
 - `btdt/themes/preset/*.min.css`
+- `btdt/fonts/*/*` (only fonts used by the selected presets)
 
 It preserves the relative directory structure inside the exported `btdt/` folder.
 
 Examples:
 
 ```bash
+# Export all presets and all fonts (full export)
 python3 btdt/scripts/export-runtime.py /tmp/runtime-export
-python3 btdt/scripts/export-runtime.py /tmp/runtime-export --force
+
+# Export only specific presets with their required fonts only
+python3 btdt/scripts/export-runtime.py /tmp/runtime-export --presets nordic-elegance,amber-roar
+python3 btdt/scripts/export-runtime.py /tmp/runtime-export --presets amber-roar --force
+
+# Dry run to preview what would be copied
 python3 btdt/scripts/export-runtime.py /tmp/runtime-export --dry-run
+python3 btdt/scripts/export-runtime.py /tmp/runtime-export --presets amber-roar --dry-run
 ```
 
 ### Notes
@@ -48,6 +56,7 @@ python3 btdt/scripts/export-runtime.py /tmp/runtime-export --dry-run
 - The destination argument is the parent directory; the script creates `DESTINATION/btdt/`
 - If `DESTINATION/btdt/` already exists, the script does nothing unless `--force` is passed
 - With `--force`, existing files in the destination are overwritten only for the exported subset
+- With `--presets`, only the specified presets are exported, and only the fonts they use are included
 
 ## `download_google_fonts.py`
 

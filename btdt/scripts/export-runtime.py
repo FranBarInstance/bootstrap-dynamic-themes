@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -36,6 +37,11 @@ def parse_args() -> argparse.Namespace:
         help="Directory where the script will create or update the nested btdt/ folder.",
     )
     parser.add_argument(
+        "--presets",
+        metavar="PRESET1,PRESET2,...",
+        help="Comma-separated list of preset names to export (e.g., 'nordic-elegance,default'). If omitted, all presets are exported.",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Print the files that would be copied without writing anything.",
@@ -48,15 +54,97 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def collect_source_files() -> list[Path]:
-    """Return the full list of source files that must be exported."""
-    files = [BTDT_DIR / relative_path for relative_path in STATIC_FILES]
-    files.extend(sorted(BTDT_DIR.glob(PRESET_GLOB)))
-    files.extend(sorted(BTDT_DIR.glob(FONTS_GLOB)))
-    return files
+def extract_fonts_from_preset(preset_path: Path) -> set[str]:
+    """Extract font names used in a preset CSS file.
+
+    Analyzes both @import statements and @font-face rules to detect fonts.
+    """
+    fonts: set[str] = set()
+    content = preset_path.read_text(encoding="utf-8")
+
+    # Look for @import "../fonts/fontname.css" patterns
+    import_pattern = re.compile(
+        r'@import\s+["\']\.\.?/fonts/([^"\']+)\.css["\']',
+        re.IGNORECASE
+    )
+    for match in import_pattern.finditer(content):
+        fonts.add(match.group(1))
+
+    # Look for font files referenced in @font-face src:url() paths
+    # Matches patterns like: url(../fonts/../../fonts/nunito/nunito-400.ttf)
+    # or url(nunito-400.ttf) - extracting the folder name if present
+    font_path_pattern = re.compile(
+        r'src:\s*url\([^)]*fonts/([^/)]+)/[^)]+\.\w+\)',
+        re.IGNORECASE
+    )
+    for match in font_path_pattern.finditer(content):
+        fonts.add(match.group(1))
+
+    # Also detect fonts referenced directly in font-family declarations
+    # like: --bs-body-font-family:'Work Sans',... or font-family:'Montserrat',...
+    font_family_pattern = re.compile(
+        r"(?:font-family|var\(--bs-body-font-family\))\s*:\s*['\"]?([^,'\"]{2,})['\"]?",
+        re.IGNORECASE
+    )
+    for match in font_family_pattern.finditer(content):
+        family = match.group(1).lower().replace(' ', '-')
+        # Only add if there's a matching font directory
+        font_dir = BTDT_DIR / "fonts" / family
+        if font_dir.exists():
+            fonts.add(family)
+
+    return fonts
 
 
-def validate_source_files(files: list[Path]) -> list[str]:
+def collect_source_files(preset_names: list[str] | None = None) -> tuple[list[Path], set[str]]:
+    """Return the full list of source files that must be exported.
+
+    Args:
+        preset_names: List of preset names to include. If None, all presets are included.
+
+    Returns:
+        Tuple of (files_to_copy, set_of_used_font_names)
+    """
+    files: list[Path] = [BTDT_DIR / relative_path for relative_path in STATIC_FILES]
+    used_fonts: set[str] = set()
+
+    # Collect presets
+    if preset_names:
+        # Specific presets requested
+        for name in preset_names:
+            # Try minified first, fall back to non-minified
+            min_path = BTDT_DIR / "themes" / "preset" / f"{name}.min.css"
+            full_path = BTDT_DIR / "themes" / "preset" / f"{name}.css"
+
+            if min_path.exists():
+                files.append(min_path)
+                used_fonts.update(extract_fonts_from_preset(min_path))
+            elif full_path.exists():
+                files.append(full_path)
+                used_fonts.update(extract_fonts_from_preset(full_path))
+            else:
+                print(f"Warning: Preset '{name}' not found", file=sys.stderr)
+    else:
+        # All presets
+        preset_files = sorted(BTDT_DIR.glob(PRESET_GLOB))
+        files.extend(preset_files)
+        for preset_path in preset_files:
+            used_fonts.update(extract_fonts_from_preset(preset_path))
+
+    # Collect only used fonts (or all if no specific presets)
+    if preset_names and used_fonts:
+        for font_name in sorted(used_fonts):
+            font_dir = BTDT_DIR / "fonts" / font_name
+            if font_dir.exists():
+                files.extend(sorted(font_dir.glob("*")))
+    else:
+        # All fonts
+        files.extend(sorted(BTDT_DIR.glob(FONTS_GLOB)))
+
+    return files, used_fonts
+
+
+def validate_source_files(files: list[Path], preset_names: list[str] | None = None) -> list[str]:
     """Return validation errors for missing or unexpected files."""
     errors: list[str] = []
 
@@ -64,8 +152,20 @@ def validate_source_files(files: list[Path]) -> list[str]:
         if not path.is_file():
             errors.append(f"Missing source file: {path}")
 
-    if not any(path.match("*/themes/preset/*.min.css") for path in files):
-        errors.append("No preset .min.css files were found in btdt/themes/preset/.")
+    if preset_names:
+        # Check that requested presets were found
+        found_presets = set()
+        for p in files:
+            if "themes/preset" in str(p):
+                name = p.stem.replace(".min", "").replace(".css", "")
+                found_presets.add(name)
+        for name in preset_names:
+            if name not in found_presets:
+                errors.append(f"Requested preset '{name}' was not found in btdt/themes/preset/")
+    else:
+        # All presets mode - ensure at least one exists
+        if not any(path.match("*/themes/preset/*.min.css") for path in files):
+            errors.append("No preset .min.css files were found in btdt/themes/preset/.")
 
     return errors
 
@@ -100,6 +200,11 @@ def main() -> int:
     destination_root = Path(args.destination).expanduser().resolve()
     export_root = destination_root / "btdt"
 
+    # Parse preset names if provided
+    preset_names: list[str] | None = None
+    if args.presets:
+        preset_names = [p.strip() for p in args.presets.split(",") if p.strip()]
+
     if export_root.exists() and not args.force:
         print(
             f"Destination already exists: {export_root}. "
@@ -107,8 +212,8 @@ def main() -> int:
         )
         return 0
 
-    files = collect_source_files()
-    errors = validate_source_files(files)
+    files, used_fonts = collect_source_files(preset_names)
+    errors = validate_source_files(files, preset_names)
     if errors:
         for error in errors:
             print(error, file=sys.stderr)
@@ -117,6 +222,10 @@ def main() -> int:
     copied_count = copy_files(destination_root, files, args.dry_run)
     action = "Would copy" if args.dry_run else "Copied"
     print(f"{action} {copied_count} files into {destination_root / 'btdt'}")
+
+    if preset_names and used_fonts:
+        print(f"\nFonts detected and included: {', '.join(sorted(used_fonts))}")
+
     return 0
 
 
