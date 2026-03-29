@@ -25,7 +25,48 @@
     return await response.text();
   }
 
-  async function resolveCSSImports(css, baseUrl, stack = []) {
+  function rewriteFontURLs(css, currentUrl, rootUrl) {
+    const currentBase = new URL('./', currentUrl).href;
+    const rootBase = new URL('./', rootUrl).href;
+    if (currentBase === rootBase) return css;
+
+    // Only rewrite if it's a font-face or contains font indicators
+    if (!css.includes('@font-face') || !css.includes('src:')) return css;
+
+    return css.replace(/url\(\s*(['"]?)([^)'\"]+)\1\s*\)/gi, (match, quote, url) => {
+      if (url.startsWith('data:') || url.startsWith('/') || /^(?:https?:)?\/\//i.test(url)) {
+        return match;
+      }
+
+      // Match .ttf and .woff2 specifically to align with Python script behavior
+      if (!url.toLowerCase().endsWith('.woff2') && !url.toLowerCase().endsWith('.ttf')) {
+        return match;
+      }
+
+      try {
+        const targetUrl = new URL(url, currentBase).href;
+        const root = new URL(rootBase);
+        const target = new URL(targetUrl);
+
+        if (root.origin !== target.origin) return match;
+
+        const rootParts = root.pathname.split('/').filter(Boolean);
+        const targetParts = target.pathname.split('/').filter(Boolean);
+
+        while (rootParts.length > 0 && targetParts.length > 0 && rootParts[0] === targetParts[0]) {
+          rootParts.shift();
+          targetParts.shift();
+        }
+
+        const relPath = '../'.repeat(rootParts.length) + targetParts.join('/');
+        return `url(${quote}${relPath}${quote})`;
+      } catch (e) {
+        return match;
+      }
+    });
+  }
+
+  async function resolveCSSImports(css, baseUrl, rootUrl, stack = []) {
     let cursor = 0;
     let output = '';
     let match;
@@ -54,7 +95,8 @@
       }
 
       const importedCSS = await fetchText(resolvedUrl);
-      output += await resolveCSSImports(importedCSS, resolvedUrl, [...stack, resolvedUrl]);
+      const processedCSS = await resolveCSSImports(importedCSS, resolvedUrl, rootUrl, [...stack, resolvedUrl]);
+      output += rewriteFontURLs(processedCSS, resolvedUrl, rootUrl);
     }
 
     output += css.slice(cursor);
@@ -85,7 +127,7 @@
 
   async function bundleAndMinifyPresetCSS(css, options = {}) {
     const presetUrl = options.presetUrl || new URL('../themes/preset/custom.css', window.location.href).href;
-    const bundled = await resolveCSSImports(css, presetUrl);
+    const bundled = await resolveCSSImports(css, presetUrl, presetUrl);
     const hoisted = hoistImportsToTop(bundled);
     const minified = minifyCSS(hoisted);
     return minified || '/* empty */';
