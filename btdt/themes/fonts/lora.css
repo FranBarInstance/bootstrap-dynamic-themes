@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/lora.css */
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+@import url('../../fonts/lora/lora.css');
 
 :root {
   --bs-body-font-family: 'IBM Plex Sans', 'Segoe UI', sans-serif;

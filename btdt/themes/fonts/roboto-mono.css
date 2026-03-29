@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/roboto-mono.css */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap');
+@import url('../../fonts/roboto-mono/roboto-mono.css');
 
 :root {
   --bs-body-font-family: 'Roboto Mono', -apple-system, BlinkMacSystemFont, sans-serif;

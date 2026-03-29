@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/fira-code.css */
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&display=swap');
+@import url('../../fonts/fira-code/fira-code.css');
 
 :root {
   --bs-body-font-family: 'Fira Code', -apple-system, BlinkMacSystemFont, sans-serif;

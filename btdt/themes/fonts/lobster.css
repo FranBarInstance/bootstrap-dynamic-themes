@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/lobster.css */
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('../../fonts/lobster/lobster.css');
 
 :root {
   --bs-body-font-family: 'Lobster', -apple-system, BlinkMacSystemFont, sans-serif;

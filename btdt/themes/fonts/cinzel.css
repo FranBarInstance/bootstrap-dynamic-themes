@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/cinzel.css */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+@import url('../../fonts/cinzel/cinzel.css');
 
 :root {
   --bs-body-font-family: 'Cinzel', -apple-system, BlinkMacSystemFont, sans-serif;

@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/pt-serif.css */
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@300;400;700&family=PT+Serif:wght@400;700&display=swap');
+@import url('../../fonts/pt-sans/pt-sans.css');
 
 :root {
   --bs-body-font-family: 'PT Sans', 'Segoe UI', sans-serif;

@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/pacifico.css */
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('../../fonts/pacifico/pacifico.css');
 
 :root {
   --bs-body-font-family: 'Pacifico', -apple-system, BlinkMacSystemFont, sans-serif;

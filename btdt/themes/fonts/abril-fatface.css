@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/abril-fatface.css */
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('../../fonts/abril-fatface/abril-fatface.css');
 
 :root {
   --bs-body-font-family: 'Abril Fatface', -apple-system, BlinkMacSystemFont, sans-serif;

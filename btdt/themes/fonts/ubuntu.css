@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/ubuntu.css */
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import url('../../fonts/ubuntu/ubuntu.css');
 
 :root {
   --bs-body-font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, sans-serif;

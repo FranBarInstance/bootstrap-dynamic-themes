@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/josefin-sans.css */
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap');
+@import url('../../fonts/josefin-sans/josefin-sans.css');
 
 :root {
   --bs-body-font-family: 'Josefin Sans', -apple-system, BlinkMacSystemFont, sans-serif;

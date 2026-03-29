@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/work-sans.css */
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap');
+@import url('../../fonts/work-sans/work-sans.css');
 
 :root {
   --bs-body-font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;

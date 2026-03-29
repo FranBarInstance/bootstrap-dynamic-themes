@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/righteous.css */
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('../../fonts/righteous/righteous.css');
 
 :root {
   --bs-body-font-family: 'Righteous', -apple-system, BlinkMacSystemFont, sans-serif;

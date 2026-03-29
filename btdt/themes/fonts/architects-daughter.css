@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/architects-daughter.css */
-@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+@import url('../../fonts/architects-daughter/architects-daughter.css');
 
 :root {
   --bs-body-font-family: 'Architects Daughter', -apple-system, BlinkMacSystemFont, sans-serif;

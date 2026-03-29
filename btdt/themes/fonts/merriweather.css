@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/merriweather.css */
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+@import url('../../fonts/merriweather/merriweather.css');
 
 :root {
   --bs-body-font-family: 'Source Sans 3', 'Segoe UI', sans-serif;

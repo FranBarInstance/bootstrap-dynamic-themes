@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/fredoka-one.css */
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('../../fonts/fredoka-one/fredoka-one.css');
 
 :root {
   --bs-body-font-family: 'Fredoka One', -apple-system, BlinkMacSystemFont, sans-serif;

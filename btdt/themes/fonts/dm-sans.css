@@ -1,6 +1,6 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/dm-sans.css */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap');
+@import url('../../fonts/dm-sans/dm-sans.css');
 
 :root {
   --bs-body-font-family: 'DM Sans', 'Segoe UI', sans-serif;
