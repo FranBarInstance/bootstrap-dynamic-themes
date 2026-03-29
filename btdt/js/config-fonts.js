@@ -11,7 +11,7 @@ window.BTDT_FONTS = {
   comfortaa: 'Comfortaa',
   'cormorant-garamond': 'Cormorant Garamond',
   'crimson-text': 'Crimson Text',
-  default: 'Default',
+  default: 'Default (System)',
   'dm-sans': 'DM Sans',
   'eb-garamond': 'EB Garamond',
   'fira-code': 'Fira Code',
