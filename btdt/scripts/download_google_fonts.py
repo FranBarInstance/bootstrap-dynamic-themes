@@ -135,15 +135,17 @@ def download_font(font_name: str, base_dir: Path) -> Path:
     ]
 
     css = None
+    successful_url = None
     for url in urls_to_try:
         print(f"Trying: {url}")
         try:
             css = fetch_css(url)
             print(f"Success with: {url}")
+            successful_url = url
             break
         except urllib.error.HTTPError as e:
             if e.code == 400:
-                print(f"  Bad request (font may not support variable weights), trying fallback...")
+                print("  Bad request (font may not support variable weights), trying fallback...")
                 continue
             elif e.code == 404:
                 print(f"Error: Font '{font_name}' not found on Google Fonts")
@@ -155,7 +157,7 @@ def download_font(font_name: str, base_dir: Path) -> Path:
             print(f"Error fetching font: {e}")
             continue
 
-    if css is None:
+    if css is None or successful_url is None:
         print(f"ERROR: Could not fetch font '{font_name}' with any weight configuration")
         sys.exit(1)
 
@@ -173,7 +175,7 @@ def download_font(font_name: str, base_dir: Path) -> Path:
         if url.startswith("//"):
             url = "https:" + url
         elif url.startswith("/"):
-            url = urljoin(google_url, url)
+            url = urljoin(successful_url, url)
 
         fmt = face.get("format", "woff2")
         ext = ".woff2" if fmt == "woff2" else ".ttf"
@@ -215,7 +217,7 @@ def download_font(font_name: str, base_dir: Path) -> Path:
     print(f"\nGenerated CSS: {css_path}")
 
     # Download license
-    download_license(font_name, license_path)
+    download_license(slug, license_path)
     print(f"License: {license_path}")
 
     return fonts_dir
