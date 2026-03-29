@@ -144,12 +144,15 @@ def resolve_css_imports(path: Path, stack=None) -> str:
 
         relative = relative.strip().strip('"').strip("'")
 
-        # BTDT preset bundling is local-only: keep external imports
-        # and media-specific imports untouched.
+        # BTDT preset bundling is local-only: keep external imports,
+        # media-specific imports, and font imports untouched.
         tail = (match.group("tail") or "").strip()
         if re.match(r"^(url\()?https?://", relative, re.IGNORECASE):
             return match.group(0)
         if tail:
+            return match.group(0)
+        # Keep font imports untouched - they have relative paths to font files
+        if "fonts/" in relative:
             return match.group(0)
 
         imported_path = (path.parent / relative).resolve()
