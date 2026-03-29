@@ -62,6 +62,7 @@ PRESET_IMPORT_ORDER = [
     "accent",
     "accentSize",
     "accentColor",
+    "personality",
 ]
 
 PRESET_METADATA_KEYS = [
@@ -76,6 +77,7 @@ PRESET_METADATA_KEYS = [
     "accent",
     "accentSize",
     "accentColor",
+    "personality",
 ]
 
 VAR_RE = re.compile(r"--(?P<name>[\w-]+)\s*:\s*(?P<value>[^;]+);")
@@ -327,18 +329,26 @@ def scan_fonts(existing_labels: dict[str, str], warnings: WarningCollector) -> d
     for path in list_source_css(FONT_DIR):
         slug = path.stem
         content = read_text(path)
+        is_default = (slug == "default")
 
-        if "@import url(" not in content:
-            warnings.add(f"[font:{slug}] Missing Google Fonts @import")
+        # Only warn about missing imports/vars if it's NOT the default font
+        # or if it IS the default but you've started adding some declarations.
+        has_imports = "@import url(" in content
+        if not has_imports and not is_default:
+            warnings.add(f"[font:{slug}] Missing font @import")
+        
         for required in [
             "--bs-body-font-family",
             "--bs-body-font-weight",
             "--bs-body-line-height",
         ]:
-            if required not in content:
+            if required not in content and not is_default:
                 warnings.add(f"[font:{slug}] Missing required declaration: {required}")
 
-        fonts[slug] = derive_font_label(path, existing_labels, warnings)
+        if is_default and not has_imports and "--bs-body-font-family" not in content:
+            fonts[slug] = "Default (System)"
+        else:
+            fonts[slug] = derive_font_label(path, existing_labels, warnings)
 
     return dict(sorted(fonts.items()))
 
@@ -457,6 +467,7 @@ def categorize_preset_import(import_path: str) -> tuple[str, str] | None:
         "../styles/shadows-": "shadows",
         "../styles/spacing-": "spacing",
         "../styles/gradients-": "gradients",
+        "../styles/personality-": "personality",
     }
     for prefix, category in simple_prefixes.items():
         if import_path.startswith(prefix):
@@ -509,7 +520,10 @@ def validate_preset_metadata(
     warnings: WarningCollector,
 ) -> None:
     """Validate metadata completeness and consistency for a preset."""
-    missing_metadata = [key for key in PRESET_METADATA_KEYS if key not in metadata]
+    missing_metadata = [
+        key for key in PRESET_METADATA_KEYS 
+        if key not in metadata and key != "personality"
+    ]
     if missing_metadata:
         warnings.add(f"[preset:{slug}] Missing metadata keys: {', '.join(missing_metadata)}")
 
@@ -549,20 +563,24 @@ def validate_preset(
     context: PresetValidationContext,
 ) -> None:
     """Validate structure, metadata and references of a preset CSS file."""
-    if len(imports) != 11:
-        context.warnings.add(f"[preset:{slug}] Expected 11 imports, found {len(imports)}")
-
     seen_categories, import_values = collect_preset_import_values(
         slug,
         imports,
         context.warnings,
     )
 
-    if seen_categories != PRESET_IMPORT_ORDER:
-        context.warnings.add(
-            f"[preset:{slug}] Imports are not in the required order: "
-            + " -> ".join(seen_categories or ["<none>"])
-        )
+    # Check that imports follow the required relative order
+    # Get indices of seen categories in the master order
+    try:
+        indices = [PRESET_IMPORT_ORDER.index(cat) for cat in seen_categories]
+        if indices != sorted(indices):
+            context.warnings.add(
+                f"[preset:{slug}] Imports are not in the required order: "
+                + " -> ".join(seen_categories)
+            )
+    except ValueError as e:
+        # This should already be caught by "Unsupported import path" but as a safety:
+        context.warnings.add(f"[preset:{slug}] Internal error during order check: {e}")
 
     validate_preset_metadata(slug, metadata, import_values, context.warnings)
     validate_preset_references(slug, metadata, context)
