@@ -19,6 +19,7 @@ STATIC_FILES = [
     Path("themes/modes/dark.min.css"),
 ]
 PRESET_GLOB = "themes/preset/*.min.css"
+FONTS_GLOB = "fonts/*/*"
 ROOT_README = ROOT / "README.md"
 
 
@@ -51,6 +52,7 @@ def collect_source_files() -> list[Path]:
     """Return the full list of source files that must be exported."""
     files = [BTDT_DIR / relative_path for relative_path in STATIC_FILES]
     files.extend(sorted(BTDT_DIR.glob(PRESET_GLOB)))
+    files.extend(sorted(BTDT_DIR.glob(FONTS_GLOB)))
     return files
 
 
