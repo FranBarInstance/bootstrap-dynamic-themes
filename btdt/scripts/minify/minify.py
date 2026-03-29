@@ -144,20 +144,23 @@ def resolve_css_imports(path: Path, stack=None) -> str:
 
         relative = relative.strip().strip('"').strip("'")
 
-        # BTDT preset bundling is local-only: keep external imports,
-        # media-specific imports, and font imports untouched.
+        # BTDT preset bundling is local-only: keep external imports
+        # and media-specific imports untouched.
         tail = (match.group("tail") or "").strip()
         if re.match(r"^(url\()?https?://", relative, re.IGNORECASE):
             return match.group(0)
         if tail:
             return match.group(0)
-        # Keep font imports untouched - they have relative paths to font files
-        if "fonts/" in relative:
-            return match.group(0)
 
         imported_path = (path.parent / relative).resolve()
         if not imported_path.exists():
             raise FileNotFoundError(f"No existe el import '{relative}' en {path}")
+
+        # If this is a font CSS, don't inline it - keep as external import
+        # Font CSS files have relative paths to font files that would break
+        if "fonts/" in str(imported_path):
+            return match.group(0)
+
         return resolve_css_imports(imported_path, current_stack)
 
     return IMPORT_RE.sub(replace_import, source)
