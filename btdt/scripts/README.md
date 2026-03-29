@@ -5,7 +5,7 @@ This directory contains maintenance and build utilities for the `btdt/` module.
 Available scripts:
 
 - `add-fonts.py`
-- `download-google-fonts.py`
+- `download_google_fonts.py`
 - `export-runtime.py`
 - `minify/`
 - `minify-all`
@@ -49,17 +49,17 @@ python3 btdt/scripts/export-runtime.py /tmp/runtime-export --dry-run
 - If `DESTINATION/btdt/` already exists, the script does nothing unless `--force` is passed
 - With `--force`, existing files in the destination are overwritten only for the exported subset
 
-## `download-google-fonts.py`
+## `download_google_fonts.py`
 
 Utility to download Google Fonts for local hosting with licenses.
 
 File:
 
-- [`download-google-fonts.py`](download-google-fonts.py)
+- [`download_google_fonts.py`](download_google_fonts.py)
 
 ### Purpose
 
-`download-google-fonts.py` downloads individual Google Fonts with all their weights and variants for local hosting. It:
+`download_google_fonts.py` downloads individual Google Fonts with all their weights and variants for local hosting. It:
 
 - Fetches font metadata from Google Fonts API
 - Downloads all variants (supports variable font ranges like 100..900)
@@ -75,15 +75,15 @@ This is typically used when:
 ### Usage
 
 ```bash
-python3 btdt/scripts/download-google-fonts.py "Font Name"
+python3 btdt/scripts/download_google_fonts.py "Font Name"
 ```
 
 Example:
 
 ```bash
-python3 btdt/scripts/download-google-fonts.py "Inter"
-python3 btdt/scripts/download-google-fonts.py "Roboto Slab"
-python3 btdt/scripts/download-google-fonts.py "Playfair Display"
+python3 btdt/scripts/download_google_fonts.py "Inter"
+python3 btdt/scripts/download_google_fonts.py "Roboto Slab"
+python3 btdt/scripts/download_google_fonts.py "Playfair Display"
 ```
 
 ### What it does
@@ -126,7 +126,7 @@ File:
 
 ### Purpose
 
-`sync-fonts.py` scans `btdt/themes/fonts/` for font CSS files, checks if corresponding font files exist in `btdt/fonts/`, and downloads missing fonts using `download-google-fonts.py`.
+`sync-fonts.py` scans `btdt/themes/fonts/` for font CSS files, checks if corresponding font files exist in `btdt/fonts/`, and downloads missing fonts using `download_google_fonts.py`.
 
 This is typically used when:
 - Setting up a new development environment
@@ -152,7 +152,7 @@ python3 btdt/scripts/sync-fonts.py --dry-run
 
 - This script uses only Python's standard library
 - Uses `--dry-run` to preview what would be downloaded without actually downloading
-- Automatically imports and uses `download-google-fonts.py` for downloads
+- Automatically imports and uses `download_google_fonts.py` for downloads
 - Handles both WOFF2 and TrueType font formats
 
 ## `add-fonts.py`
@@ -189,7 +189,7 @@ python3 btdt/scripts/add-fonts.py "Playfair Display"
 ### What it does
 
 1. Checks if font files exist in `btdt/fonts/[slug]/`
-2. If missing, downloads using `download-google-fonts.py`
+2. If missing, downloads using `download_google_fonts.py`
 3. Checks if theme CSS exists in `btdt/themes/fonts/[slug].css`
 4. If missing, creates CSS that imports local font with Bootstrap variable mappings
 5. Shows next steps (sync-configs.py and minify-all.py)
@@ -216,7 +216,7 @@ Next steps:
 - This script uses only Python's standard library
 - Safe to run multiple times - won't overwrite existing files
 - Font name is case-sensitive (use exact name from Google Fonts)
-- Automatically imports and uses `download-google-fonts.py`
+- Automatically imports and uses `download_google_fonts.py`
 
 ## `minify/`
 
