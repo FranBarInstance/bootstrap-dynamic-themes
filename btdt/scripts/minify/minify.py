@@ -111,10 +111,11 @@ def minify_standard_file(path: Path) -> None:
         print(f"[ERROR] {path}: {exc}")
 
 
-def resolve_css_imports(path: Path, stack=None) -> str:
+def resolve_css_imports(path: Path, stack=None, root_path: Path | None = None) -> str:
     """Resolve local preset @import statements recursively into a single CSS string."""
     stack = stack or []
     resolved_path = path.resolve()
+    root_path = root_path or resolved_path
 
     if resolved_path in stack:
         chain = " -> ".join(str(item) for item in [*stack, resolved_path])
@@ -156,14 +157,39 @@ def resolve_css_imports(path: Path, stack=None) -> str:
         if not imported_path.exists():
             raise FileNotFoundError(f"No existe el import '{relative}' en {path}")
 
-        # If this is a font CSS, don't inline it - keep as external import
-        # Font CSS files have relative paths to font files that would break
-        if "fonts/" in str(imported_path):
-            return match.group(0)
+        # Recursively resolve the import
+        inlined = resolve_css_imports(imported_path, current_stack, root_path)
 
-        return resolve_css_imports(imported_path, current_stack)
+        # If this is a font CSS (contains @font-face with src: url),
+        # we need to rewrite the relative URLs to be correct from root_path
+        if "@font-face" in inlined and "src:" in inlined:
+            inlined = rewrite_font_urls(inlined, imported_path, root_path)
+
+        return inlined
 
     return IMPORT_RE.sub(replace_import, source)
+
+
+def rewrite_font_urls(css: str, css_path: Path, root_path: Path) -> str:
+    """Rewrite relative font URLs in @font-face rules to be relative to root_path."""
+    # Calculate the relative path from root_path.parent to css_path.parent
+    # This tells us how to get from the preset directory to the font directory
+    try:
+        rel_path = css_path.parent.relative_to(root_path.parent)
+        # css_path is inside root_path's directory - just use the relative path
+        prefix = str(rel_path).replace("\\", "/") + "/" if rel_path.parts else ""
+    except ValueError:
+        # css_path is outside root_path's directory
+        # Calculate path from root to css using os.path.relpath logic
+        import os
+        prefix = os.path.relpath(css_path.parent, root_path.parent).replace("\\", "/") + "/"
+
+    if prefix and prefix != "./":
+        # Replace url(filename) with url(prefix/filename)
+        css = re.sub(r"url\((['\"]?)([^)'\"]+)\.ttf\1\)", rf"url(\1{prefix}\2.ttf\1)", css)
+        css = re.sub(r"url\((['\"]?)([^)'\"]+)\.woff2\1\)", rf"url(\1{prefix}\2.woff2\1)", css)
+
+    return css
 
 
 def hoist_imports_to_top(css: str) -> str:
