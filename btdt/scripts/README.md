@@ -253,8 +253,8 @@ Files:
 From `btdt/scripts/minify/`:
 
 ```bash
-source .venv/bin/activate
-pip install -r requirements.txt
+source btdt/scripts/minify/.venv/bin/activate
+pip install -r btdt/scripts/minify/requirements.txt
 ```
 
 Dependencies:

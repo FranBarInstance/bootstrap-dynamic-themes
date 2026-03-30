@@ -407,8 +407,8 @@ In some cases you may need to use `text-reset`.
 ```
 
 - **Zero HTML Changes**: Switch from a dark professional theme to a light pastel style, and your menus, cards, and links **automatically adapt** their colors instantly.
-- **Smart Icons**: The navbar toggler and other SVG icons automatically flip their filters to remain visible.
-- **Harmonized Accents**: Themes include a synchronized `--accent-color` (automatically derived from your primary color) for decorative elements, ensuring a premium, integrated look across all 50+ palettes.
+- **Smart Icons**: The navbar toggler and themed SVG tokens stay visible by following the active theme foreground colors, without requiring HTML changes.
+- **Harmonized Accents**: Themes include a synchronized `--accent-color` chosen to stay coherent with the primary palette for decorative elements, ensuring a premium, integrated look across all 50+ palettes.
 
 ---
 Built with ❤️ and Bootstrap 5.
