@@ -10,7 +10,7 @@
  *              Content Security Policy (CSP) compliant: no inline styles, eval, or nonce required.
  *
  * @usage
- *   <script src="path/to/btdt-loader.js"
+ *   <script src="path/to/btdt.min.js"
  *           data-preset="preset-name"
  *           data-auto-init="true"
  *           data-dark-value="dark"
