@@ -2,7 +2,7 @@
 
 A professional, real-time theme customizer and modular engine for Bootstrap 5. An alternative to **Bootswatch**.
 
-[**🚀 Live Demo & Visual Designer**](https://franbarinstance.github.io/bootstrap-dynamic-themes/btdt/editor/)
+[**Live Demo & Visual Designer**](https://franbarinstance.github.io/bootstrap-dynamic-themes/btdt/editor/)
 
 **This is a production-ready theme system.** Use the included visual designer to create your look, and drop the self-contained module into your project.
 
