@@ -35,9 +35,8 @@ For advanced color theory and aesthetic guidelines, consult: `btdt/docs/color-sy
 Set the contrast-related variables in the template so that:
 - If the `--bs-primary` or `--bs-secondary` color is light (e.g., pastels, lime, yellow), text on those backgrounds uses a dark color (e.g., `#1a1a1a`).
 - Conversely, for dark primary colors, text uses white.
-- **Navbar Toggler**: Ensure `--bs-navbar-toggler-icon-filter` matches the text color of the primary background.
-  - Use `invert(1) brightness(2)` for white text on dark backgrounds.
-  - Use `none` for dark text on light backgrounds.
+- **Navbar Toggler**: The current app no longer uses a filter-based SVG icon for the navbar toggler.
+  The icon now inherits `currentColor` from the navbar, so getting `--bs-primary-contrast` and related contrast colors right is enough.
 
 ### 1.2 Component Overrides
 Do not add or modify component override selectors. All required overrides must already exist in the template.
@@ -51,7 +50,8 @@ In very light themes, some elements may need theme-specific tweaks (for example,
   - **For Dark Primary themes**: Use a slightly LIGTHER version (tint) of the primary color.
   - **For Light Primary themes**: Use a slightly DARKER version (shade) of the primary color.
 - **Goal**: The accent should feel like a natural extension of the primary brand color, providing a premium, integrated look instead of a sharp, high-contrast break.
-- **SVG Sync**: Ensure embedded SVGs in the template (like accordion icons) use this color logic when applicable.
+- **SVG Sync**: Keep the embedded SVG tokens in the template aligned with the colors they represent.
+  Today this mainly affects `--bs-accordion-btn-active-icon` and `--bs-form-switch-focus-bg`.
 
 ### 2. Button Overrides
 Only adjust the template variables used by button styles. Do not edit selector blocks.
