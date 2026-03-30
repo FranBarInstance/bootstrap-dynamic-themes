@@ -144,6 +144,7 @@ python3 btdt/scripts/add-fonts.py "Playfair Display"
 After adding fonts, regenerate the catalogs:
 
 ```bash
+python3 btdt/scripts/sync-configs.py
 python3 btdt/scripts/minify-all.py     # Update .min.css files
 ```
 
