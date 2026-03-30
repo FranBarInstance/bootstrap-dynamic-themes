@@ -520,9 +520,14 @@ def validate_preset_metadata(
     warnings: WarningCollector,
 ) -> None:
     """Validate metadata completeness and consistency for a preset."""
+    accent_value = metadata.get("accent", import_values.get("accent"))
+    accent_is_none = accent_value == "none"
+
     missing_metadata = [
         key for key in PRESET_METADATA_KEYS 
-        if key not in metadata and key != "personality"
+        if key not in metadata
+        and key != "personality"
+        and not (accent_is_none and key in {"accentSize", "accentColor"})
     ]
     if missing_metadata:
         warnings.add(f"[preset:{slug}] Missing metadata keys: {', '.join(missing_metadata)}")
