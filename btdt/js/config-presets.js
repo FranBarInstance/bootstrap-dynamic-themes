@@ -52,6 +52,7 @@ window.BTDT_PRESETS = {
   'studio-asymmetric': { title: 'Studio Asymmetric', color: 'corporate' },
   'studio-coupon': { title: 'Studio Coupon', color: 'corporate' },
   'studio-fold': { title: 'Studio Fold', color: 'corporate' },
+  'studio-material': { title: 'Studio Material', color: 'corporate' },
   'studio-notch': { title: 'Studio Notch', color: 'corporate' },
   'studio-pill': { title: 'Studio Pill', color: 'corporate' },
   'studio-sketch': { title: 'Studio Sketch', color: 'corporate' },
