@@ -39,6 +39,8 @@ window.BTDT_PRESETS = {
   paper: { title: 'Paper', color: 'white' },
   'plum-atelier': { title: 'Plum Atelier', color: 'plum' },
   'power-grid': { title: 'Power Grid', color: 'power' },
+  pwa: { title: 'Pwa', color: 'white' },
+  'pwa-material': { title: 'Pwa Material', color: 'white' },
   retro: { title: 'Retro', color: 'peach' },
   'rose-sonata': { title: 'Rose Sonata', color: 'rose' },
   'royal-heritage': { title: 'Royal Heritage', color: 'royal' },

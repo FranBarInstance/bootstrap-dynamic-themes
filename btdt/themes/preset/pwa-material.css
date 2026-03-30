@@ -1,0 +1,25 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+@import "../fonts/inter.css";
+@import "../colors/white.css";
+@import "../styles/background-none.css";
+@import "../styles/borders-minimal.css";
+@import "../styles/rounding-normal.css";
+@import "../styles/shadows-normal.css";
+@import "../styles/spacing-default.css";
+@import "../styles/gradients-default.css";
+@import "../styles/accent-none.css";
+@import "../styles/personality-material.css";
+
+/* Metadata for the editor */
+:root {
+  --preset-colors: "white";
+  --preset-fonts: "inter";
+  --preset-background: "none";
+  --preset-borders: "minimal";
+  --preset-rounding: "normal";
+  --preset-shadows: "normal";
+  --preset-spacing: "default";
+  --preset-gradients: "default";
+  --preset-accent: "none";
+  --preset-personality: "material";
+}
