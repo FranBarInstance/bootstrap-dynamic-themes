@@ -15,6 +15,7 @@ Before choosing modules, inspect what already exists:
 - **Styles**: `btdt/themes/styles/` — grouped by prefix:
   - `background-*`, `borders-*`, `rounding-*`, `shadows-*`, `spacing-*`
   - `gradients-*`, `accent-*` (position), `accent-[1-5].css` (size), `accent-primary/secondary/gray.css` (color)
+  - `personality-*` (optional final finish layer)
 
 ## Project Context
 A preset is a single CSS file that imports other modules. It also includes "Invisible Metadata" so the Editor can recognize and sync the configuration even when running locally via `file://`.
@@ -37,13 +38,47 @@ Include `@import` statements in this exact order:
 - `accent`
 - `accentSize`
 - `accentColor`
+- `personality` (optional, only when the preset intentionally includes a personality layer)
 
-All `@import` rules MUST stay at the top of the file (first lines), before any other CSS rule or comment block. This order is required for compatibility with the preset bundling/minification workflow.
+All `@import` rules MUST stay together at the top of the stylesheet, before any non-`@import` CSS rules such as `:root` metadata blocks.
+Leading license/header comments are acceptable and already used in the project.
 
-Use exactly one module from each category. Presets in this project are now considered complete only when all 11 categories are explicit.
+Use exactly one module from each base category.
+For current BTDT presets, the standard complete base set is:
+- `fonts`
+- `colors`
+- `background`
+- `borders`
+- `rounding`
+- `shadows`
+- `spacing`
+- `gradients`
+- `accent`
+- `accentSize`
+- `accentColor`
+
+`personality` is an optional twelfth layer. Include it only when the preset is meant to carry a personality finish.
 
 ### 2. Zero-CORS Metadata Block
-Append a `:root` block at the end of the file containing `--preset-[category]` variables for all 11 categories. These values MUST match the imported modules exactly.
+Append a `:root` block at the end of the file containing `--preset-[category]` variables matching the imported modules.
+
+Required metadata keys for the current base preset standard:
+- `--preset-colors`
+- `--preset-fonts`
+- `--preset-background`
+- `--preset-borders`
+- `--preset-rounding`
+- `--preset-shadows`
+- `--preset-spacing`
+- `--preset-gradients`
+- `--preset-accent`
+- `--preset-accentSize`
+- `--preset-accentColor`
+
+Optional metadata key:
+- `--preset-personality`
+
+If the preset imports `personality-*`, add `--preset-personality` as well so the file remains fully self-descriptive.
 
 ### 3. Catalog Sync (CRITICAL)
 After creating or removing a preset CSS file, do NOT edit `btdt/js/config-presets.js` manually.
@@ -74,6 +109,7 @@ Order matters:
 @import "../styles/accent-bottom.css";
 @import "../styles/accent-1.css";
 @import "../styles/accent-primary.css";
+@import "../styles/personality-material.css";
 
 /* Metadata for the editor */
 :root {
@@ -88,6 +124,7 @@ Order matters:
   --preset-accent: "bottom";
   --preset-accentSize: "1";
   --preset-accentColor: "primary";
+  --preset-personality: "material";
 }
 ```
 
