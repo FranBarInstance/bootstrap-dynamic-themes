@@ -3,7 +3,7 @@
  * BTDT production loader — CSP compliant.
  * No inline styles, no eval, no nonce required.
  *
- * @file        btdt-loader.js
+ * @file        btdt.js
  * @description Production loader for BTDT. Handles color mode (light/dark) detection and application,
  *              loads the active preset's stylesheet, synchronizes UI elements based on the active mode,
  *              persists the mode preference to a cookie, and automatically binds toggle button listeners.
