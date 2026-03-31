@@ -78,6 +78,9 @@ If minified assets need updating, run after that:
 python3 btdt/scripts/minify-all.py
 ```
 
+`btdt/scripts/minify-all.py` relies on the shared `btdt/scripts/.venv`
+environment and the dependencies listed in `btdt/scripts/requirements.txt`.
+
 **Order matters:**
 1. `python3 btdt/scripts/sync-configs.py`
 2. `python3 btdt/scripts/minify-all.py`

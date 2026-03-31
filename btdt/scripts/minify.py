@@ -77,7 +77,8 @@ def get_cssmin():
         from rcssmin import cssmin  # pylint: disable=import-outside-toplevel
     except ModuleNotFoundError as exc:
         raise ModuleNotFoundError(
-            "Falta 'rcssmin'. Instala las dependencias con: pip install -r requirements.txt"
+            "Missing 'rcssmin'. Install script dependencies with: "
+            "pip install -r btdt/scripts/requirements.txt"
         ) from exc
     return cssmin
 
@@ -88,7 +89,8 @@ def get_jsmin():
         from rjsmin import jsmin  # pylint: disable=import-outside-toplevel
     except ModuleNotFoundError as exc:
         raise ModuleNotFoundError(
-            "Falta 'rjsmin'. Instala las dependencias con: pip install -r requirements.txt"
+            "Missing 'rjsmin'. Install script dependencies with: "
+            "pip install -r btdt/scripts/requirements.txt"
         ) from exc
     return jsmin
 
@@ -145,8 +147,6 @@ def resolve_css_imports(path: Path, stack=None, root_path: Path | None = None) -
 
         relative = relative.strip().strip('"').strip("'")
 
-        # BTDT preset bundling is local-only: keep external imports
-        # and media-specific imports untouched.
         tail = (match.group("tail") or "").strip()
         if re.match(r"^(url\()?https?://", relative, re.IGNORECASE):
             return match.group(0)
@@ -157,11 +157,8 @@ def resolve_css_imports(path: Path, stack=None, root_path: Path | None = None) -
         if not imported_path.exists():
             raise FileNotFoundError(f"No existe el import '{relative}' en {path}")
 
-        # Recursively resolve the import
         inlined = resolve_css_imports(imported_path, current_stack, root_path)
 
-        # If this is a font CSS (contains @font-face with src: url),
-        # we need to rewrite the relative URLs to be correct from root_path
         if "@font-face" in inlined and "src:" in inlined:
             inlined = rewrite_font_urls(inlined, imported_path, root_path)
 
@@ -172,20 +169,14 @@ def resolve_css_imports(path: Path, stack=None, root_path: Path | None = None) -
 
 def rewrite_font_urls(css: str, css_path: Path, root_path: Path) -> str:
     """Rewrite relative font URLs in @font-face rules to be relative to root_path."""
-    # Calculate the relative path from root_path.parent to css_path.parent
-    # This tells us how to get from the preset directory to the font directory
     try:
         rel_path = css_path.parent.relative_to(root_path.parent)
-        # css_path is inside root_path's directory - just use the relative path
         prefix = str(rel_path).replace("\\", "/") + "/" if rel_path.parts else ""
     except ValueError:
-        # css_path is outside root_path's directory
-        # Calculate path from root to css using os.path.relpath logic
         import os
         prefix = os.path.relpath(css_path.parent, root_path.parent).replace("\\", "/") + "/"
 
     if prefix and prefix != "./":
-        # Replace url(filename) with url(prefix/filename)
         css = re.sub(r"url\((['\"]?)([^)'\"]+)\.ttf\1\)", rf"url(\1{prefix}\2.ttf\1)", css)
         css = re.sub(r"url\((['\"]?)([^)'\"]+)\.woff2\1\)", rf"url(\1{prefix}\2.woff2\1)", css)
 
@@ -193,12 +184,7 @@ def rewrite_font_urls(css: str, css_path: Path, root_path: Path) -> str:
 
 
 def hoist_imports_to_top(css: str) -> str:
-    """Move any remaining @import rules to the beginning of the stylesheet.
-
-    After preset bundling, external/media-qualified @import rules can remain in
-    arbitrary positions. Keeping them at the top avoids invalid CSS ordering
-    and keeps downstream minification predictable.
-    """
+    """Move any remaining @import rules to the beginning of the stylesheet."""
     imports: list[str] = []
 
     def collect_import(match):

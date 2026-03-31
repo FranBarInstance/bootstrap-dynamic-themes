@@ -2,8 +2,8 @@
 """Run BTDT minification across all standard asset directories.
 
 This is a Python equivalent of `btdt/scripts/minify-all`, using only the
-standard library. It delegates the actual work to `minify/minify.py` and
-intentionally uses the local `.venv` inside `btdt/scripts/minify/`, matching
+standard library. It delegates the actual work to `minify.py` and
+intentionally uses the local `.venv` inside `btdt/scripts/`, matching
 the Bash wrapper behaviour.
 """
 
@@ -15,10 +15,9 @@ from pathlib import Path
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-MINIFY_DIR = SCRIPT_DIR / "minify"
-MINIFY_PY = MINIFY_DIR / "minify.py"
-VENV_PYTHON_POSIX = MINIFY_DIR / ".venv" / "bin" / "python"
-VENV_PYTHON_WINDOWS = MINIFY_DIR / ".venv" / "Scripts" / "python.exe"
+MINIFY_PY = SCRIPT_DIR / "minify.py"
+VENV_PYTHON_POSIX = SCRIPT_DIR / ".venv" / "bin" / "python"
+VENV_PYTHON_WINDOWS = SCRIPT_DIR / ".venv" / "Scripts" / "python.exe"
 
 NORMAL_DIRS = [
     SCRIPT_DIR / "../css",
@@ -35,14 +34,14 @@ PRESET_DIRS = [
 
 
 def resolve_python_executable() -> Path:
-    """Return the Python interpreter from minify/.venv, matching minify-all."""
+    """Return the Python interpreter from scripts/.venv, matching minify-all."""
     if VENV_PYTHON_POSIX.exists():
         return VENV_PYTHON_POSIX
     if VENV_PYTHON_WINDOWS.exists():
         return VENV_PYTHON_WINDOWS
 
     raise FileNotFoundError(
-        "Could not find the local virtualenv Python for minify/.venv. "
+        "Could not find the local virtualenv Python for btdt/scripts/.venv. "
         "Expected one of:\n"
         f"- {VENV_PYTHON_POSIX}\n"
         f"- {VENV_PYTHON_WINDOWS}\n"
@@ -54,7 +53,7 @@ def run_minify(mode: str, target: Path) -> None:
     """Run the underlying minify.py script for one target directory."""
     python_executable = resolve_python_executable()
     command = [str(python_executable), str(MINIFY_PY), mode, str(target.resolve())]
-    subprocess.run(command, cwd=MINIFY_DIR, check=True)
+    subprocess.run(command, cwd=SCRIPT_DIR, check=True)
 
 
 def main() -> int:

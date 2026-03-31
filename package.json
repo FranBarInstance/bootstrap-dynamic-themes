@@ -1,0 +1,7 @@
+{
+  "name": "bootstrap-dynamic-themes-tests",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.test.js && python3 -m unittest tests.test_btdt_scripts && python3 btdt/scripts/sync-configs.py --check && . btdt/scripts/.venv/bin/activate && python -m unittest tests.test_minify_scripts"
+  }
+}

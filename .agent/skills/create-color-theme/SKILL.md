@@ -70,6 +70,10 @@ This regenerates `btdt/js/config-colors.js` from the filesystem and keeps the ed
 If the task also requires minified assets to be updated, run after that:
 - `btdt/scripts/minify-all.py`
 
+`btdt/scripts/minify-all.py` uses the shared script environment in
+`btdt/scripts/.venv`. Install its dependencies from
+`btdt/scripts/requirements.txt` if minification is required.
+
 Order matters:
 1. `btdt/scripts/sync-configs.py`
 2. `btdt/scripts/minify-all.py`

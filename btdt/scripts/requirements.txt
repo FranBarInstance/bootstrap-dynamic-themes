@@ -1,0 +1,3 @@
+# Dependencies for btdt/scripts/minify and its wrappers.
+rjsmin
+rcssmin

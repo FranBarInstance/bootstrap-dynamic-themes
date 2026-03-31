@@ -58,6 +58,10 @@ This regenerates `btdt/js/config-ui.js` from the actual modules present in `btdt
 If the task also requires minified assets to be updated, run after that:
 - `btdt/scripts/minify-all.py`
 
+`btdt/scripts/minify-all.py` uses the shared `btdt/scripts/.venv`
+environment. Install dependencies from `btdt/scripts/requirements.txt`
+before running the minification step.
+
 Order matters:
 1. `btdt/scripts/sync-configs.py`
 2. `btdt/scripts/minify-all.py`

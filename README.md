@@ -43,7 +43,7 @@ This project is organized as a standalone module (`btdt/`) that can be easily dr
 
 The visual editor also includes a browser-side helper at [`btdt/js/minify.js`](btdt/js/minify.js) for generating a **single bundled and minified preset CSS** from the current configuration.
 
-It is designed to mirror the preset flow from [`btdt/scripts/minify/minify.py`](btdt/scripts/minify/minify.py):
+It is designed to mirror the preset flow from [`btdt/scripts/minify.py`](btdt/scripts/minify.py):
 
 - Resolves local `@import` rules recursively
 - Inlines font CSS modules (converting relative URLs to work from the preset location)
@@ -149,6 +149,12 @@ python3 btdt/scripts/minify-all.py     # Update .min.css files
 ```
 
 For advanced usage and other font utilities, see [`btdt/scripts/README.md`](btdt/scripts/README.md).
+
+> [!NOTE]
+> Only the minification utilities require a virtual environment. The shared
+> environment lives at `btdt/scripts/.venv`; see
+> [`btdt/scripts/README.md`](btdt/scripts/README.md) for the installation
+> summary and dependency setup.
 
 ## Implementation in Production
 

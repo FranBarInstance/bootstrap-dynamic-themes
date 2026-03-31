@@ -2,6 +2,24 @@
 
 This directory contains maintenance and build utilities for the `btdt/` module.
 
+## Installation
+
+Most utilities in `btdt/scripts/` use only Python's standard library and can be
+run directly with `python3`.
+
+The only utility that currently requires a virtual environment is
+`btdt/scripts/minify.py`. Its dependencies are installed in the shared
+`btdt/scripts/.venv` environment so future Python utilities can reuse the same
+setup if needed.
+
+Install it with:
+
+```bash
+python3 -m venv btdt/scripts/.venv
+source btdt/scripts/.venv/bin/activate
+pip install -r btdt/scripts/requirements.txt
+```
+
 Available scripts:
 
 - `add-fonts.py`
@@ -39,20 +57,21 @@ Examples:
 
 ```bash
 # Export all presets and all fonts (full export)
-python3 btdt/scripts/export-runtime.py /tmp/runtime-export
+python3 btdt/scripts/export-runtime.py tmp/runtime-export
 
 # Export only specific presets with their required fonts only
-python3 btdt/scripts/export-runtime.py /tmp/runtime-export --presets nordic-elegance,amber-roar
-python3 btdt/scripts/export-runtime.py /tmp/runtime-export --presets amber-roar --force
+python3 btdt/scripts/export-runtime.py tmp/runtime-export --presets nordic-elegance,amber-roar
+python3 btdt/scripts/export-runtime.py tmp/runtime-export --presets amber-roar --force
 
 # Dry run to preview what would be copied
-python3 btdt/scripts/export-runtime.py /tmp/runtime-export --dry-run
-python3 btdt/scripts/export-runtime.py /tmp/runtime-export --presets amber-roar --dry-run
+python3 btdt/scripts/export-runtime.py tmp/runtime-export --dry-run
+python3 btdt/scripts/export-runtime.py tmp/runtime-export --presets amber-roar --dry-run
 ```
 
 ### Notes
 
 - This script uses only Python's standard library
+- `tmp/` is a good default destination for local preview exports because the repo ignores its contents
 - The destination argument is the parent directory; the script creates `DESTINATION/btdt/`
 - If `DESTINATION/btdt/` already exists, the script does nothing unless `--force` is passed
 - With `--force`, existing files in the destination are overwritten only for the exported subset
@@ -227,7 +246,7 @@ Next steps:
 - Font name is case-sensitive (use exact name from Google Fonts)
 - Automatically imports and uses `download_google_fonts.py`
 
-## `minify/`
+## `minify.py`
 
 Utility to generate minified assets from source files.
 
@@ -236,8 +255,8 @@ Utility to generate minified assets from source files.
 
 Files:
 
-- [`minify.py`](minify/minify.py)
-- [`requirements.txt`](minify/requirements.txt)
+- [`minify.py`](minify.py)
+- [`requirements.txt`](requirements.txt)
 - [`minify-all`](minify-all)
 - [`minify-all.py`](minify-all.py)
 
@@ -250,11 +269,11 @@ Files:
 
 ### Requirements
 
-From `btdt/scripts/minify/`:
+From the project root:
 
 ```bash
-source btdt/scripts/minify/.venv/bin/activate
-pip install -r btdt/scripts/minify/requirements.txt
+source btdt/scripts/.venv/bin/activate
+pip install -r btdt/scripts/requirements.txt
 ```
 
 Dependencies:
@@ -264,7 +283,7 @@ Dependencies:
 
 ### Usage
 
-Run from `btdt/scripts/minify/`:
+Run from `btdt/scripts/`:
 
 ```bash
 source .venv/bin/activate
@@ -275,10 +294,10 @@ python minify.py preset <file-or-directory>
 Examples:
 
 ```bash
-python minify.py normal ../../js/btdt.js
-python minify.py normal ../../themes/styles
-python minify.py preset ../../themes/preset/amber-roar.css
-python minify.py preset ../../themes/preset
+python btdt/scripts/minify.py normal btdt/js/btdt.js
+python btdt/scripts/minify.py normal btdt/themes/styles
+python btdt/scripts/minify.py preset btdt/themes/preset/amber-roar.css
+python btdt/scripts/minify.py preset btdt/themes/preset
 ```
 
 ### Modes

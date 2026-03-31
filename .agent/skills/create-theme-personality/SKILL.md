@@ -140,6 +140,10 @@ This regenerates `btdt/js/config-ui.js` from the styles catalog so the personali
 If the task also requires minified assets to be updated, run after that:
 - `btdt/scripts/minify-all.py`
 
+`btdt/scripts/minify-all.py` runs through the shared
+`btdt/scripts/.venv` environment and depends on the packages listed in
+`btdt/scripts/requirements.txt`.
+
 Order matters:
 1. `btdt/scripts/sync-configs.py`
 2. `btdt/scripts/minify-all.py`
