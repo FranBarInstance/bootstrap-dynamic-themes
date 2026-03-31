@@ -48,6 +48,9 @@
 
   /* Custom accent color for btdt/themes/styles/accent-*.css */
   --accent-color: #b2b2b2;
+  --bs-theme-active-bg: #D0D6DE;
+  --bs-theme-active-border: #B8C0CC;
+  --bs-theme-active-color: #161C2D;
 
   /* ─── Semantic RGB ─── */
   --bs-primary-rgb: 255, 255, 255;
@@ -251,6 +254,11 @@
   --bs-nav-tabs-link-active-color: var(--bs-dark);
 }
 
+.nav-pills {
+  --bs-nav-pills-link-active-bg: var(--bs-theme-active-bg);
+  --bs-nav-pills-link-active-color: var(--bs-theme-active-color);
+}
+
 /* ─── Outline buttons ─── */
 .btn-outline-primary { --bs-btn-color: var(--bs-dark); --bs-btn-border-color: var(--bs-dark); --bs-btn-hover-color: var(--bs-white); --bs-btn-hover-bg: var(--bs-dark); --bs-btn-hover-border-color: var(--bs-dark); --bs-btn-active-color: var(--bs-white); --bs-btn-active-bg: var(--bs-dark); --bs-btn-active-border-color: var(--bs-dark); --bs-btn-disabled-color: var(--bs-dark); --bs-btn-disabled-border-color: var(--bs-dark); }
 .btn-outline-secondary { --bs-btn-color: var(--bs-gray-600); --bs-btn-border-color: var(--bs-gray-600); --bs-btn-hover-bg: var(--bs-gray-600); --bs-btn-hover-border-color: var(--bs-gray-600); --bs-btn-active-bg: var(--bs-gray-600); --bs-btn-active-border-color: var(--bs-gray-600); --bs-btn-disabled-color: var(--bs-gray-600); --bs-btn-disabled-border-color: var(--bs-gray-600); }
@@ -260,9 +268,28 @@
 /* ─── Fix list hover contrast ─── */
 .list-group {
   --bs-list-group-action-hover-color: var(--bs-body-color);
+  --bs-list-group-active-color: var(--bs-theme-active-color);
+  --bs-list-group-active-bg: var(--bs-theme-active-bg);
+  --bs-list-group-active-border-color: var(--bs-theme-active-border);
+  --bs-list-group-action-active-color: var(--bs-theme-active-color);
+  --bs-list-group-action-active-bg: var(--bs-theme-active-bg);
 }
 
 /* ─── Fix primary button visibility on white theme ─── */
 .btn-primary {
   --bs-btn-border-color: var(--bs-border-color);
+}
+
+/* ─── Fix active state contrast on white theme ─── */
+.page-item.active > .page-link,
+.page-item.active > .page-link:hover,
+.page-item.active > .page-link:focus,
+.dropdown-item.active,
+.dropdown-item:active,
+.list-group-item.active,
+a.list-group-item.active,
+button.list-group-item.active {
+  color: var(--bs-theme-active-color) !important;
+  background-color: var(--bs-theme-active-bg) !important;
+  border-color: var(--bs-theme-active-border) !important;
 }
