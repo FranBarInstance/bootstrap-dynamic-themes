@@ -20,3 +20,10 @@ Skills are located in `.agent/skills/`. Each skill has a `SKILL.md` with detaile
 - **Styles** (`btdt/themes/styles/`): Structural modifiers (borders, shadows, rounding, spacing) that change the UI feel.
 - **Personalities** (`btdt/themes/styles/personality-*.css`): Final finish layers that add character to an existing theme without fundamentally changing its identity. They should work across palettes and usually act through contour, shadow, texture, filter, or surface treatment.
 - **Themes / Presets** (`btdt/themes/preset/`): Files that combine exactly **one** of each previous item via `@import` to create a complete look.
+
+## Cross-cutting Rule — Catalog Sync
+After creating, editing, or removing ANY module
+(color, font, style, personality, or preset), always run:
+
+1. `btdt/scripts/sync-configs.py`
+2. `btdt/scripts/minify-all.py`
