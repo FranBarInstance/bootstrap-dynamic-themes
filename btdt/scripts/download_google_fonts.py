@@ -12,6 +12,10 @@ from pathlib import Path
 from urllib.parse import urljoin
 
 
+class DownloadFontError(RuntimeError):
+    """Raised when a font cannot be downloaded or parsed."""
+
+
 def slugify(name: str) -> str:
     """Convert font name to slug (lowercase, hyphens)."""
     return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
@@ -148,8 +152,9 @@ def download_font(font_name: str, base_dir: Path) -> Path:
                 print("  Bad request (font may not support variable weights), trying fallback...")
                 continue
             elif e.code == 404:
-                print(f"Error: Font '{font_name}' not found on Google Fonts")
-                sys.exit(1)
+                raise DownloadFontError(
+                    f"Font '{font_name}' not found on Google Fonts"
+                ) from e
             else:
                 print(f"Error fetching font: {e}")
                 continue
@@ -158,14 +163,14 @@ def download_font(font_name: str, base_dir: Path) -> Path:
             continue
 
     if css is None or successful_url is None:
-        print(f"ERROR: Could not fetch font '{font_name}' with any weight configuration")
-        sys.exit(1)
+        raise DownloadFontError(
+            f"Could not fetch font '{font_name}' with any weight configuration"
+        )
 
     font_faces = parse_font_faces(css)
 
     if not font_faces:
-        print("ERROR: Could not find any font files to download")
-        sys.exit(1)
+        raise DownloadFontError("Could not find any font files to download")
 
     fonts_dir.mkdir(parents=True, exist_ok=True)
 
@@ -240,7 +245,11 @@ def main() -> int:
 
     args = parser.parse_args()
 
-    fonts_dir = download_font(args.font_name, args.base_dir)
+    try:
+        fonts_dir = download_font(args.font_name, args.base_dir)
+    except DownloadFontError as exc:
+        print(f"Error: {exc}")
+        return 1
 
     print(f"\nSuccess! Font downloaded to: {fonts_dir}")
 

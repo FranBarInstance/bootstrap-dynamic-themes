@@ -47,6 +47,8 @@ def is_minified(path: Path) -> bool:
 def iter_targets(target: Path, mode: str):
     """Yield source files to process from a single file or a directory tree."""
     if target.is_file():
+        if target.name.startswith("_") or is_minified(target):
+            return
         yield target
         return
 
@@ -58,6 +60,8 @@ def iter_targets(target: Path, mode: str):
         if not path.is_file():
             continue
         if should_skip_dir(path.parent):
+            continue
+        if path.name.startswith("_"):
             continue
         if path.suffix not in suffixes or is_minified(path):
             continue

@@ -2,6 +2,7 @@ import importlib.util
 import io
 import sys
 import tempfile
+import urllib.error
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -22,6 +23,7 @@ def load_module(name: str, relative_path: str):
 
 sync_configs = load_module("sync_configs", "btdt/scripts/sync-configs.py")
 export_runtime = load_module("export_runtime", "btdt/scripts/export-runtime.py")
+download_google_fonts = load_module("download_google_fonts", "btdt/scripts/download_google_fonts.py")
 
 
 class SyncConfigsTests(unittest.TestCase):
@@ -185,6 +187,42 @@ class ExportRuntimeTests(unittest.TestCase):
 
             self.assertEqual(result, 0)
             self.assertFalse((Path(tmpdir) / "btdt").exists())
+
+
+class DownloadGoogleFontsTests(unittest.TestCase):
+    def test_download_font_raises_reusable_error_for_missing_font(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            with mock.patch.object(
+                download_google_fonts,
+                "fetch_css",
+                side_effect=urllib.error.HTTPError(
+                    url="https://fonts.googleapis.com/css2?family=Missing",
+                    code=404,
+                    msg="Not Found",
+                    hdrs=None,
+                    fp=None,
+                ),
+            ):
+                with self.assertRaises(download_google_fonts.DownloadFontError):
+                    download_google_fonts.download_font("Missing Font", Path(tmpdir))
+
+    def test_main_returns_non_zero_instead_of_exiting_from_helper(self):
+        captured = io.StringIO()
+        original_argv = sys.argv
+        try:
+            sys.argv = ["download_google_fonts.py", "Inter"]
+            with mock.patch.object(
+                download_google_fonts,
+                "download_font",
+                side_effect=download_google_fonts.DownloadFontError("boom"),
+            ):
+                with mock.patch("sys.stdout", new=captured):
+                    result = download_google_fonts.main()
+        finally:
+            sys.argv = original_argv
+
+        self.assertEqual(result, 1)
+        self.assertIn("Error: boom", captured.getvalue())
 
 
 if __name__ == "__main__":

@@ -96,11 +96,11 @@ def add_font(font_name: str, base_dir: Path) -> int:
         # Import and use download function
         # pylint: disable=import-error,import-outside-toplevel
         sys.path.insert(0, str(base_dir / "btdt" / "scripts"))
-        from download_google_fonts import download_font
+        from download_google_fonts import DownloadFontError, download_font
         try:
             download_font(font_name, base_dir)
             print("✓ Font downloaded successfully")
-        except (OSError, urllib.error.URLError) as e:
+        except (DownloadFontError, OSError, urllib.error.URLError) as e:
             print(f"✗ Error downloading font: {e}")
             return 1
 

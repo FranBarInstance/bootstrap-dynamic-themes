@@ -134,7 +134,7 @@ def sync_fonts(base_dir: Path, dry_run: bool = False) -> int:
     # Import download function from download-google-fonts
     # pylint: disable=import-error,import-outside-toplevel
     sys.path.insert(0, str(base_dir / "btdt" / "scripts"))
-    from download_google_fonts import download_font
+    from download_google_fonts import DownloadFontError, download_font
 
     # Download missing fonts
     success = 0
@@ -145,7 +145,7 @@ def sync_fonts(base_dir: Path, dry_run: bool = False) -> int:
         try:
             download_font(name, base_dir)
             success += 1
-        except (OSError, urllib.error.URLError) as e:
+        except (DownloadFontError, OSError, urllib.error.URLError) as e:
             print(f"  Error: {e}")
             failed += 1
 
