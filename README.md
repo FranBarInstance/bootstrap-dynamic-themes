@@ -161,6 +161,14 @@ For advanced usage and other font utilities, see [`btdt/scripts/README.md`](btdt
 ### 1. Integration
 Copy the `btdt/` folder to your project root.
 
+If you want to prepare a production-ready package automatically, use
+[`btdt/scripts/export-runtime.py`](btdt/scripts/export-runtime.py). It creates
+the `btdt/` export structure in a destination folder and copies only the assets
+needed at runtime. You can also pass a specific preset list with `--presets` so
+only the presets you actually use, plus their required fonts, are exported
+instead of copying the full catalog. For detailed usage and related utilities,
+see [`btdt/scripts/README.md`](btdt/scripts/README.md).
+
 > [!IMPORTANT]
 > **Production Safety**: Add `btdt/editor/` to your `.gitignore` to keep the customizer out of your public environment.
 
