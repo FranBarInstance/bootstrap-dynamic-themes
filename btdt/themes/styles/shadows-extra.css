@@ -10,6 +10,15 @@
   transform: translateY(-2px);
 }
 
+/* Firefox can artifact rounded card corners when hover combines
+   border-radius, overflow clipping, shadow, and transform. */
+@supports (-moz-appearance: none) {
+  .card:hover {
+    box-shadow: 0 10px 38px rgba(0, 0, 0, 0.14);
+    transform: none;
+  }
+}
+
 .btn {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.2s ease, transform 0.2s ease;
