@@ -53,7 +53,7 @@ def iter_targets(target: Path, mode: str):
         return
 
     if not target.is_dir():
-        raise FileNotFoundError(f"'{target}' no es un archivo o directorio valido")
+        raise FileNotFoundError(f"'{target}' is not a valid file or directory")
 
     suffixes = {".css", ".js"} if mode == "normal" else {".css"}
     for path in sorted(target.rglob("*")):
@@ -125,7 +125,7 @@ def resolve_css_imports(path: Path, stack=None, root_path: Path | None = None) -
 
     if resolved_path in stack:
         chain = " -> ".join(str(item) for item in [*stack, resolved_path])
-        raise ValueError(f"Circular @import detectado: {chain}")
+        raise ValueError(f"Circular @import detected: {chain}")
 
     source = path.read_text(encoding="utf-8")
     current_stack = [*stack, resolved_path]
@@ -147,7 +147,7 @@ def resolve_css_imports(path: Path, stack=None, root_path: Path | None = None) -
             None,
         )
         if relative is None:
-            raise ValueError(f"No se pudo interpretar @import en {path}")
+            raise ValueError(f"Could not parse @import in {path}")
 
         relative = relative.strip().strip('"').strip("'")
 
@@ -159,7 +159,7 @@ def resolve_css_imports(path: Path, stack=None, root_path: Path | None = None) -
 
         imported_path = (path.parent / relative).resolve()
         if not imported_path.exists():
-            raise FileNotFoundError(f"No existe el import '{relative}' en {path}")
+            raise FileNotFoundError(f"Import '{relative}' does not exist in {path}")
 
         inlined = resolve_css_imports(imported_path, current_stack, root_path)
 
@@ -206,7 +206,7 @@ def hoist_imports_to_top(css: str) -> str:
 def minify_preset_file(path: Path) -> None:
     """Bundle a BTDT preset CSS file by inlining imports, then write its .min.css output."""
     if path.suffix != ".css":
-        print(f"[SKIP] {path}: preset solo admite archivos CSS")
+        print(f"[SKIP] {path}: preset mode only supports CSS files")
         return
 
     try:
@@ -224,18 +224,18 @@ def parse_args():
     """Parse CLI arguments for normal or preset minification."""
     parser = argparse.ArgumentParser(
         description=(
-            "Minifica archivos CSS/JS o compila "
-            "presets CSS embebiendo sus @import."
+            "Minify CSS/JS files or bundle preset CSS files "
+            "by inlining their @import dependencies."
         )
     )
     parser.add_argument(
         "mode",
         choices=("normal", "preset"),
-        help="Modo de trabajo: minificado normal o minificado especial para presets",
+        help="Processing mode: standard minification or preset bundling/minification",
     )
     parser.add_argument(
         "target",
-        help="Archivo o directorio a procesar",
+        help="File or directory to process",
     )
     return parser.parse_args()
 
@@ -252,7 +252,7 @@ def main():
         sys.exit(1)
 
     if not paths:
-        print("No hay archivos para procesar")
+        print("No files to process")
         sys.exit(0)
 
     for path in paths:

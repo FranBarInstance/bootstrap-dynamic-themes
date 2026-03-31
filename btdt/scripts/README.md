@@ -43,7 +43,7 @@ File:
 
 `export-runtime.py` creates or updates `DESTINATION/btdt/` and copies only:
 
-- `README.md` de la raíz del proyecto como `DESTINATION/btdt/README.md`
+- the project root `README.md` as `DESTINATION/btdt/README.md`
 - `btdt/css/bootstrap.min.css`
 - `btdt/js/bootstrap.bundle.min.js`
 - `btdt/js/btdt.min.js`

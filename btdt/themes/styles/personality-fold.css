@@ -21,7 +21,7 @@
   --personality-fold-sticky: 0 4px 24px 24px;     /* Only top-left square */
 }
 
-/* Cards: efecto "nota despegada", alternando qué esquina está suelta */
+/* Cards: "peeled note" effect, alternating which corner lifts */
 .card {
   border-radius: var(--personality-fold-tear-tl) !important;
 }
@@ -38,19 +38,19 @@
   border-radius: var(--personality-fold-tear-bl) !important;
 }
 
-/* Modals y dropdowns grandes: efecto documento formal con esquina doblada */
+/* Large modals and dropdowns: formal document effect with a folded corner */
 .modal-content,
 .dropdown-menu {
   border-radius: var(--personality-fold-tear-tr) !important;
 }
 
-/* Toasts y alerts: pequeños, como notas post-it */
+/* Toasts and alerts: small, like sticky notes */
 .toast,
 .alert {
   border-radius: var(--personality-fold-sticky) !important;
 }
 
-/* Botones: forma banderín, alternando dirección de la punta */
+/* Buttons: pennant-like shape, alternating tip direction */
 .btn,
 .badge,
 .pagination .page-link {
@@ -63,14 +63,14 @@
   border-radius: var(--personality-fold-flag-l) !important;
 }
 
-/* Forms: un lado recto (como etiqueta de archivo) */
+/* Forms: one straight side, like a file tab */
 .form-control,
 .form-select,
 .input-group-text {
   border-radius: 0 16px 16px 0 !important;
 }
 
-/* Navigation: tabs con esquina activa doblada */
+/* Navigation: tabs with a folded active corner */
 .nav-tabs .nav-link {
   border-radius: var(--personality-fold-tear-tl) !important;
 }
@@ -79,7 +79,7 @@
   border-radius: var(--personality-fold-tear-tr) !important;
 }
 
-/* Pills: un lado puntiagudo */
+/* Pills: one pointed side */
 .nav-pills .nav-link {
   border-radius: 0 50px 50px 0 !important;
 }
@@ -88,12 +88,12 @@
   border-radius: 50px 0 0 50px !important;
 }
 
-/* Navbar: esquina derecha doblada hacia abajo */
+/* Navbar: right corner folded downward */
 .navbar {
   border-radius: 0 0 32px 0 !important;
 }
 
-/* Accordion: efecto ficha de archivo */
+/* Accordion: file-card effect */
 .accordion-item {
   border-radius: 0 20px 20px 0 !important;
   overflow: hidden;
@@ -103,7 +103,7 @@
   border-radius: 20px 0 0 20px !important;
 }
 
-/* List group: como hojas sueltas apiladas */
+/* List group: like stacked loose sheets */
 .list-group-item {
   border-radius: 0 16px 0 16px !important;
 }
@@ -112,7 +112,7 @@
   border-radius: 16px 0 16px 0 !important;
 }
 
-/* Headers y footers heredan la forma del contenedor */
+/* Headers and footers inherit the container shape */
 .card-header,
 .modal-header,
 .card-footer,

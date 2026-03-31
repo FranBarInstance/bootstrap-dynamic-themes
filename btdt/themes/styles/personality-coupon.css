@@ -8,14 +8,14 @@
 
 :root {
   /* Sharp geometric cuts: 0 radius on alternating corners */
-  --personality-coupon-cut-card: 0 32px 0 32px;      /* Más pronunciado para cards */
-  --personality-coupon-cut-card-alt: 32px 0 32px 0;  /* Alternativa para grid */
-  --personality-coupon-cut-lg: 0 24px 0 24px;        /* Botones, badges */
+  --personality-coupon-cut-card: 0 32px 0 32px;      /* More pronounced for cards */
+  --personality-coupon-cut-card-alt: 32px 0 32px 0;  /* Alternate grid variant */
+  --personality-coupon-cut-lg: 0 24px 0 24px;        /* Buttons, badges */
   --personality-coupon-cut-tag: 0 16px 0 16px;       /* Forms, nav */
-  --personality-coupon-cut-modal: 0 28px 0 28px;     /* Modals, alerts grandes */
+  --personality-coupon-cut-modal: 0 28px 0 28px;     /* Large modals and alerts */
 }
 
-/* Cards: corte pronunciado estilo ticket grande */
+/* Cards: pronounced large-ticket cut */
 .card {
   border-radius: var(--personality-coupon-cut-card) !important;
 }
@@ -24,7 +24,7 @@
   border-radius: var(--personality-coupon-cut-card-alt) !important;
 }
 
-/* Large surfaces: modals, dropdowns, toasts - consistente pero más marcado */
+/* Large surfaces: modals, dropdowns, toasts - consistent but more pronounced */
 .dropdown-menu,
 .modal-content,
 .toast,
@@ -33,7 +33,7 @@
   border-radius: var(--personality-coupon-cut-modal) !important;
 }
 
-/* Interactive elements: cortes fuertes para énfasis */
+/* Interactive elements: stronger cuts for emphasis */
 .btn,
 .badge,
 .pagination .page-link,
@@ -47,7 +47,7 @@
   border-radius: 24px 0 24px 0 !important;
 }
 
-/* Forms and navigation: tag-like más sutil */
+/* Forms and navigation: subtler tag-like treatment */
 .form-control,
 .form-select,
 .accordion-button,
@@ -66,7 +66,7 @@
   border-radius: 0 0 32px 0 !important;
 }
 
-/* Accordion stacking con cortes notables */
+/* Accordion stacking with noticeable cuts */
 .accordion-item {
   border-radius: 0 20px 0 20px !important;
   overflow: hidden;
@@ -76,7 +76,7 @@
   border-radius: 20px 0 20px 0 !important;
 }
 
-/* Headers y footers heredan la geometría del padre */
+/* Headers and footers inherit the parent geometry */
 .card-header,
 .modal-header,
 .card-footer,
