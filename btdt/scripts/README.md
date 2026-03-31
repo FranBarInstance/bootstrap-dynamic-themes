@@ -25,7 +25,7 @@ Available scripts:
 - `add-fonts.py`
 - `download_google_fonts.py`
 - `export-runtime.py`
-- `minify/`
+- `minify.py`
 - `minify-all`
 - `minify-all.py`
 - `sync-configs.py`
