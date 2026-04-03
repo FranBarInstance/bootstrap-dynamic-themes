@@ -1,0 +1,81 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+/* themes/styles/personality-pastel.css
+ * Pastel finish layer.
+ * Applies color filters to background color classes only.
+ * Converts any bg-* color to its pastel version.
+ */
+
+/* Apply pastel filter to colored background classes */
+/* EXCLUDE: elements containing fixed/sticky children (prevents navbar issues) */
+.bg-primary:not(:has(.fixed-top, .sticky-top, .fixed-bottom)),
+.bg-secondary:not(:has(.fixed-top, .sticky-top, .fixed-bottom)),
+.bg-success:not(:has(.fixed-top, .sticky-top, .fixed-bottom)),
+.bg-danger:not(:has(.fixed-top, .sticky-top, .fixed-bottom)),
+.bg-warning:not(:has(.fixed-top, .sticky-top, .fixed-bottom)),
+.bg-info:not(:has(.fixed-top, .sticky-top, .fixed-bottom)),
+.bg-dark:not(:has(.fixed-top, .sticky-top, .fixed-bottom)),
+.bg-black:not(:has(.fixed-top, .sticky-top, .fixed-bottom)) {
+  filter: saturate(50%) brightness(1.2);
+}
+
+/* Also apply to component-specific bg classes */
+.card.bg-primary,
+.card.bg-secondary,
+.card.bg-success,
+.card.bg-danger,
+.card.bg-warning,
+.card.bg-info,
+.card.bg-light,
+.card.bg-dark,
+.alert.bg-primary,
+.alert.bg-secondary,
+.alert.bg-success,
+.alert.bg-danger,
+.alert.bg-warning,
+.alert.bg-info,
+.alert.bg-light,
+.alert.bg-dark,
+.badge.bg-primary,
+.badge.bg-secondary,
+.badge.bg-success,
+.badge.bg-danger,
+.badge.bg-warning,
+.badge.bg-info,
+.badge.bg-light,
+.badge.bg-dark,
+.btn.bg-primary,
+.btn.bg-secondary,
+.btn.bg-success,
+.btn.bg-danger,
+.btn.bg-warning,
+.btn.bg-info,
+.btn.bg-light,
+.btn.bg-dark,
+.toast.bg-primary,
+.toast.bg-secondary,
+.toast.bg-success,
+.toast.bg-danger,
+.toast.bg-warning,
+.toast.bg-info,
+.toast.bg-light,
+.toast.bg-dark,
+.modal-content.bg-primary,
+.modal-content.bg-secondary,
+.modal-content.bg-success,
+.modal-content.bg-danger,
+.modal-content.bg-warning,
+.modal-content.bg-info,
+.modal-content.bg-light,
+.modal-content.bg-dark {
+  filter: saturate(50%) brightness(1.2);
+}
+
+/* Exclude navbar toggler and images */
+.navbar-toggler,
+img,
+svg,
+iframe,
+video,
+canvas {
+  filter: none !important;
+}
