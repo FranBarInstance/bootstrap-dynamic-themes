@@ -9,5 +9,5 @@ window.BTDT_UI = {
   accent: { bottom: 'Bottom', left: 'Left', none: 'None', right: 'Right', top: 'Top' },
   accentSize: { '1': '1 px', '2': '2 px', '3': '3 px', '4': '4 px', '5': '5 px' },
   accentColor: { gray: 'Gray', primary: 'Primary', secondary: 'Secondary' },
-  personality: { asymmetric: 'Asymmetric', coupon: 'Coupon', fold: 'Fold', material: 'Material', none: 'None', notch: 'Notch', pill: 'Pill', sketch: 'Sketch' },
+  personality: { asymmetric: 'Asymmetric', coupon: 'Coupon', fold: 'Fold', material: 'Material', neobrutalist: 'Neobrutalist', none: 'None', notch: 'Notch', pill: 'Pill', sketch: 'Sketch' },
 };
