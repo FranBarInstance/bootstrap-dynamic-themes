@@ -1,0 +1,117 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+/* themes/styles/personality-swiss.css
+ * Swiss / International Typographic Style finish layer.
+ * Mathematical precision, geometric clarity, functional asymmetry.
+ * Zero aesthetic excess. Every radius and proportion is systematic.
+ */
+
+:root {
+  /* 8pt grid system values */
+  --personality-swiss-line: 1px;
+  --personality-swiss-radius-zero: 0;
+  /* Asymmetric corners: 0 0 0 16px (functional, directional emphasis) */
+  --personality-swiss-radius-accent: 0 0 0 1rem;
+  --personality-swiss-radius-accent-alt: 0 1rem 0 0;
+  /* Minimal radius for large surfaces: 0 0 0 4px */
+  --personality-swiss-radius-soft: 0 0 0 0.25rem;
+  /* Micro radius for precision: 0 0 0 2px */
+  --personality-swiss-radius-micro: 0 0 0 0.125rem;
+}
+
+.card,
+.btn,
+.form-control,
+.form-select,
+.alert,
+.badge,
+.dropdown-menu,
+.navbar,
+.modal-content,
+.toast,
+.accordion-item,
+.list-group-item,
+.input-group-text,
+.pagination .page-link,
+.nav-pills .nav-link,
+.nav-tabs .nav-link,
+.accordion-button {
+  border-style: solid;
+  border-width: max(var(--bs-border-width, 1px), var(--personality-swiss-line));
+}
+
+/* Buttons: sharp with single accent corner - functional emphasis */
+.btn,
+.badge,
+.pagination .page-link,
+.input-group-text {
+  border-radius: var(--personality-swiss-radius-accent) !important;
+}
+
+/* Alternate accent direction for rhythm */
+.btn:nth-of-type(even),
+.badge:nth-of-type(even),
+.pagination .page-link:nth-of-type(even) {
+  border-radius: var(--personality-swiss-radius-accent-alt) !important;
+}
+
+/* Cards and containers: near-zero, only micro asymmetry */
+.card,
+.dropdown-menu,
+.modal-content,
+.toast,
+.alert,
+.list-group-item,
+.navbar {
+  border-radius: var(--personality-swiss-radius-soft) !important;
+}
+
+/* Navigation: alternate accent direction */
+.nav-pills .nav-link,
+.nav-tabs .nav-link {
+  border-radius: var(--personality-swiss-radius-accent) !important;
+}
+
+.nav-pills .nav-link:nth-of-type(even),
+.nav-tabs .nav-link:nth-of-type(even) {
+  border-radius: var(--personality-swiss-radius-accent-alt) !important;
+}
+
+/* Forms: minimal functional radius */
+.form-control,
+.form-select,
+.accordion-button {
+  border-radius: var(--personality-swiss-radius-micro) !important;
+}
+
+/* Accordion as structural element */
+.accordion-item {
+  border-radius: var(--personality-swiss-radius-soft) !important;
+  overflow: hidden;
+}
+
+/* Card and modal headers/footers inherit container geometry */
+.card-header,
+.modal-header,
+.card-footer,
+.modal-footer,
+.list-group-item:first-child,
+.list-group-item:last-child {
+  border-radius: inherit;
+}
+
+/* Precise header/footer corner control */
+.card > .card-header:first-child,
+.modal-content > .modal-header {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.card > .card-footer:last-child,
+.modal-content > .modal-footer {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
