@@ -1,0 +1,279 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+/* themes/styles/personality-skeuomorphism.css
+ * Skeuomorphic finish layer.
+ * Physical realism through light, shadow, and surface curvature.
+ * Simulates tactile materials with dimensional depth.
+ */
+
+:root {
+  /* Surface depth values */
+  --personality-skeuo-elevation-high: inset 0 1px 0 rgba(255,255,255,0.25),
+                                      0 2px 4px rgba(0,0,0,0.15),
+                                      0 4px 8px rgba(0,0,0,0.1),
+                                      0 8px 16px rgba(0,0,0,0.05);
+  --personality-skeuo-elevation-mid: inset 0 1px 0 rgba(255,255,255,0.2),
+                                     0 1px 2px rgba(0,0,0,0.12),
+                                     0 2px 4px rgba(0,0,0,0.08);
+  --personality-skeuo-elevation-low: inset 0 1px 0 rgba(255,255,255,0.15),
+                                    0 1px 2px rgba(0,0,0,0.1);
+  /* Inset/pressed state */
+  --personality-skeuo-inset: inset 0 2px 4px rgba(0,0,0,0.15),
+                            inset 0 1px 2px rgba(0,0,0,0.1);
+  /* Surface curvature gradient overlay */
+  --personality-skeuo-shine: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 50%, rgba(0,0,0,0.05) 100%);
+  /* Material textures - subtle noise */
+  --personality-skeuo-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  /* Rounded corners for organic physical objects */
+  --personality-skeuo-radius: 0.5rem;
+  --personality-skeuo-radius-lg: 0.75rem;
+  --personality-skeuo-radius-sm: 0.35rem;
+}
+
+/* Cards: elevated physical surfaces with convex curvature */
+.card {
+  border-radius: var(--personality-skeuo-radius-lg) !important;
+  box-shadow: var(--personality-skeuo-elevation-high) !important;
+  background-image: var(--personality-skeuo-shine), var(--personality-skeuo-texture) !important;
+  background-blend-mode: overlay, normal !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+/* Buttons: convex tactile surfaces (exclude navbar-toggler) */
+.btn:not(.navbar-toggler) {
+  border-radius: var(--personality-skeuo-radius) !important;
+  box-shadow: var(--personality-skeuo-elevation-mid), inset 0 -2px 0 rgba(0,0,0,0.1) !important;
+  background-image: var(--personality-skeuo-shine) !important;
+  border: 1px solid rgba(0,0,0,0.12) !important;
+  position: relative;
+  top: 0;
+  transition: all 0.1s ease;
+}
+
+/* Button active/pressed state: inset depression (exclude navbar-toggler) */
+.btn:not(.navbar-toggler):active,
+.btn:not(.navbar-toggler).active {
+  box-shadow: var(--personality-skeuo-inset) !important;
+  top: 1px;
+  background-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.03) 100%) !important;
+}
+
+/* Form controls: recessed/inset surfaces */
+.form-control,
+.form-select {
+  border-radius: var(--personality-skeuo-radius-sm) !important;
+  box-shadow: var(--personality-skeuo-inset) !important;
+  background-image: var(--personality-skeuo-texture) !important;
+  border: 1px solid rgba(0,0,0,0.15) !important;
+}
+
+/* Input group text: raised accent piece */
+.input-group-text {
+  border-radius: var(--personality-skeuo-radius-sm) !important;
+  box-shadow: var(--personality-skeuo-elevation-low) !important;
+  background-image: var(--personality-skeuo-shine) !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+}
+
+/* Dropdown menus: floating panel */
+.dropdown-menu {
+  border-radius: var(--personality-skeuo-radius-lg) !important;
+  box-shadow: var(--personality-skeuo-elevation-high) !important;
+  background-image: var(--personality-skeuo-texture) !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+}
+
+/* Badges and pills: convex small elements */
+.badge {
+  border-radius: var(--personality-skeuo-radius) !important;
+  box-shadow: var(--personality-skeuo-elevation-low) !important;
+  background-image: var(--personality-skeuo-shine) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+/* Modal: floating dialog with strong depth */
+.modal-content {
+  border-radius: var(--personality-skeuo-radius-lg) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.12),
+              0 8px 24px rgba(0,0,0,0.15),
+              0 16px 48px rgba(0,0,0,0.1),
+              inset 0 1px 0 rgba(255,255,255,0.2) !important;
+  background-image: var(--personality-skeuo-shine), var(--personality-skeuo-texture) !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+}
+
+/* Toast: small floating notification */
+.toast {
+  border-radius: var(--personality-skeuo-radius) !important;
+  box-shadow: var(--personality-skeuo-elevation-mid) !important;
+  background-image: var(--personality-skeuo-shine) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+/* Alerts: colored surfaces with subtle depth */
+.alert {
+  border-radius: var(--personality-skeuo-radius) !important;
+  box-shadow: var(--personality-skeuo-elevation-low) !important;
+  background-image: var(--personality-skeuo-shine) !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+}
+
+/* Navbar: top bar with slight convex */
+.navbar {
+  border-radius: var(--personality-skeuo-radius) !important;
+  box-shadow: var(--personality-skeuo-elevation-mid) !important;
+  background-image: var(--personality-skeuo-shine) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+/* Accordion: stacked physical panels */
+.accordion-item {
+  border-radius: var(--personality-skeuo-radius) !important;
+  box-shadow: var(--personality-skeuo-elevation-low) !important;
+  background-image: var(--personality-skeuo-texture) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  margin-bottom: 0.25rem;
+}
+
+.accordion-button {
+  border-radius: inherit !important;
+  background-image: var(--personality-skeuo-shine) !important;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.05) !important;
+}
+
+.accordion-button:not(.collapsed) {
+  box-shadow: var(--personality-skeuo-inset) !important;
+  background-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.02) 100%) !important;
+}
+
+/* List group: stacked items with tactile separation */
+.list-group-item {
+  border-radius: var(--personality-skeuo-radius-sm) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
+  background-image: var(--personality-skeuo-shine) !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+  margin-bottom: 0.125rem;
+}
+
+/* Pagination: individual pill buttons */
+.pagination .page-link {
+  border-radius: var(--personality-skeuo-radius-sm) !important;
+  box-shadow: var(--personality-skeuo-elevation-low) !important;
+  background-image: var(--personality-skeuo-shine) !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  margin: 0 0.125rem;
+}
+
+.pagination .page-link:active,
+.pagination .active .page-link {
+  box-shadow: var(--personality-skeuo-inset) !important;
+  background-image: linear-gradient(180deg, rgba(0,0,0,0.03) 0%, transparent 100%) !important;
+}
+
+/* Navigation pills: tactile segmented control */
+.nav-pills .nav-link {
+  border-radius: var(--personality-skeuo-radius) !important;
+  box-shadow: var(--personality-skeuo-elevation-low) !important;
+  background-image: var(--personality-skeuo-shine) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  margin: 0 0.125rem;
+}
+
+.nav-pills .nav-link.active {
+  box-shadow: var(--personality-skeuo-inset) !important;
+  background-image: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, transparent 100%) !important;
+}
+
+/* Navigation tabs: physical tab appearance */
+.nav-tabs .nav-link {
+  border-radius: var(--personality-skeuo-radius) var(--personality-skeuo-radius) 0 0 !important;
+  box-shadow: var(--personality-skeuo-elevation-low) !important;
+  background-image: var(--personality-skeuo-shine) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-bottom: none !important;
+}
+
+.nav-tabs .nav-link.active {
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.08),
+              inset 0 1px 0 rgba(255,255,255,0.15) !important;
+  background-image: var(--personality-skeuo-shine) !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* Card and modal header/footer inheritance */
+.card-header,
+.modal-header,
+.card-footer,
+.modal-footer,
+.list-group-item:first-child,
+.list-group-item:last-child {
+  border-radius: inherit;
+}
+
+/* Card header: surface transition */
+.card > .card-header:first-child {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%) !important;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.05) !important;
+}
+
+.card > .card-footer:last-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.03) 0%, transparent 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05) !important;
+}
+
+/* Exclude navbar toggler from skeuomorphic effects - high specificity override */
+.navbar button.navbar-toggler,
+.navbar button.navbar-toggler.btn,
+button.navbar-toggler,
+.navbar-toggler {
+  border-radius: var(--bs-border-radius, 0.375rem) !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  border: var(--bs-border-width) solid var(--bs-navbar-toggler-border-color) !important;
+  position: static !important;
+  top: auto !important;
+  transition: none !important;
+  background-color: transparent !important;
+  text-shadow: none !important;
+}
+
+.navbar button.navbar-toggler:active,
+.navbar button.navbar-toggler.btn:active,
+button.navbar-toggler:active,
+.navbar-toggler:active {
+  box-shadow: none !important;
+  top: auto !important;
+  background-image: none !important;
+  transform: none !important;
+}
+
+/* Additional exclusions for menu toggler buttons with .btn class */
+.btn:has(.navbar-toggler-icon),
+.btn:has(.mdi-menu),
+#theme-drawer-toggle.btn,
+.btn.navbar-toggler {
+  border-radius: var(--bs-border-radius, 0.375rem) !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  position: static !important;
+  top: auto !important;
+  transition: none !important;
+}
+
+.btn:has(.navbar-toggler-icon):active,
+.btn:has(.mdi-menu):active,
+#theme-drawer-toggle.btn:active,
+.btn.navbar-toggler:active {
+  box-shadow: none !important;
+  top: auto !important;
+  background-image: none !important;
+  transform: none !important;
+}
