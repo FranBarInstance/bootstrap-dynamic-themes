@@ -1,0 +1,29 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+@import "../fonts/ubuntu.css";
+@import "../colors/corporate.css";
+@import "../styles/background-none.css";
+@import "../styles/borders-extra.css";
+@import "../styles/rounding-normal.css";
+@import "../styles/shadows-normal.css";
+@import "../styles/spacing-normal.css";
+@import "../styles/gradients-off.css";
+@import "../styles/accent-none.css";
+@import "../styles/accent-2.css";
+@import "../styles/accent-secondary.css";
+@import "../styles/personality-underline.css";
+
+/* Metadata for the editor */
+:root {
+  --preset-colors: "corporate";
+  --preset-fonts: "ubuntu";
+  --preset-background: "none";
+  --preset-borders: "extra";
+  --preset-rounding: "normal";
+  --preset-shadows: "normal";
+  --preset-spacing: "normal";
+  --preset-gradients: "off";
+  --preset-accent: "none";
+  --preset-accentSize: "2";
+  --preset-accentColor: "secondary";
+  --preset-personality: "underline";
+}

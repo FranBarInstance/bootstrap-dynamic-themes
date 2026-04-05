@@ -72,6 +72,7 @@ window.BTDT_PRESETS = {
   'studio-sketch': { title: 'Studio Sketch', color: 'corporate' },
   'studio-skeuomorphism': { title: 'Studio Skeuomorphism', color: 'corporate' },
   'studio-swiss': { title: 'Studio Swiss', color: 'corporate' },
+  'studio-underline': { title: 'Studio Underline', color: 'corporate' },
   sunset: { title: 'Sunset', color: 'sunset' },
   'techno-splash': { title: 'Techno Splash', color: 'vibrant-splash' },
   'vintage-journal': { title: 'Vintage Journal', color: 'vintage' },
