@@ -1,0 +1,79 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+/* themes/styles/personality-underline.css
+ * Underline finish layer.
+ * Removes top, left, right borders leaving only bottom borders for a minimal underline aesthetic.
+ * Input group text backgrounds become transparent.
+ */
+
+/* Core components: remove top/left/right borders, keep only bottom */
+.card,
+.btn,
+.form-control,
+.form-select,
+.badge,
+.alert,
+.dropdown-menu,
+.navbar,
+.modal-content,
+.toast,
+.accordion-item,
+.accordion-button,
+.list-group-item,
+.input-group-text,
+.pagination .page-link,
+.nav-pills .nav-link,
+.nav-tabs .nav-link {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* Transparent background for input group text */
+.input-group-text {
+  background-color: transparent !important;
+}
+
+/* Card header and footer: only remove top and side borders */
+.card-header,
+.card-footer {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* Modal header and footer: only remove top and side borders */
+.modal-header,
+.modal-footer {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* List group first/last items handle border inheritance */
+.list-group-item:first-child,
+.list-group-item:last-child {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* Accordion button clean borders */
+.accordion-button {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* Nav tabs: only remove top and side borders */
+.nav-tabs .nav-link {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* Dropdown menu items: only remove top and side borders */
+.dropdown-item {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
