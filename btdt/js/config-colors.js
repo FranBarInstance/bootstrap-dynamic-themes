@@ -48,6 +48,7 @@ window.BTDT_COLORS = {
   serene: { primary: '#6366f1', secondary: '#a5b4fc', accent: '#1317da' },
   sky: { primary: '#81d4fa', secondary: '#b3e5fc', accent: '#1eb2f6' },
   slate: { primary: '#334155', secondary: '#64748b', accent: '#597194' },
+  snow: { primary: '#f8f8f8', secondary: '#e8e8e8', accent: '#b2b2b2' },
   'steel-blue': { primary: '#4682b4', secondary: '#a9c1d9', accent: '#8db3d2' },
   sunset: { primary: '#e63946', secondary: '#f4845f', accent: '#a4141f' },
   teal: { primary: '#008080', secondary: '#20c997', accent: '#00e5e6' },
