@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<div class="bg-primary">
+<div class="bg-primary" id="navbar-theme-surface">
   <!-- ==================== NAVBAR ==================== -->
   <nav class="navbar navbar-expand-lg rounded-0 bg-primary fixed-top" id="main-navbar">
     <div class="container">
@@ -67,6 +67,19 @@
           </li>
         </ul>
         <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle px-3" href="#" id="navbarBgDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Primary
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="navbarBgDropdown">
+              <li><a class="dropdown-item active" href="#" data-navbar-bg="bg-primary">Primary</a></li>
+              <li><a class="dropdown-item" href="#" data-navbar-bg="bg-dark">Dark</a></li>
+              <li><a class="dropdown-item" href="#" data-navbar-bg="bg-secondary">Secondary</a></li>
+              <li><a class="dropdown-item" href="#" data-navbar-bg="bg-light">Light</a></li>
+              <li><a class="dropdown-item" href="#" data-navbar-bg="bg-body-tertiary">Tertiary</a></li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a class="nav-link d-flex align-items-center px-3" href="javascript:void(0)" onclick="togglePanel()" title="Open Customizer">
               <i class="mdi mdi-tune-variant me-2" aria-hidden="true"></i>
@@ -95,7 +108,7 @@
   <div class="navbar navbar-expand-lg mb-2 border-0" id="main-navbar-hidden">&nbsp;</div>
 
   <!-- ==================== HERO ==================== -->
-  <div class="bg-primary py-5">
+  <div class="bg-primary py-5" id="hero-theme-surface">
     <div class="container py-5">
       <div class="row align-items-center gy-4">
         <div class="col-lg-7">
@@ -1588,6 +1601,47 @@
   <script src="../js/minify.js"></script>
 
   <script src="./editor.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const bgDropdown = document.getElementById('navbarBgDropdown');
+      const navbar = document.getElementById('main-navbar');
+      const navbarSurface = document.getElementById('navbar-theme-surface');
+      const heroSurface = document.getElementById('hero-theme-surface');
+      const bgItems = Array.from(document.querySelectorAll('[data-navbar-bg]'));
+      const bgClasses = ['bg-primary', 'bg-dark', 'bg-secondary', 'bg-light', 'bg-body-tertiary'];
+
+      function applyNavbarBackground(bgClass, label) {
+        navbar.classList.remove(...bgClasses, 'navbar-dark', 'navbar-light');
+        navbarSurface.classList.remove(...bgClasses);
+        heroSurface.classList.remove(...bgClasses);
+
+        navbar.classList.add(bgClass);
+        navbarSurface.classList.add(bgClass);
+        heroSurface.classList.add(bgClass);
+
+        if (bgClass === 'bg-light' || bgClass === 'bg-body-tertiary') {
+          navbar.classList.add('navbar-light');
+        } else {
+          navbar.classList.add('navbar-dark');
+        }
+
+        bgDropdown.textContent = label;
+
+        bgItems.forEach(function (item) {
+          item.classList.toggle('active', item.dataset.navbarBg === bgClass);
+        });
+      }
+
+      bgItems.forEach(function (item) {
+        item.addEventListener('click', function (event) {
+          event.preventDefault();
+          applyNavbarBackground(item.dataset.navbarBg, item.textContent.trim());
+        });
+      });
+
+      applyNavbarBackground('bg-primary', 'Primary');
+    });
+  </script>
 </body>
 
 </html>
