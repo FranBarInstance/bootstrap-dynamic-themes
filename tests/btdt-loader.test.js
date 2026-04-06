@@ -14,7 +14,7 @@ test('btdt loader loads the minified preset by default and creates the dark mode
 
   assert.equal(btdt.getMode(), 'light');
   assert.equal(presetLink.href, 'https://example.test/btdt/themes/preset/studio.min.css');
-  assert.equal(darkLink.href, 'https://example.test/btdt/themes/modes/dark.min.css?v=2.0.5');
+  assert.equal(darkLink.href, 'https://example.test/btdt/themes/modes/dark.min.css?v=2.0.6');
   assert.equal(darkLink.media, 'not all');
 });
 
