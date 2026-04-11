@@ -12,6 +12,7 @@ window.BTDT_PRESETS = {
   'blank-neobrutalist': { title: 'Blank Neobrutalist', color: 'snow' },
   'blank-notch': { title: 'Blank Notch', color: 'snow' },
   'blank-pill': { title: 'Blank Pill', color: 'snow' },
+  'blank-skeuomorphism': { title: 'Blank Skeuomorphism', color: 'snow' },
   'blank-swiss': { title: 'Blank Swiss', color: 'snow' },
   'blank-underline': { title: 'Blank Underline', color: 'snow' },
   'boutique-chic': { title: 'Boutique Chic', color: 'boutique' },
