@@ -329,7 +329,7 @@ def scan_fonts(existing_labels: dict[str, str], warnings: WarningCollector) -> d
     for path in list_source_css(FONT_DIR):
         slug = path.stem
         content = read_text(path)
-        is_default = (slug == "default")
+        is_default = slug == "default"
 
         # Only warn about missing imports/vars if it's NOT the default font
         # or if it IS the default but you've started adding some declarations.
