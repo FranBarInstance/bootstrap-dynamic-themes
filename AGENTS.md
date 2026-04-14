@@ -1,17 +1,17 @@
 # Agent Instructions — Bootstrap Dynamic Themes
 
-Skills are located in `.agent/skills/`. Each skill has a `SKILL.md` with detailed rules.
+Skills are located in `.agents/skills/`. Each skill has a `SKILL.md` with detailed rules.
 **ALWAYS read the relevant `SKILL.md` BEFORE doing any work in that area.**
 
 ## Skill Trigger Map
 
 | When the user asks to… | Read this skill first |
 |---|---|
-| Create a new **color** (a color palette, a new color file, new color variables) | `.agent/skills/create-color-theme/` |
-| Add a new font or typography option | `.agent/skills/create-font-module/` |
-| Create a new style modifier (borders, shadows, rounding, spacing, gradients, accent…) | `.agent/skills/create-style-module/` |
-| Create or refine a **personality** layer (`personality-*`) that gives a theme a final finish without redefining it | `.agent/skills/create-theme-personality/` |
-| Create a new **theme** or **preset** (a named theme that combines color + font + styles) | `.agent/skills/create-theme-preset/` |
+| Create a new **color** (a color palette, a new color file, new color variables) | `.agents/skills/create-color-theme/` |
+| Add a new font or typography option | `.agents/skills/create-font-module/` |
+| Create a new style modifier (borders, shadows, rounding, spacing, gradients, accent…) | `.agents/skills/create-style-module/` |
+| Create or refine a **personality** layer (`personality-*`) that gives a theme a final finish without redefining it | `.agents/skills/create-theme-personality/` |
+| Create a new **theme** or **preset** (a named theme that combines color + font + styles) | `.agents/skills/create-theme-preset/` |
 
 ## Core Concepts Summary
 

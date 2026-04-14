@@ -345,7 +345,7 @@ File:
 
 It does **not** rewrite the corresponding `.min.js` files. Those remain under the minification workflow.
 
-It also emits warnings when it finds mismatches or modules that do not follow the conventions documented in `.agent/skills/`.
+It also emits warnings when it finds mismatches or modules that do not follow the conventions documented in `.agents/skills/`.
 
 Examples:
 

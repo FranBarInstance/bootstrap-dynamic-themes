@@ -9,7 +9,7 @@ This script keeps the editor/runtime catalogs in sync with the real theme files:
 - btdt/js/config-ui.js
 
 It also emits warnings when modules do not follow the conventions documented in
-.agent/skills/.
+.agents/skills/.
 """
 
 from __future__ import annotations
@@ -336,7 +336,7 @@ def scan_fonts(existing_labels: dict[str, str], warnings: WarningCollector) -> d
         has_imports = "@import url(" in content
         if not has_imports and not is_default:
             warnings.add(f"[font:{slug}] Missing font @import")
-        
+
         for required in [
             "--bs-body-font-family",
             "--bs-body-font-weight",
@@ -524,7 +524,7 @@ def validate_preset_metadata(
     accent_is_none = accent_value == "none"
 
     missing_metadata = [
-        key for key in PRESET_METADATA_KEYS 
+        key for key in PRESET_METADATA_KEYS
         if key not in metadata
         and key != "personality"
         and not (accent_is_none and key in {"accentSize", "accentColor"})
