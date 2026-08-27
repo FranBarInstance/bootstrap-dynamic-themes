@@ -5,7 +5,7 @@
 @import "../styles/borders-extra.css";
 @import "../styles/rounding-default.css";
 @import "../styles/shadows-default.css";
-@import "../styles/spacing-normal.css";
+@import "../styles/spacing-medium.css";
 @import "../styles/gradients-default.css";
 @import "../styles/accent-none.css";
 @import "../styles/personality-underline.css";
@@ -18,7 +18,7 @@
   --preset-borders: "extra";
   --preset-rounding: "default";
   --preset-shadows: "default";
-  --preset-spacing: "normal";
+  --preset-spacing: "medium";
   --preset-gradients: "default";
   --preset-accent: "none";
   --preset-personality: "underline";

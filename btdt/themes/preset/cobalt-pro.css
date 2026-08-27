@@ -5,7 +5,7 @@
 @import "../styles/borders-minimal.css";
 @import "../styles/rounding-none.css";
 @import "../styles/shadows-normal.css";
-@import "../styles/spacing-normal.css";
+@import "../styles/spacing-medium.css";
 @import "../styles/gradients-on.css";
 @import "../styles/accent-none.css";
 @import "../styles/accent-1.css";
@@ -19,7 +19,7 @@
   --preset-borders: "minimal";
   --preset-rounding: "none";
   --preset-shadows: "normal";
-  --preset-spacing: "normal";
+  --preset-spacing: "medium";
   --preset-gradients: "on";
   --preset-accent: "none";
   --preset-accentSize: "1";
