@@ -107,7 +107,7 @@ Order matters:
 @import "../styles/background-none.css";
 @import "../styles/borders-medium.css";
 @import "../styles/rounding-medium.css";
-@import "../styles/shadows-normal.css";
+@import "../styles/shadows-medium.css";
 @import "../styles/spacing-medium.css";
 @import "../styles/gradients-off.css";
 @import "../styles/accent-bottom.css";
@@ -122,7 +122,7 @@ Order matters:
   --preset-background: "none";
   --preset-borders: "medium";
   --preset-rounding: "medium";
-  --preset-shadows: "normal";
+  --preset-shadows: "medium";
   --preset-spacing: "medium";
   --preset-gradients: "off";
   --preset-accent: "bottom";

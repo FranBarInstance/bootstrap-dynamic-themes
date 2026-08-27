@@ -4,7 +4,7 @@
 @import "../styles/background-none.css";
 @import "../styles/borders-medium.css";
 @import "../styles/rounding-medium.css";
-@import "../styles/shadows-normal.css";
+@import "../styles/shadows-medium.css";
 @import "../styles/spacing-large.css";
 @import "../styles/gradients-off.css";
 @import "../styles/accent-left.css";
@@ -18,7 +18,7 @@
   --preset-background: "none";
   --preset-borders: "medium";
   --preset-rounding: "medium";
-  --preset-shadows: "normal";
+  --preset-shadows: "medium";
   --preset-spacing: "large";
   --preset-gradients: "off";
   --preset-accent: "left";
