@@ -255,3 +255,16 @@
   --bs-btn-disabled-color: var(--bs-secondary-text-emphasis);
   --bs-btn-disabled-border-color: var(--bs-secondary-text-emphasis);
 }
+
+.btn-outline-warning {
+  --bs-btn-color: var(--bs-warning-text-emphasis);
+  --bs-btn-border-color: var(--bs-warning-text-emphasis);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: var(--bs-warning-text-emphasis);
+  --bs-btn-hover-border-color: var(--bs-warning-text-emphasis);
+  --bs-btn-active-color: var(--bs-white);
+  --bs-btn-active-bg: var(--bs-warning-text-emphasis);
+  --bs-btn-active-border-color: var(--bs-warning-text-emphasis);
+  --bs-btn-disabled-color: var(--bs-warning-text-emphasis);
+  --bs-btn-disabled-border-color: var(--bs-warning-text-emphasis);
+}

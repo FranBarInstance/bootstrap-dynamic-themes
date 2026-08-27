@@ -1,0 +1,272 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+/* ================================================================
+   THEME: Celadon
+   Ultra-light pale green tones for calm modern interfaces
+   ================================================================ */
+
+/* IMPORTANT: Import color-theme-rules.min.css */
+@import "../../css/color-theme-rules.min.css";
+
+:root {
+
+  /* ─── Named Colors ─── */
+  --bs-blue: #7EA2B0;
+  --bs-indigo: #8A8CAC;
+  --bs-purple: #968CA8;
+  --bs-pink: #BC98A0;
+  --bs-red: #A0655E;
+  --bs-orange: #B8926E;
+  --bs-yellow: #DCBE7D;
+  --bs-green: #607C58;
+  --bs-teal: #66928E;
+  --bs-cyan: #7EA4A4;
+  --bs-black: #000;
+  --bs-white: #fff;
+  --bs-gray: #7E8A80;
+  --bs-gray-dark: #445146;
+
+  /* ─── Gray Scale ─── */
+  --bs-gray-100: #F4F8F4;
+  --bs-gray-200: #E5EDE6;
+  --bs-gray-300: #D3DED5;
+  --bs-gray-400: #B8C6BA;
+  --bs-gray-500: #9AAA9C;
+  --bs-gray-600: #7C8C7E;
+  --bs-gray-700: #5F6F61;
+  --bs-gray-800: #445146;
+  --bs-gray-900: #2D3730;
+
+  /* ─── Semantic Colors ─── */
+  --bs-primary: #D3E3D5;
+  --bs-secondary: #E4EEE5;
+  --bs-success: #607C58;
+  --bs-info: #63777D;
+  --bs-warning: #DCBE7D;
+  --bs-danger: #A0655E;
+  --bs-light: #F4F8F4;
+  --bs-dark: #2F3A31;
+
+  /* Custom accent color for btdt/themes/styles/accent-*.css */
+  --accent-color: #A9B6AA;
+
+  /* ─── Semantic RGB ─── */
+  --bs-primary-rgb: 211, 227, 213;
+  --bs-secondary-rgb: 228, 238, 229;
+  --bs-success-rgb: 96, 124, 88;
+  --bs-info-rgb: 99, 119, 125;
+  --bs-warning-rgb: 220, 190, 125;
+  --bs-danger-rgb: 160, 101, 94;
+  --bs-light-rgb: 244, 248, 244;
+  --bs-dark-rgb: 47, 58, 49;
+  --accent-color-rgb: 169, 182, 170;
+
+  /* ─── Contrast (text on top of each bg) ─── */
+  --bs-primary-contrast: #000;
+  --bs-secondary-contrast: #000;
+  --bs-success-contrast: #fff;
+  --bs-info-contrast: #fff;
+  --bs-warning-contrast: #2F3A31;
+  --bs-danger-contrast: #fff;
+  --bs-light-contrast: #2F3A31;
+  --bs-dark-contrast: #fff;
+  --bs-black-contrast: #fff;
+  --bs-white-contrast: #2F3A31;
+
+  /* ─── Contrast RGB ─── */
+  --bs-primary-contrast-rgb: 0, 0, 0;
+  --bs-secondary-contrast-rgb: 0, 0, 0;
+  --bs-success-contrast-rgb: 255, 255, 255;
+  --bs-info-contrast-rgb: 255, 255, 255;
+  --bs-warning-contrast-rgb: 47, 58, 49;
+  --bs-danger-contrast-rgb: 255, 255, 255;
+  --bs-light-contrast-rgb: 47, 58, 49;
+  --bs-dark-contrast-rgb: 255, 255, 255;
+  --bs-black-contrast-rgb: 255, 255, 255;
+  --bs-white-contrast-rgb: 47, 58, 49;
+
+  /* ─── Button Hover/Active Shades ─── */
+  --bs-primary-hover-bg: #A9B6AA;
+  --bs-primary-hover-border: #A0ADA2;
+  --bs-primary-active-bg: #949F95;
+  --bs-primary-active-border: #8B968D;
+  --bs-primary-focus-shadow-rgb: 211, 227, 213;
+
+  --bs-secondary-hover-bg: #B6BEB7;
+  --bs-secondary-hover-border: #ADB5AE;
+  --bs-secondary-active-bg: #A0A7A0;
+  --bs-secondary-active-border: #969D97;
+  --bs-secondary-focus-shadow-rgb: 228, 238, 229;
+
+  --bs-success-hover-bg: #52694B;
+  --bs-success-hover-border: #4D6346;
+  --bs-success-active-bg: #485D42;
+  --bs-success-active-border: #43573E;
+  --bs-success-focus-shadow-rgb: 96, 124, 88;
+
+  --bs-info-hover-bg: #54656A;
+  --bs-info-hover-border: #4F5F64;
+  --bs-info-active-bg: #4A595E;
+  --bs-info-active-border: #455358;
+  --bs-info-focus-shadow-rgb: 99, 119, 125;
+
+  --bs-warning-hover-bg: #BBA26A;
+  --bs-warning-hover-border: #B09864;
+  --bs-warning-active-bg: #A58E5E;
+  --bs-warning-active-border: #9A8558;
+  --bs-warning-focus-shadow-rgb: 220, 190, 125;
+
+  --bs-danger-hover-bg: #885650;
+  --bs-danger-hover-border: #80514B;
+  --bs-danger-active-bg: #784C46;
+  --bs-danger-active-border: #704742;
+  --bs-danger-focus-shadow-rgb: 160, 101, 94;
+
+  --bs-light-hover-bg: #E0E6E1;
+  --bs-light-hover-border: #DBE1DC;
+  --bs-light-active-bg: #D6DCD7;
+  --bs-light-active-border: #D1D7D2;
+  --bs-light-focus-shadow-rgb: 244, 248, 244;
+
+  --bs-dark-hover-bg: #3F4F42;
+  --bs-dark-hover-border: #3C4C3F;
+  --bs-dark-active-bg: #475C4C;
+  --bs-dark-active-border: #3C4C3F;
+  --bs-dark-focus-shadow-rgb: 63, 79, 66;
+
+  /* ─── Text Emphasis (shade 60%) ─── */
+  --bs-primary-text-emphasis: #545B55;
+  --bs-secondary-text-emphasis: #5B5F5C;
+  --bs-success-text-emphasis: #263223;
+  --bs-info-text-emphasis: #283032;
+  --bs-warning-text-emphasis: #584C32;
+  --bs-danger-text-emphasis: #402826;
+  --bs-light-text-emphasis: #5F6F61;
+  --bs-dark-text-emphasis: #5F6F61;
+
+  /* ─── Background Subtle (tint 80%) ─── */
+  --bs-primary-bg-subtle: #F6F9F7;
+  --bs-secondary-bg-subtle: #FAFCFA;
+  --bs-success-bg-subtle: #DFE5DE;
+  --bs-info-bg-subtle: #E0E4E5;
+  --bs-warning-bg-subtle: #F8F2E5;
+  --bs-danger-bg-subtle: #ECE0DF;
+  --bs-light-bg-subtle: #FDFDFD;
+  --bs-dark-bg-subtle: #D4D5D5;
+
+  /* ─── Border Subtle (tint 60%) ─── */
+  --bs-primary-border-subtle: #EDF4EE;
+  --bs-secondary-border-subtle: #F4F8F5;
+  --bs-success-border-subtle: #BFCBBC;
+  --bs-info-border-subtle: #C1C9CB;
+  --bs-warning-border-subtle: #F1E5CB;
+  --bs-danger-border-subtle: #D9C1BF;
+  --bs-light-border-subtle: #E5EDE6;
+  --bs-dark-border-subtle: #A3A6A3;
+
+  /* ─── Link Hover RGB (shade ~20% of each color) ─── */
+  --bs-primary-link-hover-rgb: 169, 182, 170;
+  --bs-secondary-link-hover-rgb: 182, 190, 183;
+  --bs-success-link-hover-rgb: 77, 99, 70;
+  --bs-info-link-hover-rgb: 79, 95, 100;
+  --bs-warning-link-hover-rgb: 176, 152, 100;
+  --bs-danger-link-hover-rgb: 128, 81, 75;
+  --bs-light-link-hover-rgb: 195, 198, 195;
+  --bs-dark-link-hover-rgb: 38, 46, 39;
+
+  /* ─── Base ─── */
+  --bs-white-rgb: 255, 255, 255;
+  --bs-black-rgb: 0, 0, 0;
+
+  /* ─── Body ─── */
+  --bs-body-color: #353E36;
+  --bs-body-color-rgb: 53, 62, 54;
+  --bs-body-bg: #fff;
+  --bs-body-bg-rgb: 255, 255, 255;
+
+  /* ─── Emphasis ─── */
+  --bs-emphasis-color: #000;
+  --bs-emphasis-color-rgb: 0, 0, 0;
+
+  /* ─── Secondary / Tertiary ─── */
+  --bs-secondary-color: rgba(53, 62, 54, 0.75);
+  --bs-secondary-color-rgb: 53, 62, 54;
+  --bs-secondary-bg: #E5EDE6;
+  --bs-secondary-bg-rgb: 229, 237, 230;
+  --bs-tertiary-color: rgba(53, 62, 54, 0.5);
+  --bs-tertiary-color-rgb: 53, 62, 54;
+  --bs-tertiary-bg: #F4F8F4;
+  --bs-tertiary-bg-rgb: 244, 248, 244;
+
+  /* ─── Links ─── */
+  --bs-link-color: #656D66;
+  --bs-link-color-rgb: 101, 109, 102;
+  --bs-link-hover-color: #515752;
+  --bs-link-hover-color-rgb: 81, 87, 82;
+
+  /* ─── Code / Highlight ─── */
+  --bs-code-color: #8A747E;
+  --bs-highlight-color: #353E36;
+  --bs-highlight-bg: #F8F2E5;
+
+  /* ─── Borders ─── */
+  --bs-border-color: #D3DED5;
+  --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+
+  /* ─── Shadows (based on dark color) ─── */
+  --bs-box-shadow: 0 0.5rem 1rem rgba(47, 58, 49, 0.15);
+  --bs-box-shadow-sm: 0 0.125rem 0.25rem rgba(47, 58, 49, 0.075);
+  --bs-box-shadow-lg: 0 1rem 3rem rgba(47, 58, 49, 0.175);
+  --bs-box-shadow-inset: inset 0 1px 2px rgba(47, 58, 49, 0.075);
+
+  /* ─── Forms ─── */
+  --bs-form-focus-border-color: #E0EBE2;
+  --bs-form-range-active-bg: #F4F8F4;
+  --bs-form-valid-color: #607C58;
+  --bs-form-valid-border-color: #607C58;
+  --bs-form-invalid-color: #A0655E;
+  --bs-form-invalid-border-color: #A0655E;
+  /* ─── SVGs with embedded colors (can't use var() inside data URIs) ─── */
+  /* Navbar toggler no longer needs a theme token: it inherits currentColor
+     from color-theme-rules.css. */
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23545B55'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-form-switch-focus-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23E0EBE2'/%3e%3c/svg%3e");
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--bs-primary-text-emphasis);
+  --bs-btn-border-color: var(--bs-primary-text-emphasis);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: var(--bs-primary-text-emphasis);
+  --bs-btn-hover-border-color: var(--bs-primary-text-emphasis);
+  --bs-btn-active-color: var(--bs-white);
+  --bs-btn-active-bg: var(--bs-primary-text-emphasis);
+  --bs-btn-active-border-color: var(--bs-primary-text-emphasis);
+  --bs-btn-disabled-color: var(--bs-primary-text-emphasis);
+  --bs-btn-disabled-border-color: var(--bs-primary-text-emphasis);
+}
+
+.btn-outline-secondary {
+  --bs-btn-color: var(--bs-secondary-text-emphasis);
+  --bs-btn-border-color: var(--bs-secondary-text-emphasis);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: var(--bs-secondary-text-emphasis);
+  --bs-btn-hover-border-color: var(--bs-secondary-text-emphasis);
+  --bs-btn-active-color: var(--bs-white);
+  --bs-btn-active-bg: var(--bs-secondary-text-emphasis);
+  --bs-btn-active-border-color: var(--bs-secondary-text-emphasis);
+  --bs-btn-disabled-color: var(--bs-secondary-text-emphasis);
+  --bs-btn-disabled-border-color: var(--bs-secondary-text-emphasis);
+}
+
+.btn-outline-warning {
+  --bs-btn-color: var(--bs-warning-text-emphasis);
+  --bs-btn-border-color: var(--bs-warning-text-emphasis);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: var(--bs-warning-text-emphasis);
+  --bs-btn-hover-border-color: var(--bs-warning-text-emphasis);
+  --bs-btn-active-color: var(--bs-white);
+  --bs-btn-active-bg: var(--bs-warning-text-emphasis);
+  --bs-btn-active-border-color: var(--bs-warning-text-emphasis);
+  --bs-btn-disabled-color: var(--bs-warning-text-emphasis);
+  --bs-btn-disabled-border-color: var(--bs-warning-text-emphasis);
+}
