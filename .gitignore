@@ -25,4 +25,5 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-store/
 .codex
+.freebuff
 none
