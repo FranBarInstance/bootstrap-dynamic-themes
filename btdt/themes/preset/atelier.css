@@ -1,0 +1,27 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+@import "../fonts/chakra-petch.css";
+@import "../colors/denim.css";
+@import "../styles/background-none.css";
+@import "../styles/borders-medium.css";
+@import "../styles/rounding-none.css";
+@import "../styles/shadows-none.css";
+@import "../styles/spacing-medium.css";
+@import "../styles/gradients-off.css";
+@import "../styles/accent-left.css";
+@import "../styles/accent-3.css";
+@import "../styles/accent-primary.css";
+
+/* Metadata for the editor */
+:root {
+  --preset-colors: "denim";
+  --preset-fonts: "chakra-petch";
+  --preset-background: "none";
+  --preset-borders: "medium";
+  --preset-rounding: "none";
+  --preset-shadows: "none";
+  --preset-spacing: "medium";
+  --preset-gradients: "off";
+  --preset-accent: "left";
+  --preset-accentSize: "3";
+  --preset-accentColor: "primary";
+}

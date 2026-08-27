@@ -2,7 +2,7 @@
 @import "../fonts/ubuntu.css";
 @import "../colors/sky.css";
 @import "../styles/background-none.css";
-@import "../styles/borders-none.css";
+@import "../styles/borders-minimal.css";
 @import "../styles/rounding-medium.css";
 @import "../styles/shadows-medium.css";
 @import "../styles/spacing-medium.css";
@@ -16,7 +16,7 @@
   --preset-colors: "sky";
   --preset-fonts: "ubuntu";
   --preset-background: "none";
-  --preset-borders: "none";
+  --preset-borders: "minimal";
   --preset-rounding: "medium";
   --preset-shadows: "medium";
   --preset-spacing: "medium";

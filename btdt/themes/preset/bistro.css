@@ -1,0 +1,27 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+@import "../fonts/bree-serif.css";
+@import "../colors/coffee.css";
+@import "../styles/background-secondary-low.css";
+@import "../styles/borders-minimal.css";
+@import "../styles/rounding-medium.css";
+@import "../styles/shadows-none.css";
+@import "../styles/spacing-medium.css";
+@import "../styles/gradients-off.css";
+@import "../styles/accent-bottom.css";
+@import "../styles/accent-3.css";
+@import "../styles/accent-primary.css";
+
+/* Metadata for the editor */
+:root {
+  --preset-colors: "coffee";
+  --preset-fonts: "bree-serif";
+  --preset-background: "secondary-low";
+  --preset-borders: "minimal";
+  --preset-rounding: "medium";
+  --preset-shadows: "none";
+  --preset-spacing: "medium";
+  --preset-gradients: "off";
+  --preset-accent: "bottom";
+  --preset-accentSize: "3";
+  --preset-accentColor: "primary";
+}

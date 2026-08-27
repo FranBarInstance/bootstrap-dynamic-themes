@@ -2,7 +2,7 @@
 @import "../fonts/quicksand.css";
 @import "../colors/candy.css";
 @import "../styles/background-none.css";
-@import "../styles/borders-none.css";
+@import "../styles/borders-minimal.css";
 @import "../styles/rounding-extra.css";
 @import "../styles/shadows-extra.css";
 @import "../styles/spacing-medium.css";
@@ -16,7 +16,7 @@
   --preset-colors: "candy";
   --preset-fonts: "quicksand";
   --preset-background: "none";
-  --preset-borders: "none";
+  --preset-borders: "minimal";
   --preset-rounding: "extra";
   --preset-shadows: "extra";
   --preset-spacing: "medium";

@@ -1,0 +1,27 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+@import "../fonts/abril-fatface.css";
+@import "../colors/oxblood.css";
+@import "../styles/background-gray-low.css";
+@import "../styles/borders-none.css";
+@import "../styles/rounding-none.css";
+@import "../styles/shadows-none.css";
+@import "../styles/spacing-large.css";
+@import "../styles/gradients-off.css";
+@import "../styles/accent-left.css";
+@import "../styles/accent-3.css";
+@import "../styles/accent-secondary.css";
+
+/* Metadata for the editor */
+:root {
+  --preset-colors: "oxblood";
+  --preset-fonts: "abril-fatface";
+  --preset-background: "gray-low";
+  --preset-borders: "none";
+  --preset-rounding: "none";
+  --preset-shadows: "none";
+  --preset-spacing: "large";
+  --preset-gradients: "off";
+  --preset-accent: "left";
+  --preset-accentSize: "3";
+  --preset-accentColor: "secondary";
+}

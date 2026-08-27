@@ -1,0 +1,27 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+@import "../fonts/source-sans-pro.css";
+@import "../colors/indigo-dye.css";
+@import "../styles/background-none.css";
+@import "../styles/borders-medium.css";
+@import "../styles/rounding-none.css";
+@import "../styles/shadows-none.css";
+@import "../styles/spacing-large.css";
+@import "../styles/gradients-off.css";
+@import "../styles/accent-top.css";
+@import "../styles/accent-1.css";
+@import "../styles/accent-primary.css";
+
+/* Metadata for the editor */
+:root {
+  --preset-colors: "indigo-dye";
+  --preset-fonts: "source-sans-pro";
+  --preset-background: "none";
+  --preset-borders: "medium";
+  --preset-rounding: "none";
+  --preset-shadows: "none";
+  --preset-spacing: "large";
+  --preset-gradients: "off";
+  --preset-accent: "top";
+  --preset-accentSize: "1";
+  --preset-accentColor: "primary";
+}

@@ -1,0 +1,27 @@
+/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+@import "../fonts/righteous.css";
+@import "../colors/cyberpunk-light.css";
+@import "../styles/background-none.css";
+@import "../styles/borders-medium.css";
+@import "../styles/rounding-medium.css";
+@import "../styles/shadows-none.css";
+@import "../styles/spacing-medium.css";
+@import "../styles/gradients-on.css";
+@import "../styles/accent-bottom.css";
+@import "../styles/accent-3.css";
+@import "../styles/accent-primary.css";
+
+/* Metadata for the editor */
+:root {
+  --preset-colors: "cyberpunk-light";
+  --preset-fonts: "righteous";
+  --preset-background: "none";
+  --preset-borders: "medium";
+  --preset-rounding: "medium";
+  --preset-shadows: "none";
+  --preset-spacing: "medium";
+  --preset-gradients: "on";
+  --preset-accent: "bottom";
+  --preset-accentSize: "3";
+  --preset-accentColor: "primary";
+}

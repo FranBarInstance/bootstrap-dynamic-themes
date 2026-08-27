@@ -2,7 +2,7 @@
 @import "../fonts/lora.css";
 @import "../colors/sunset.css";
 @import "../styles/background-none.css";
-@import "../styles/borders-none.css";
+@import "../styles/borders-minimal.css";
 @import "../styles/rounding-extra.css";
 @import "../styles/shadows-medium.css";
 @import "../styles/spacing-large.css";
@@ -16,7 +16,7 @@
   --preset-colors: "sunset";
   --preset-fonts: "lora";
   --preset-background: "none";
-  --preset-borders: "none";
+  --preset-borders: "minimal";
   --preset-rounding: "extra";
   --preset-shadows: "medium";
   --preset-spacing: "large";
