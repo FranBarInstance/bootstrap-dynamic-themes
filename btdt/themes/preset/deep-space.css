@@ -2,7 +2,7 @@
 @import "../fonts/inter.css";
 @import "../colors/indigo-night.css";
 @import "../styles/background-primary-low.css";
-@import "../styles/borders-normal.css";
+@import "../styles/borders-medium.css";
 @import "../styles/rounding-none.css";
 @import "../styles/shadows-extra.css";
 @import "../styles/spacing-medium.css";
@@ -16,7 +16,7 @@
   --preset-colors: "indigo-night";
   --preset-fonts: "inter";
   --preset-background: "primary-low";
-  --preset-borders: "normal";
+  --preset-borders: "medium";
   --preset-rounding: "none";
   --preset-shadows: "extra";
   --preset-spacing: "medium";

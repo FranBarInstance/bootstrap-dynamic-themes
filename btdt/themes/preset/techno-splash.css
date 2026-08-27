@@ -2,7 +2,7 @@
 @import "../fonts/syne.css";
 @import "../colors/vibrant-splash.css";
 @import "../styles/background-none.css";
-@import "../styles/borders-normal.css";
+@import "../styles/borders-medium.css";
 @import "../styles/rounding-extra.css";
 @import "../styles/shadows-extra.css";
 @import "../styles/spacing-medium.css";
@@ -16,7 +16,7 @@
   --preset-colors: "vibrant-splash";
   --preset-fonts: "syne";
   --preset-background: "none";
-  --preset-borders: "normal";
+  --preset-borders: "medium";
   --preset-rounding: "extra";
   --preset-shadows: "extra";
   --preset-spacing: "medium";

@@ -30,7 +30,7 @@ class ThemeManager {
         'secondary-low', 'secondary-medium', 'secondary-high',
         'gray-low', 'gray-medium', 'gray-high'
       ],
-      borders: Object.keys(ui.borders || {}).length ? Object.keys(ui.borders) : ['default', 'normal', 'minimal', 'extra', 'none'],
+      borders: Object.keys(ui.borders || {}).length ? Object.keys(ui.borders) : ['default', 'medium', 'minimal', 'extra', 'none'],
       rounding: Object.keys(ui.rounding || {}).length ? Object.keys(ui.rounding) : ['default', 'medium', 'extra', 'none'],
       shadows: Object.keys(ui.shadows || {}).length ? Object.keys(ui.shadows) : ['default', 'normal', 'extra', 'none'],
       spacing: Object.keys(ui.spacing || {}).length ? Object.keys(ui.spacing) : ['default', 'medium', 'large', 'small'],

@@ -2,7 +2,7 @@
 @import "../fonts/ubuntu.css";
 @import "../colors/ink.css";
 @import "../styles/background-none.css";
-@import "../styles/borders-normal.css";
+@import "../styles/borders-medium.css";
 @import "../styles/rounding-none.css";
 @import "../styles/shadows-none.css";
 @import "../styles/spacing-small.css";
@@ -16,7 +16,7 @@
   --preset-colors: "ink";
   --preset-fonts: "ubuntu";
   --preset-background: "none";
-  --preset-borders: "normal";
+  --preset-borders: "medium";
   --preset-rounding: "none";
   --preset-shadows: "none";
   --preset-spacing: "small";

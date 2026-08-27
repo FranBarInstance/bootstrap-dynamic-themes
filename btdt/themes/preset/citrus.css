@@ -2,7 +2,7 @@
 @import "../fonts/inter.css";
 @import "../colors/citrus.css";
 @import "../styles/background-none.css";
-@import "../styles/borders-normal.css";
+@import "../styles/borders-medium.css";
 @import "../styles/rounding-medium.css";
 @import "../styles/shadows-normal.css";
 @import "../styles/spacing-medium.css";
@@ -16,7 +16,7 @@
   --preset-colors: "citrus";
   --preset-fonts: "inter";
   --preset-background: "none";
-  --preset-borders: "normal";
+  --preset-borders: "medium";
   --preset-rounding: "medium";
   --preset-shadows: "normal";
   --preset-spacing: "medium";
