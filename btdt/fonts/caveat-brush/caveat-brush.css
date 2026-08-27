@@ -1,0 +1,9 @@
+/* Caveat Brush - Downloaded from Google Fonts */
+
+@font-face {
+  font-family: 'Caveat Brush';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(caveat-brush-400-normal.ttf) format('truetype');
+}

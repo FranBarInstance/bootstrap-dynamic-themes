@@ -1,0 +1,9 @@
+/* Fjalla One - Downloaded from Google Fonts */
+
+@font-face {
+  font-family: 'Fjalla One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fjalla-one-400-normal.ttf) format('truetype');
+}

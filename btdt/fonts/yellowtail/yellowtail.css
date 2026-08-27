@@ -1,0 +1,9 @@
+/* Yellowtail - Downloaded from Google Fonts */
+
+@font-face {
+  font-family: 'Yellowtail';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(yellowtail-400-normal.ttf) format('truetype');
+}

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BTDT Font Gallery</title>
+  <meta name="description" content="Preview every font currently available in Bootstrap 5 Dynamic Themes.">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../icons/csp-icons.min.css">
+  <style>
+    :root {
+      --gallery-bg: #f5f7fa;
+      --gallery-card-bg: #fff;
+      --gallery-border: #e1e6ed;
+      --gallery-muted: #667085;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--gallery-bg);
+      color: var(--bs-body-color);
+    }
+
+    .gallery-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: color-mix(in srgb, var(--gallery-bg) 92%, transparent);
+      border-bottom: 1px solid var(--gallery-border);
+      backdrop-filter: blur(10px);
+    }
+
+    .gallery-toolbar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto auto;
+      gap: .75rem;
+      align-items: center;
+    }
+
+    .gallery-toolbar input {
+      min-width: 0;
+    }
+
+    .font-count {
+      color: var(--gallery-muted);
+      font-size: .9rem;
+      white-space: nowrap;
+    }
+
+    .font-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+      gap: 1rem;
+    }
+
+    .font-card {
+      background: var(--gallery-card-bg);
+      border: 1px solid var(--gallery-border);
+      border-radius: 1rem;
+      box-shadow: 0 .25rem 1rem rgba(15, 23, 42, .04);
+      overflow: hidden;
+    }
+
+    .font-card-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .85rem 1rem .5rem;
+      border-bottom: 1px solid var(--gallery-border);
+    }
+
+    .font-card-title {
+      margin: 0;
+      font-size: .95rem;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    .font-card-slug {
+      color: var(--gallery-muted);
+      font: .7rem ui-monospace, SFMono-Regular, Menlo, monospace;
+      white-space: nowrap;
+    }
+
+    .font-sample {
+      min-height: 8.5rem;
+      padding: 1rem;
+      font-size: 1.8rem;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .font-sample-secondary {
+      display: block;
+      margin-top: .75rem;
+      color: var(--gallery-muted);
+      font-size: .95rem;
+      line-height: 1.5;
+    }
+
+    .font-card-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: .75rem;
+      padding: .65rem 1rem;
+      color: var(--gallery-muted);
+      font-size: .75rem;
+      border-top: 1px solid var(--gallery-border);
+    }
+
+    .empty-state {
+      padding: 4rem 1rem;
+      color: var(--gallery-muted);
+      text-align: center;
+    }
+
+    @media (max-width: 767.98px) {
+      .gallery-toolbar {
+        grid-template-columns: 1fr auto;
+      }
+
+      .gallery-toolbar .sample-label {
+        display: none;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html[data-bs-theme="light"] {
+        color-scheme: light;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="gallery-header">
+    <div class="container py-3">
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+        <div>
+          <h1 class="h3 mb-1">BTDT Font Gallery</h1>
+          <p class="mb-0 text-body-secondary">Preview the fonts currently available in the editor.</p>
+        </div>
+        <a class="btn btn-outline-primary btn-sm" href="index.html">Back to editor</a>
+      </div>
+      <div class="gallery-toolbar">
+        <label class="visually-hidden" for="fontSearch">Search fonts</label>
+        <input id="fontSearch" class="form-control" type="search" placeholder="Search fonts..." autocomplete="off">
+        <label class="sample-label" for="sampleText">Sample text</label>
+        <input id="sampleText" class="form-control" type="text" value="Aa Bb Cc · 123 · The quick brown fox" aria-label="Sample text">
+        <output id="fontCount" class="font-count" for="fontSearch">Loading fonts...</output>
+      </div>
+    </div>
+  </header>
+
+  <main class="container py-4">
+    <div id="fontGrid" class="font-grid" aria-live="polite"></div>
+    <div id="emptyState" class="empty-state d-none">No fonts match your search.</div>
+  </main>
+
+  <script src="../js/config-fonts.js"></script>
+  <script>
+    (() => {
+      'use strict';
+
+      const catalog = window.BTDT_FONTS || {};
+      const grid = document.getElementById('fontGrid');
+      const emptyState = document.getElementById('emptyState');
+      const search = document.getElementById('fontSearch');
+      const sampleText = document.getElementById('sampleText');
+      const count = document.getElementById('fontCount');
+      const fontFaceUrls = new Set();
+
+      function loadFontStylesheets() {
+        Object.keys(catalog).forEach((slug) => {
+          if (slug === 'default') return;
+          const href = `../fonts/${slug}/${slug}.css`;
+          if (fontFaceUrls.has(href)) return;
+          fontFaceUrls.add(href);
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = href;
+          link.dataset.font = slug;
+          document.head.appendChild(link);
+        });
+      }
+
+      function createCard(slug, label) {
+        const card = document.createElement('article');
+        card.className = 'font-card';
+        card.dataset.fontSlug = slug;
+        card.dataset.fontLabel = label.toLowerCase();
+
+        const header = document.createElement('div');
+        header.className = 'font-card-header';
+
+        const title = document.createElement('h2');
+        title.className = 'font-card-title';
+        title.textContent = label;
+        header.appendChild(title);
+
+        const slugLabel = document.createElement('span');
+        slugLabel.className = 'font-card-slug';
+        slugLabel.textContent = slug;
+        header.appendChild(slugLabel);
+
+        const sample = document.createElement('div');
+        sample.className = 'font-sample';
+        sample.style.fontFamily = `'${label}', sans-serif`;
+        sample.textContent = sampleText.value;
+
+        const secondary = document.createElement('span');
+        secondary.className = 'font-sample-secondary';
+        secondary.textContent = 'The quick brown fox jumps over the lazy dog';
+        sample.appendChild(secondary);
+
+        const footer = document.createElement('div');
+        footer.className = 'font-card-footer';
+        footer.innerHTML = '<span>Local font preview</span><span>400</span>';
+
+        card.append(header, sample, footer);
+        return card;
+      }
+
+      function render() {
+        const query = search.value.trim().toLowerCase();
+        const entries = Object.entries(catalog).filter(([slug, label]) => {
+          if (slug === 'default') return false;
+          return !query || slug.includes(query) || label.toLowerCase().includes(query);
+        });
+
+        grid.replaceChildren(...entries.map(([slug, label]) => createCard(slug, label)));
+        emptyState.classList.toggle('d-none', entries.length > 0);
+        count.textContent = `${entries.length} of ${Object.keys(catalog).length - (catalog.default ? 1 : 0)} fonts`;
+      }
+
+      loadFontStylesheets();
+      render();
+      search.addEventListener('input', render);
+      sampleText.addEventListener('input', () => {
+        grid.querySelectorAll('.font-sample').forEach((sample) => {
+          const secondary = sample.querySelector('.font-sample-secondary');
+          sample.firstChild.textContent = sampleText.value;
+          if (secondary) sample.appendChild(secondary);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+/* Bungee Shade - Downloaded from Google Fonts */
+
+@font-face {
+  font-family: 'Bungee Shade';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(bungee-shade-400-normal.ttf) format('truetype');
+}

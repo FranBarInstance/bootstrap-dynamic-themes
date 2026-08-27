@@ -1,0 +1,9 @@
+/* Courgette - Downloaded from Google Fonts */
+
+@font-face {
+  font-family: 'Courgette';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(courgette-400-normal.ttf) format('truetype');
+}

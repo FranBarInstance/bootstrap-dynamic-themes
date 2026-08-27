@@ -1,0 +1,9 @@
+Font: press-start-2p
+Source: https://fonts.google.com/specimen/press+start+2p
+
+This font is available on Google Fonts. Please visit the specimen page above
+to view the license information (typically SIL Open Font License 1.1).
+
+For license details, see:
+- https://github.com/google/fonts/tree/main/ofl/press-start-2p/
+- https://scripts.sil.org/OFL

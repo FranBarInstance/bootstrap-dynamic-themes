@@ -1,0 +1,9 @@
+/* Shadows Into Light - Downloaded from Google Fonts */
+
+@font-face {
+  font-family: 'Shadows Into Light';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(shadows-into-light-400-normal.ttf) format('truetype');
+}

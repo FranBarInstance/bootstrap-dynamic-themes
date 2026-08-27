@@ -3,7 +3,7 @@
 @import url('../../fonts/neucha/neucha.css');
 
 :root {
-  --bs-body-font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --bs-body-font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.7;
 }
@@ -23,7 +23,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .btn {
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   text-transform: none;
   letter-spacing: 0.02em;

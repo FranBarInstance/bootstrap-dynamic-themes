@@ -1,0 +1,9 @@
+/* Bree Serif - Downloaded from Google Fonts */
+
+@font-face {
+  font-family: 'Bree Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(bree-serif-400-normal.ttf) format('truetype');
+}

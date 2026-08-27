@@ -6,6 +6,7 @@
   --bs-body-font-family: 'Inter', 'Segoe UI', sans-serif;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.6;
+  font-synthesis: none;
 }
 
 h1, h2, h3, h4, h5, h6,

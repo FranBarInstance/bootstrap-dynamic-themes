@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Add a new font to BTDT system.
-
-Downloads the font files and creates the theme CSS file if they don't exist.
-Usage: python3 add-fonts.py "Font Name"
-"""
+"""Add a new font to BTDT system."""
 
 import argparse
 import re
@@ -18,13 +14,11 @@ def slugify(name: str) -> str:
 
 
 def font_exists(fonts_dir: Path, slug: str) -> bool:
-    """Check if font is already downloaded."""
+    """Check if font files are already downloaded."""
     font_dir = fonts_dir / slug
-    if not font_dir.exists():
-        return False
-    has_css = (font_dir / f"{slug}.css").exists()
-    has_fonts = any(font_dir.glob("*.woff2")) or any(font_dir.glob("*.ttf"))
-    return has_css and has_fonts
+    return font_dir.exists() and (font_dir / f"{slug}.css").exists() and bool(
+        any(font_dir.glob("*.woff2")) or any(font_dir.glob("*.ttf"))
+    )
 
 
 def theme_css_exists(themes_fonts_dir: Path, slug: str) -> bool:
@@ -33,10 +27,9 @@ def theme_css_exists(themes_fonts_dir: Path, slug: str) -> bool:
 
 
 def create_theme_css(themes_fonts_dir: Path, slug: str, font_name: str) -> Path:
-    """Create the theme CSS file that imports local font."""
+    """Create the theme CSS file that imports the local font."""
     css_path = themes_fonts_dir / f"{slug}.css"
-
-    css_content = f'''/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
+    css_content = f"""/*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
 /* themes/fonts/{slug}.css */
 @import url('../../fonts/{slug}/{slug}.css');
 
@@ -44,104 +37,61 @@ def create_theme_css(themes_fonts_dir: Path, slug: str, font_name: str) -> Path:
   --bs-body-font-family: '{font_name}', -apple-system, BlinkMacSystemFont, sans-serif;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.6;
+  font-synthesis: none;
+}}
+
+/* Keep the source font's available weights; do not synthesize bold/light. */
+body,
+.btn,
+.form-label {{
+  font-family: '{font_name}', sans-serif;
+  font-weight: 400;
 }}
 
 h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {{
-  font-family: '{font_name}', sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}}
-
+.h1, .h2, .h3, .h4, .h5, .h6,
 .display-1, .display-2, .display-3,
-.display-4, .display-5, .display-6 {{
-  font-weight: 300;
-  letter-spacing: -0.03em;
+.display-4, .display-5, .display-6,
+.navbar-brand {{
+  font-family: '{font_name}', sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }}
 
 .btn {{
-  font-family: '{font_name}', sans-serif;
-  font-weight: 500;
   letter-spacing: 0.01em;
 }}
-
-.navbar-brand {{
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}}
-
-.form-label {{
-  font-weight: 500;
-}}
-'''
-
+"""
     css_path.write_text(css_content, encoding="utf-8")
     return css_path
 
 
 def add_font(font_name: str, base_dir: Path) -> int:
-    """Add a font to BTDT system."""
+    """Add a new font to BTDT."""
     slug = slugify(font_name)
     fonts_dir = base_dir / "btdt" / "fonts"
     themes_fonts_dir = base_dir / "btdt" / "themes" / "fonts"
-
     print(f"Adding font: {font_name} ({slug})")
-    print()
 
-    # Check if font files exist
-    if font_exists(fonts_dir, slug):
-        print(f"✓ Font files already exist: {fonts_dir / slug}")
-    else:
-        print("✗ Font files missing - downloading...")
-        # Import and use download function
-        # pylint: disable=import-error,import-outside-toplevel
+    if not font_exists(fonts_dir, slug):
         sys.path.insert(0, str(base_dir / "btdt" / "scripts"))
         from download_google_fonts import DownloadFontError, download_font
         try:
             download_font(font_name, base_dir)
-            print("✓ Font downloaded successfully")
-        except (DownloadFontError, OSError, urllib.error.URLError) as e:
-            print(f"✗ Error downloading font: {e}")
+        except (DownloadFontError, OSError, urllib.error.URLError) as exc:
+            print(f"Error downloading font: {exc}")
             return 1
 
-    print()
-
-    # Check if theme CSS exists
-    if theme_css_exists(themes_fonts_dir, slug):
-        print(f"✓ Theme CSS already exists: {themes_fonts_dir / f'{slug}.css'}")
-    else:
-        print("✗ Theme CSS missing - creating...")
-        css_path = create_theme_css(themes_fonts_dir, slug, font_name)
-        print(f"✓ Theme CSS created: {css_path}")
-
-    print()
-    print("=" * 50)
-    print("Font added successfully!")
-    print()
-    print("Next steps:")
-    print("1. Run: python3 btdt/scripts/sync-configs.py")
-    print("2. Run: python3 btdt/scripts/minify-all.py")
-
+    if not theme_css_exists(themes_fonts_dir, slug):
+        create_theme_css(themes_fonts_dir, slug, font_name)
     return 0
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(
-        description="Add a new font to BTDT system"
-    )
-    parser.add_argument(
-        "font_name",
-        help='Font name from Google Fonts (e.g., "Inter", "Roboto Slab")',
-    )
-    parser.add_argument(
-        "--base-dir",
-        type=Path,
-        default=Path(__file__).resolve().parents[2],
-        help="Base directory of the project",
-    )
-
+    parser = argparse.ArgumentParser(description="Add a new font to BTDT system")
+    parser.add_argument("font_name", help='Font name from Google Fonts')
+    parser.add_argument("--base-dir", type=Path, default=Path(__file__).resolve().parents[2])
     args = parser.parse_args()
-
     return add_font(args.font_name, args.base_dir)
 
 

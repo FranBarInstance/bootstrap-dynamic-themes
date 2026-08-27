@@ -1,0 +1,9 @@
+/* Graduate - Downloaded from Google Fonts */
+
+@font-face {
+  font-family: 'Graduate';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(graduate-400-normal.ttf) format('truetype');
+}
