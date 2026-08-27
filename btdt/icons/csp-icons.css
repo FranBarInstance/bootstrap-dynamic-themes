@@ -1,0 +1,93 @@
+/* Same-origin icon fixes (this component's reason to exist): the theme
+   preset and Bootstrap paint UI icons with data: SVG images, which the
+   strict CSP (img-src 'self') blocks. Each rule points the affected icon
+   at a same-origin copy of the Bootstrap 5 SVG (MIT License) shipped in
+   this component's static dir. Loaded after the theme preset (load.after
+   on the btdt uuid, priority 1140 > 1130), so these rules win the
+   cascade. */
+
+/* Navbar toggler: mask + currentColor (the preset's adaptive technique),
+   so the icon follows the text color of its container automatically. */
+.navbar-toggler-icon {
+    -webkit-mask-image: url("navbar-toggler.svg");
+    mask-image: url("navbar-toggler.svg");
+}
+
+/* Form select arrow */
+.form-select {
+    --bs-form-select-bg-img: url("form-select-arrow.svg");
+}
+[data-bs-theme="dark"] .form-select {
+    --bs-form-select-bg-img: url("form-select-arrow-dark.svg");
+}
+
+/* Checkbox, radio and indeterminate marks */
+.form-check-input:checked[type="checkbox"] {
+    --bs-form-check-bg-image: url("form-check-check.svg");
+}
+.form-check-input:checked[type="radio"] {
+    --bs-form-check-bg-image: url("form-check-radio.svg");
+}
+.form-check-input[type="checkbox"]:indeterminate {
+    --bs-form-check-bg-image: url("form-check-indeterminate.svg");
+}
+
+/* Switch knob */
+.form-switch .form-check-input {
+    --bs-form-switch-bg: url("form-switch.svg");
+}
+.form-switch .form-check-input:focus {
+    --bs-form-switch-bg: url("form-switch-focus.svg");
+    --bs-form-switch-focus-bg: url("form-switch-focus.svg");
+}
+.form-switch .form-check-input:checked {
+    --bs-form-switch-bg: url("form-switch-checked.svg");
+}
+[data-bs-theme="dark"] .form-switch .form-check-input:not(:checked):not(:focus) {
+    --bs-form-switch-bg: url("form-switch-dark.svg");
+}
+
+/* Validation states */
+.form-control.is-valid,
+.was-validated .form-control:valid {
+    background-image: url("form-valid.svg");
+}
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+    background-image: url("form-invalid.svg");
+}
+.was-validated .form-select:valid:not([multiple]):not([size]),
+.was-validated .form-select:valid:not([multiple])[size="1"],
+.form-select.is-valid:not([multiple]):not([size]),
+.form-select.is-valid:not([multiple])[size="1"] {
+    --bs-form-select-bg-icon: url("form-valid.svg");
+}
+.was-validated .form-select:invalid:not([multiple]):not([size]),
+.was-validated .form-select:invalid:not([multiple])[size="1"],
+.form-select.is-invalid:not([multiple]):not([size]),
+.form-select.is-invalid:not([multiple])[size="1"] {
+    --bs-form-select-bg-icon: url("form-invalid.svg");
+}
+
+/* Accordion chevron */
+.accordion-button {
+    --bs-accordion-btn-icon: url("accordion-chevron.svg");
+    --bs-accordion-btn-active-icon: url("accordion-chevron-active.svg");
+}
+[data-bs-theme="dark"] .accordion-button::after {
+    --bs-accordion-btn-icon: url("accordion-chevron-dark.svg");
+    --bs-accordion-btn-active-icon: url("accordion-chevron-dark.svg");
+}
+
+/* Close button */
+.btn-close {
+    --bs-btn-close-bg: url("btn-close.svg");
+}
+
+/* Carousel arrows */
+.carousel-control-prev-icon {
+    background-image: url("carousel-prev.svg");
+}
+.carousel-control-next-icon {
+    background-image: url("carousel-next.svg");
+}

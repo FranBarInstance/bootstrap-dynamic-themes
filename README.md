@@ -216,6 +216,24 @@ For production, prefer `btdt.min.js`. Adding a version to the script URL, for ex
 
 The BTDT loader (`btdt.js` / `btdt.min.js`) is **CSP compliant**: it does not require inline styles, `eval`, or a nonce. Named preset loads use `*.min.css` by default; set `data-minified="false"` only if you intentionally want source CSS files.
 
+### CSP-compatible Bootstrap icons
+
+Bootstrap 5 uses several inline `data:image/svg+xml` URLs for interface icons. A strict Content Security Policy that does not allow `data:` images can therefore hide select arrows, form marks, switches, validation icons, accordion chevrons, close buttons, carousel controls and navbar togglers.
+
+BTDT provides optional same-origin replacements in [`btdt/icons/`](btdt/icons/). Load the minified stylesheet after Bootstrap and the active preset:
+
+```html
+<head>
+    <link rel="stylesheet" href="btdt/css/bootstrap.min.css">
+    <link id="theme-preset" rel="stylesheet" href="btdt/themes/preset/studio.min.css">
+    <link rel="stylesheet" href="btdt/icons/csp-icons.min.css">
+</head>
+```
+
+The stylesheet points Bootstrap's icon variables and backgrounds to SVG files served from the same origin, so the policy can keep `img-src 'self'` without adding `data:`. It is optional and does not change `bootstrap.css`; omit it when your policy allows Bootstrap's data icons.
+
+The editor loads this compatibility stylesheet automatically so the complete set of replacements can be tested in `btdt/editor/index.html`.
+
 ### About `theme-preset`
 
 When using the JS loader, BTDT manages the active preset through a standard stylesheet tag:
