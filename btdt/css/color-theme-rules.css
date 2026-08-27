@@ -699,6 +699,11 @@ button.list-group-item.active {
   color: var(--bs-white-contrast) !important;
 }
 
+.bg-transparent {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
 /* ─── Subtle ─── */
 .bg-primary-subtle {
   background-color: var(--bs-primary-bg-subtle) !important;
@@ -760,7 +765,8 @@ button.list-group-item.active {
 .bg-dark a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link),
 .bg-light a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link),
 .bg-black a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link),
-.bg-white a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link) {
+.bg-white a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link),
+.bg-transparent a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link) {
   color: color-mix(in srgb, currentColor 85%, transparent) !important;
 }
 
@@ -774,6 +780,7 @@ button.list-group-item.active {
 .bg-light a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover      { color: var(--bs-light-contrast) !important; }
 .bg-black a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover      { color: var(--bs-black-contrast) !important; }
 .bg-white a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover      { color: var(--bs-white-contrast) !important; }
+.bg-transparent a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link):hover { color: currentColor !important; }
 
 /* Ensure Bootstrap navbar variables follow the computed foreground color of bg-* navbars. */
 .navbar.bg-primary,
@@ -787,7 +794,8 @@ button.list-group-item.active {
 .navbar.bg-light,
 .navbar.bg-dark,
 .navbar.bg-black,
-.navbar.bg-white {
+.navbar.bg-white,
+.navbar.bg-transparent {
   --bs-navbar-color: color-mix(in srgb, currentColor 85%, transparent);
   --bs-navbar-hover-color: currentColor;
   --bs-navbar-active-color: currentColor;
