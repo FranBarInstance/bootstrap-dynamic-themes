@@ -35,7 +35,7 @@ This project is organized as a standalone module (`btdt/`) that can be easily dr
 ## Workflow: Design to Production
 
 1.  **Open the Editor**: Launch `btdt/editor/index.html` in your browser (or use the [Live Demo](https://franbarinstance.github.io/bootstrap-dynamic-themes/btdt/editor/)).
-2.  **Design**: Use the panel to experiment with 50+ palettes, 50+ fonts, 50+ presets and multiple structural styles.
+2.  **Design**: Use the panel to experiment with 100+ palettes, 100+ fonts, 100+ presets and multiple structural styles.
 3.  **Export**: Click **"Copy CSS Preset"** to get your `@import` code.
 4.  **Save & Link**: Save your design in `btdt/themes/preset/my-theme.css` and link it in your HTML.
 
@@ -52,7 +52,7 @@ It is designed to mirror the preset flow from [`btdt/scripts/minify.py`](btdt/sc
 - Minifies the final combined stylesheet
 
 > [!NOTE]
-> **Local Fonts**: All 58+ fonts are now hosted locally in `btdt/fonts/` with their OFL licenses. When presets are minified, the font CSS is inlined with rewritten URLs so the preset remains self-contained. For production, only `btdt/fonts/` and `btdt/themes/preset/` are needed.
+> **Local Fonts**: All 100+ fonts are now hosted locally in `btdt/fonts/` with their OFL licenses. When presets are minified, the font CSS is inlined with rewritten URLs so the preset remains self-contained. For production, only `btdt/fonts/` and `btdt/themes/preset/` are needed.
 
 This feature is only available when the editor is served over `http://` or `https://`, because it relies on `fetch()` to read the imported CSS files. When the editor is opened via `file://`, the bundled export UI is disabled and shows a "not available on file://" message.
 
@@ -405,7 +405,7 @@ You can combine multiple modules (colors, fonts, styles) to create your own them
 </head>
 ```
 
-You can find all available modules in the `btdt/themes/` subdirectories. There are over 50+ color palettes and 100+ typography modules ready to use.
+You can find all available modules in the `btdt/themes/` subdirectories. There are over 100+ color palettes and 100+ typography modules ready to use.
 
 ## Dynamic Contrast & Theming
 
@@ -440,7 +440,7 @@ In some cases you may need to use `text-reset`.
 
 - **Zero HTML Changes**: Switch from a dark professional theme to a light pastel style, and your menus, cards, and links **automatically adapt** their colors instantly.
 - **Smart Icons**: The navbar toggler and themed SVG tokens stay visible by following the active theme foreground colors, without requiring HTML changes.
-- **Harmonized Accents**: Themes include a synchronized `--accent-color` chosen to stay coherent with the primary palette for decorative elements, ensuring a premium, integrated look across all 50+ palettes.
+- **Harmonized Accents**: Themes include a synchronized `--accent-color` chosen to stay coherent with the primary palette for decorative elements, ensuring a premium, integrated look across all 100+ palettes.
 
 ---
 Built with ❤️ and Bootstrap 5.
