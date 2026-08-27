@@ -3,7 +3,7 @@
 @import "../colors/volcano.css";
 @import "../styles/background-none.css";
 @import "../styles/borders-none.css";
-@import "../styles/rounding-normal.css";
+@import "../styles/rounding-medium.css";
 @import "../styles/shadows-extra.css";
 @import "../styles/spacing-small.css";
 @import "../styles/gradients-on.css";
@@ -17,7 +17,7 @@
   --preset-fonts: "syne";
   --preset-background: "none";
   --preset-borders: "none";
-  --preset-rounding: "normal";
+  --preset-rounding: "medium";
   --preset-shadows: "extra";
   --preset-spacing: "small";
   --preset-gradients: "on";

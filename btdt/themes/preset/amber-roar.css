@@ -3,7 +3,7 @@
 @import "../colors/amber.css";
 @import "../styles/background-none.css";
 @import "../styles/borders-minimal.css";
-@import "../styles/rounding-normal.css";
+@import "../styles/rounding-medium.css";
 @import "../styles/shadows-extra.css";
 @import "../styles/spacing-medium.css";
 @import "../styles/gradients-on.css";
@@ -17,7 +17,7 @@
   --preset-fonts: "oswald";
   --preset-background: "none";
   --preset-borders: "minimal";
-  --preset-rounding: "normal";
+  --preset-rounding: "medium";
   --preset-shadows: "extra";
   --preset-spacing: "medium";
   --preset-gradients: "on";

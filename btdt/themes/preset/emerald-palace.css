@@ -3,7 +3,7 @@
 @import "../colors/emerald.css";
 @import "../styles/background-none.css";
 @import "../styles/borders-normal.css";
-@import "../styles/rounding-normal.css";
+@import "../styles/rounding-medium.css";
 @import "../styles/shadows-extra.css";
 @import "../styles/spacing-medium.css";
 @import "../styles/gradients-off.css";
@@ -17,7 +17,7 @@
   --preset-fonts: "cinzel";
   --preset-background: "none";
   --preset-borders: "normal";
-  --preset-rounding: "normal";
+  --preset-rounding: "medium";
   --preset-shadows: "extra";
   --preset-spacing: "medium";
   --preset-gradients: "off";

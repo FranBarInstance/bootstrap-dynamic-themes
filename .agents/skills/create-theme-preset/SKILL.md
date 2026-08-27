@@ -106,7 +106,7 @@ Order matters:
 @import "../colors/corporate.css";
 @import "../styles/background-none.css";
 @import "../styles/borders-normal.css";
-@import "../styles/rounding-normal.css";
+@import "../styles/rounding-medium.css";
 @import "../styles/shadows-normal.css";
 @import "../styles/spacing-medium.css";
 @import "../styles/gradients-off.css";
@@ -121,7 +121,7 @@ Order matters:
   --preset-fonts: "ubuntu";
   --preset-background: "none";
   --preset-borders: "normal";
-  --preset-rounding: "normal";
+  --preset-rounding: "medium";
   --preset-shadows: "normal";
   --preset-spacing: "medium";
   --preset-gradients: "off";

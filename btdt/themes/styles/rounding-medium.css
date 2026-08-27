@@ -1,5 +1,5 @@
 /*! See license: https://github.com/FranBarInstance/bootstrap-dynamic-themes */
-/* themes/styles/rounding-normal.css */
+/* themes/styles/rounding-medium.css */
 /* Moderate corners: clearer rounding than inherited defaults, below Extra. */
 .navbar {
   border-radius: var(--bs-border-radius);

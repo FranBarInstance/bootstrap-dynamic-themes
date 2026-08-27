@@ -3,7 +3,7 @@
 @import "../colors/desert.css";
 @import "../styles/background-none.css";
 @import "../styles/borders-normal.css";
-@import "../styles/rounding-normal.css";
+@import "../styles/rounding-medium.css";
 @import "../styles/shadows-normal.css";
 @import "../styles/spacing-large.css";
 @import "../styles/gradients-on.css";
@@ -17,7 +17,7 @@
   --preset-fonts: "libre-baskerville";
   --preset-background: "none";
   --preset-borders: "normal";
-  --preset-rounding: "normal";
+  --preset-rounding: "medium";
   --preset-shadows: "normal";
   --preset-spacing: "large";
   --preset-gradients: "on";
