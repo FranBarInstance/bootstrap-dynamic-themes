@@ -3,6 +3,13 @@
 Skills are located in `.agents/skills/`. Each skill has a `SKILL.md` with detailed rules.
 **ALWAYS read the relevant `SKILL.md` BEFORE doing any work in that area.**
 
+## Local Overrides — `AGENTS.local.md`
+
+Before starting any work, check for an `AGENTS.local.md` file at the repository root.
+If it exists, read it and follow it: it holds personalization for this checkout and is
+gitignored, so it is never committed. Where it adds to or overrides a rule in this file,
+the local file wins.
+
 ## Skill Trigger Map
 
 | When the user asks to… | Read this skill first |
