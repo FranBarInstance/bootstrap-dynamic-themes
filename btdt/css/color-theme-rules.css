@@ -754,6 +754,55 @@ button.list-group-item.active {
 }
 
 /* ─────────────────────────────────────────────
+   MUTED TEXT INSIDE BACKGROUNDS
+   Bootstrap derives .text-muted / .text-body-secondary from
+   --bs-secondary-color, which follows the page foreground and can
+   vanish on colored surfaces. Inside a bg-* surface they follow the
+   contrast color instead, de-emphasized with color-mix like the rest
+   of the dynamic contrast rules.
+   ───────────────────────────────────────────── */
+.bg-primary .text-muted,
+.bg-secondary .text-muted,
+.bg-success .text-muted,
+.bg-info .text-muted,
+.bg-warning .text-muted,
+.bg-danger .text-muted,
+.bg-dark .text-muted,
+.bg-light .text-muted,
+.bg-black .text-muted,
+.bg-white .text-muted,
+.bg-transparent .text-muted,
+.bg-primary-subtle .text-muted,
+.bg-secondary-subtle .text-muted,
+.bg-success-subtle .text-muted,
+.bg-info-subtle .text-muted,
+.bg-warning-subtle .text-muted,
+.bg-danger-subtle .text-muted,
+.bg-light-subtle .text-muted,
+.bg-dark-subtle .text-muted,
+.bg-primary .text-body-secondary,
+.bg-secondary .text-body-secondary,
+.bg-success .text-body-secondary,
+.bg-info .text-body-secondary,
+.bg-warning .text-body-secondary,
+.bg-danger .text-body-secondary,
+.bg-dark .text-body-secondary,
+.bg-light .text-body-secondary,
+.bg-black .text-body-secondary,
+.bg-white .text-body-secondary,
+.bg-transparent .text-body-secondary,
+.bg-primary-subtle .text-body-secondary,
+.bg-secondary-subtle .text-body-secondary,
+.bg-success-subtle .text-body-secondary,
+.bg-info-subtle .text-body-secondary,
+.bg-warning-subtle .text-body-secondary,
+.bg-danger-subtle .text-body-secondary,
+.bg-light-subtle .text-body-secondary,
+.bg-dark-subtle .text-body-secondary {
+  color: color-mix(in srgb, currentColor 75%, transparent) !important;
+}
+
+/* ─────────────────────────────────────────────
    LINKS INSIDE BACKGROUNDS
    ───────────────────────────────────────────── */
 .bg-primary a:not(.btn):not(.dropdown-item):not(.dropdown-header):not(.list-group-item):not(.page-link),
