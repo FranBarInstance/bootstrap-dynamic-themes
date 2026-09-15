@@ -2,6 +2,22 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 
+const BTDT_LOADER_PATH = path.join(process.cwd(), 'btdt/js/btdt.js');
+
+/**
+ * Read the loader version from its source of truth so assertions do not have to
+ * be updated by hand on every release.
+ */
+function readBtdtVersion() {
+  const match = fs.readFileSync(BTDT_LOADER_PATH, 'utf8').match(/const VERSION = '([^']+)';/);
+
+  if (!match) {
+    throw new Error(`Could not read VERSION from ${BTDT_LOADER_PATH}`);
+  }
+
+  return match[1];
+}
+
 class FakeClassList {
   constructor(element) {
     this.element = element;
@@ -327,7 +343,7 @@ function createTestEnv(options = {}) {
 }
 
 function runBtdtLoader(env, scriptAttributes = {}) {
-  const scriptPath = path.join(process.cwd(), 'btdt/js/btdt.js');
+  const scriptPath = BTDT_LOADER_PATH;
   const code = fs.readFileSync(scriptPath, 'utf8');
   const script = env.document.createElement('script');
   script.src = scriptAttributes.src || 'https://example.test/btdt/js/btdt.js';
@@ -370,5 +386,6 @@ function runBtdtLoader(env, scriptAttributes = {}) {
 module.exports = {
   createTestEnv,
   runBtdtLoader,
+  readBtdtVersion,
   FakeCustomEvent,
 };

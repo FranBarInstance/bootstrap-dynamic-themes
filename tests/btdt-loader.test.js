@@ -1,7 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 
-const { createTestEnv, runBtdtLoader, FakeCustomEvent } = require('./dom-test-helpers');
+const { createTestEnv, runBtdtLoader, readBtdtVersion, FakeCustomEvent } = require('./dom-test-helpers');
 
 test('btdt loader loads the minified preset by default and creates the dark mode link', () => {
   const env = createTestEnv();
@@ -14,7 +14,10 @@ test('btdt loader loads the minified preset by default and creates the dark mode
 
   assert.equal(btdt.getMode(), 'light');
   assert.equal(presetLink.href, 'https://example.test/btdt/themes/preset/studio.min.css');
-  assert.equal(darkLink.href, 'https://example.test/btdt/themes/modes/dark.min.css?v=2.0.8');
+  assert.equal(
+    darkLink.href,
+    `https://example.test/btdt/themes/modes/dark.min.css?v=${readBtdtVersion()}`
+  );
   assert.equal(darkLink.media, 'not all');
 });
 

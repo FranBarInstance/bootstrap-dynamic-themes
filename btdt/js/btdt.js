@@ -70,7 +70,7 @@
 (function() {
     if (window.btdt && window.btdt._initialized) return;
 
-    const VERSION = '3.0.0';
+    const VERSION = '3.0.1';
 
     const script = document.currentScript;
     if (!script) return;
