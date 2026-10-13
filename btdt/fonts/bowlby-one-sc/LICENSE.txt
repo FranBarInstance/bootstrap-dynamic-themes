@@ -1,9 +1,0 @@
-Font: bowlby-one-sc
-Source: https://fonts.google.com/specimen/bowlby+one+sc
-
-This font is available on Google Fonts. Please visit the specimen page above
-to view the license information (typically SIL Open Font License 1.1).
-
-For license details, see:
-- https://github.com/google/fonts/tree/main/ofl/bowlby-one-sc/
-- https://scripts.sil.org/OFL

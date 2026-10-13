@@ -1,9 +1,0 @@
-Font: chakra-petch
-Source: https://fonts.google.com/specimen/chakra+petch
-
-This font is available on Google Fonts. Please visit the specimen page above
-to view the license information (typically SIL Open Font License 1.1).
-
-For license details, see:
-- https://github.com/google/fonts/tree/main/ofl/chakra-petch/
-- https://scripts.sil.org/OFL

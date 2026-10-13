@@ -1,9 +1,0 @@
-Font: caveat-brush
-Source: https://fonts.google.com/specimen/caveat+brush
-
-This font is available on Google Fonts. Please visit the specimen page above
-to view the license information (typically SIL Open Font License 1.1).
-
-For license details, see:
-- https://github.com/google/fonts/tree/main/ofl/caveat-brush/
-- https://scripts.sil.org/OFL

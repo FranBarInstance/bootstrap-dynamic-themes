@@ -1,9 +1,0 @@
-Font: permanent-marker
-Source: https://fonts.google.com/specimen/permanent+marker
-
-This font is available on Google Fonts. Please visit the specimen page above
-to view the license information (typically SIL Open Font License 1.1).
-
-For license details, see:
-- https://github.com/google/fonts/tree/main/ofl/permanent-marker/
-- https://scripts.sil.org/OFL
