@@ -1,4 +1,4 @@
-# Bootstrap Dynamic Themes
+# Bootstrap 6 Dynamic Themes
 
 > **Status: rewrite in progress.** This branch (`main`) is the **6.x line** — a from-scratch rewrite on top of Bootstrap 6. It currently contains no code: the architecture and the directory layout are being redesigned before the first commit of the new implementation. For production use, the current stable line lives on the `v5` branch.
 
